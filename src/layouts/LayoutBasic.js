@@ -1,12 +1,36 @@
 import React from "react";
+import { Route, Switch } from "react-router-dom";
 import { Layout } from "antd";
 
-export default function LayoutBasic() {
+import "./LayoutBasic.scss";
+
+export default function LayoutBasic({ routes }) {
+//   const { routes } = props;
+  const { Content, Footer } = Layout;
   return (
     <Layout>
-      <h2>Menú Sider Basic</h2>
-      <div>Content</div>
-      <h5>Footer</h5>
+      <h2>Menú Sider Basic User</h2>
+      <Layout>
+        <Content>
+          <LoadRoutes routes={routes} />
+        </Content>
+        <Footer>David Pizarro Frick</Footer>
+      </Layout>
     </Layout>
+  );
+}
+
+function LoadRoutes({ routes }) {
+  return (
+    <Switch>
+      {routes.map((route, index) => (
+        <Route
+          key={index}
+          exact={route.exact}
+          path={route.path}
+          component={route.component}
+        />
+      ))}
+    </Switch>
   );
 }
