@@ -9,7 +9,8 @@ import {
 
 import "./MenuTop.scss";
 
-export default function MenuTop() {
+export default function MenuTop( props ) {
+  const { menuCollapsed, setMenuCollapsed } = props;
   return (
     <div className="menu-top">
       <div className="menu-top__left">
@@ -18,8 +19,10 @@ export default function MenuTop() {
           src={Logo}
           alt="David Thomas Pizarro Frick"
         />
-        <Button type="link" onClick={() => console.log("Menú")}>
-          <MenuFoldOutlined />
+        <Button type="link" onClick={() => setMenuCollapsed(!menuCollapsed)}>
+          {React.createElement(
+            menuCollapsed ? MenuUnfoldOutlined : MenuFoldOutlined
+          )}
         </Button>
       </div>
       <div className="menu-top__right">

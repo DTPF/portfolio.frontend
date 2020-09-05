@@ -4,7 +4,6 @@
   transition: margin-left 0.2s;
 
   &__header {
-    background-color: $header-background-color;
     position: fixed;
     top: 0;
     left: 0;
@@ -22,4 +21,10 @@
   &__footer {
     padding: 20px;
   }
+
 }
+
+// .ant-layout-sider-collapsed {
+//     width: 0 !important;
+//     min-width: 0 !important;
+// }
