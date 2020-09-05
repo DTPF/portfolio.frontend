@@ -8,13 +8,13 @@ export default function LayoutAdmin({ routes }) {
   const { Header, Content, Footer } = Layout;
   return (
     <Layout>
-      <h2>Menú Sider Admin</h2>
-      <Layout>
-        <Header>Header</Header>
-        <Content>
+        {/* TO DO: MenuSider */}
+      <Layout className="layout-admin">
+        <Header className="layout-admin__header">Header</Header>
+        <Content className="layout-admin__content">
           <LoadRoutes routes={routes} />
         </Content>
-        <Footer>David Thomas Pizarro Frick</Footer>
+        <Footer className="layout-admin__footer">David Thomas Pizarro Frick</Footer>
       </Layout>
     </Layout>
   );
