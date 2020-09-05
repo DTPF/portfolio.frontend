@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "antd";
-import Logo from "../../../assets/img/png/logo-white-200.png";
+import Logo from "../../../assets/img/png/logo-white.png";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -9,7 +9,7 @@ import {
 
 import "./MenuTop.scss";
 
-export default function MenuTop( props ) {
+export default function MenuTop(props) {
   const { menuCollapsed, setMenuCollapsed } = props;
   return (
     <div className="menu-top">

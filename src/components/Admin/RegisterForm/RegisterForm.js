@@ -26,7 +26,7 @@ export default function RegisterForm() {
     }
   };
 
-  const register = e => {
+  const register = (e) => {
     console.log(inputs);
   };
 
