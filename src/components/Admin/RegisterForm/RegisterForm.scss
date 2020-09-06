@@ -30,6 +30,9 @@
         border-color: $primary-color;
         box-shadow: none;
       }
+      @media (min-width: $media-breakpoint-up-md) {
+        font-size: 0em + 21px / $defaultFontSize;
+      }
     }
   }
 

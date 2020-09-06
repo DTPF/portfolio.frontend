@@ -29,7 +29,7 @@
 
       .ant-tabs {
         width: 90vw;
-        @media (min-width: $media-breakpoint-up-lg) {
+        @media (min-width: $media-breakpoint-up-sm) {
           width: auto;
         }
       }
@@ -49,8 +49,10 @@
         border-top: 4px solid $border-grey !important;
         border-radius: 0 !important;
         margin: 0 !important;
-        @media (min-width: $media-breakpoint-up-md) {
+        @media (min-width: $media-breakpoint-up-sm) {
           width: 215px;
+        }
+        @media (min-width: $media-breakpoint-up-md) {
           font-size: 0em + 23px / $defaultFontSize;
         }
         &:hover {
