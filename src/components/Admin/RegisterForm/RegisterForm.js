@@ -75,18 +75,42 @@ export default function RegisterForm() {
         });
       } else {
         const result = await signUpApi(inputs);
-        
-        if(!result.ok) {
+
+        if (!result.ok) {
           notification["error"]({
-            message: result.message
+            message: result.message,
           });
         } else {
           notification["success"]({
-            message: result.message
-          })
+            message: result.message,
+          });
+          resetForm();
         }
       }
     }
+  };
+
+  const resetForm = () => {
+    const input = document.getElementsByTagName("input");
+
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].className.remove("success");
+      inputs[i].className.remove("error");
+    }
+
+    setInputs({
+      email: "",
+      password: "",
+      repeatPassword: "",
+      privacyPolicy: false,
+    });
+
+    setFormValid({
+      email: false,
+      password: false,
+      repeatPassword: false,
+      privacyPolicy: false,
+    });
   };
 
   return (
