@@ -5,6 +5,7 @@ import {
   emailValidation,
   minLenghtValidation,
 } from "../../../utils/formValidation";
+import { signUpApi } from "../../../api/user";
 
 import "./RegisterForm.scss";
 
@@ -50,33 +51,42 @@ export default function RegisterForm() {
     }
   };
 
-  const register = (e) => {
-    console.log(inputs);
-    const {email, password, repeatPassword, privacyPolicy} = formValid;
-      const emailVal = inputs.email;
-      const passwordVal = inputs.password;
-      const repeatPasswordVal = inputs.repeatPassword;
-      const privacyPolicyVal = inputs.privacyPolicy;
+  const register = async (e) => {
+    const { email, password, repeatPassword, privacyPolicy } = formValid;
+    const emailVal = inputs.email;
+    const passwordVal = inputs.password;
+    const repeatPasswordVal = inputs.repeatPassword;
+    const privacyPolicyVal = inputs.privacyPolicy;
 
-      if(!emailVal || !passwordVal || !repeatPasswordVal || !privacyPolicyVal) {
-        if(emailVal && passwordVal && repeatPasswordVal && !privacyPolicyVal) {
-          notification['error']({
-            message: "Acepta nuestra política de privacidad"
-          });
-        } else {
-          notification['error']({
-            message: "Todos los campos son obligatorios"
-          });
-        }        
+    if (!emailVal || !passwordVal || !repeatPasswordVal || !privacyPolicyVal) {
+      if (emailVal && passwordVal && repeatPasswordVal && !privacyPolicyVal) {
+        notification["error"]({
+          message: "Acepta nuestra política de privacidad",
+        });
       } else {
-        if(passwordVal !== repeatPasswordVal) {
+        notification["error"]({
+          message: "Todos los campos son obligatorios",
+        });
+      }
+    } else {
+      if (passwordVal !== repeatPasswordVal) {
+        notification["error"]({
+          message: "Las contraseñas tienen que ser iguales",
+        });
+      } else {
+        const result = await signUpApi(inputs);
+        
+        if(!result.ok) {
           notification["error"]({
-            message: "Las contraseñas tienen que ser iguales"
+            message: result.message
           });
         } else {
-          // TO DO: Conectar con el API y registrar el usuario
+          notification["success"]({
+            message: result.message
+          })
         }
       }
+    }
   };
 
   return (

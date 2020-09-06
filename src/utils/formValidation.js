@@ -11,7 +11,7 @@ export function minLenghtValidation(inputData, minLength) {
 }
 
 export function emailValidation(inputData) {
-  const emailValid = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  const emailValid = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,63}$/i;
   const { value } = inputData;
   removeClassErrorSuccess(inputData);
   const resultValidation = emailValid.test(value);
