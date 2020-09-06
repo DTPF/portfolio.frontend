@@ -52,7 +52,7 @@ export default function RegisterForm() {
   };
 
   const register = async (e) => {
-    const { email, password, repeatPassword, privacyPolicy } = formValid;
+    // const { email, password, repeatPassword, privacyPolicy } = formValid;
     const emailVal = inputs.email;
     const passwordVal = inputs.password;
     const repeatPasswordVal = inputs.repeatPassword;
@@ -91,7 +91,7 @@ export default function RegisterForm() {
   };
 
   const resetForm = () => {
-    const input = document.getElementsByTagName("input");
+    const inputs = document.getElementsByTagName("input");
 
     for (let i = 0; i < inputs.length; i++) {
       inputs[i].className.remove("success");
