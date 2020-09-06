@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import routes from "./config/routes";
 
-import "./App.css";
+import "./App.scss";
 
 function App() {
   return (
