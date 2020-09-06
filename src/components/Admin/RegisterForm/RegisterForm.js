@@ -68,7 +68,7 @@ export default function RegisterForm() {
         </Checkbox>
       </Form.Item>
       <Form.Item>
-        <Button htmlType="submit" className="register-form__button">
+        <Button type="link" htmlType="submit" className="register-form__button">
           Crear cuenta
         </Button>
       </Form.Item>
