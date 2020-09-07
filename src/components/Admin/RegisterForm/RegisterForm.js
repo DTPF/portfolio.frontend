@@ -91,11 +91,11 @@ export default function RegisterForm() {
   };
 
   const resetForm = () => {
-    const inputs = document.getElementsByTagName("input");
+    const input = document.getElementsByTagName("input");
 
     for (let i = 0; i < inputs.length; i++) {
-      inputs[i].className.remove("success");
-      inputs[i].className.remove("error");
+      input[i].className.remove("success");
+      input[i].className.remove("error");
     }
 
     setInputs({
