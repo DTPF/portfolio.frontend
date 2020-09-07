@@ -5,6 +5,7 @@
 
   button {
     color: $font-light;
+    padding-left: 0;
 
     &:hover {
       color: $primary-color;
@@ -17,8 +18,9 @@
 
   &__left {
     &-logo {
-      width: 145px;
+      width: 125px;
       padding: 0 20px;
+      padding-right: 0;
     }
   }
 
