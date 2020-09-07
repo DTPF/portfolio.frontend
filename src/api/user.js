@@ -31,21 +31,18 @@ export function signInApi(data) {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   };
 
   return fetch(url, params)
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .then(result => {
-      console.log(result);
+    .then((result) => {
       return result;
     })
-    .catch(err => {
+    .catch((err) => {
       return err.message;
     });
-
-  
 }
