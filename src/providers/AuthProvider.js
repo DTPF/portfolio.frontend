@@ -13,7 +13,7 @@ export default function AuthProvider(props) {
   const { children } = props;
   const [user, setUser] = useState({
     user: null,
-    isLoad: true,
+    isLoading: true,
   });
   useEffect(() => {
     checkUserLogin(setUser);
@@ -29,14 +29,14 @@ function checkUserLogin(setUser) {
       logout();
       setUser({
         user: null,
-        isLoad: false,
+        isLoading: false,
       });
     } else {
       refreshAccessTokenApi(refreshToken);
     }
   } else {
     setUser({
-      isLoad: false,
+      isLoading: false,
       user: jwtDecode(accessToken),
     });
   }

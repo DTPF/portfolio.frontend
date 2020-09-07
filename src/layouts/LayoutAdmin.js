@@ -11,12 +11,9 @@ import "./LayoutAdmin.scss";
 export default function LayoutAdmin({ routes }) {
   const [menuCollapsed, setMenuCollapsed] = useState(false);
   const { Header, Content, Footer } = Layout;
+  const { user, isLoading } = useAuth();
 
-  const { user, isLoad } = useAuth();
-
-  console.log(user);
-
-  if (!user) {
+  if (!user && !isLoading) {
     return (
       <>
         <Route path="/admin/login" component={AdminSignIn} />
@@ -25,28 +22,31 @@ export default function LayoutAdmin({ routes }) {
     );
   }
 
-  return (
-    <Layout>
-      <MenuSider menuCollapsed={menuCollapsed} style={{ mainHeight: 20 }} />
-      <Layout
-        className="layout-admin"
-        style={{ marginLeft: menuCollapsed ? "80px" : "200px" }}
-      >
-        <Header className="layout-admin__header">
-          <MenuTop
-            menuCollapsed={menuCollapsed}
-            setMenuCollapsed={setMenuCollapsed}
-          />
-        </Header>
-        <Content className="layout-admin__content">
-          <LoadRoutes routes={routes} />
-        </Content>
-        <Footer className="layout-admin__footer">
-          David Thomas Pizarro Frick
-        </Footer>
+  if(user && !isLoading) {
+    return (
+      <Layout>
+        <MenuSider menuCollapsed={menuCollapsed} style={{ mainHeight: 20 }} />
+        <Layout
+          className="layout-admin"
+          style={{ marginLeft: menuCollapsed ? "80px" : "200px" }}
+        >
+          <Header className="layout-admin__header">
+            <MenuTop
+              menuCollapsed={menuCollapsed}
+              setMenuCollapsed={setMenuCollapsed}
+            />
+          </Header>
+          <Content className="layout-admin__content">
+            <LoadRoutes routes={routes} />
+          </Content>
+          <Footer className="layout-admin__footer">
+            David Thomas Pizarro Frick
+          </Footer>
+        </Layout>
       </Layout>
-    </Layout>
-  );
+    );
+  }
+  return null;
 }
 
 function LoadRoutes({ routes }) {
