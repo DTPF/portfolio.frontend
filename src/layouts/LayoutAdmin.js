@@ -9,7 +9,7 @@ import AdminSignIn from "../pages/Admin/SignIn";
 import "./LayoutAdmin.scss";
 
 export default function LayoutAdmin({ routes }) {
-  const [menuCollapsed, setMenuCollapsed] = useState(false);
+  const [menuCollapsed, setMenuCollapsed] = useState(true);
   const { Header, Content, Footer } = Layout;
   const { user, isLoading } = useAuth();
 
