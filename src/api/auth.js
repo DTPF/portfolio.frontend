@@ -18,27 +18,27 @@ export function getRefreshTokenApi() {
   return willExpireToken(refreshToken) ? null : refreshToken;
 }
 
-export function refreshAccessToken (refreshToken) {
+export function refreshAccessTokenApi(refreshToken) {
   const url = `${basePath}/${apiVersion}/refresh-access-token`;
   const bodyObj = {
-    refreshToken: refreshToken
-  }
+    refreshToken: refreshToken,
+  };
   const params = {
     method: "POST",
     body: JSON.stringify(bodyObj),
     headers: {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   };
 
   fetch(url, params)
-    .then(response => {
+    .then((response) => {
       if (response.status !== 200) {
         return null;
       }
       return response.json();
     })
-    .then(result => {
+    .then((result) => {
       if (!result) {
         logout();
       } else {
@@ -46,7 +46,7 @@ export function refreshAccessToken (refreshToken) {
         localStorage.setItem(ACCESS_TOKEN, accessToken);
         localStorage.setItem(REFRESH_TOKEN, refreshToken);
       }
-    })
+    });
 }
 
 export function logout() {

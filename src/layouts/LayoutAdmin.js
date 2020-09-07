@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Layout } from "antd";
+import useAuth from "../hooks/useAuth";
 import MenuTop from "../components/Admin/MenuTop";
 import MenuSider from "../components/Admin/MenuSider";
 import AdminSignIn from "../pages/Admin/SignIn";
@@ -11,7 +12,10 @@ export default function LayoutAdmin({ routes }) {
   const [menuCollapsed, setMenuCollapsed] = useState(false);
   const { Header, Content, Footer } = Layout;
 
-  const user = null;
+  const { user, isLoad } = useAuth();
+
+  console.log(user);
+
   if (!user) {
     return (
       <>
