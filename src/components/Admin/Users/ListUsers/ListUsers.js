@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Switch, List, Avatar, Button } from "antd";
 import NoAvatar from "../../../../assets/img/png/no-avatar.png";
+import Modal from "../../../Modal";
 import { EditOutlined, StopOutlined, DeleteOutlined, CheckOutlined } from "@ant-design/icons";
 
 import "./ListUsers.scss";
@@ -26,6 +27,14 @@ export default function ListUsers(props) {
       ) : (
         <UsersInactive usersInactive={usersInactive}/>
       )}
+
+      <Modal
+        title="Mi modal!!"
+        isVisible={true}
+        setIsVisible={() => console.log("sdfsdf")}
+      >
+        Hola este es miprimer modal
+      </Modal>
     </div>
   );
 }
