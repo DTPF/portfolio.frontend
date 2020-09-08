@@ -3,6 +3,10 @@ import { Form, Input, Button, notification } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { signInApi } from "../../../api/user";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../../utils/constants";
+import {
+  emailValidation,
+  minLenghtValidation,
+} from "../../../utils/formValidation";
 
 import "./LoginForm.scss";
 
@@ -11,12 +15,29 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
+  const [formValid, setFormValid] = useState({
+    email: false,
+    password: false,
+  });
+
   const changeForm = (e) => {
     setInputs({
       ...inputs,
       [e.target.name]: e.target.value,
     });
   };
+
+  const inputValidation = (e) => {
+    const { type, name } = e.target;
+
+    if (type === "email") {
+      setFormValid({ ...formValid, [name]: emailValidation(e.target) });
+    }
+    if (type === "password") {
+      setFormValid({ ...formValid, [name]: minLenghtValidation(e.target, 6) });
+    }
+  };
+
   const login = async e => {
     const result = await signInApi(inputs);
 
@@ -46,6 +67,7 @@ export default function LoginForm() {
           name="email"
           placeholder="Correo electrónico"
           className="login-form__input"
+          onChange={inputValidation}
         />
       </Form.Item>
       <Form.Item>
@@ -55,6 +77,7 @@ export default function LoginForm() {
           name="password"
           placeholder="Contraseña"
           className="login-form__input"
+          onChange={inputValidation}
         />
       </Form.Item>
       <Form.Item>
