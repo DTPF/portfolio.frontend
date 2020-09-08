@@ -2,13 +2,23 @@ import React, { useState } from "react";
 import { Switch, List, Avatar, Button } from "antd";
 import NoAvatar from "../../../../assets/img/png/no-avatar.png";
 import Modal from "../../../Modal";
-import { EditOutlined, StopOutlined, DeleteOutlined, CheckOutlined } from "@ant-design/icons";
+import EditUserForm from "../EditUserForm";
+import {
+  EditOutlined,
+  StopOutlined,
+  DeleteOutlined,
+  CheckOutlined,
+} from "@ant-design/icons";
 
 import "./ListUsers.scss";
 
 export default function ListUsers(props) {
   const { usersActive, usersInactive } = props;
   const [viewUsersActive, setViewUsersActive] = useState(true);
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalContent, setModalContent] = useState(null);
+
   return (
     <div className="list-users">
       <div className="list-users__switch">
@@ -23,24 +33,44 @@ export default function ListUsers(props) {
         </span>
       </div>
       {viewUsersActive ? (
-        <UsersActive usersActive={usersActive} />
+        <UsersActive
+          usersActive={usersActive}
+          setIsVisibleModal={setIsVisibleModal}
+          setModalTitle={setModalTitle}
+          setModalContent={setModalContent}
+        />
       ) : (
-        <UsersInactive usersInactive={usersInactive}/>
+        <UsersInactive usersInactive={usersInactive} />
       )}
 
       <Modal
-        title="Mi modal!!"
-        isVisible={true}
-        setIsVisible={() => console.log("sdfsdf")}
+        title={modalTitle}
+        isVisible={isVisibleModal}
+        setIsVisible={setIsVisibleModal}
       >
-        Hola este es miprimer modal
+        {modalContent}
       </Modal>
     </div>
   );
 }
 
 function UsersActive(props) {
-  const { usersActive } = props;
+  const {
+    usersActive,
+    setIsVisibleModal,
+    setModalTitle,
+    setModalContent,
+  } = props;
+
+  const editUser = (user) => {
+    setIsVisibleModal(true);
+    setModalTitle(
+      `Editar ${user.name ? user.name : "..."} ${
+        user.lastName ? user.lastName : "..."
+      }`
+    );
+    setModalContent(<EditUserForm user={user} />);
+  };
 
   return (
     <List
@@ -50,10 +80,7 @@ function UsersActive(props) {
       renderItem={(user) => (
         <List.Item
           actions={[
-            <Button
-              type="primary"
-              onClick={() => console.log("Editar usuario")}
-            >
+            <Button type="primary" onClick={() => editUser(user)}>
               <EditOutlined />
             </Button>,
             <Button
@@ -79,45 +106,45 @@ function UsersActive(props) {
             description={user.email}
           />
         </List.Item>
-    )}
+      )}
     />
   );
 }
 
 function UsersInactive(props) {
-    const { usersInactive } = props;
-    return (
-        <List
-          className="users-active"
-          itemLayout="horizontal"
-          dataSource={usersInactive}
-          renderItem={(user) => (
-            <List.Item
-              actions={[
-                <Button
-                  type="primary"
-                  onClick={() => console.log("Activar usuario")}
-                >
-                  <CheckOutlined />
-                </Button>,
-                <Button
-                  type="danger"
-                  onClick={() => console.log("Eliminar usuario")}
-                >
-                  <DeleteOutlined />
-                </Button>,
-              ]}
+  const { usersInactive } = props;
+  return (
+    <List
+      className="users-active"
+      itemLayout="horizontal"
+      dataSource={usersInactive}
+      renderItem={(user) => (
+        <List.Item
+          actions={[
+            <Button
+              type="primary"
+              onClick={() => console.log("Activar usuario")}
             >
-              <List.Item.Meta
-                avatar={<Avatar src={user.avatar ? user.avatar : NoAvatar} />}
-                title={`
+              <CheckOutlined />
+            </Button>,
+            <Button
+              type="danger"
+              onClick={() => console.log("Eliminar usuario")}
+            >
+              <DeleteOutlined />
+            </Button>,
+          ]}
+        >
+          <List.Item.Meta
+            avatar={<Avatar src={user.avatar ? user.avatar : NoAvatar} />}
+            title={`
                   ${user.name ? user.name : "..."} 
                   ${user.lastName ? user.lastName : "..."}
                 `}
-                description={user.email}
-              />
-            </List.Item>
-        )}
-        />
-      );
+            description={user.email}
+          />
+        </List.Item>
+      )}
+    />
+  );
 }
