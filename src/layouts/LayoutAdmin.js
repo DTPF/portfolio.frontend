@@ -28,7 +28,7 @@ export default function LayoutAdmin({ routes }) {
         <MenuSider menuCollapsed={menuCollapsed} style={{ minHeight: 20 }} />
         <Layout
           className="layout-admin"
-          style={{ marginLeft: menuCollapsed ? "0px" : "135px" }}
+          style={{ marginLeft: menuCollapsed ? "0px" : "205px" }}
         >
           <Header className="layout-admin__header">
             <MenuTop
