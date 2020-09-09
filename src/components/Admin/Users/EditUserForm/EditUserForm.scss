@@ -8,4 +8,22 @@
     padding: 10px;
     margin-bottom: 20px;
   }
+  .form-edit {
+    .ant-form-item {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      svg {
+        color: rgba(0, 0, 0, 0.25);
+      }
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        box-shadow: 0 0 0 30px white inset !important;
+      }
+    }
+    .btn-submit {
+      width: 100%;
+    }
+  }
 }

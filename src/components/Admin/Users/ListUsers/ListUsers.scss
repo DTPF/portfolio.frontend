@@ -1,3 +1,5 @@
+@import "../../../../scss/index.scss";
+
 .list-users {
   &__switch {
     display: flex;
@@ -5,17 +7,26 @@
     margin-bottom: 20px;
 
     > button {
-      margin-right: 20px;
+      margin-right: 10px;
     }
   }
-  
+
   .users-active {
     background-color: #fff;
     padding: 10px 20px;
-    
-    .ant-list-item-meta {
+
+    .ant-list-item {
+      &-meta {
         display: flex;
         align-items: center;
+        min-width: 300px;
+      }
+      &-action {
+        @media (max-width: $media-breakpoint-up-sm) {
+          margin: 0 auto;
+          margin-top: 15px;
+        }
+      }
     }
   }
 }
