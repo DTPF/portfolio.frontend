@@ -96,7 +96,7 @@ export function uploadAvatarApi(token, avatar, userId) {
   const formData = new FormData();
   formData.append("avatar", avatar, avatar.name);
   const params = {
-    methhod: "PUT",
+    method: "PUT",
     body: formData,
     headers: {
       Authorization: token
@@ -147,5 +147,5 @@ export function updateUserApi(token, user, userId) {
     })
     .catch(err => {
       return err;
-    })
+    });
 }
