@@ -54,8 +54,6 @@ export default function LoginForm() {
       });
       window.location.href = "/admin";
     }
-
-    console.log(result);
   };
 
   return (
