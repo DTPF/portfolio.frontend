@@ -3,6 +3,7 @@ import { Switch, List, Avatar, Button, Modal as ModalDelete, notification } from
 import NoAvatar from "../../../../assets/img/png/no-avatar.png";
 import Modal from "../../../Modal";
 import EditUserForm from "../EditUserForm";
+import AddUserForm from "../AddUserForm";
 import { getAvatarApi, activateUserApi, deleteUserApi } from "../../../../api/user";
 import { getAccessTokenApi } from "../../../../api/auth";
 import { notifDelay, notifDelayErr } from "../../../../config/notifications";
@@ -28,9 +29,7 @@ export default function ListUsers(props) {
     setIsVisibleModal(true);
     setModalTitle("Creando nuevo usuario");
     setModalContent(
-      <div>
-        <h1>Formulario creación de usuario</h1>
-      </div>
+      <AddUserForm setIsVisibleModal={setIsVisibleModal} setReloadUsers={setReloadUsers} />
     )
   }
 
