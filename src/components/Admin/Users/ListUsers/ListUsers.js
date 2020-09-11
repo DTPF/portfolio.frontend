@@ -24,19 +24,36 @@ export default function ListUsers(props) {
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState(null);
 
+  const addUserModal = () => {
+    setIsVisibleModal(true);
+    setModalTitle("Creando nuevo usuario");
+    setModalContent(
+      <div>
+        <h1>Formulario creación de usuario</h1>
+      </div>
+    )
+  }
+
   return (
     <div className="list-users">
-      <div className="list-users__switch">
-        <Switch
-          title="Mostrar Usuarios"
-          size="default"
-          defaultChecked
-          onChange={() => setViewUsersActive(!viewUsersActive)}
-        />
-        <span>
-          {viewUsersActive ? "Usuarios Activos" : "Usuarios Inactivos"}
-        </span>
+      <div className="list-users__header">
+        <div className="list-users__header-switch">
+          <Switch
+            title="Mostrar Usuarios"
+            size="default"
+            defaultChecked
+            onChange={() => setViewUsersActive(!viewUsersActive)}
+          />
+          <span>
+            {viewUsersActive ? "Usuarios Activos" : "Usuarios Inactivos"}
+          </span>
+        </div>
+        <Button type="primary" onClick={addUserModal}>
+          Nuevo Usuario
+        </Button>
       </div>
+
+      
       {viewUsersActive ? (
         <UsersActive
           usersActive={usersActive}
