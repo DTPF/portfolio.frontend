@@ -63,24 +63,49 @@ export default function EditUserForm(props) {
     }
 
     if(typeof userUpdate.avatar === "object") {
-      uploadAvatarApi(token, userUpdate.avatar, user._id).then(response => {
-        userUpdate.avatar = response.avatarName;
-        updateUserApi(token, userUpdate, user._id).then(result => {
+      uploadAvatarApi(token, userUpdate.avatar, user._id)
+        .then(response => {
+          userUpdate.avatar = response.avatarName;
+          if(response.avatarName !== undefined) {
+            updateUserApi(token, userUpdate, user._id).then(result => {
+              if (result.message === "Usuario actualizado correctamente.") {
+                notification["success"]({
+                  message: result.message
+                });
+                setIsVisibleModal(false);
+                setReloadUsers(true);
+              } else {
+                updateUserApi(token, userUpdate, user._id).then(result => {
+                  notification["error"]({
+                    message: result.message
+                  });
+                });
+              }        
+            });
+          } else {
+            notification["error"]({
+              message: "Extensiones admitidas: (.jpg, .jpeg, .png)"
+            });
+            setIsVisibleModal(false);
+          }
+        });
+    } else {
+      updateUserApi(token, userUpdate, user._id).then(result => {
+        if (result.message === "Usuario actualizado correctamente.") {
           notification["success"]({
             message: result.message
           });
           setIsVisibleModal(false);
           setReloadUsers(true);
-        });
+        } else {
+          updateUserApi(token, userUpdate, user._id).then(result => {
+            notification["error"]({
+              message: result.message
+            });
+          });
+        }        
       });
-    } else {
-      updateUserApi(token, userUpdate, user._id).then(result => {
-        notification["success"]({
-          message: result.message
-        });
-        setIsVisibleModal(false);
-        setReloadUsers(true);
-      });
+  
     }
 
   };
@@ -114,9 +139,15 @@ function UploadAvatar(props) {
   }, [avatar]);
 
   const onDrop = useCallback(
-    (acceptedFiles) => {
+    acceptedFiles => {
       const file = acceptedFiles[0];
-      setAvatar({ file, preview: URL.createObjectURL(file) });
+      if(file === undefined) {
+        notification["error"]({
+          message: "Formato de imágen inválido."
+        });
+      } else {
+        setAvatar({ file, preview: URL.createObjectURL(file) });
+      }
     },
     [setAvatar]
   );
