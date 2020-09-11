@@ -17,7 +17,7 @@ export default function EditUserForm(props) {
   useEffect(() => {
     setUserData({
       name: user.name,
-      lastName: user.lastName,
+      lastname: user.lastname,
       email: user.email,
       role: user.role,
       avatar: user.avatar,
@@ -57,7 +57,7 @@ export default function EditUserForm(props) {
       }
     }
 
-    if(!userUpdate.name || !userUpdate.lastName || !userUpdate.email) {
+    if(!userUpdate.name || !userUpdate.lastname || !userUpdate.email) {
       notification["error"]({
         message: "El nombre, apellidos y email son obligatorios.",
         duration: notifDelay
@@ -204,9 +204,9 @@ function EditForm(props) {
             <Input
               prefix={<UserOutlined />}
               placeholder="Apellidos"
-              value={userData.lastName}
+              value={userData.lastname}
               onChange={(e) =>
-                setUserData({ ...userData, lastName: e.target.value })
+                setUserData({ ...userData, lastname: e.target.value })
               }
             />
           </Form.Item>

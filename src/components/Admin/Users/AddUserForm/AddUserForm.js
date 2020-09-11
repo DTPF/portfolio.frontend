@@ -13,7 +13,7 @@ export default function AddUserForm(props) {
   const addUser = (event) => {
     if (
       !userData.name ||
-      !userData.lastName ||
+      !userData.lastname ||
       !userData.role ||
       !userData.email ||
       !userData.password ||
@@ -86,9 +86,9 @@ function AddForm(props) {
             <Input
               prefix={<UserOutlined />}
               placeholder="Apellidos"
-              value={userData.lastName}
+              value={userData.lastname}
               onChange={(e) =>
-                setUserData({ ...userData, lastName: e.target.value })
+                setUserData({ ...userData, lastname: e.target.value })
               }
             />
           </Form.Item>

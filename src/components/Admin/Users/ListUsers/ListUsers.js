@@ -89,7 +89,7 @@ function UsersActive(props) {
     setIsVisibleModal(true);
     setModalTitle(
       `Editar ${user.name ? user.name : "..."} ${
-        user.lastName ? user.lastName : "..."
+        user.lastname ? user.lastname : "..."
       }`
     );
     setModalContent(
@@ -201,7 +201,7 @@ function UserActive(props) {
             avatar={<Avatar src={avatar ? avatar : NoAvatar} />}
             title={`
               ${user.name ? user.name : "..."} 
-              ${user.lastName ? user.lastName : "..."}
+              ${user.lastname ? user.lastname : "..."}
             `}
             description={user.email}
           />
@@ -302,9 +302,9 @@ function UserInactive(props) {
           <List.Item.Meta
             avatar={<Avatar src={avatar ? avatar : NoAvatar} />}
             title={`
-                  ${user.name ? user.name : "..."} 
-                  ${user.lastName ? user.lastName : "..."}
-                `}
+              ${user.name ? user.name : "..."} 
+              ${user.lastname ? user.lastname : "..."}
+            `}
             description={user.email}
           />
         </List.Item>
