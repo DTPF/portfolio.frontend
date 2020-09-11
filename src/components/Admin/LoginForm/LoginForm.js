@@ -3,6 +3,7 @@ import { Form, Input, Button, notification } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { signInApi } from "../../../api/user";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../../utils/constants";
+import { notifDelay, notifDelayErr } from "../../../config/notifications";
 import {
   emailValidation,
   minLenghtValidation,
@@ -43,14 +44,16 @@ export default function LoginForm() {
 
     if(result.message) {
       notification["error"]({
-        message: result.message
+        message: result.message,
+        duration: notifDelayErr
       });
     } else {
       const {accessToken, refreshToken} = result;
       localStorage.setItem(ACCESS_TOKEN, accessToken);
       localStorage.setItem(REFRESH_TOKEN, refreshToken);
       notification["success"]({
-        message: "Login correcto."
+        message: "Login correcto.",
+        duration: notifDelay
       });
       window.location.href = "/admin";
     }

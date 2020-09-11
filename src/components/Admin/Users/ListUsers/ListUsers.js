@@ -5,6 +5,7 @@ import Modal from "../../../Modal";
 import EditUserForm from "../EditUserForm";
 import { getAvatarApi, activateUserApi, deleteUserApi } from "../../../../api/user";
 import { getAccessTokenApi } from "../../../../api/auth";
+import { notifDelay, notifDelayErr } from "../../../../config/notifications";
 import {
   EditOutlined,
   StopOutlined,
@@ -119,13 +120,15 @@ function UserActive(props) {
     activateUserApi(accessToken, user._id, false)
       .then(response => {
         notification["success"]({
-          message: response
+          message: response,
+          duration: notifDelay
         });
         setReloadUsers(true);
       })
       .catch(err => {
         notification["error"]({
-          message: err
+          message: err,
+          duration: notifDelayErr
         });
       });
   }
@@ -143,13 +146,15 @@ function UserActive(props) {
         deleteUserApi(accessToken, user._id)
           .then(response => {
             notification["success"]({
-              message: response
+              message: response,
+              duration: notifDelay
             });
             setReloadUsers(true);
           })
           .catch(err => {
             notification["error"]({
-              message: err
+              message: err,
+              duration: notifDelayErr
             });
           });
       }
@@ -220,13 +225,15 @@ function UserInactive(props) {
     activateUserApi(accessToken, user._id, true)
       .then(response => {
         notification["success"]({
-          message: response
+          message: response,
+          duration: notifDelay
         });
         setReloadUsers(true);
       })
       .catch(err => {
         notification["error"]({
-          message: err
+          message: err,
+          duration: notifDelayErr
         });
       });
   }
@@ -244,13 +251,15 @@ function UserInactive(props) {
         deleteUserApi(accessToken, user._id)
           .then(response => {
             notification["success"]({
-              message: response
+              message: response,
+              duration: notifDelay
             });
             setReloadUsers(true);
           })
           .catch(err => {
             notification["error"]({
-              message: err
+              message: err,
+              duration: notifDelayErr
             });
           });
       }

@@ -4,6 +4,7 @@ import { useDropzone } from "react-dropzone";
 import NoAvatar from "../../../../assets/img/png/no-avatar.png";
 import { updateUserApi, uploadAvatarApi, getAvatarApi } from "../../../../api/user";
 import { getAccessTokenApi } from "../../../../api/auth";
+import { notifDelay, notifDelayErr } from "../../../../config/notifications";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 import "./EditUserForm.scss";
@@ -12,8 +13,6 @@ export default function EditUserForm(props) {
   const { user, setIsVisibleModal, setReloadUsers } = props;
   const [avatar, setAvatar] = useState(null);
   const [userData, setUserData] = useState({});
-  const notifDelay = 3;
-  const notifDelayErr  = 5;
 
   useEffect(() => {
     setUserData({
@@ -154,7 +153,7 @@ function UploadAvatar(props) {
       if(file === undefined) {
         notification["error"]({
           message: "Formato de imágen inválido.",
-          duration: 3
+          duration: notifDelay
         });
       } else {
         setAvatar({ file, preview: URL.createObjectURL(file) });

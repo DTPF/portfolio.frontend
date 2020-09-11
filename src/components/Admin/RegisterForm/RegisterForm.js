@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Checkbox, notification } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { notifDelay, notifDelayErr } from "../../../config/notifications";
 import {
   emailValidation,
   minLenghtValidation,
@@ -61,16 +62,19 @@ export default function RegisterForm() {
       if (emailVal && passwordVal && repeatPasswordVal && !privacyPolicyVal) {
         notification["error"]({
           message: "Acepta nuestra política de privacidad",
+          duration: notifDelayErr
         });
       } else {
         notification["error"]({
           message: "Todos los campos son obligatorios",
+          duration: notifDelayErr
         });
       }
     } else {
       if (passwordVal !== repeatPasswordVal) {
         notification["error"]({
           message: "Las contraseñas tienen que ser iguales",
+          duration: notifDelayErr
         });
       } else {
         const result = await signUpApi(inputs);
@@ -78,10 +82,12 @@ export default function RegisterForm() {
         if (!result.ok) {
           notification["error"]({
             message: result.message,
+            duration: notifDelayErr
           });
         } else {
           notification["success"]({
             message: result.message,
+            duration: notifDelay
           });
           resetForm();
         }
