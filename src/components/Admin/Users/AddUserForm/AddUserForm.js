@@ -11,7 +11,45 @@ export default function AddUserForm(props) {
   const [userData, setUserData] = useState({});
 
   const addUser = (event) => {
-    console.log("Creando usuarios...");
+    if (
+      !userData.name ||
+      !userData.lastName ||
+      !userData.role ||
+      !userData.email ||
+      !userData.password ||
+      !userData.repeatPassword
+    ) {
+      notification["error"]({
+        message: "Todos los campos son obligatorios.",
+      });
+    } else if (userData.password !== userData.repeatPassword) {
+      notification["error"]({
+        message: "Las contraseñas tienen que ser iguales.",
+      });
+    } else {
+      const accessToken = getAccessTokenApi();
+
+      signUpAdminApi(accessToken, userData)
+        .then((response) => {
+          if (response.status === 200) {
+            notification["success"]({
+              message: response.message
+            });
+            setIsVisibleModal(false);
+            setReloadUsers(true);
+            setUserData({});
+          } else {
+            notification["error"]({
+              message: response.message
+            });
+          }
+        })
+        .catch((err) => {
+          notification["error"]({
+            message: err.message
+          });
+        });
+    }
   };
   return (
     <div className="add-user-form">
@@ -48,9 +86,9 @@ function AddForm(props) {
             <Input
               prefix={<UserOutlined />}
               placeholder="Apellidos"
-              value={userData.lastname}
+              value={userData.lastName}
               onChange={(e) =>
-                setUserData({ ...userData, lastname: e.target.value })
+                setUserData({ ...userData, lastName: e.target.value })
               }
             />
           </Form.Item>
@@ -111,9 +149,9 @@ function AddForm(props) {
         </Col>
       </Row>
       <Form.Item>
-          <Button type="primary" htmlType="submit" className="btn-submit">
-              Crear Usuario
-          </Button>
+        <Button type="primary" htmlType="submit" className="btn-submit">
+          Crear Usuario
+        </Button>
       </Form.Item>
     </Form>
   );
