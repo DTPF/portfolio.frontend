@@ -12,6 +12,8 @@ export default function EditUserForm(props) {
   const { user, setIsVisibleModal, setReloadUsers } = props;
   const [avatar, setAvatar] = useState(null);
   const [userData, setUserData] = useState({});
+  const notifDelay = 3;
+  const notifDelayErr  = 5;
 
   useEffect(() => {
     setUserData({
@@ -47,7 +49,8 @@ export default function EditUserForm(props) {
     if(userUpdate.password || userUpdate.repeatPassword) {
       if(userUpdate.password !== userUpdate.repeatPassword) {
         notification["error"]({
-          message: "Las contraseñas tienen que ser iguales."
+          message: "Las contraseñas tienen que ser iguales.",
+          duration: notifDelay
         })
         return;
       } else {
@@ -57,7 +60,8 @@ export default function EditUserForm(props) {
 
     if(!userUpdate.name || !userUpdate.lastName || !userUpdate.email) {
       notification["error"]({
-        message: "El nombre, apellidos y email son obligatorios."
+        message: "El nombre, apellidos y email son obligatorios.",
+        duration: notifDelay
       })
       return;
     }
@@ -68,44 +72,50 @@ export default function EditUserForm(props) {
           userUpdate.avatar = response.avatarName;
           if(response.avatarName !== undefined) {
             updateUserApi(token, userUpdate, user._id).then(result => {
-              if (result.message === "Usuario actualizado correctamente.") {
+              if (result.status === 200) {
                 notification["success"]({
-                  message: result.message
+                  message: result.message,
+                  duration: notifDelay
                 });
                 setIsVisibleModal(false);
                 setReloadUsers(true);
               } else {
-                updateUserApi(token, userUpdate, user._id).then(result => {
-                  notification["error"]({
-                    message: result.message
-                  });
+                notification["error"]({
+                  message: result.message,
+                  duration: notifDelayErr
                 });
-              }        
-            });
+                notification["success"]({
+                  message: "Avatar cambiado corretamente.",
+                  duration: notifDelay
+                });
+                setReloadUsers(true);
+              }      
+            }); 
           } else {
             notification["error"]({
-              message: "Extensiones admitidas: (.jpg, .jpeg, .png)"
+              message: "Extensiones admitidas: (.jpg, .jpeg, .png)",
+              duration: notifDelay
             });
             setIsVisibleModal(false);
           }
         });
     } else {
-      updateUserApi(token, userUpdate, user._id).then(result => {
-        if (result.message === "Usuario actualizado correctamente.") {
-          notification["success"]({
-            message: result.message
-          });
-          setIsVisibleModal(false);
-          setReloadUsers(true);
-        } else {
-          updateUserApi(token, userUpdate, user._id).then(result => {
-            notification["error"]({
-              message: result.message
+      updateUserApi(token, userUpdate, user._id)
+        .then(result => {
+          if (result.status === 200) {
+            notification["success"]({
+              message: result.message,
+              duration: notifDelay
             });
-          });
-        }        
-      });
-  
+            setIsVisibleModal(false);
+            setReloadUsers(true);
+          } else {
+            notification["error"]({
+              message: result.message,
+              duration: notifDelay
+            });
+          }      
+        });  
     }
 
   };
@@ -143,7 +153,8 @@ function UploadAvatar(props) {
       const file = acceptedFiles[0];
       if(file === undefined) {
         notification["error"]({
-          message: "Formato de imágen inválido."
+          message: "Formato de imágen inválido.",
+          duration: 3
         });
       } else {
         setAvatar({ file, preview: URL.createObjectURL(file) });
