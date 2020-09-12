@@ -18,8 +18,6 @@ export default function MenuWebList(props) {
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState(null);
 
-  console.log(listItems);
-
   useEffect(() => {
     const listItemsArray = [];
     menu.forEach((item) => {
@@ -37,7 +35,6 @@ export default function MenuWebList(props) {
     
     activateMenuApi(accessToken, menu._id, status)
     .then(response => {
-      console.log(status);
         if(status === true) {
           notification["success"]({
             message: response.message,
