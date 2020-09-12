@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Switch, List, Button, Modal as ModalAntd, notification, message } from "antd";
+import { Switch, List, Button, Modal as ModalAntd, notification } from "antd";
 import Modal from "../../../Modal";
 import DragSortableList from "react-drag-sortable";
 import { updateMenuApi, activateMenuApi } from "../../../../api/menu";
 import { getAccessTokenApi } from "../../../../api/auth";
 import { notifDelay, notifDelayErr } from "../../../../config/notifications";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import AddMenuWebForm from "../AddMenuWebForm";
+import EditMenuWebForm from "../EditMenuWebForm";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import "./MenuWebList.scss";
 
@@ -24,7 +25,11 @@ export default function MenuWebList(props) {
     menu.forEach((item) => {
       listItemsArray.push({
         content: (
-          <MenuItem item={item} activateMenu={activateMenu} />
+          <MenuItem 
+            item={item}
+            activateMenu={activateMenu}
+            editMenuWebModal={editMenuWebModal}
+          />
         )
       });
     });
@@ -69,6 +74,18 @@ export default function MenuWebList(props) {
         setReloadMenuWeb={setReloadMenuWeb}
       />
     );
+  };
+
+  const editMenuWebModal = menu => {
+    setIsVisibleModal(true);
+    setModalTitle(`Editando menu: ${menu.title}`);
+    setModalContent(
+      <EditMenuWebForm
+        setIsVisibleModal={setIsVisibleModal}
+        setReloadMenuWeb={setReloadMenuWeb}
+        menu={menu}
+      />
+    )
   }
 
   return (
@@ -91,13 +108,13 @@ export default function MenuWebList(props) {
 }
 
 function MenuItem(props) {
-  const { item, activateMenu } = props;
+  const { item, activateMenu, editMenuWebModal } = props;
 
   return (
     <List.Item
       actions={[
         <Switch defaultChecked={item.active} onChange={e => activateMenu(item, e)} />,
-        <Button type="primary">
+        <Button type="primary" onClick={() => editMenuWebModal(item)}>
           <EditOutlined />
         </Button>,
         <Button type="danger">
