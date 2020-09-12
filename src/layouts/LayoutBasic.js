@@ -14,7 +14,7 @@ export default function LayoutBasic({ routes }) {
         <Content>
           <LoadRoutes routes={routes} />
         </Content>
-        <Footer>David Pizarro Frick</Footer>
+        <Footer>David Thomas Pizarro Frick</Footer>
       </Layout>
     </Layout>
   );
