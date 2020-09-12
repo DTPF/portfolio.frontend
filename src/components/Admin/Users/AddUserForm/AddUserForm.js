@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { Form, Input, Select, Button, Row, Col, notification } from "antd";
 import { signUpAdminApi } from "../../../../api/user";
 import { getAccessTokenApi } from "../../../../api/auth";
-import { UserOutlined, MailOutlined, LockOutlined } from "@ant-design/icons";
+import { notifDelay, notifDelayErr } from "../../../../config/notifications";
+import {
+  UserOutlined,
+  MailOutlined,
+  LockOutlined
+} from "@ant-design/icons";
 
 import "./AddUserForm.scss";
 
@@ -21,10 +26,12 @@ export default function AddUserForm(props) {
     ) {
       notification["error"]({
         message: "Todos los campos son obligatorios.",
+        duration: notifDelayErr
       });
     } else if (userData.password !== userData.repeatPassword) {
       notification["error"]({
         message: "Las contraseñas tienen que ser iguales.",
+        duration: notifDelayErr
       });
     } else {
       const accessToken = getAccessTokenApi();
@@ -33,20 +40,23 @@ export default function AddUserForm(props) {
         .then((response) => {
           if (response.status === 200) {
             notification["success"]({
-              message: response.message
+              message: response.message,
+              duration: notifDelay
             });
             setIsVisibleModal(false);
             setReloadUsers(true);
             setUserData({});
           } else {
             notification["error"]({
-              message: response.message
+              message: response.message,
+              duration: notifDelayErr
             });
           }
         })
         .catch((err) => {
           notification["error"]({
-            message: err.message
+            message: err.message,
+            duration: notifDelayErr
           });
         });
     }
