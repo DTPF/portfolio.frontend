@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Switch, List, Button, Modal as ModalAntd, notification } from "antd";
 import Modal from "../../../Modal";
 import DragSortableList from "react-drag-sortable";
-import { updateMenuApi, activateMenuApi } from "../../../../api/menu";
+import { updateMenuApi, activateMenuApi, deleteMenuApi } from "../../../../api/menu";
 import { getAccessTokenApi } from "../../../../api/auth";
 import { notifDelay, notifDelayErr } from "../../../../config/notifications";
 import AddMenuWebForm from "../AddMenuWebForm";
@@ -29,11 +29,13 @@ export default function MenuWebList(props) {
             item={item}
             activateMenu={activateMenu}
             editMenuWebModal={editMenuWebModal}
+            deleteMenu={deleteMenu}
           />
         )
       });
     });
     setListItems(listItemsArray);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [menu]);
 
   const activateMenu = (menu, status) => {
@@ -86,7 +88,35 @@ export default function MenuWebList(props) {
         menu={menu}
       />
     )
-  }
+  };
+
+  const deleteMenu = menu => {
+    const accessToken = getAccessTokenApi();
+
+    confirm({
+      title: "Eliminando menú",
+      content: `¿Estás seguro que quieres eliminar el menú ${menu.title}?`,
+      okText: "Eliminar",
+      okType: "danger",
+      cancelText: "Cancelar",
+      onOk() {
+        deleteMenuApi(accessToken, menu._id)
+          .then(response => {
+            notification["success"]({
+              message: response,
+              duration: notifDelay
+            });
+            setReloadMenuWeb(true);
+          })
+          .catch(() => {
+            notification["error"]({
+              message: "Error del servidor, inténtelo más tarde.",
+              duration: notifDelayErr
+            });
+          });
+      }
+    });
+  };
 
   return (
     <div className="menu-web-list">
@@ -108,7 +138,7 @@ export default function MenuWebList(props) {
 }
 
 function MenuItem(props) {
-  const { item, activateMenu, editMenuWebModal } = props;
+  const { item, activateMenu, editMenuWebModal, deleteMenu } = props;
 
   return (
     <List.Item
@@ -117,7 +147,7 @@ function MenuItem(props) {
         <Button type="primary" onClick={() => editMenuWebModal(item)}>
           <EditOutlined />
         </Button>,
-        <Button type="danger">
+        <Button type="danger" onClick={() => deleteMenu(item)}>
           <DeleteOutlined />
         </Button>,
       ]}
