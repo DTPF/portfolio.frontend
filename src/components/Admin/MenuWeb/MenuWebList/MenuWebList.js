@@ -6,6 +6,7 @@ import { updateMenuApi, activateMenuApi } from "../../../../api/menu";
 import { getAccessTokenApi } from "../../../../api/auth";
 import { notifDelay, notifDelayErr } from "../../../../config/notifications";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import AddMenuWebForm from "../AddMenuWebForm";
 
 import "./MenuWebList.scss";
 
@@ -59,14 +60,29 @@ export default function MenuWebList(props) {
     });
   };
 
+  const addMenuWebModal = () => {
+    setIsVisibleModal(true);
+    setModalTitle("Creando nuevo menú");
+    setModalContent(
+      <AddMenuWebForm />
+    );
+  }
+
   return (
     <div className="menu-web-list">
       <div className="menu-web-list__header">
-        <Button type="primary">Añadir Menú</Button>
+        <Button type="primary" onClick={addMenuWebModal}>Crear Menú</Button>
       </div>
       <div className="menu-web-list__items">
         <DragSortableList items={listItems} onSort={onSort} type="vertical" />
       </div>
+      <Modal
+        title={modalTitle}
+        isVisible={isVisibleModal}
+        setIsVisible={setIsVisibleModal}
+      >
+        {modalContent}
+      </Modal>
     </div>
   );
 }
