@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu } from "antd";
 import { Link } from "react-router-dom";
+import SocialLinks from "../SocialLinks";
 import { getMenuApi } from "./../../../api/menu";
 import logoWhite from "../../../assets/img/png/logo-white.png";
 
@@ -34,7 +35,9 @@ export default function MenuTop() {
         if (external) {
           return (
             <Menu.Item key={item._id} className="menu-top-web__item">
-              <a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a>
+              <a href={item.url} target="_blank" rel="noopener noreferrer">
+                {item.title}
+              </a>
             </Menu.Item>
           );
         }
@@ -44,7 +47,7 @@ export default function MenuTop() {
           </Menu.Item>
         );
       })}
-      <div>Social Media</div>
+      <SocialLinks />
     </Menu>
   );
 }
