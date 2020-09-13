@@ -25,7 +25,10 @@ export default function LayoutAdmin({ routes }) {
   if(user && !isLoading) {
     return (
       <Layout>
-        <MenuSider menuCollapsed={menuCollapsed} style={{ minHeight: 20 }} />
+        <MenuSider
+          menuCollapsed={menuCollapsed}
+          style={{ minHeight: 20 }}
+        />
         <Layout
           className="layout-admin"
           style={{ marginLeft: menuCollapsed ? "0px" : "205px" }}

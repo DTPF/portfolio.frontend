@@ -57,6 +57,11 @@ const routes = [
         component: Home,
       },
       {
+        path: "/home",
+        exact: true,
+        component: Home,
+      },
+      {
         path: "/contact",
         exact: true,
         component: Contact,

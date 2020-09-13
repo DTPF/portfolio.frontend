@@ -2,7 +2,10 @@ $defaultFontSize: 16px;
 
 $primary-background-color: rgba(23, 23, 133, 0.787);
 
-$primary-color: #4f86b9;
+// $primary-color: #4f86b9;
+$primary-color: #5d718d;
+$primary-color-light: #c3ddff;
+$primary-color-dark: #2f4665;
 
 $primary-color-hover: #326290;
 
@@ -13,7 +16,10 @@ $font-grey-light: #e8e8e8;
 $font-grey: #808080;
 $font-grey-dark: #595959;
 $font-dark-light: #4d4d53;
+$font-dark-medium: rgba(0, 0, 0, 0.877);
 $font-dark: #000;
+$font-dark-primary: #2f4665;
+$font-light-primary:  #c3ddff;
 
 $border-light: #fff;
 $border-grey-light: #e8e8e8;
@@ -21,6 +27,9 @@ $border-grey: #808080;
 $border-grey-dark: #595959;
 $border-dark-light: #252527;
 $border-dark: #000;
+$border-radius: 3px;
+
+$box-shadow-primary: 0.1px 0.1px 2px 0.1px $primary-color;
 
 $background-light: #fff;
 $background-grey-light: #e8e8e8;
@@ -36,9 +45,7 @@ $success: #84b84c;
 $error: #f00;
 
 // Sociial color
-$youtube: #cd201f;
-$twitter: #1da1f2;
-$facebook: #3b5998;
+$github: #333;
 $linkedin: #0077b5;
 
 // Responsesive down size

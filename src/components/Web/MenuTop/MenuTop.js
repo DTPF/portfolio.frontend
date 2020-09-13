@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Menu } from "antd";
+import { Menu, Button } from "antd";
 import { Link } from "react-router-dom";
 import SocialLinks from "../SocialLinks";
 import { getMenuApi } from "./../../../api/menu";
 import logoWhite from "../../../assets/img/png/logo-white.png";
+import { URL } from "../../../config/url";
+import { MenuOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 import "./MenuTop.scss";
 
-export default function MenuTop() {
+export default function MenuTop(props) {
   const [menuData, setMenuData] = useState([]);
+  const { menuCollapsed, setMenuCollapsed } = props;
 
   useEffect(() => {
     getMenuApi().then((response) => {
@@ -23,10 +26,14 @@ export default function MenuTop() {
     });
   }, []);
 
+  const reload = () => {
+    window.location.href = URL + "home";
+  };
+
   return (
     <Menu className="menu-top-web" mode="horizontal">
       <Menu.Item className="menu-top-web__logo">
-        <Link to={"/"}>
+        <Link to={"/home"} onClick={reload}>
           <img src={logoWhite} alt="David Thomas Pizarro Frick" />
         </Link>
       </Menu.Item>
@@ -34,7 +41,7 @@ export default function MenuTop() {
         const external = item.url.indexOf("http") > -1 ? true : false;
         if (external) {
           return (
-            <Menu.Item key={item._id} className="menu-top-web__item">
+            <Menu.Item key={item.url} className="menu-top-web__item">
               <a href={item.url} target="_blank" rel="noopener noreferrer">
                 {item.title}
               </a>
@@ -42,14 +49,27 @@ export default function MenuTop() {
           );
         }
         return (
-          <Menu.Item key={item._id} className="menu-top-web__item">
+          <Menu.Item key={item.url} className="menu-top-web__item">
             <Link to={item.url}>{item.title}</Link>
           </Menu.Item>
         );
       })}
-      <Menu.Item className="menu-top-web__item-social">
-        <SocialLinks />
-      </Menu.Item>
+      <div>
+        <div className="menu-top-web__item-social">
+          <SocialLinks />
+        </div>
+        <div>
+          <Button
+            type="link"
+            className="menu-top-web__menu"
+            onClick={() => setMenuCollapsed(!menuCollapsed)}
+          >
+            {React.createElement(
+              menuCollapsed ? MenuOutlined : CloseCircleOutlined
+            )}
+          </Button>
+        </div>
+      </div>
     </Menu>
   );
 }

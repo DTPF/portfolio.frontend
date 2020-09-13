@@ -3,22 +3,24 @@
 .menu-top-web {
   position: sticky;
   top: 0;
-  background-color: $background-dark-web;
+  background-color: $primary-color;
   border: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   li {
     border: 0 !important;
     a {
       color: #fff !important;
       font-weight: bold;
       &:hover {
-        color: $primary-color !important;
+        color: $primary-color-light !important;
       }
     }
   }
   &__logo {
+    position: absolute;
+    left: 0;
     margin: 0 !important;
     img {
       width: 125px;
@@ -27,15 +29,33 @@
     }
   }
   &__item {
-    @media (max-width: $media-breakpoint-up-lg) {
-      visibility: hidden;
-      // display: none !important;
+    @media (max-width: 880px) {
+      display: none !important;
     }
     &-social {
-      @media (max-width: $media-breakpoint-up-lg) {
-        visibility: hidden;
-        // display: none !important;
-      }
-    }
+      position: absolute !important;
+      right: 0 !important;
+      top: 20px !important;
+      @media (max-width: 880px) {
+        display: none !important;
+      }    
+    }    
   }
+  
+  &__menu {
+    position: absolute;
+    right: 0;
+    margin-top: -15px !important;
+    display: flex;
+    font-size: 1.5em;
+    color: #fff;
+    &:hover,
+    &:focus {
+      color: #fff;
+    }
+    @media (min-width: 880px) {
+      display: none !important;
+    }
+    
+  } 
 }

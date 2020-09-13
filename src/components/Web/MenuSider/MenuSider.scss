@@ -1,0 +1,55 @@
+@import "../../../scss/index.scss";
+
+.menu-sider-web {
+  position: fixed;
+  left: 0;
+  top: 70px;
+  min-height: calc(100vh - 70px);
+  overflow: hidden;
+  background-color: #fff;
+  border-bottom-right-radius: $border-radius;
+  padding: 0 !important;
+  padding-bottom: 15px;
+  -webkit-box-shadow: 1px 1px 5px 0px $box-shadow-primary;
+  -moz-box-shadow: 1px 1px 5px 0px $box-shadow-primary;
+  box-shadow: 1px 1px 5px 0px $box-shadow-primary;
+  box-shadow: $box-shadow-primary;
+  @media (min-width: $media-breakpoint-up-lg) {
+    display: none !important;
+  }
+  .ant-menu-item-selected {
+    background-color: $primary-color-light !important;
+    a {
+      color: $font-dark-medium;
+    }
+  }
+  &__item {
+    padding-left: 5px !important;
+    margin: 0 !important;
+    height: 25px !important;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    width: 100% !important;
+    &:first-child {
+      margin-top: 7px !important;
+    }
+    &:hover,
+    &:focus {
+      background-color: $primary-color-light !important;
+      color: white !important;
+    }
+    a {
+      &:hover,
+      &:focus {
+        color: $font-dark-primary !important;
+      }
+    }
+    &-social-sider {
+      position: absolute;
+      bottom: 0;
+      margin-left: 60px !important;
+      margin: 1.4rem;
+    }
+  }
+}
