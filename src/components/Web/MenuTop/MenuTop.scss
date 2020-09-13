@@ -7,6 +7,7 @@
   border: 0;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   li {
     border: 0 !important;
     a {
@@ -23,6 +24,18 @@
       width: 125px;
       padding-right: 0;
       padding-left: 0;
+    }
+  }
+  &__item {
+    @media (max-width: $media-breakpoint-up-lg) {
+      visibility: hidden;
+      // display: none !important;
+    }
+    &-social {
+      @media (max-width: $media-breakpoint-up-lg) {
+        visibility: hidden;
+        // display: none !important;
+      }
     }
   }
 }

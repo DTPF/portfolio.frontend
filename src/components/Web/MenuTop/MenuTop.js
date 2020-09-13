@@ -47,7 +47,9 @@ export default function MenuTop() {
           </Menu.Item>
         );
       })}
-      <SocialLinks />
+      <Menu.Item className="menu-top-web__item-social">
+        <SocialLinks />
+      </Menu.Item>
     </Menu>
   );
 }

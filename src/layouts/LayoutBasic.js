@@ -11,13 +11,13 @@ export default function LayoutBasic({ routes }) {
 
   return (
     <Row>
-      <Col lg={4} />
-      <Col span={24} lg={16}>
+      <Col span={0} xl={4} />
+      <Col span={24} xl={16}>
         <MenuTop />
         <LoadRoutes routes={routes} />
         <Footer>David Thomas Pizarro Frick</Footer>
       </Col>
-      <Col lg={4} />
+      <Col span={0} xl={4} />
     </Row>
   );
 }
