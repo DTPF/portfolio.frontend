@@ -14,7 +14,7 @@
   -moz-box-shadow: 1px 1px 5px 0px $box-shadow-primary;
   box-shadow: 1px 1px 5px 0px $box-shadow-primary;
   box-shadow: $box-shadow-primary;
-  @media (min-width: $media-breakpoint-up-lg) {
+  @media (min-width: 880px) {
     display: none !important;
   }
   .ant-menu-item-selected {

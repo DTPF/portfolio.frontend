@@ -9,7 +9,7 @@ import "./LayoutBasic.scss";
 export default function LayoutBasic({ routes }) {
   //   const { routes } = props;
   const [menuCollapsed, setMenuCollapsed] = useState(true);
-  const { Footer } = Layout;
+  const { Footer, Content } = Layout;
 
   const closeMenu = () => {
     if(menuCollapsed === false) {
@@ -33,8 +33,11 @@ export default function LayoutBasic({ routes }) {
           setMenuCollapsed={setMenuCollapsed}
           style={{ minHeight: 20 }}
         />
-        <LoadRoutes routes={routes} />
-        <Footer>David Thomas Pizarro Frick</Footer>
+        <Content className="layout-basic__content">
+          <LoadRoutes routes={routes} />
+
+        </Content>
+        <Footer className="layout-basic__footer">David Thomas Pizarro Frick</Footer>
       </Col>
       <Col span={0} xl={2} />
     </Row>
