@@ -13,6 +13,11 @@ export default function LayoutAdmin( props ) {
   const [menuCollapsed, setMenuCollapsed] = useState(true);
   const { Header, Content, Footer } = Layout;
   const { user, isLoading } = useAuth();
+  const closeMenu = () => {
+    if(menuCollapsed === false) {
+      setMenuCollapsed(true);
+    }
+  };
   if (!user && !isLoading) {
     return (
       <>
@@ -23,7 +28,7 @@ export default function LayoutAdmin( props ) {
   }
   if(user && !isLoading) {
     return (
-      <Layout>
+      <Layout onClick={closeMenu}>
         <MenuSider
           menuCollapsed={menuCollapsed}
           style={{ minHeight: 20 }}
