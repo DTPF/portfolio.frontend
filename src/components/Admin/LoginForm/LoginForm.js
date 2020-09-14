@@ -56,7 +56,7 @@ export default function LoginForm() {
         message: "Login correcto.",
         duration: notifDelay
       });
-      window.location.href = "/admin";
+      window.location.href = "/ad1988";
       addNotification({
         title: 'Accediendo desde '+inputs.email,
         native: true

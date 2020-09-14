@@ -19,7 +19,7 @@ export default function MenuTop(props) {
   };
 
   const reload = () => {
-    window.location.href = URL + "admin";
+    window.location.href = URL + "ad1988";
   };
 
   return (

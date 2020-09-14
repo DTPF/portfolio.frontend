@@ -4,7 +4,8 @@ import { Layout, Menu } from "antd";
 import { 
   HomeOutlined,
   UserOutlined,
-  MenuOutlined
+  MenuOutlined,
+  ChromeOutlined
 } from "@ant-design/icons";
 
 import "./MenuSider.scss";
@@ -21,22 +22,28 @@ function MenuSider(props) {
       collapsed={menuCollapsed}
     >
       <Menu theme="dark" mode="inline" defaultSelectedKeys={[location.pathname]} >
-        <Menu.Item key="/admin">
-          <Link to={"/admin"}>
+        <Menu.Item key="/ad1988">
+          <Link to={"/ad1988"}>
             <HomeOutlined />
             <span className="nav-text">Home</span>
           </Link>
         </Menu.Item>
-        <Menu.Item key="/admin/users">
-          <Link to={"/admin/users"}>
+        <Menu.Item key="/ad1988/users">
+          <Link to={"/ad1988/users"}>
             <UserOutlined />
             <span className="nac-text">Usuarios</span>
           </Link>
         </Menu.Item>
-        <Menu.Item key="/admin/menu">
-          <Link to={"/admin/menu"}>
+        <Menu.Item key="/ad1988/menu">
+          <Link to={"/ad1988/menu"}>
             <MenuOutlined />
             <span className="nac-text">Menú</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="/home">
+          <Link to={"/home"}>
+            <ChromeOutlined />
+            <span className="nac-text">Web</span>
           </Link>
         </Menu.Item>
       </Menu>

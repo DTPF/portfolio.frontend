@@ -17,27 +17,27 @@ import Error404 from "../pages/Error404";
 
 const routes = [
   {
-    path: "/admin",
+    path: "/ad1988",
     exact: false,
     component: LayoutAdmin,
     routes: [
       {
-        path: "/admin",
+        path: "/ad1988",
         exact: true,
         component: AdminHome,
       },
       {
-        path: "/admin/login",
+        path: "/ad1988/login",
         exact: true,
         component: AdminSignIn,
       },
       {
-        path: "/admin/users",
+        path: "/ad1988/users",
         component: AdminUsers,
         exact: true
       },
       {
-        path: "/admin/menu",
+        path: "/ad1988/menu",
         component: AdminMenuWeb,
         exact: true
       },

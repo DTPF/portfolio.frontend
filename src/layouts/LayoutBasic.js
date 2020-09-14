@@ -22,8 +22,8 @@ export default function LayoutBasic({ routes }) {
       className="layout-basic"
       onClick={closeMenu}
     >
-      <Col span={0} xl={2} />
-      <Col span={24} xl={20}>
+      <Col span={0} xxl={2} />
+      <Col span={24} xxl={20}>
         <MenuTop
           menuCollapsed={menuCollapsed}
           setMenuCollapsed={setMenuCollapsed}
@@ -39,7 +39,7 @@ export default function LayoutBasic({ routes }) {
         </Content>
         <Footer className="layout-basic__footer">David Thomas Pizarro Frick</Footer>
       </Col>
-      <Col span={0} xl={2} />
+      <Col span={0} xxl={2} />
     </Row>
   );
 }

@@ -21,8 +21,8 @@ export default function LayoutAdmin( props ) {
   if (!user && !isLoading) {
     return (
       <>
-        <Route path="/admin/login" component={AdminSignIn} />
-        <Redirect to="/admin/login" />
+        <Route path="/ad1988/login" component={AdminSignIn} />
+        <Redirect to="/ad1988/login" />
       </>
     );
   }
