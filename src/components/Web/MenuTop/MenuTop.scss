@@ -41,8 +41,7 @@
         display: none !important;
       }    
     }    
-  }
-  
+  }  
   &__menu {
     position: absolute;
     right: 0;
@@ -56,7 +55,6 @@
     }
     @media (min-width: 880px) {
       display: none !important;
-    }
-    
+    }    
   } 
 }

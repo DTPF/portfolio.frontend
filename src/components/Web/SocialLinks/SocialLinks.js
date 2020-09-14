@@ -17,7 +17,8 @@ export default function SocialLinks() {
       <a href="/"
         className="github"
         target="_blank"
-        rel="noopener noreferrer">
+        rel="noopener noreferrer"
+      >
         <GithubOutlined />
       </a>
     </div>

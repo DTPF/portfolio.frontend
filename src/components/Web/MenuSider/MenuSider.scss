@@ -3,8 +3,8 @@
 .menu-sider-web {
   position: fixed;
   left: 0;
-  top: 70px;
-  min-height: calc(100vh - 70px);
+  top: 73px;
+  min-height: calc(100vh - 73px);
   overflow: hidden;
   background-color: #fff;
   border-bottom-right-radius: $border-radius;
@@ -12,7 +12,6 @@
   padding-bottom: 15px;
   -webkit-box-shadow: 1px 1px 5px 0px $box-shadow-primary;
   -moz-box-shadow: 1px 1px 5px 0px $box-shadow-primary;
-  box-shadow: 1px 1px 5px 0px $box-shadow-primary;
   box-shadow: $box-shadow-primary;
   @media (min-width: 880px) {
     display: none !important;

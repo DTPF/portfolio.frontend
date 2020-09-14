@@ -12,22 +12,18 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-
     &-tabs {
       box-shadow: 2px 5px 34px -10px rgba(88, 88, 88, 0.75);
       border-radius: 10px !important;
     }
-
     &-logo {
       padding: 60px 20px;
       img {
         width: 100%;
       }
     }
-
     &-tabs {
       background-color: $background-light;
-
       .ant-tabs {
         width: 90vw;
         @media (min-width: $media-breakpoint-up-sm) {
@@ -81,12 +77,10 @@
           color: $primary-color;
         }
       }
-
       .ant-tabs-content {
         padding: 0 16px 16px 16px;
         text-align: center;
       }
-
       .ant-tabs-nav-wrap {
         border-radius: 10px !important;
       }
