@@ -12,18 +12,14 @@ export default function LayoutBasic({ routes }) {
   const { Footer, Content } = Layout;
 
   const closeMenu = () => {
-    if(menuCollapsed === false) {
+    if (menuCollapsed === false) {
       setMenuCollapsed(true);
     }
   };
 
   return (
-    <Row
-      className="layout-basic"
-      onClick={closeMenu}
-    >
-      <Col span={0} xxl={2} />
-      <Col span={24} xxl={20}>
+    <div className="layout-basic" onClick={closeMenu}>
+      <div className="layout-basic__header">
         <MenuTop
           menuCollapsed={menuCollapsed}
           setMenuCollapsed={setMenuCollapsed}
@@ -33,13 +29,14 @@ export default function LayoutBasic({ routes }) {
           setMenuCollapsed={setMenuCollapsed}
           style={{ minHeight: 20 }}
         />
-        <Content className="layout-basic__content">
-          <LoadRoutes routes={routes} />
-        </Content>
-        <Footer className="layout-basic__footer">David Thomas Pizarro Frick</Footer>
-      </Col>
-      <Col span={0} xxl={2} />
-    </Row>
+      </div>
+      <Content className="layout-basic__content">
+        <LoadRoutes routes={routes} />
+      </Content>
+      <Footer className="layout-basic__footer">
+        David Thomas Pizarro Frick
+      </Footer>
+    </div>
   );
 }
 

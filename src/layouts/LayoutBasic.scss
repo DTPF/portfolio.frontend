@@ -2,17 +2,40 @@
 
 .layout-basic {
   transition: margin-left 0.2s;
-
   background-image: url("../assets/img/jpg/background-squares.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  &__header {
+    transition: margin-left 0.2s;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    left: 0;
+    height: 65px;
+    padding: 0 !important;
+    margin: 0 !important;
+    @media (min-width: $media-breakpoint-up-xxl) {
+      width: 80vw;
+      margin: 0 auto !important;
+    }
+  }
   &__content {
-    min-height: calc(100vh - 142px);
+    min-height: calc(100vh - 140px);
+    padding: 0 !important;
+    @media (min-width: $media-breakpoint-up-xxl) {
+      width: 80vw;
+      margin: 0 auto;
+    }
   }
   &__footer {
     background-color: $primary-color;
     color: #fff;
     text-align: center;
+    @media (min-width: $media-breakpoint-up-xxl) {
+      width: 80vw;
+      margin: 0 auto;
+    }
   }
 }
