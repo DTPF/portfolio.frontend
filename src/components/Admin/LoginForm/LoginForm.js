@@ -4,6 +4,8 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { signInApi } from "../../../api/user";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../../utils/constants";
 import { notifDelay, notifDelayErr } from "../../../config/notifications";
+import addNotification from 'react-push-notification';
+
 import {
   emailValidation,
   minLenghtValidation,
@@ -16,6 +18,7 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
+
   const [formValid, setFormValid] = useState({
     email: false,
     password: false,
@@ -30,7 +33,6 @@ export default function LoginForm() {
 
   const inputValidation = (e) => {
     const { type, name } = e.target;
-
     if (type === "email") {
       setFormValid({ ...formValid, [name]: emailValidation(e.target) });
     }
@@ -40,8 +42,7 @@ export default function LoginForm() {
   };
 
   const login = async e => {
-    const result = await signInApi(inputs);
-
+    const result = await signInApi(inputs);  
     if(result.message) {
       notification["error"]({
         message: result.message,
@@ -56,6 +57,10 @@ export default function LoginForm() {
         duration: notifDelay
       });
       window.location.href = "/admin";
+      addNotification({
+        title: 'Accediendo desde '+inputs.email,
+        native: true
+    });
     }
   };
 

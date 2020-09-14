@@ -8,11 +8,11 @@ import AdminSignIn from "../pages/Admin/SignIn";
 
 import "./LayoutAdmin.scss";
 
-export default function LayoutAdmin({ routes }) {
+export default function LayoutAdmin( props ) {
+  const { routes } = props;
   const [menuCollapsed, setMenuCollapsed] = useState(true);
   const { Header, Content, Footer } = Layout;
   const { user, isLoading } = useAuth();
-
   if (!user && !isLoading) {
     return (
       <>
@@ -21,7 +21,6 @@ export default function LayoutAdmin({ routes }) {
       </>
     );
   }
-
   if(user && !isLoading) {
     return (
       <Layout>
@@ -32,6 +31,7 @@ export default function LayoutAdmin({ routes }) {
         <Layout
           className="layout-admin"
           style={{ marginLeft: menuCollapsed ? "0px" : "205px" }}
+          
         >
           <Header className="layout-admin__header">
             <MenuTop
