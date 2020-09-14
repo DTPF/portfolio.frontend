@@ -35,7 +35,6 @@ export default function LayoutBasic({ routes }) {
         />
         <Content className="layout-basic__content">
           <LoadRoutes routes={routes} />
-
         </Content>
         <Footer className="layout-basic__footer">David Thomas Pizarro Frick</Footer>
       </Col>
