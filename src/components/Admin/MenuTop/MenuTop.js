@@ -2,6 +2,7 @@ import React from "react";
 import { logout } from "../../../api/auth";
 import { Button } from "antd";
 import Logo from "../../../assets/img/png/logo-white.png";
+import { URL } from "../../../config/url";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -16,6 +17,11 @@ export default function MenuTop(props) {
     logout();
     window.location.reload();
   };
+
+  const reload = () => {
+    window.location.href = URL + "admin";
+  };
+
   return (
     <div className="menu-top">
       <div className="menu-top__left">
@@ -23,6 +29,7 @@ export default function MenuTop(props) {
           className="menu-top__left-logo"
           src={Logo}
           alt="David Thomas Pizarro Frick"
+          onClick={reload}
         />
         <Button type="link" onClick={() => setMenuCollapsed(!menuCollapsed)}>
           {React.createElement(
