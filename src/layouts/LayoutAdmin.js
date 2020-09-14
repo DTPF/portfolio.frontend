@@ -30,10 +30,9 @@ export default function LayoutAdmin( props ) {
         />
         <Layout
           className="layout-admin"
-          style={{ marginLeft: menuCollapsed ? "0px" : "205px" }}
-          
+          style={{ marginLeft: menuCollapsed ? "0px" : "205px" }}          
         >
-          <Header className="layout-admin__header">
+          <Header className="layout-admin__header" >
             <MenuTop
               menuCollapsed={menuCollapsed}
               setMenuCollapsed={setMenuCollapsed}

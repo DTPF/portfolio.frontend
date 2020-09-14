@@ -6,25 +6,21 @@
   &__header {
     position: fixed;
     top: 0;
-    left: 0;
+    z-index: 100;
     width: 100%;
-    display: flex;
-    padding: 0;
+    left: 0;
     height: 65px;
+    padding: 0;
+    box-shadow: $box-shadow-header;
   }
-
+  
   &__content {
     min-height: calc(100vh - 65px);
     padding: 90px 25px 25px 25px;
   }
 
   &__footer {
+    width: 100%;
     padding: 20px;
   }
-
 }
-
-// .ant-layout-sider-collapsed {
-//     width: 0 !important;
-//     min-width: 0 !important;
-// }

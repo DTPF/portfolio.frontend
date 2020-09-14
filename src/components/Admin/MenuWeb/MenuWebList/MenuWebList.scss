@@ -1,3 +1,5 @@
+@import "../../../../scss/index.scss";
+
 .menu-web-list {
   &__header {
     display: flex;
@@ -14,6 +16,7 @@
         width: 100%;
         touch-action: none;
         background-color: rgba(255, 255, 255, 0.5);
+        border-bottom: 1px solid $primary-color-light;
         &:hover {
           cursor: pointer;
         }
@@ -23,9 +26,22 @@
         }
       }
     }
-    .ant-list-item-meta {
-      display: flex;
-      align-items: center;
+    .ant-list-item {
+      &-meta {
+        display: flex;
+        align-items: center;
+        min-width: 300px;
+        &-title {
+          font-weight: bold;
+          font-size: 1.1em;
+        }
+      }
+      &-action {
+        @media (max-width: $media-breakpoint-down-sm) {
+          margin: 0 auto;
+          margin-top: 7px;
+        }
+      }
     }
   }
 }

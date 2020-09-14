@@ -143,7 +143,7 @@ function MenuItem(props) {
   return (
     <List.Item
       actions={[
-        <Switch defaultChecked={item.active} onChange={e => activateMenu(item, e)} />,
+        <Switch defaultChecked={item.active} checkedChildren="on" unCheckedChildren="off"  onChange={e => activateMenu(item, e)} />,
         <Button type="primary" onClick={() => editMenuWebModal(item)}>
           <EditOutlined />
         </Button>,
