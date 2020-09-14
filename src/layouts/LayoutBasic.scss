@@ -1,13 +1,11 @@
 @import "../scss/index.scss";
 
 .layout-basic {
-  transition: margin-left 0.2s;
   background-image: url("../assets/img/jpg/background-squares.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  &__header {
-    transition: margin-left 0.2s;
+  &__header {    
     position: sticky;
     top: 0;
     z-index: 100;

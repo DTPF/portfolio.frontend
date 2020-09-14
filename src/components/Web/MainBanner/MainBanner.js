@@ -1,11 +1,13 @@
 import React from "react";
 import { Row, Col } from "antd";
+import QueueAnim from 'rc-queue-anim';
 
 import "./MainBanner.scss";
 
 export default function MainBanner() {
   return (
-    <div className="main-banner">
+    <QueueAnim type={['right', 'left']} ease={['easeOutQuart', 'easeInOutQuart']} duration={3000}>
+    <div className="main-banner" key="banner">
       <div className="main-banner__dark" />
       <Row>
         <Col lg={4} />
@@ -22,5 +24,6 @@ export default function MainBanner() {
         <Col lg={4} />
       </Row>
     </div>
+    </QueueAnim>
   );
 }
