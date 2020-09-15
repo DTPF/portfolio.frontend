@@ -27,14 +27,19 @@ function MenuTop(props) {
   }, []);
 
   const reload = () => {
-    window.location.href = URL + "home";
+    window.location.href = URL + " ";
   };
 
   return (
     <Menu defaultSelectedKeys={[location.pathname]} className="menu-top-web" mode="horizontal">
       <Menu.Item className="menu-top-web__logo">
-        <Link to={"/home"} onClick={reload}>
+        <Link to={"/"} onClick={reload}>
           <img src={logoWhite} alt="David Thomas Pizarro Frick" />
+        </Link>
+      </Menu.Item>
+      <Menu.Item className="menu-top-web__item" key={['/']}>
+        <Link to={"/home"}>
+          Home
         </Link>
       </Menu.Item>
       {menuData.map((item) => {
