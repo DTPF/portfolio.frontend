@@ -24,15 +24,13 @@ export default function ListUsers(props) {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState(null);
-
   const addUserModal = () => {
     setIsVisibleModal(true);
     setModalTitle("Creando nuevo usuario");
     setModalContent(
       <AddUserForm setIsVisibleModal={setIsVisibleModal} setReloadUsers={setReloadUsers} />
     )
-  }
-
+  };
   return (
     <div className="list-users">
       <div className="list-users__header">
@@ -50,9 +48,7 @@ export default function ListUsers(props) {
         <Button type="primary" onClick={addUserModal}>
           Nuevo Usuario
         </Button>
-      </div>
-
-      
+      </div>      
       {viewUsersActive ? (
         <UsersActive
           usersActive={usersActive}
@@ -64,7 +60,6 @@ export default function ListUsers(props) {
       ) : (
         <UsersInactive usersInactive={usersInactive} setReloadUsers={setReloadUsers} />
       )}
-
       <Modal
         title={modalTitle}
         isVisible={isVisibleModal}
@@ -84,7 +79,6 @@ function UsersActive(props) {
     setModalContent,
     setReloadUsers
   } = props;
-
   const editUser = (user) => {
     setIsVisibleModal(true);
     setModalTitle(
@@ -99,7 +93,6 @@ function UsersActive(props) {
         setReloadUsers={setReloadUsers}
       />);
   };
-
   return (
     <List
       className="users-active"
@@ -119,7 +112,6 @@ function UsersActive(props) {
 function UserActive(props) {
   const { user, editUser, setReloadUsers } = props;
   const [ avatar, setAvatar ] = useState(null);
-
   useEffect(() => {
     if(user.avatar) {
       getAvatarApi(user.avatar).then(response => {
@@ -129,10 +121,8 @@ function UserActive(props) {
       setAvatar(null);
     }
   }, [user]);
-
   const deactivateUser = () => {
     const accessToken = getAccessTokenApi();
-
     activateUserApi(accessToken, user._id, false)
       .then(response => {
         notification["success"]({
@@ -151,7 +141,6 @@ function UserActive(props) {
 
   const showDeleteConfirm = () => {
     const accessToken = getAccessTokenApi();
-
     confirm({
       title: "Eliminando usuario",
       content: `¿Estás seguro que quieres eliminar a ${user.email}?`,
@@ -176,36 +165,35 @@ function UserActive(props) {
       }
     });
   };
-
   return (
     <List.Item
-          actions={[
-            <Button type="primary" onClick={() => editUser(user)}>
-              <EditOutlined />
-            </Button>,
-            <Button
-              type="danger"
-              onClick={deactivateUser}
-            >
-              <StopOutlined />
-            </Button>,
-            <Button
-              type="danger"
-              onClick={showDeleteConfirm}
-            >
-              <DeleteOutlined />
-            </Button>,
-          ]}
+      actions={[
+        <Button type="primary" onClick={() => editUser(user)}>
+          <EditOutlined />
+        </Button>,
+        <Button
+          type="danger"
+          onClick={deactivateUser}
         >
-          <List.Item.Meta
-            avatar={<Avatar src={avatar ? avatar : NoAvatar} />}
-            title={`
-              ${user.name ? user.name : "..."} 
-              ${user.lastname ? user.lastname : "..."}
-            `}
-            description={user.email}
-          />
-        </List.Item>
+          <StopOutlined />
+        </Button>,
+        <Button
+          type="danger"
+          onClick={showDeleteConfirm}
+        >
+          <DeleteOutlined />
+        </Button>,
+      ]}
+    >
+      <List.Item.Meta
+        avatar={<Avatar src={avatar ? avatar : NoAvatar} />}
+        title={`
+          ${user.name ? user.name : "..."} 
+          ${user.lastname ? user.lastname : "..."}
+        `}
+        description={user.email}
+      />
+    </List.Item>
   );
 }
 
@@ -224,7 +212,6 @@ function UsersInactive(props) {
 function UserInactive(props) {
   const { user, setReloadUsers } = props;
   const [ avatar, setAvatar ] = useState(null);
-
   useEffect(() => {
     if(user.avatar) {
       getAvatarApi(user.avatar).then(response => {
@@ -234,10 +221,8 @@ function UserInactive(props) {
       setAvatar(null);
     }
   }, [user]);
-
   const activateUser = () => {
     const accessToken = getAccessTokenApi();
-
     activateUserApi(accessToken, user._id, true)
       .then(response => {
         notification["success"]({
@@ -252,11 +237,9 @@ function UserInactive(props) {
           duration: notifDelayErr
         });
       });
-  }
-
+  };
   const showDeleteConfirm = () => {
     const accessToken = getAccessTokenApi();
-
     confirm({
       title: "Eliminando usuario",
       content: `¿Estás seguro que quieres eliminar a ${user.email}?`,
@@ -281,7 +264,6 @@ function UserInactive(props) {
       }
     });
   };
-
   return (
     <List.Item
           actions={[

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import { Layout, Row, Col } from "antd";
+import { Layout } from "antd";
 import MenuTop from "../components/Web/MenuTop";
 import MenuSider from "../components/Web/MenuSider";
 import QueueAnim from "rc-queue-anim";
@@ -20,7 +20,7 @@ export default function LayoutBasic({ routes }) {
 
   return (
     <div className="layout-basic" onClick={closeMenu}>
-      <QueueAnim type={["top"]} duration={1400} ease="easeOutBounce">
+      <QueueAnim type={["top"]} duration={1000} ease="easeOutBounce">
         <div className="layout-basic__header" key="header">
           <MenuTop
             menuCollapsed={menuCollapsed}

@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Texty from "rc-texty";
 import TweenOne from "rc-tween-one";
 
 import "./MainTitle.scss";
 
 export default function MainTitle() {
-
   return (
     <div className="main-title">
       <div className="combined-wrapper">
@@ -75,7 +74,7 @@ export default function MainTitle() {
             }}
           >
             Pizarro&nbsp;Frick
-          </Texty>
+          </Texty>          
           <TweenOne
             className="combined-bar"
             animation={{
@@ -89,12 +88,12 @@ export default function MainTitle() {
           <Texty
             className="content"
             type="bottom"
-            delay={1400}
+            delay={1300}
             interval={10}
           >
-            Desarrollador Full-Stack de Software
+            Desarrollador Front-End de Software
           </Texty>
-        </div>
+        </div>        
       </div>
     </div>
   );
