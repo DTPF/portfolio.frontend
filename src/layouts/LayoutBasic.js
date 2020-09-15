@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { Layout, Row, Col } from "antd";
 import MenuTop from "../components/Web/MenuTop";
 import MenuSider from "../components/Web/MenuSider";
+import QueueAnim from "rc-queue-anim";
 
 import "./LayoutBasic.scss";
 
@@ -19,23 +20,27 @@ export default function LayoutBasic({ routes }) {
 
   return (
     <div className="layout-basic" onClick={closeMenu}>
-      <div className="layout-basic__header">
-        <MenuTop
-          menuCollapsed={menuCollapsed}
-          setMenuCollapsed={setMenuCollapsed}
-        />
-        <MenuSider
-          menuCollapsed={menuCollapsed}
-          setMenuCollapsed={setMenuCollapsed}
-          style={{ minHeight: 20 }}
-        />
-      </div>
-      <Content className="layout-basic__content">
-        <LoadRoutes routes={routes} />
-      </Content>
-      <Footer className="layout-basic__footer">
-        David Thomas Pizarro Frick
-      </Footer>
+      <QueueAnim type={["top"]} duration={1400} ease="easeOutBounce">
+        <div className="layout-basic__header" key="header">
+          <MenuTop
+            menuCollapsed={menuCollapsed}
+            setMenuCollapsed={setMenuCollapsed}
+          />
+          <MenuSider
+            menuCollapsed={menuCollapsed}
+            setMenuCollapsed={setMenuCollapsed}
+            style={{ minHeight: 20 }}
+          />
+        </div>
+        <Content className="layout-basic__content">
+          <LoadRoutes routes={routes} />
+        </Content>
+        <div key="footer">
+          <Footer className="layout-basic__footer">
+            David Thomas Pizarro Frick
+          </Footer>
+        </div>
+      </QueueAnim>
     </div>
   );
 }
