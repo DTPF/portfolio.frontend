@@ -1,11 +1,18 @@
 $defaultFontSize: 16px;
+$font-size-xs: 15px;
+$font-size-sm: 16px;
+$font-size-md: 17px;
+$font-size-lg: 18px;
+$font-size-xl: 20px;
+
 
 $primary-background-color: rgba(23, 23, 133, 0.787);
 
 // $primary-color: #4f86b9;
+$primary-color-extra-dark: #273b56d3;
+$primary-color-dark: #273b56;
 $primary-color: #5d718d;
 $primary-color-light: #c3ddff;
-$primary-color-dark: #2f4665;
 
 $primary-color-hover: #326290;
 
@@ -16,10 +23,11 @@ $font-grey-light: #e8e8e8;
 $font-grey: #808080;
 $font-grey-dark: #595959;
 $font-dark-light: #4d4d53;
-$font-dark-medium: rgba(0, 0, 0, 0.877);
+$font-dark-medium: rgba(0, 0, 0, 0.733);
 $font-dark: #000;
-$font-dark-primary: #2f4665;
 $font-light-primary:  #c3ddff;
+$font-medium-primary: #384f6e;
+$font-dark-primary: #25354d;
 
 $border-light: #fff;
 $border-grey-light: #e8e8e8;
@@ -29,7 +37,7 @@ $border-dark-light: #252527;
 $border-dark: #000;
 $border-radius: 3px;
 
-$box-shadow-primary: 0.1px 0.1px 2px 0.1px $primary-color;
+$box-shadow-primary: 0.1px 0.1px 4px 0.2px $primary-color;
 $box-shadow-header: 0.1px 1px 2px 0.1px $primary-color;
 
 $background-light: #fff;

@@ -5,12 +5,14 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  margin: 0 !important;
+  border-top: 2.5px solid $primary-color-dark;
   &__header {    
     position: sticky;
     top: 0;
+    left: 0;
     z-index: 100;
     width: 100%;
-    left: 0;
     height: 65px;
     padding: 0 !important;
     margin: 0 !important;
@@ -20,7 +22,7 @@
     }
   }
   &__content {
-    min-height: calc(100vh - 140px);
+    min-height: calc(100vh - 132px);
     padding: 0 !important;
     @media (min-width: $media-breakpoint-up-xxl) {
       width: 80vw;
@@ -28,9 +30,21 @@
     }
   }
   &__footer {
-    background-color: $primary-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 65px;
     color: #fff;
+    background-color: $primary-color;
     text-align: center;
+    font-weight: bold;
+    font-size: $font-size-sm;
+    @media (min-width: $media-breakpoint-up-xs) {
+      font-size: $font-size-sm;
+    }
+    @media (min-width: $media-breakpoint-up-sm) {
+      font-size: $font-size-lg;
+    }
     @media (min-width: $media-breakpoint-up-xxl) {
       width: 80vw;
       margin: 0 auto;

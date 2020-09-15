@@ -1,60 +1,74 @@
 @import "../../../scss/index.scss";
 
 .menu-top-web {
-  position: sticky;
-  top: 0;
   background-color: $primary-color;
-  border: 0;
-  border-top: 3px solid $primary-color-dark;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+
   li {
     border: 0 !important;
     a {
-      color: #fff !important;
-      font-weight: bold;
-      &:hover {
-        color: $primary-color-light !important;
+      &:active {
+        border: 0 !important;
       }
     }
   }
+
   &__logo {
     position: absolute;
     left: 0;
     margin: 0 !important;
+    
     img {
       width: 125px;
-      padding-right: 0;
-      padding-left: 0;
     }
   }
+
   &__item {
-    @media (max-width: 880px) {
+    a {
+      color: #fff !important;
+      font-weight: bold;
+      &:hover {
+        border-bottom: 1px solid $primary-color-light !important;
+      }
+    }
+    @media (min-width: $media-breakpoint-up-md) {
+      font-size: $font-size-md;
+    }
+    @media (max-width: $media-breakpoint-down-md) {
       display: none !important;
     }
     &-social {
       position: absolute !important;
       right: 0 !important;
       top: 20px !important;
-      @media (max-width: 880px) {
+      @media (max-width: $media-breakpoint-down-md) {
         display: none !important;
       }    
     }    
-  }  
+  }
+
+  .ant-menu-item-selected {
+    a {
+      border-bottom: 1px solid $primary-color-light !important;
+    }
+  } 
+
   &__menu {
     position: absolute;
     right: 0;
-    margin-top: -15px !important;
+    margin-top: -18px !important;
     display: flex;
-    font-size: 1.5em;
+    font-size: 1.9em;
     color: #fff;
     &:hover,
     &:focus {
       color: #fff;
     }
-    @media (min-width: 880px) {
+    @media (min-width: $media-breakpoint-down-md) {
       display: none !important;
     }    
   } 
+
 }

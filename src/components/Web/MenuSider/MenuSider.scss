@@ -2,34 +2,40 @@
 
 .menu-sider-web {
   position: fixed;
-  left: 0;
-  top: 73px;
+  right: 0;
+  top: 70px;
   min-height: calc(100vh - 73px);
   overflow: hidden;
   background-color: #fff;
   border-bottom-right-radius: $border-radius;
-  padding: 0 !important;
-  padding-bottom: 15px;
-  -webkit-box-shadow: 1px 1px 5px 0px $box-shadow-primary;
-  -moz-box-shadow: 1px 1px 5px 0px $box-shadow-primary;
+  margin-top: 0 !important;
+  -webkit-box-shadow: $box-shadow-primary;
+  -moz-box-shadow: $box-shadow-primary;
   box-shadow: $box-shadow-primary;
-  @media (min-width: 880px) {
+  @media (min-width: $media-breakpoint-down-md) {
     display: none !important;
   }
   .ant-menu-item-selected {
-    background-color: $primary-color-light !important;
+    background-color: $primary-color-extra-dark !important;
     a {
-      color: $font-dark-medium;
+      color: #fff !important;
     }
   }
   &__item {
     padding-left: 5px !important;
     margin: 0 !important;
-    height: 25px !important;
+    height: 30px !important;
     display: flex;
     align-items: center;
     font-weight: bold;
+    font-size: $defaultFontSize;
     width: 100% !important;
+    @media (min-width: $media-breakpoint-up-sm) {
+      font-size: $font-size-md;
+    }
+    a {
+      color: $font-medium-primary !important;
+    }
     &:first-child {
       margin-top: 7px !important;
     }

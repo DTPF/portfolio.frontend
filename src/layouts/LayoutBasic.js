@@ -20,7 +20,7 @@ export default function LayoutBasic({ routes }) {
 
   return (
     <div className="layout-basic" onClick={closeMenu}>
-      <QueueAnim type={["top"]} duration={1000} ease="easeOutBounce">
+      <QueueAnim type={["top"]} delay={100} duration={1200} ease="easeOutBounce">
         <div className="layout-basic__header" key="header">
           <MenuTop
             menuCollapsed={menuCollapsed}

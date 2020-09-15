@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Menu, Button } from "antd";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import SocialLinks from "../SocialLinks";
 import { getMenuApi } from "./../../../api/menu";
 import logoWhite from "../../../assets/img/png/logo-white.png";
@@ -9,9 +9,9 @@ import { MenuOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 import "./MenuTop.scss";
 
-export default function MenuTop(props) {
+function MenuTop(props) {
   const [menuData, setMenuData] = useState([]);
-  const { menuCollapsed, setMenuCollapsed } = props;
+  const { menuCollapsed, setMenuCollapsed, location } = props;
 
   useEffect(() => {
     getMenuApi().then((response) => {
@@ -31,7 +31,7 @@ export default function MenuTop(props) {
   };
 
   return (
-    <Menu className="menu-top-web" mode="horizontal">
+    <Menu defaultSelectedKeys={[location.pathname]} className="menu-top-web" mode="horizontal">
       <Menu.Item className="menu-top-web__logo">
         <Link to={"/home"} onClick={reload}>
           <img src={logoWhite} alt="David Thomas Pizarro Frick" />
@@ -73,3 +73,5 @@ export default function MenuTop(props) {
     </Menu>
   );
 }
+
+export default withRouter(MenuTop);
