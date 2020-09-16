@@ -1,0 +1,88 @@
+@import "../../../scss/index.scss";
+
+.home-courses {
+  margin-top: 20px;
+  margin-bottom: 50px;
+
+  &__title {
+    text-align: center !important;
+
+    h2 {
+      color: $font-dark;
+      font-weight: bold;
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+  }
+
+  .row-courses {
+    display: flex;
+    justify-content: space-between;
+    .ant-col {
+      padding: 20px !important;
+    }
+  }
+
+  &__card {
+    border: 0;
+    background-color: $primary-color;
+    border-radius: 10px;
+    overflow: hidden;
+    min-width: 235px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.75);
+
+    .ant-card-body {
+      text-align: center;
+      background-color: $primary-color-light;
+
+      .ant-card-meta-title,
+      .ant-card-meta-description {
+        color: $font-dark-primary;
+      }
+
+      .ant-card-meta-title {
+        font-weight: bold;
+      }
+    }
+
+    .ant-card-actions {
+      background-color: transparent;
+      border: 0;
+
+      button {
+        width: 90%;
+        height: 35px;
+        background-color: transparent;
+        color: #fff;
+        border: 1px solid #fff;
+        &:hover {
+          background-color: $primary-color-dark;
+        }
+      }
+    }
+  }
+
+  &__more {
+    margin: 0 auto;
+    text-align: center;
+
+    button {
+      background-color: $primary-color;
+      border: 0;
+      color: #fff;
+      width: 260px;
+      height: 40px;
+      font-weight: bold;
+      font-size: 14px;
+      text-transform: uppercase;
+      margin-top: 15px;
+
+      &:hover {
+        background-color: $primary-color-dark;
+        color: #fff;
+      }
+    }
+  }
+}
