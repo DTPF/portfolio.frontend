@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { Layout } from "antd";
 import MenuTop from "../components/Web/MenuTop";
 import MenuSider from "../components/Web/MenuSider";
+import Footer from "../components/Web/Footer";
 import QueueAnim from "rc-queue-anim";
 
 import "./LayoutBasic.scss";
@@ -10,7 +11,7 @@ import "./LayoutBasic.scss";
 export default function LayoutBasic({ routes }) {
   //   const { routes } = props;
   const [menuCollapsed, setMenuCollapsed] = useState(true);
-  const { Footer, Content } = Layout;
+  const { Content } = Layout;
 
   const closeMenu = () => {
     if (menuCollapsed === false) {
@@ -36,9 +37,10 @@ export default function LayoutBasic({ routes }) {
           <LoadRoutes routes={routes} />
         </Content>
         <div key="footer">
-          <Footer className="layout-basic__footer">
+          <Footer />
+          {/* <Footer className="layout-basic__footer">
             David Thomas Pizarro Frick
-          </Footer>
+          </Footer> */}
         </div>
       </QueueAnim>
     </div>
