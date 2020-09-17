@@ -165,6 +165,7 @@ function UserActive(props) {
       }
     });
   };
+
   return (
     <List.Item
       actions={[
@@ -264,6 +265,7 @@ function UserInactive(props) {
       }
     });
   };
+
   return (
     <List.Item
           actions={[

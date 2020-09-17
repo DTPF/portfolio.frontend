@@ -1,0 +1,57 @@
+@import "../../../scss/index.scss";
+
+.messages-contact {
+  &__header {
+    margin-bottom: 20px;
+  }
+
+  &__switch {
+    display: flex;
+
+    > button {
+      margin-right: 10px;
+    }
+  }
+
+  .messages-unread {
+    background-color: #fff;
+    padding: 5px 20px;
+
+    .ant-list-item {
+      border-bottom: 1px solid $primary-color-light;
+      &:last-of-type {
+        border: 0;
+      }
+      &-meta {
+        min-width: 232px;
+      }
+      &-action {
+        margin: 0 auto;
+        @media (max-width: 376px) {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+
+  .messages-read {
+    background-color: #fff;
+    padding: 5px 20px;
+
+    .ant-list-item {
+      border-bottom: 1px solid $primary-color-light;
+      &:last-of-type {
+        border: 0;
+      }
+      &-meta {
+        min-width: 232px;
+      }
+      &-action {
+        margin: 0 auto;
+        @media (max-width: 439px) {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}

@@ -5,7 +5,8 @@ import {
   HomeOutlined,
   UserOutlined,
   MenuOutlined,
-  ChromeOutlined
+  ChromeOutlined,
+  MessageOutlined
 } from "@ant-design/icons";
 
 import "./MenuSider.scss";
@@ -38,6 +39,12 @@ function MenuSider(props) {
           <Link to={"/ad1988/menu"}>
             <MenuOutlined />
             <span className="nac-text">Menú</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="ad1988/contact-messages">
+          <Link to="/ad1988/contact-messages">
+            <MessageOutlined />
+            <span className="nav-text">Mensajes</span>
           </Link>
         </Menu.Item>
         <Menu.Item key="/home">

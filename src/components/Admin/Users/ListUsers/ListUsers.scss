@@ -20,16 +20,16 @@
 
   .users-active {
     background-color: #fff;
-    padding: 10px 20px;
+    padding: 5px 20px;
 
     .ant-list-item {
       &-meta {
         display: flex;
         align-items: center;
-        min-width: 300px;
+        min-width: 308px;
       }
       &-action {
-        @media (max-width: $media-breakpoint-up-sm) {
+        @media (max-width: 576px) {
           margin: 0 auto;
           margin-top: 15px;
         }
