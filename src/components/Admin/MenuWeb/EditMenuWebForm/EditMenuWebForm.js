@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Input, Button, notification } from "antd";
 import { updateMenuApi } from "../../../../api/menu";
 import { getAccessTokenApi } from "../../../../api/auth";
-import { notifDelay, notifDelayErr } from "../../../../config/notifications";
+import { notifDelay, notifDelayErr } from "../../../../utils/notifications";
 import { FontSizeOutlined, LinkOutlined } from "@ant-design/icons";
 
 import "./EditMenuWebForm.scss";

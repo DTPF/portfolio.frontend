@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, Select, Button, Row, Col, notification } from "antd";
 import { signUpAdminApi } from "../../../../api/user";
 import { getAccessTokenApi } from "../../../../api/auth";
-import { notifDelay, notifDelayErr } from "../../../../config/notifications";
+import { notifDelay, notifDelayErr } from "../../../../utils/notifications";
 import {
   UserOutlined,
   MailOutlined,

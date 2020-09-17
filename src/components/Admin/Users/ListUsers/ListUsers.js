@@ -6,7 +6,7 @@ import EditUserForm from "../EditUserForm";
 import AddUserForm from "../AddUserForm";
 import { getAvatarApi, activateUserApi, deleteUserApi } from "../../../../api/user";
 import { getAccessTokenApi } from "../../../../api/auth";
-import { notifDelay, notifDelayErr } from "../../../../config/notifications";
+import { notifDelay, notifDelayErr } from "../../../../utils/notifications";
 import {
   EditOutlined,
   StopOutlined,

@@ -3,7 +3,7 @@ import { Form, Input, Button, notification } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { signInApi } from "../../../api/user";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../../utils/constants";
-import { notifDelay, notifDelayErr } from "../../../config/notifications";
+import { notifDelay, notifDelayErr } from "../../../utils/notifications";
 import addNotification from 'react-push-notification';
 
 import {

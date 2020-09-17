@@ -4,7 +4,7 @@ import Modal from "../../../Modal";
 import DragSortableList from "react-drag-sortable";
 import { updateMenuApi, activateMenuApi, deleteMenuApi } from "../../../../api/menu";
 import { getAccessTokenApi } from "../../../../api/auth";
-import { notifDelay, notifDelayErr } from "../../../../config/notifications";
+import { notifDelay, notifDelayErr } from "../../../../utils/notifications";
 import AddMenuWebForm from "../AddMenuWebForm";
 import EditMenuWebForm from "../EditMenuWebForm";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";

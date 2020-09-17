@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Button, notification } from "antd";
 import { subscribeContactApi } from "../../../api/contact";
-import { notifDelay, notifDelayErr } from "../../../config/notifications";
+import { notifDelayErr } from "../../../utils/notifications";
 import { UserOutlined, QuestionOutlined } from "@ant-design/icons";
 
 import "./ContactMe.scss";

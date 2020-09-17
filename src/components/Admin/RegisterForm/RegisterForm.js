@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Checkbox, notification } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { notifDelay, notifDelayErr } from "../../../config/notifications";
+import { notifDelay, notifDelayErr } from "../../../utils/notifications";
 import {
   emailValidation,
   minLenghtValidation,
