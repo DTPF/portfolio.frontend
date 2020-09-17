@@ -36,7 +36,7 @@ export default function LayoutBasic({ routes }) {
         <Content className="layout-basic__content">
           <LoadRoutes routes={routes} />
         </Content>
-        <div key="footer">
+        <div className="layout-basic__footer" key="footer">
           <Footer />
           {/* <Footer className="layout-basic__footer">
             David Thomas Pizarro Frick

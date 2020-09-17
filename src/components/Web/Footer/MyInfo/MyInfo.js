@@ -9,7 +9,7 @@ export default function MyInfo() {
     <div className="my-info">
       <img src={LogoWhite} alt="David Thomas Pizarro Frick" />
       <h4>
-          Mi pasión por el hardware sólo es superada por mi pasión y devoción por el software.
+          Mi pasión por la vida sólo es superada por mi pasión y devoción por el software.
       </h4>
       <SocialLinks />
     </div>
