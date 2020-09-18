@@ -157,18 +157,12 @@ function MessageRead(props) {
       onOk() {
         deleteContactMessageApi(accessToken, message._id)
           .then(response => {
-            if (response.status === 200) {
-              notification["success"]({
+            const typeNotification = response.status === 200 ? "success" : "warning";
+              notification[typeNotification]({
                 message: response.message,
                 duration: notifDelay
               });
               setReloadMessages(true);
-            } else {
-              notification["warning"]({
-                message: response.message,
-                duration: notifDelayErr
-              });
-            }
           })
           .catch(err => {
             notification["error"]({
@@ -192,11 +186,11 @@ function MessageRead(props) {
     >
       <List.Item.Meta
         title={
-          <span>
-            {message.name ? message.name + ' - Hace ' : "Anónimo - Hace "}
-            <Moment locale="es" fromNow ago>{message.date}</Moment>
-          </span>
-          }
+        <span>
+          {message.name ? message.name + ' - Hace ' : "Anónimo - Hace "}
+          <Moment locale="es" fromNow ago>{message.date}</Moment>
+        </span>
+        }
         description={message.subject + " - " + message.email}
       />
     </List.Item>
