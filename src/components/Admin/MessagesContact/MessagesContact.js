@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import { Switch, List, Button, Modal as ModalDelete, notification } from "antd";
-import { checkMessageApi } from "../../../api/contact";
+import Modal from "../../../components/Modal";
+import { checkMessageApi, deleteContactMessageApi } from "../../../api/contact";
 import { getAccessTokenApi } from "../../../api/auth";
 import { notifDelay, notifDelayErr } from "../../../utils/notifications";
 import { CheckOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import "./MessagesContact.scss";
 
+const { confirm } = ModalDelete;
+
 export default function MessagesContact(props) {
   const { messagesUnread, messagesRead, setReloadMessages } = props;
   const [viewMessagesUnread, setViewMessagesUnread] = useState(true);
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalContent, setModalContent] = useState(null);
   return (
     <div className="messages-contact">
       <div className="messages-contact__header">
@@ -34,6 +40,13 @@ export default function MessagesContact(props) {
           setReloadMessages={setReloadMessages}
         />
       )}
+      <Modal
+        title={modalTitle}
+        isVisible={isVisibleModal}
+        setIsVisibleModal={setIsVisibleModal}
+      >
+        {modalContent}
+      </Modal>
     </div>
   );
 }
@@ -127,13 +140,46 @@ function MessageRead(props) {
         });
       });
   };
+  const showDeleteConfirm = () => {
+    const accessToken = getAccessTokenApi();
+    confirm({
+      title: "Eliminando mensaje",
+      content: `¿Estás seguro que quieres eliminar el mensaje de ${message.email}?`,
+      okText: "Eliminar",
+      okType: "danger",
+      cancaelText: "Cancelar",
+      onOk() {
+        deleteContactMessageApi(accessToken, message._id)
+          .then(response => {
+            if (response.status === 200) {
+              notification["success"]({
+                message: response.message,
+                duration: notifDelay
+              });
+              setReloadMessages(true);
+            } else {
+              notification["warning"]({
+                message: response.message,
+                duration: notifDelayErr
+              });
+            }
+          })
+          .catch(err => {
+            notification["error"]({
+              message: err.message,
+              duration: notifDelayErr
+            });
+          });
+      }
+    });
+  }
   return (
     <List.Item
       actions={[
         <Button type="primary" onClick={checkMessage}>
           <CheckOutlined />
         </Button>,
-        <Button type="danger" onClick={() => console.log("eliminando mensaje")}>
+        <Button type="danger" onClick={showDeleteConfirm}>
           <DeleteOutlined />
         </Button>,
       ]}
