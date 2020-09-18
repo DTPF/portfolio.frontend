@@ -5,8 +5,6 @@ import reactJsHooks from "../../../assets/img/nopush/react-js-hooks.jpg";
 import reactNative from "../../../assets/img/nopush/react-native.jpg";
 import javaScript from "../../../assets/img/nopush/javascript-es6.jpg";
 import wordPress from "../../../assets/img/nopush/wordpress.jpg";
-// import prestaShop from "../../../assets/img/nopush/prestashop-1-7.jpg";
-// import cssGrid from "../../../assets/img/nopush/css-grid.jpg";
 import QueueAnim from "rc-queue-anim";
 
 import "./HomeCourses.scss";
@@ -22,7 +20,7 @@ export default function HomeCourses() {
         <Col lg={22}>
           <QueueAnim type={["bottom", "top"]} ease={["easeInCubic"]} duration={600}>
             <Row className="row-courses" key="courses">
-              <Col md={12} lg={8} xl={6}>
+              <Col span={12} md={8} lg={8} xl={6}>
                 <CardCourse
                   image={reactJsHooks}
                   title="React JS Hooks"
@@ -30,7 +28,7 @@ export default function HomeCourses() {
                   link="https://recetasmsr.com"
                 />
               </Col>
-              <Col md={12} lg={8} xl={6}>
+              <Col span={12} md={8} lg={8} xl={6}>
                 <CardCourse
                   image={reactNative}
                   title="React Native Expo"
@@ -38,7 +36,7 @@ export default function HomeCourses() {
                   link="https://recetasmsr.com"
                 />
               </Col>
-              <Col md={12} lg={8} xl={6}>
+              <Col span={12} md={8} lg={8} xl={6}>
                 <CardCourse
                   image={javaScript}
                   title="JavaScript ES6"
@@ -46,7 +44,7 @@ export default function HomeCourses() {
                   link="https://recetasmsr.com"
                 />
               </Col>
-              <Col md={12} lg={8} xl={6}>
+              <Col span={12} md={8} lg={8} xl={6}>
                 <CardCourse
                   image={wordPress}
                   title="WordPress"
@@ -54,22 +52,6 @@ export default function HomeCourses() {
                   link="https://recetasmsr.com"
                 />
               </Col>
-              {/* <Col md={12} lg={8} xl={6}>
-              <CardCourse
-                image={prestaShop}
-                title="PrestaShop"
-                subtitle="Básico - PrestaShop"
-                link="https://recetasmsr.com"
-              />
-            </Col>
-            <Col md={12} lg={8} xl={6}>
-              <CardCourse
-                image={cssGrid}
-                title="CSS Grid"
-                subtitle="Básico - CSS Grid"
-                link="https://recetasmsr.com"
-              />
-            </Col> */}
             </Row>
           </QueueAnim>
         </Col>
