@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Moment from 'react-moment';
+import 'moment/locale/es';
 import { Switch, List, Button, Modal as ModalDelete, notification } from "antd";
 import Modal from "../../../components/Modal";
 import { checkMessageApi, deleteContactMessageApi } from "../../../api/contact";
@@ -88,6 +90,7 @@ function MessageUnread(props) {
         });
       });
   };
+  
   return (
     <List.Item
       actions={[
@@ -95,10 +98,13 @@ function MessageUnread(props) {
           <CheckOutlined />
         </Button>,
       ]}
-    >
+    >      
       <List.Item.Meta
         title={
-          `${message.name ? message.name + ' - ' : "Anónimo - "}` + message.date
+        <span>
+          {message.name ? message.name + ' - Hace ' : "Anónimo - Hace "}
+          <Moment locale="es" fromNow ago>{message.date}</Moment>
+        </span>
         }
         description={message.subject + " - " + message.email}
       />
@@ -186,8 +192,11 @@ function MessageRead(props) {
     >
       <List.Item.Meta
         title={
-          `${message.name ? message.name + ' - ' : "Anónimo - "}` + message.date
-        }
+          <span>
+            {message.name ? message.name + ' - Hace ' : "Anónimo - Hace "}
+            <Moment locale="es" fromNow ago>{message.date}</Moment>
+          </span>
+          }
         description={message.subject + " - " + message.email}
       />
     </List.Item>
