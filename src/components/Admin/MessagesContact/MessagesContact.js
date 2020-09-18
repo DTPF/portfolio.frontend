@@ -14,8 +14,8 @@ export default function MessagesContact(props) {
   const { messagesUnread, messagesRead, setReloadMessages } = props;
   const [viewMessagesUnread, setViewMessagesUnread] = useState(true);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
-  const [modalTitle, setModalTitle] = useState("");
-  const [modalContent, setModalContent] = useState(null);
+  const [modalTitle] = useState("");
+  const [modalContent] = useState(null);
   return (
     <div className="messages-contact">
       <div className="messages-contact__header">
