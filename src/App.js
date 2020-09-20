@@ -23,7 +23,7 @@ function App() {
       <Notifications />
       {!spin ? (
         <Spin
-          tipe="Cargando usuarios"
+          tip="Cargando"
           style={{
             textAlign: "center",
             width: "100%",

@@ -24,7 +24,7 @@ export default function MenuWeb() {
     <div className="menu-web">
       {menuLength === 0 ? (
         <Spin
-          tipe="Cargando menú"
+          tip="Cargando menú"
           style={{ 
             textAlign: "center",
             width: "100%",

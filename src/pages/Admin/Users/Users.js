@@ -34,7 +34,7 @@ export default function Users() {
     <div className="users">
       {usersActiveLength === 0 ? (
         <Spin
-          tipe="Cargando usuarios"
+          tip="Cargando usuarios"
           style={{
             textAlign: "center",
             width: "100%",

@@ -12,12 +12,12 @@ export default function MainTitle() {
           <Texty
             className="title"
             type="left"
-            delay={350}
+            delay={100}
             component={TweenOne}
             componentProps={{
               animation: [
                 { x: 130, type: "set" },
-                { x: 100, delay: 100, duration: 50 },
+                { x: 100, delay: 0, duration: 50 },
                 {
                   ease: "easeOutQuart",
                   duration: 100,
@@ -34,7 +34,7 @@ export default function MainTitle() {
                   scale: 1,
                   width: "100%",
                   delay: 0,
-                  duration: 50,
+                  duration: 500,
                   ease: "easeInOutQuint",
                 },
               ],
@@ -45,12 +45,12 @@ export default function MainTitle() {
           <Texty
             className="title-2"
             type="right"
-            delay={350}
+            delay={100}
             component={TweenOne}
             componentProps={{
               animation: [
                 { x: 130, type: "set" },
-                { x: 100, delay: 550, duration: 50 },
+                { x: 100, delay: 0, duration: 50 },
                 {
                   ease: "easeOutQuart",
                   duration: 100,
@@ -67,7 +67,7 @@ export default function MainTitle() {
                   scale: 1,
                   width: "100%",
                   delay: 0,
-                  duration: 50,
+                  duration: 500,
                   ease: "easeInOutQuint",
                 },
               ],
@@ -78,20 +78,20 @@ export default function MainTitle() {
           <TweenOne
             className="combined-bar"
             animation={{
-              delay: 1100,
+              delay: 800,
               width: 0,
               x: 158,
               type: "from",
-              ease: "easeInOutExpo",
+              ease: "easeInOutQuart",
             }}
           />
           <Texty
             className="content"
             type="bottom"
-            delay={1300}
-            interval={10}
+            delay={900}
+            interval={8}
           >
-            Desarrollador Front-End de Software
+            Desarrollador Junior de Software
           </Texty>
         </div>        
       </div>

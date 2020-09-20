@@ -15,14 +15,15 @@ function MenuTop(props) {
 
   useEffect(() => {
     getMenuApi().then((response) => {
+      let unmounted = false;
       const arrayMenu = [];
-      response.menu.forEach((item) => {
-        //   if(item.active) {
-        //     arrayMenu.push(item);
-        //   }
-        item.active && arrayMenu.push(item);
-      });
-      setMenuData(arrayMenu);
+      if (!unmounted) {
+        response.menu.forEach((item) => {
+          item.active && arrayMenu.push(item);
+        });
+        setMenuData(arrayMenu);
+      }
+      return () => { unmounted = true }
     });
   }, []);
 
