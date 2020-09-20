@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getMessagesUnreadApi } from "../../../api/contact";
 import { getAccessTokenApi } from "../../../api/auth";
-import MessagesContact from "../../../components/Admin/MessagesContact";
+import ContactMessagesList from "../../../components/Admin/ContactMessagesList";
 
 export default function ContactMessages() {
   const [messagesUnread, setMessagesUnread] = useState([]);
@@ -21,7 +21,7 @@ export default function ContactMessages() {
 
   return (
     <div>
-      <MessagesContact
+      <ContactMessagesList
         messagesUnread={messagesUnread}
         messagesRead={messagesRead}
         setReloadMessages={setReloadMessages}

@@ -8,11 +8,11 @@ import { getAccessTokenApi } from "../../../api/auth";
 import { notifDelay, notifDelayErr } from "../../../utils/notifications";
 import { CheckOutlined, DeleteOutlined } from "@ant-design/icons";
 
-import "./MessagesContact.scss";
+import "./ContactMessagesList.scss";
 
 const { confirm } = ModalDelete;
 
-export default function MessagesContact(props) {
+export default function ContactMessagesList(props) {
   const { messagesUnread, messagesRead, setReloadMessages } = props;
   const [viewMessagesUnread, setViewMessagesUnread] = useState(true);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
