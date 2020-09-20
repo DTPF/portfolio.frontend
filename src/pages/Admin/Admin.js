@@ -7,20 +7,23 @@ export default function Admin() {
   const [reloadMessages, setReloadMessages] = useState(false);
   const [messagesUnread, setMessagesUnread] = useState({});
   const token = getAccessTokenApi();
-  const msgUnr = messagesUnread.length;
-
+  let messagesLenght = messagesUnread.length ? messagesUnread.length : 0;
   useEffect(() => {
+    let unmounted = false;
     getMessagesUnreadApi(token, false).then((response) => {
-      setMessagesUnread(response.messages);
+      if (!unmounted) {
+        setMessagesUnread(response.messages);
+        if (messagesLenght > 0) {
+          notification["warning"]({
+            message: `Tienes ${messagesLenght} mensajes sin leer.`,
+            duration: 5,
+          });
+        }
+      }
     }); 
-    if (msgUnr > 0) {
-      notification["warning"]({
-        message: `Tienes ${msgUnr} mensajes sin leer.`,
-        duration: 5,
-      });
-    } 
     setReloadMessages(false);
-  }, [reloadMessages, msgUnr, token]);
+    return () => { unmounted = true };
+  }, [reloadMessages, messagesLenght, token]);
 
   return (
     <div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Moment from 'react-moment';
 import 'moment/locale/es';
 import { Switch, List, Button, Modal as ModalDelete, notification } from "antd";
-import Modal from "../../../components/Modal";
+import Modal from "../../Modal";
 import { checkMessageApi, deleteContactMessageApi } from "../../../api/contact";
 import { getAccessTokenApi } from "../../../api/auth";
 import { notifDelay, notifDelayErr } from "../../../utils/notifications";

@@ -21,6 +21,7 @@ export default function MenuWebList(props) {
   const [modalContent, setModalContent] = useState(null);
 
   useEffect(() => {
+    let unmounted = false;
     const listItemsArray = [];
     menu.forEach((item) => {
       listItemsArray.push({
@@ -34,7 +35,10 @@ export default function MenuWebList(props) {
         )
       });
     });
-    setListItems(listItemsArray);
+    if (!unmounted) {
+      setListItems(listItemsArray);
+    }
+    return () => { unmounted = true }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [menu]);
 

@@ -113,14 +113,20 @@ function UserActive(props) {
   const { user, editUser, setReloadUsers } = props;
   const [ avatar, setAvatar ] = useState(null);
   useEffect(() => {
+    let unmounted = false;
+    // setAvatar();
     if(user.avatar) {
       getAvatarApi(user.avatar).then(response => {
-        setAvatar(response);
+        if (!unmounted) {
+          setAvatar(response);
+        }
       });
     } else {
       setAvatar(null);
     }
+    return () => { unmounted = true };
   }, [user]);
+
   const deactivateUser = () => {
     const accessToken = getAccessTokenApi();
     activateUserApi(accessToken, user._id, false)
@@ -214,14 +220,19 @@ function UserInactive(props) {
   const { user, setReloadUsers } = props;
   const [ avatar, setAvatar ] = useState(null);
   useEffect(() => {
+    let unmounted = false;
     if(user.avatar) {
       getAvatarApi(user.avatar).then(response => {
-        setAvatar(response);
+        if (!unmounted) {
+          setAvatar(response);
+        }
       });
     } else {
       setAvatar(null);
     }
+    return () => { unmounted = true };    
   }, [user]);
+
   const activateUser = () => {
     const accessToken = getAccessTokenApi();
     activateUserApi(accessToken, user._id, true)
@@ -239,6 +250,7 @@ function UserInactive(props) {
         });
       });
   };
+
   const showDeleteConfirm = () => {
     const accessToken = getAccessTokenApi();
     confirm({
