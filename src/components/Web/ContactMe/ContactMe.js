@@ -1,18 +1,28 @@
 import React, { useState } from "react";
 import { Form, Input, Button, notification } from "antd";
-import { subscribeContactApi } from "../../../api/contact";
+import { subscribeContactApi, getMessagesApi } from "../../../api/contact";
+import { getAccessTokenApi } from "../../../api/auth";
 import { notifDelayErr } from "../../../utils/notifications";
 import { UserOutlined, QuestionOutlined } from "@ant-design/icons";
 
 import "./ContactMe.scss";
 
 export default function ContactMe() {
-  const [inputs, setInputs] = useState({
-    email: "",
-    subject: "",
+  const [inputs, setInputs] = useState({});
+  const [order, setOrder] = useState();
+  const token = getAccessTokenApi();
+
+  getMessagesApi(token).then((result) => {
+      const data =  result.messages.length + 1;
+      setOrder(data);
   });
 
   const onFinish = () => {
+    let finalData = {
+        email: inputs.email,
+        subject: inputs.subject,
+        order: order
+    }
     const emailValid = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,63}$/i;
     const resultValidation = emailValid.test(inputs.email);
 
@@ -27,7 +37,7 @@ export default function ContactMe() {
         duration: notifDelayErr,
       });
     } else {
-      subscribeContactApi(inputs).then((response) => {
+      subscribeContactApi(finalData).then((response) => {
         if (response.status === 200) {
           notification["success"]({
             message:
