@@ -21,7 +21,7 @@ export default function LayoutBasic({ routes }) {
 
   return (
     <div className="layout-basic" onClick={closeMenu}>
-      <QueueAnim type={["top"]} delay={100} duration={1200} ease="easeOutBounce">
+      <QueueAnim type={["top"]} duration={1000} ease="easeOutBounce">
         <div className="layout-basic__header" key="header">
           <MenuTop
             menuCollapsed={menuCollapsed}
@@ -38,9 +38,6 @@ export default function LayoutBasic({ routes }) {
         </Content>
         <div className="layout-basic__footer" key="footer">
           <Footer />
-          {/* <Footer className="layout-basic__footer">
-            David Thomas Pizarro Frick
-          </Footer> */}
         </div>
       </QueueAnim>
     </div>

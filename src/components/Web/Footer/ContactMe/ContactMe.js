@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Form, Input, Button, notification } from "antd";
-import { subscribeContactApi, getMessagesApi } from "../../../api/contact";
-import { getAccessTokenApi } from "../../../api/auth";
-import { notifDelayErr } from "../../../utils/notifications";
+import { subscribeContactApi, getMessagesApi } from "../../../../api/contact";
+import { getAccessTokenApi } from "../../../../api/auth";
+import { notifDelayErr } from "../../../../utils/notifications";
 import { UserOutlined, QuestionOutlined } from "@ant-design/icons";
 
 import "./ContactMe.scss";
@@ -12,9 +12,9 @@ export default function ContactMe() {
   const [order, setOrder] = useState();
   const token = getAccessTokenApi();
 
-  getMessagesApi(token).then((result) => {
+  getMessagesApi(token).then( async (result) => {
       const data =  result.messages.length + 1;
-      setOrder(data);
+      await setOrder(data);
   });
 
   const onFinish = () => {

@@ -2,7 +2,7 @@ import React from "react";
 import { Layout, Row, Col } from "antd";
 import MyInfo from "./MyInfo";
 // import NavigationFooter from "./NavigationFooter";
-import ContactMe from "../ContactMe";
+import ContactMe from "../Footer/ContactMe";
 
 import "./Footer.scss";
 
