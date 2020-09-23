@@ -15,7 +15,7 @@ export function subscribeContactApi(data) {
     .then((result) => {
       return result;
     })
-    .catch((err) => {
+    .then((err) => {
       return err;
     });
 }
@@ -37,7 +37,7 @@ export function getMessagesApi(token) {
     .then((result => {
       return result;
     }))
-    .catch((err) => {
+    .then((err) => {
       return err;
     });
 }
@@ -59,7 +59,7 @@ export function getMessagesUnreadApi(token, status) {
     .then((result => {
       return result;
     }))
-    .catch((err) => {
+    .then((err) => {
       return err;
     });
 }
@@ -82,7 +82,7 @@ export function checkMessageApi(token, messageId, status) {
     .then(result => {
       return result;
     })
-    .catch(err => {
+    .then(err => {
       return err;
     });
 }
@@ -104,7 +104,7 @@ export function deleteContactMessageApi(token, messageId) {
     .then(result => {
       return result;
     })
-    .catch(err => {
+    .then(err => {
       return err;
     })
 }

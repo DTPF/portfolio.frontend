@@ -27,7 +27,7 @@ export default function EditUserForm(props) {
   useEffect(() => {
     if(user.avatar) {
       getAvatarApi(user.avatar).then(response => {
-        setAvatar(response);
+        setAvatar(response.url);
       })
     } else {
       setAvatar(null);

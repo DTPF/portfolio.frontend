@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import { getMessagesUnreadApi } from "../../../api/contact";
 import { getAccessTokenApi } from "../../../api/auth";
 import ContactMessagesList from "../../../components/Admin/ContactMessagesList";
-import { Spin } from "antd";
 
 export default function ContactMessages() {
   const [messagesUnread, setMessagesUnread] = useState([]);
   const [messagesRead, setMessagesRead] = useState([]);
   const [reloadMessages, setReloadMessages] = useState(false);
   const token = getAccessTokenApi();
-  let messagesLength = messagesUnread.length ? messagesUnread.length : 0;
 
   useEffect(() => {
     let unmounted = false;
@@ -29,23 +27,11 @@ export default function ContactMessages() {
 
   return (
     <div>
-      {messagesLength === 0 ? (
-        <Spin
-          tip="Cargando mensajes"
-          style={{
-            textAlign: "center",
-            width: "100%",
-            padding: "20px",
-            marginTop: "200px"
-          }}
-        />
-      ) : (
       <ContactMessagesList
         messagesUnread={messagesUnread}
         messagesRead={messagesRead}
         setReloadMessages={setReloadMessages}
       />
-      )}
     </div>
   );
 }

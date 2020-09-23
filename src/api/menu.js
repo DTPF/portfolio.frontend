@@ -10,8 +10,8 @@ export function getMenuApi() {
     .then((result) => {
       return result;
     })
-    .catch((err) => {
-      return err.message;
+    .then((err) => {
+      return err;
     });
 }
 
@@ -31,9 +31,9 @@ export function updateMenuApi(token, menuId, data) {
       return response.json();
     })
     .then((result) => {
-      return result.message;
+      return result;
     })
-    .catch((err) => {
+    .then((err) => {
       return err;
     });
 }
@@ -56,8 +56,8 @@ export function activateMenuApi(token, menuId, status) {
     .then(result => {
       return result;
     })
-    .catch(err => {
-      console.log(err);
+    .then(err => {
+      return err;
     });
 }
 
@@ -77,10 +77,10 @@ export function addMenuApi(token, menu) {
       return response.json();
     })
     .then(result => {
-      return result.message;
+      return result;
     })
-    .catch(err => {
-      console.log(err);
+    .then(err => {
+      return err;
     });
 }
 
@@ -99,9 +99,9 @@ export function deleteMenuApi(token, menuId) {
       return response.json();
     })
     .then(result => {
-      return result.message;
+      return result;
     })
-    .catch(err => {
-      console.log(err);
+    .then(err => {
+      return err;
     })
 }

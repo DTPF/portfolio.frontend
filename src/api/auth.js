@@ -54,7 +54,7 @@ export function logout() {
   localStorage.removeItem(REFRESH_TOKEN);
 }
 
-function willExpireToken(token) {
+export function willExpireToken(token) {
   const seconds = 60;
   const metaToken = jwtDecode(token);
   const { exp } = metaToken;

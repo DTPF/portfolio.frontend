@@ -53,7 +53,7 @@ export default function ContactMessagesList(props) {
   );
 }
 
-function MessagesUnread(props) {
+export function MessagesUnread(props) {
   const { messagesUnread, setReloadMessages } = props;
 
   return (
@@ -127,7 +127,7 @@ function MessagesRead(props) {
   );
 }
 
-function MessageRead(props) {
+export function MessageRead(props) {
   const { message, setReloadMessages } = props;
   const checkMessage = () => {
     const accessToken = getAccessTokenApi();

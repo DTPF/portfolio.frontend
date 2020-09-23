@@ -118,7 +118,7 @@ function UserActive(props) {
     if(user.avatar) {
       getAvatarApi(user.avatar).then(response => {
         if (!unmounted) {
-          setAvatar(response);
+          setAvatar(response.url);
         }
       });
     } else {
@@ -132,14 +132,14 @@ function UserActive(props) {
     activateUserApi(accessToken, user._id, false)
       .then(response => {
         notification["success"]({
-          message: response,
+          message: response.message,
           duration: notifDelay
         });
         setReloadUsers(true);
       })
       .catch(err => {
         notification["error"]({
-          message: err,
+          message: err.message,
           duration: notifDelayErr
         });
       });
@@ -157,14 +157,14 @@ function UserActive(props) {
         deleteUserApi(accessToken, user._id)
           .then(response => {
             notification["success"]({
-              message: response,
+              message: response.message,
               duration: notifDelay
             });
             setReloadUsers(true);
           })
           .catch(err => {
             notification["error"]({
-              message: err,
+              message: err.message,
               duration: notifDelayErr
             });
           });
@@ -224,7 +224,7 @@ function UserInactive(props) {
     if(user.avatar) {
       getAvatarApi(user.avatar).then(response => {
         if (!unmounted) {
-          setAvatar(response);
+          setAvatar(response.url);
         }
       });
     } else {
@@ -238,14 +238,14 @@ function UserInactive(props) {
     activateUserApi(accessToken, user._id, true)
       .then(response => {
         notification["success"]({
-          message: response,
+          message: response.message,
           duration: notifDelay
         });
         setReloadUsers(true);
       })
       .catch(err => {
         notification["error"]({
-          message: err,
+          message: err.message,
           duration: notifDelayErr
         });
       });
@@ -263,14 +263,14 @@ function UserInactive(props) {
         deleteUserApi(accessToken, user._id)
           .then(response => {
             notification["success"]({
-              message: response,
+              message: response.message,
               duration: notifDelay
             });
             setReloadUsers(true);
           })
           .catch(err => {
             notification["error"]({
-              message: err,
+              message: err.message,
               duration: notifDelayErr
             });
           });

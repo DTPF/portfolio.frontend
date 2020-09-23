@@ -26,7 +26,7 @@ export default function EditMenuWebForm(props) {
       updateMenuApi(accessToken, menuWebData._id, menuWebData)
         .then((response) => {
           notification["success"]({
-            message: response,
+            message: response.message,
             duration: notifDelay
           });
           setIsVisibleModal(false);

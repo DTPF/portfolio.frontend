@@ -28,7 +28,7 @@ export default function AddMenuWebForm(props) {
       addMenuApi(accessToken, finalData)
         .then(response => {
           notification["success"]({
-            message: response,
+            message: response.message,
             duration: notifDelay
           });
           setIsVisibleModal(false);

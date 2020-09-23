@@ -15,13 +15,10 @@ export function signUpApi(data) {
       return response.json();
     })
     .then((result) => {
-      if (result.user) {
-        return { ok: true, message: "Usuario creado correctamente" };
-      }
-      return { ok: false, message: result.message };
+      return result;
     })
-    .catch((err) => {
-      return { ok: false, message: err.message };
+    .then((err) => {
+      return err;
     });
 }
 
@@ -42,8 +39,8 @@ export function signInApi(data) {
     .then((result) => {
       return result;
     })
-    .catch((err) => {
-      return err.message;
+    .then((err) => {
+      return err;
     });
 }
 
@@ -64,8 +61,8 @@ export function getUsersApi(token) {
     .then((result) => {
       return result;
     })
-    .catch((err) => {
-      return err.message;
+    .then((err) => {
+      return err;
     });
 }
 
@@ -86,15 +83,15 @@ export function getUsersActiveApi(token, status) {
     .then((result) => {
       return result;
     })
-    .catch((err) => {
-      return err.message;
+    .then((err) => {
+      return err;
     });
 }
 
 export function uploadAvatarApi(token, avatar, userId) {
   const url = `${basePath}/${apiVersion}/upload-avatar/${userId}`;
   const formData = new FormData();
-  formData.append("avatar", avatar, avatar.name);
+  formData.append("avatar", avatar);
   const params = {
     method: "PUT",
     body: formData,
@@ -110,8 +107,8 @@ export function uploadAvatarApi(token, avatar, userId) {
     .then(result => {
       return result;
     })
-    .catch(err => {
-      return err.message;
+    .then(err => {
+      return err;
     });
 }
 
@@ -120,10 +117,10 @@ export function getAvatarApi(avatarName) {
 
   return fetch(url)
     .then(response => {
-      return response.url;
+      return response;
     })
-    .catch(err => {
-      return err.message;
+    .then(err => {
+      return err;
     });
 }
 
@@ -145,7 +142,7 @@ export function updateUserApi(token, user, userId) {
     .then(result => {
       return result;
     })
-    .catch(err => {
+    .then(err => {
       return err;
     });
 }
@@ -168,10 +165,10 @@ export function activateUserApi(token, userId, status) {
       return response.json();
     })
     .then(result => {
-      return result.message;
+      return result;
     })
-    .catch(err => {
-      return err.message;
+    .then(err => {
+      return err;
     });
 }
 
@@ -190,10 +187,10 @@ export function deleteUserApi(token, userId) {
       return response.json();
     })
     .then(result => {
-      return result.message;
+      return result;
     })
-    .catch(err => {
-      return err.message;
+    .then(err => {
+      return err;
     });
 }
 
@@ -215,7 +212,7 @@ export function signUpAdminApi(token, data) {
     .then(result => {
       return result;
     })
-    .catch(err => {
+    .then(err => {
       return err;
     });
 }

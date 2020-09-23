@@ -42,7 +42,7 @@ export default function LoginForm() {
   };
 
   const login = async e => {
-    const result = await signInApi(inputs);  
+    const result = await signInApi(inputs);
     if(result.message) {
       notification["error"]({
         message: result.message,
@@ -60,7 +60,7 @@ export default function LoginForm() {
       addNotification({
         title: 'Accediendo desde '+inputs.email,
         native: true
-    });
+      });
     }
   };
 
