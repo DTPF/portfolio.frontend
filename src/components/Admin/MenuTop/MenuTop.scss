@@ -18,14 +18,20 @@
 
   &__left {
     &-logo {
-      width: 125px;
-      padding: 0 20px;
-      padding-right: 0;
+      height: 40px;
+      padding-left: 20px;
+      padding-right: 25px;
+    }
+    &-button {
+      position: absolute;
+      top: 2px;
+      left: 70px;
+      padding-left: 20px !important;
     }
   }
 
   &__right {
     position: absolute;
-    right: 0;
+    right: 5px;
   }
 }

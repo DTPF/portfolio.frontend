@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 import { Form, Input, Button, notification } from "antd";
 import { subscribeContactApi, getMessagesApi } from "../../../../api/contact";
-import { getAccessTokenApi } from "../../../../api/auth";
 import { notifDelayErr } from "../../../../utils/notifications";
 import { UserOutlined, QuestionOutlined } from "@ant-design/icons";
 
 import "./ContactMe.scss";
 
-export default function ContactMe() {
+export default function ContactMe(props) {
   const [inputs, setInputs] = useState({});
-  const [order, setOrder] = useState();
-  const token = getAccessTokenApi();
-
-  getMessagesApi(token).then( async (result) => {
-      const data =  result.messages.length + 1;
-      await setOrder(data);
-  });
+  const [order, setOrder] = useState(0);
 
   const onFinish = () => {
+    getMessagesApi().then((result) => {
+        const data = result.messages +1;
+        setOrder(data);
+    });
     let finalData = {
         email: inputs.email,
         subject: inputs.subject,

@@ -1,5 +1,5 @@
 import React from "react";
-import LogoWhite from "../../../../assets/img/png/logo-black.png";
+import Logo from "../../../../assets/img/svg/logo512.svg";
 import SocialLinks from "../../SocialLinks";
 
 import "./MyInfo.scss";
@@ -7,9 +7,9 @@ import "./MyInfo.scss";
 export default function MyInfo() {
   return (
     <div className="my-info">
-      <img src={LogoWhite} alt="David Thomas Pizarro Frick" />
+      <img src={Logo} alt="Logo de DTPF" />
       <h4>
-          Mi pasión por la vida sólo es superada por mi pasión y devoción por el software.
+          Mi afición al Hardware nace de mi devoción por el Software.
       </h4>
       <SocialLinks />
     </div>

@@ -20,23 +20,16 @@ export function subscribeContactApi(data) {
     });
 }
 
-export function getMessagesApi(token) {
+export function getMessagesApi() {
   const url = `${basePath}/${apiVersion}/get-contact-messages`;
-  const params = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token
-    }
-  }
 
-  return fetch(url, params)
-    .then((response => {
+  return fetch(url)
+    .then((response) => {
       return response.json();
-    }))
-    .then((result => {
+    })
+    .then((result) => {
       return result;
-    }))
+    })
     .then((err) => {
       return err;
     });

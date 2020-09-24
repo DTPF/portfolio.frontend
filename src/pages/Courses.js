@@ -5,10 +5,10 @@ export default function Courses() {
   return (
     <>
       <Helmet>
-        <title>Cursos - David Thomas Pizarro Frick</title>
+        <title>Cursos | Cursos realizados</title>
         <meta
           name="description"
-          content="Cursos | David Thomas Pizarro Frick"
+          content="Cursos realizados"
           data-react-helmet="true"
         />
       </Helmet>

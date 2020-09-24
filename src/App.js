@@ -4,11 +4,14 @@ import routes from "./config/routes";
 import AuthProvider from "./providers/AuthProvider";
 import { Notifications } from 'react-push-notification';
 import { Spin } from "antd";
+import { LoadingOutlined } from '@ant-design/icons';
+
 
 import "./App.scss";
 
 function App() {
   const [spin, setSpin] = useState(false);
+  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   
   useEffect(() => {
     let unmounted = false;
@@ -24,11 +27,13 @@ function App() {
       {!spin ? (
         <Spin
           tip="Cargando"
+          indicator={antIcon}
           style={{
             textAlign: "center",
             width: "100%",
             padding: "20px",
-            marginTop: "200px"
+            marginTop: "200px",
+            color: "white"
           }}
         />
       ) : (

@@ -7,10 +7,10 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <title>Home - David Thomas Pizarro Frick</title>
+        <title>Home | Página principal</title>
         <meta
           name="description"
-          content="Home | David Thomas Pizarro Frick"
+          content="Página principal"
           data-react-helmet="true"
         />
       </Helmet>

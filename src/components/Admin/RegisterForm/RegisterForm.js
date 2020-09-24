@@ -60,36 +60,36 @@ export default function RegisterForm() {
 
     if (!emailVal || !passwordVal || !repeatPasswordVal || !privacyPolicyVal) {
       if (emailVal && passwordVal && repeatPasswordVal && !privacyPolicyVal) {
-        notification["error"]({
+        notification["warning"]({
           message: "Acepta nuestra política de privacidad",
           duration: notifDelayErr
         });
       } else {
-        notification["error"]({
+        notification["warning"]({
           message: "Todos los campos son obligatorios",
           duration: notifDelayErr
         });
       }
     } else {
       if (passwordVal !== repeatPasswordVal) {
-        notification["error"]({
+        notification["warning"]({
           message: "Las contraseñas tienen que ser iguales",
           duration: notifDelayErr
         });
       } else {
         const result = await signUpApi(inputs);
-
-        if (!result.ok) {
-          notification["error"]({
-            message: result.message,
-            duration: notifDelayErr
-          });
-        } else {
+        if (result.status === 200) {
           notification["success"]({
             message: result.message,
             duration: notifDelay
           });
           resetForm();
+        } else {
+          let typeNotification = result.status === 500 ? "error" : "warning";
+          notification[typeNotification]({
+            message: result.message,
+            duration: notifDelayErr
+          });
         }
       }
     }

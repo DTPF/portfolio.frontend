@@ -5,7 +5,7 @@ export default function Contact() {
   return (
     <>
       <Helmet>
-        <title>Contacto - David Thomas Pizarro Frick</title>
+        <title>Contacto | Página de contacto</title>
         <meta
           name="description"
           content="Contacto | David Thomas Pizarro Frick"

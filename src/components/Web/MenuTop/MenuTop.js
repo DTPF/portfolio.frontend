@@ -3,7 +3,7 @@ import { Menu, Button } from "antd";
 import { Link, withRouter } from "react-router-dom";
 import SocialLinks from "../SocialLinks";
 import { getMenuApi } from "./../../../api/menu";
-import logoWhite from "../../../assets/img/png/logo-white.png";
+import logoWhite from "../../../assets/img/svg/logo512.svg";
 import { URL } from "../../../config/url";
 import { MenuOutlined, CloseCircleOutlined } from "@ant-design/icons";
 

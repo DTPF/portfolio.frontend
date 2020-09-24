@@ -7,14 +7,14 @@ export default function SocialLinks() {
   return (
     <div className="social-links">
       <a
-        href="/"
+        href="https://www.linkedin.com/in/david-tomas-pizarro-frick/"
         className="linkedin"
         target="_blank"
         rel="noopener noreferrer"
       >
         <LinkedinOutlined />
       </a>
-      <a href="/"
+      <a href="https://github.com/DTPF"
         className="github"
         target="_blank"
         rel="noopener noreferrer"

@@ -18,14 +18,9 @@
   }
 
   &__logo {
-    // display: flex;
-
-    // align-items: center;
-
-    position: absolute;
-    left: 0;
+    top: 0 !important;
     margin: 0 !important;
-    // padding: 5px;
+    padding: 0 !important;
     a {
       &:focus,
       &:active,
@@ -34,7 +29,9 @@
       }
     }
     img {
-      margin-bottom: 3px;
+      margin: 0;
+      margin-left: 3px;
+      padding: 7px;
       height: 55px;
       @media (min-width: $media-breakpoint-up-md) {
         height: 60px;

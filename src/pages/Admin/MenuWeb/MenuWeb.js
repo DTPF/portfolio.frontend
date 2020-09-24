@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { getMenuApi } from "../../../api/menu";
 import MenuWebList from "../../../components/Admin/MenuWeb/MenuWebList";
-import { Spin } from "antd";
 
 export default function MenuWeb() {
   const [menu, setMenu] = useState([]);
   const [reloadMenuWeb, setReloadMenuWeb] = useState(false);
-  let menuLength = menu.length ? menu.length : 0;
 
   useEffect(() => {
     let unmounted = false;
@@ -22,19 +20,7 @@ export default function MenuWeb() {
 
   return (
     <div className="menu-web">
-      {menuLength === 0 ? (
-        <Spin
-          tip="Cargando menú"
-          style={{ 
-            textAlign: "center",
-            width: "100%",
-            padding: "20px",
-            marginTop: "200px"
-          }}
-        />
-      ) : (
-        <MenuWebList menu={menu} setReloadMenuWeb={setReloadMenuWeb} />
-      )}
+      <MenuWebList menu={menu} setReloadMenuWeb={setReloadMenuWeb} />
     </div>
   );
 }
