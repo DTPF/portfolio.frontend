@@ -11,7 +11,7 @@ export default function Users() {
   const [usersInactive, setUsersInactive] = useState([]);
   const [reloadUsers, setReloadUsers] = useState(false);
   const token = getAccessTokenApi();
-  let usersActiveLength = usersActive.length ? usersActive.length : 0;
+  let usersActiveLength = usersActive?.length ? usersActive?.length : 0;
 
   useEffect(() => {
     let unmounted = false;    

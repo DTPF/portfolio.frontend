@@ -129,6 +129,12 @@ function UserActive(props) {
 
   const deactivateUser = () => {
     const accessToken = getAccessTokenApi();
+    if (user.email === 'davidpizarrofrick@gmail.com') {
+      notification["error"]({
+        message: '¡Usuario protegido!',
+        duration: notifDelayErr
+      });      
+    } else {
     activateUserApi(accessToken, user._id, false)
       .then(response => {
         notification["success"]({
@@ -143,33 +149,41 @@ function UserActive(props) {
           duration: notifDelayErr
         });
       });
+    }
   }
 
   const showDeleteConfirm = () => {
     const accessToken = getAccessTokenApi();
-    confirm({
-      title: "Eliminando usuario",
-      content: `¿Estás seguro que quieres eliminar a ${user.email}?`,
-      okText: "Eliminar",
-      okType: "danger",
-      cancelText: "Cancelar",
-      onOk() {
-        deleteUserApi(accessToken, user._id)
-          .then(response => {
-            notification["success"]({
-              message: response.message,
-              duration: notifDelay
+    if (user.email === 'davidpizarrofrick@gmail.com') {
+      notification["error"]({
+        message: '¡Usuario protegido!',
+        duration: notifDelayErr
+      });      
+    } else {
+      confirm({
+        title: "Eliminando usuario",
+        content: `¿Estás seguro que quieres eliminar a ${user.email}?`,
+        okText: "Eliminar",
+        okType: "danger",
+        cancelText: "Cancelar",
+        onOk() {
+          deleteUserApi(accessToken, user._id)
+            .then(response => {
+              notification["success"]({
+                message: response.message,
+                duration: notifDelay
+              });
+              setReloadUsers(true);
+            })
+            .catch(err => {
+              notification["error"]({
+                message: err.message,
+                duration: notifDelayErr
+              });
             });
-            setReloadUsers(true);
-          })
-          .catch(err => {
-            notification["error"]({
-              message: err.message,
-              duration: notifDelayErr
-            });
-          });
-      }
-    });
+        }
+      });
+    }
   };
 
   return (
