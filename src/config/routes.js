@@ -10,12 +10,12 @@ import AdminMenuWeb from "../pages/Admin/MenuWeb";
 import AdminContactMessages from "../pages/Admin/ContactMessages";
 
 // Pages
-import Home from "../pages/Home";
-import Contact from "../pages/Contact";
-import Courses from "../pages/Courses";
+import Home from "../pages/Web";
+import Contact from "../pages/Web/AboutMe";
+import Courses from "../pages/Web/Education";
 
 // Other
-import Error404 from "../pages/Error404";
+import Error404 from "../pages/Errors/Error404";
 
 const routes = [
   {
@@ -69,12 +69,12 @@ const routes = [
         component: Home,
       },
       {
-        path: "/contact",
+        path: "/about-me",
         exact: true,
         component: Contact,
       },
       {
-        path: "/courses",
+        path: "/education",
         exact: true,
         component: Courses
       },

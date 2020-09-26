@@ -21,7 +21,7 @@ export default function AuthProvider(props) {
   return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 }
 
-function checkUserLogin(setUser) {
+export function checkUserLogin(setUser) {
   const accessToken = getAccessTokenApi();
   if (!accessToken) {
     const refreshToken = getRefreshTokenApi();

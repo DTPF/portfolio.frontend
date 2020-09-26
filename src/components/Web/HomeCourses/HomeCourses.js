@@ -1,10 +1,10 @@
 import React from "react";
 import { Row, Col, Card, Button } from "antd";
 import { Link } from "react-router-dom";
-import reactJsHooks from "../../../assets/img/nopush/react-js-hooks.jpg";
-import reactNative from "../../../assets/img/nopush/react-native.jpg";
-import javaScript from "../../../assets/img/nopush/javascript-es6.jpg";
-import wordPress from "../../../assets/img/nopush/wordpress.jpg";
+import mern from "../../../assets/img/webp/mongo-node-express-react.webp";
+import angularReactVue from "../../../assets/img/webp/angular-react-vue.webp";
+import javaScript from "../../../assets/img/webp/javascript.webp";
+import nodeSymfonyLaravAng from '../../../assets/img/webp/node-symfony-laravel-angular.webp';
 import QueueAnim from "rc-queue-anim";
 
 import "./HomeCourses.scss";
@@ -22,33 +22,29 @@ export default function HomeCourses() {
             <Row className="row-courses" key="courses">
               <Col span={12} md={8} lg={8} xl={6}>
                 <CardCourse
-                  image={reactJsHooks}
-                  title="React JS Hooks"
-                  subtitle="Intermedio - React/JavaScript"
+                  image={mern}
+                  subtitle="Curso JavaScript Full Stack MERN (MongoDB, Express, React y Node)"
                   link="https://recetasmsr.com"
                 />
               </Col>
               <Col span={12} md={8} lg={8} xl={6}>
                 <CardCourse
-                  image={reactNative}
-                  title="React Native Expo"
-                  subtitle="Intermedio - React/JavaScript"
+                  image={angularReactVue}
+                  subtitle="Máster en Framewors de JavaScript: Angular, React y Vue"
+                  link="https://recetasmsr.com"
+                />
+              </Col>
+              <Col span={12} md={8} lg={8} xl={6}>
+                <CardCourse
+                  image={nodeSymfonyLaravAng}
+                  subtitle="Curso desarrollo web Fullstack: Node.js, Symfony 5, Laravel 7 y Angular 10"
                   link="https://recetasmsr.com"
                 />
               </Col>
               <Col span={12} md={8} lg={8} xl={6}>
                 <CardCourse
                   image={javaScript}
-                  title="JavaScript ES6"
-                  subtitle="Básico - JavaScript"
-                  link="https://recetasmsr.com"
-                />
-              </Col>
-              <Col span={12} md={8} lg={8} xl={6}>
-                <CardCourse
-                  image={wordPress}
-                  title="WordPress"
-                  subtitle="Básico - WordPress"
+                  subtitle="JavaScript: de cero a los detalles (ES5)"
                   link="https://recetasmsr.com"
                 />
               </Col>
@@ -60,7 +56,7 @@ export default function HomeCourses() {
         <Row key="seeMore">
           <Col span={24}>
             <Link to="/courses">
-              <Button>Ver más</Button>
+              <Button>Ver todos</Button>
             </Link>
           </Col>
         </Row>
@@ -79,7 +75,6 @@ function CardCourse(props) {
       <Card
         className="home-courses__card"
         cover={<img src={image} alt={title} />}
-        actions={[<Button>INGRESAR</Button>]}
       >
         <Meta title={title} description={subtitle} />
       </Card>

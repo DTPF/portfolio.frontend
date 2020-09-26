@@ -59,7 +59,7 @@ export default function LoginForm() {
       window.location.href = "/ad1988";
       addNotification({
         title: 'Accediendo desde '+inputs.email,
-        native: true
+        native: false
       });
     }
   };

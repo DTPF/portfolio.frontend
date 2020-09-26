@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 
-export default function Courses() {
+export default function Education() {
   return (
     <>
       <Helmet>
@@ -12,7 +12,7 @@ export default function Courses() {
           data-react-helmet="true"
         />
       </Helmet>
-      <h1>Courses</h1>
+      <h1>Formación</h1>
     </>
   );
 }

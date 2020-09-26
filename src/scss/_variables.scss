@@ -5,18 +5,32 @@ $font-size-md: 17px;
 $font-size-lg: 18px;
 $font-size-xl: 20px;
 
-
 $primary-background-color: rgba(23, 23, 133, 0.787);
 
-// $primary-color: #4f86b9;
 $primary-color-extra-dark: #273b56d3;
 $primary-color-dark: #273b56;
 $primary-color: #5d718d;
-$primary-color-light: #c3ddff;
+$primary-color-light:#cdd5df;
 
 $primary-color-hover: #326290;
 
 $menu-color: #252527;
+
+// BUTTON DARK
+$btn-background-dark: #5d718d;
+$btn-border-dark:  #556985;
+// hover
+$btn-background-dark-hover: #cdd5df;
+$btn-color-dark-hover: #5d718d;
+$btn-color-border-hover: #5d718d;
+// BUTTON LIGHT
+$btn-background-light: #cdd5df;
+$btn-color-light:  #273b56d3;
+$btn-border-light:  #273b56d3;
+// hover
+$btn-background-light-hover:#5d718d;
+$btn-color-light-hover:  #fff;
+$btn-border-light-hover:  #cdd5df;
 
 $font-light: #fff;
 $font-grey-light: #e8e8e8;
@@ -39,6 +53,7 @@ $border-radius: 3px;
 
 $box-shadow-primary: 0.1px 0.1px 4px 0.2px $primary-color;
 $box-shadow-header: -1px 3px 22px -3px rgba(0, 0, 0, 0.69);
+$box-shadow-button: -1px 3px 17px -6px $primary-color;
 
 $background-light: #fff;
 $background-grey-light: #e8e8e8;

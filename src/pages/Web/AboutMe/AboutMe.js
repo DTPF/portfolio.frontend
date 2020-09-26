@@ -1,11 +1,11 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 
-export default function Contact() {
+export default function AboutMe() {
   return (
     <>
       <Helmet>
-        <title>Contacto | Página de contacto</title>
+        <title>Sobre Mi | Página de contacto</title>
         <meta
           name="description"
           content="Contacto | David Thomas Pizarro Frick"
@@ -13,7 +13,7 @@ export default function Contact() {
         />
       </Helmet>
       <div>
-        <h1>Estamos en Contact</h1>
+        <h1>Sobre Mi</h1>
       </div>
     </>
   );
