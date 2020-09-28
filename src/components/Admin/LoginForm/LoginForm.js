@@ -5,7 +5,6 @@ import { signInApi } from "../../../api/user";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../../utils/constants";
 import { notifDelay, notifDelayErr } from "../../../utils/notifications";
 import addNotification from 'react-push-notification';
-
 import {
   emailValidation,
   minLenghtValidation,
@@ -52,14 +51,10 @@ export default function LoginForm() {
       const {accessToken, refreshToken} = result;
       localStorage.setItem(ACCESS_TOKEN, accessToken);
       localStorage.setItem(REFRESH_TOKEN, refreshToken);
-      notification["success"]({
-        message: "Login correcto.",
-        duration: notifDelay
-      });
       window.location.href = "/ad1988";
       addNotification({
         title: 'Accediendo desde '+inputs.email,
-        native: false
+        native: true
       });
     }
   };

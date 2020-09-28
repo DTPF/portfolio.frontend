@@ -11,14 +11,13 @@ import "./HomeCourses.scss";
 
 export default function HomeCourses() {
   return (
-    <QueueAnim type={["bottom", "top"]} ease={["easeInCubic"]} duration={400}>
+    <QueueAnim type={["scaleY"]} ease={["easeOutSine"]} duration={500}>
       <Row className="home-courses" key="title">
         <Col span={24} className="home-courses__title">
           <h2>Últimos cursos realizados</h2>
         </Col>
         <Col lg={1} />
         <Col lg={22}>
-          <QueueAnim type={["bottom", "top"]} ease={["easeInCubic"]} duration={600}>
             <Row className="row-courses" key="courses">
               <Col span={12} md={8} lg={8} xl={6}>
                 <CardCourse
@@ -44,23 +43,20 @@ export default function HomeCourses() {
               <Col span={12} md={8} lg={8} xl={6}>
                 <CardCourse
                   image={javaScript}
-                  subtitle="JavaScript: de cero a los detalles (ES5)"
+                  subtitle="JavaScript de cero a los detalles (ES5)"
                   link="https://recetasmsr.com"
                 />
               </Col>
             </Row>
-          </QueueAnim>
         </Col>
         <Col lg={1} />
-        <QueueAnim className="home-courses__more" type={["bottom", "top"]} ease={["easeInCubic"]} duration={800}>
-        <Row key="seeMore">
+        <Row className="home-courses__more" key="seeMore">
           <Col span={24}>
             <Link to="/courses">
               <Button>Ver todos</Button>
             </Link>
           </Col>
         </Row>
-        </QueueAnim>
       </Row>
     </QueueAnim>
   );
@@ -74,9 +70,9 @@ function CardCourse(props) {
     <a href={link} target="_blank" rel="noopener noreferrer">
       <Card
         className="home-courses__card"
-        cover={<img src={image} alt={title} />}
+        cover={<img src={image} alt={title} type="image/webp" />}
       >
-        <Meta title={title} description={subtitle} />
+        <Meta description={subtitle} />
       </Card>
     </a>
   );

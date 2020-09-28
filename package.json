@@ -9,7 +9,6 @@
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.6.3",
     "jwt-decode": "^2.2.0",
-    "moment": "^2.28.0",
     "node-sass": "^4.14.1",
     "rc-queue-anim": "^1.8.5",
     "rc-texty": "^0.2.0",

@@ -12,15 +12,14 @@ export default function MainTitle() {
           <Texty
             className="title"
             type="left"
-            delay={100}
             component={TweenOne}
             componentProps={{
               animation: [
                 { x: 130, type: "set" },
-                { x: 100, delay: 0, duration: 50 },
+                { x: 100, delay: -200, duration: 50 },
                 {
                   ease: "easeOutQuart",
-                  duration: 100,
+                  duration: 50,
                   x: 0,
                 },
                 {
@@ -34,7 +33,7 @@ export default function MainTitle() {
                   scale: 1,
                   width: "100%",
                   delay: 0,
-                  duration: 500,
+                  duration: 50,
                   ease: "easeInOutQuint",
                 },
               ],
@@ -45,12 +44,11 @@ export default function MainTitle() {
           <Texty
             className="title-2"
             type="right"
-            delay={100}
             component={TweenOne}
             componentProps={{
               animation: [
                 { x: 130, type: "set" },
-                { x: 100, delay: 0, duration: 50 },
+                { x: 100, delay: -200, duration: 50 },
                 {
                   ease: "easeOutQuart",
                   duration: 100,
@@ -67,7 +65,7 @@ export default function MainTitle() {
                   scale: 1,
                   width: "100%",
                   delay: 0,
-                  duration: 500,
+                  duration: 100,
                   ease: "easeInOutQuint",
                 },
               ],
@@ -78,7 +76,7 @@ export default function MainTitle() {
           <TweenOne
             className="combined-bar"
             animation={{
-              delay: 800,
+              delay: 300,
               width: 0,
               x: 158,
               type: "from",
@@ -88,8 +86,8 @@ export default function MainTitle() {
           <Texty
             className="content"
             type="bottom"
-            delay={900}
-            interval={8}
+            delay={400}
+            interval={5}
           >
             Desarrollador Junior de Software
           </Texty>
