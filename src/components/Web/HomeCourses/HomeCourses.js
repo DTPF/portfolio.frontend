@@ -11,7 +11,7 @@ import "./HomeCourses.scss";
 
 export default function HomeCourses() {
   return (
-    <QueueAnim type={["scaleY"]} ease={["easeOutSine"]} duration={500}>
+    <QueueAnim type={["alpha"]} duration={900} ease="easeOutSine">
       <Row className="home-courses" key="title">
         <Col span={24} className="home-courses__title">
           <h2>Últimos cursos realizados</h2>
@@ -29,7 +29,7 @@ export default function HomeCourses() {
               <Col span={12} md={8} lg={8} xl={6}>
                 <CardCourse
                   image={angularReactVue}
-                  subtitle="Máster en Framewors de JavaScript: Angular, React y Vue"
+                  subtitle="Master en Framewors de JavaScript: Angular, React y Vue"
                   link="https://recetasmsr.com"
                 />
               </Col>

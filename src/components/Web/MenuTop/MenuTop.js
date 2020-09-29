@@ -3,7 +3,7 @@ import { Menu, Button } from "antd";
 import { Link, withRouter } from "react-router-dom";
 import SocialLinks from "../SocialLinks";
 import { getMenuApi } from "./../../../api/menu";
-import logoWhite from "../../../assets/img/svg/logo512.svg";
+import logoWhite from "../../../assets/img/webp/logo512.webp";
 import { URL } from "../../../config/url";
 import { MenuOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
@@ -40,7 +40,7 @@ function MenuTop(props) {
       </Menu.Item>
       <Menu.Item className="menu-top-web__item" key={['/']}>
         <Link to={"/home"}>
-          Home
+          Inicio
         </Link>
       </Menu.Item>
       {menuData.map((item) => {

@@ -10,7 +10,7 @@ import AdminMenuWeb from "../pages/Admin/MenuWeb";
 import AdminContactMessages from "../pages/Admin/ContactMessages";
 
 // Pages
-import Home from "../pages/Web";
+import Home from "../pages/Web/Home";
 import Contact from "../pages/Web/AboutMe";
 import Courses from "../pages/Web/Education";
 

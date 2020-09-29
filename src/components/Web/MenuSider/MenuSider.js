@@ -33,7 +33,7 @@ function MenuSider(props) {
       <Menu defaultSelectedKeys={[location.pathname]}  mode="vertical">
       <Menu.Item className="menu-sider-web__item" key="/">
         <Link to={"/"}>
-          Home
+          Inicio
         </Link>
       </Menu.Item>
         {menuData.map((item) => {

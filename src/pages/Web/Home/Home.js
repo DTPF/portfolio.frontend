@@ -1,11 +1,13 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import MainTitle from "../../components/Web/MainTitle";
-import HomeCourses from "../../components/Web/HomeCourses";
+import MainTitle from "../../../components/Web/MainTitle";
+import HomeCourses from "../../../components/Web/HomeCourses";
+
+import "./Home.scss";
 
 export default function Home() {
   return (
-    <>
+    <>    
       <Helmet>
         <title>Home | Página principal</title>
         <meta

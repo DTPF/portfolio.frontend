@@ -26,7 +26,6 @@ function App() {
       <Notifications />
       {!spin ? (
         <Spin
-          tip="Cargando"
           indicator={antIcon}
           style={{
             textAlign: "center",

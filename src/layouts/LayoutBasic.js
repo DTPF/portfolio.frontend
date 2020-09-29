@@ -9,7 +9,6 @@ import QueueAnim from "rc-queue-anim";
 import "./LayoutBasic.scss";
 
 export default function LayoutBasic({ routes }) {
-  //   const { routes } = props;
   const [menuCollapsed, setMenuCollapsed] = useState(true);
   const { Content } = Layout;
 
@@ -21,7 +20,7 @@ export default function LayoutBasic({ routes }) {
 
   return (
     <div className="layout-basic" onClick={closeMenu}>
-      <QueueAnim type={["top"]} duration={1000} ease="easeOutBounce">
+      <QueueAnim type={["top", "bottom"]} duration={500} ease="easeInSine">
         <div className="layout-basic__header" key="header">
           <MenuTop
             menuCollapsed={menuCollapsed}
@@ -33,13 +32,15 @@ export default function LayoutBasic({ routes }) {
             style={{ minHeight: 20 }}
           />
         </div>
+      </QueueAnim>
         <Content className="layout-basic__content">
           <LoadRoutes routes={routes} />
         </Content>
+        <QueueAnim type={["bottom", "top"]} duration={500} ease="easeInSine">
         <div className="layout-basic__footer" key="footer">
           <Footer />
         </div>
-      </QueueAnim>
+        </QueueAnim>
     </div>
   );
 }
