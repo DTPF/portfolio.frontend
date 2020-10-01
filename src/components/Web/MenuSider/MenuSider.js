@@ -30,12 +30,7 @@ function MenuSider(props) {
       collapsed={menuCollapsed}
       onClick={() => setMenuCollapsed(!menuCollapsed)}
     >
-      <Menu defaultSelectedKeys={[location.pathname]}  mode="vertical">
-      <Menu.Item className="menu-sider-web__item" key="/">
-        <Link to={"/"}>
-          Inicio
-        </Link>
-      </Menu.Item>
+      <Menu selectedKeys={[location.pathname]}  mode="vertical">
         {menuData.map((item) => {
           const external = item.url.indexOf("http") > -1 ? true : false;
           if (external) {

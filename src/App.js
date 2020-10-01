@@ -9,7 +9,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 
 import "./App.scss";
 
-function App() {
+export default function App() {
   const [spin, setSpin] = useState(false);
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   
@@ -57,5 +57,3 @@ function RouteWithSubRoutes(route) {
     />
   );
 }
-
-export default App;

@@ -10,6 +10,7 @@ $primary-background-color: rgba(23, 23, 133, 0.787);
 $primary-color-extra-dark: #273b56d3;
 $primary-color-dark: #273b56;
 $primary-color: #5d718d;
+$primary-color-medium:  #7b93b6;
 $primary-color-light:#cdd5df;
 
 $primary-color-hover: #326290;
@@ -39,7 +40,7 @@ $font-grey-dark: #595959;
 $font-dark-light: #4d4d53;
 $font-dark-medium: rgba(0, 0, 0, 0.733);
 $font-dark: #000;
-$font-light-primary:  #c3ddff;
+$font-light-primary:  #7b8593;
 $font-medium-primary: #384f6e;
 $font-dark-primary: #25354d;
 
@@ -54,6 +55,7 @@ $border-radius: 3px;
 $box-shadow-primary: 0.1px 0.1px 4px 0.2px $primary-color;
 $box-shadow-header: -1px 3px 22px -3px rgba(0, 0, 0, 0.69);
 $box-shadow-button: -1px 3px 17px -6px $primary-color;
+$box-shadow-card: 1px 0px 25px -3px $primary-color;
 
 $background-light: #fff;
 $background-grey-light: #e8e8e8;

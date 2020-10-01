@@ -107,7 +107,7 @@ export default function MenuWebList(props) {
         deleteMenuApi(accessToken, menu._id)
           .then(response => {
             notification["success"]({
-              message: response,
+              message: response.message,
               duration: notifDelay
             });
             setReloadMenuWeb(true);

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Menu, Button } from "antd";
-import { Link, withRouter } from "react-router-dom";
-import SocialLinks from "../SocialLinks";
-import { getMenuApi } from "./../../../api/menu";
-import logoWhite from "../../../assets/img/webp/logo512.webp";
+import { NavLink, withRouter } from "react-router-dom";
 import { URL } from "../../../config/url";
-import { MenuOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { getMenuApi } from "./../../../api/menu";
+import SocialLinks from "../SocialLinks";
+import logoWhite from "../../../assets/img/webp/logo512.webp";
+import { 
+  MenuOutlined,
+  CloseCircleOutlined
+} from "@ant-design/icons";
 
 import "./MenuTop.scss";
 
@@ -14,16 +17,16 @@ function MenuTop(props) {
   const { menuCollapsed, setMenuCollapsed, location } = props;
 
   useEffect(() => {
+    let unmounted = false;
     getMenuApi().then((response) => {
-      let unmounted = false;
-      const arrayMenu = [];
       if (!unmounted) {
+        const arrayMenu = [];
         response.menu.forEach((item) => {
           item.active && arrayMenu.push(item);
         });
         setMenuData(arrayMenu);
       }
-      return () => { unmounted = true }
+      return () => {unmounted = true};
     });
   }, []);
 
@@ -32,16 +35,15 @@ function MenuTop(props) {
   };
 
   return (
-    <Menu defaultSelectedKeys={[location.pathname]} className="menu-top-web" mode="horizontal">
+    <Menu
+      selectedKeys={[location.pathname]}
+      className="menu-top-web"
+      mode="horizontal"
+    >
       <Menu.Item className="menu-top-web__logo">
-        <Link to={"/"} onClick={reload}>
+        <NavLink to={"/"} onClick={reload}>
           <img src={logoWhite} alt="David Thomas Pizarro Frick" />
-        </Link>
-      </Menu.Item>
-      <Menu.Item className="menu-top-web__item" key={['/']}>
-        <Link to={"/home"}>
-          Inicio
-        </Link>
+        </NavLink>
       </Menu.Item>
       {menuData.map((item) => {
         const external = item.url.indexOf("http") > -1 ? true : false;
@@ -56,7 +58,7 @@ function MenuTop(props) {
         }
         return (
           <Menu.Item key={item.url} className="menu-top-web__item">
-            <Link to={item.url}>{item.title}</Link>
+            <NavLink to={item.url}>{item.title}</NavLink>
           </Menu.Item>
         );
       })}

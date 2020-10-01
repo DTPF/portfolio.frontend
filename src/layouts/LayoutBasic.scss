@@ -6,38 +6,35 @@
   background-position:10% 10%;
   background-size: cover;
   background-attachment: fixed;
-  margin: 0 !important;
   &__header {
-    position: sticky;
-    top: 0;
-    left: 0;
+    position: fixed;
     z-index: 100;
     width: 100%;
-    padding: 0 !important;
-    margin: 0 !important;
-    @media (min-width: $media-breakpoint-up-xxl) {
-      width: 80vw;
-      margin: 0 auto !important;
-    }
+
     .ant-menu-horizontal {
       border-bottom: 0 !important;
       border-top: 2px solid $primary-color-dark;
       -webkit-box-shadow: $box-shadow-header;
       -moz-box-shadow: $box-shadow-header;
       box-shadow: $box-shadow-header;
-      @media (min-width: $media-breakpoint-up-xxl) {
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-      }
     }
   }
   &__content {
-    min-height: calc(100vh - 330px);
-    padding: 0 !important;
+    min-height: calc(100vh);
+    padding-top: 60px;
+    @media (min-width: $media-breakpoint-up-md) {
+      padding-top: 75px;
+    }
+    @media (min-width: $media-breakpoint-up-lg) {
+      padding-top: 80px;
+    }
+    @media (min-width: $media-breakpoint-up-xl) {
+      padding-top: 90px;
+    }
     @media (min-width: $media-breakpoint-up-xxl) {
-      width: 80vw;
+      width: 85vw;
       margin: 0 auto;
-      min-height: calc(100vh - 345px);
+      padding-top: 100px;
     }
   }
   &__footer {
@@ -46,7 +43,7 @@
     -moz-box-shadow: $box-shadow-header;
     box-shadow: $box-shadow-header;
     @media (min-width: $media-breakpoint-up-xxl) {
-      width: 80vw;
+      width: 90vw;
       margin: 0 auto;
     }
     .ant-layout-footer {
