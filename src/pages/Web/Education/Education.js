@@ -18,7 +18,7 @@ export default function Education(props) {
   
   useEffect(() => {
     let unmounted = false;
-    getCoursesApi(10, page)
+    getCoursesApi(9, page)
     .then((response) => {
           if (!unmounted) {
             setCourses(response.courses);
@@ -77,7 +77,7 @@ export default function Education(props) {
               </Col>
               <div className="div"></div>
             </QueueAnim>            
-            {courses.pages > 1 && (
+            {courses.totalPages > 1 && (
               <QueueAnim
                 type={["bottom", "top"]}
                 duration={600}

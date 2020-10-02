@@ -15,7 +15,7 @@ export default function Pagination(props) {
     <PaginationAntd
       responsive
       defaultCurrent={currentPage}
-      total={courses.total}
+      total={courses.totalDocs}
       pageSize={courses.limit}
       onChange={newPage => onChangePage(newPage)}
       className="pagination"
