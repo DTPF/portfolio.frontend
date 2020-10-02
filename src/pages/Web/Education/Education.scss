@@ -1,7 +1,9 @@
 @import "../../../scss/index.scss";
 
 .education {
+    display: flex;
+    justify-content: center;
     .div {
-        height: 30px;
+        margin-top: 20px;
     }
 }

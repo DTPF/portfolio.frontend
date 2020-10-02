@@ -74,6 +74,11 @@ const routes = [
         component: Courses
       },
       {
+        path: "/education/:url",
+        exact: true,
+        component: Courses
+      },
+      {
         component: Error404,
       },
     ],

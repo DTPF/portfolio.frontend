@@ -1,0 +1,50 @@
+@import "../../scss/index.scss";
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  .ant-pagination {
+    &-item {
+      border: 1px solid $primary-color-light;
+      & > a {
+        color: $primary-color;
+      }
+      &:hover {
+        border: 1px solid $primary-color;
+        & > a {
+          color: $primary-color;
+        }
+      }
+      &-active {
+        border: 1px solid $primary-color-light;
+        background-color: $primary-color;
+        & > a {
+          color: #fff;
+        }
+        &:hover {
+          & > a {
+            color: #fff;
+            cursor: progress;
+          }
+        }
+      }
+    }
+    &-prev,
+    &-next {
+      & > button {
+        color: $primary-color;
+        font-size: 1em;        
+        &:hover {
+          border: 1px solid $primary-color;
+          color: $primary-color;
+        }
+        &:disabled {
+          border: 1px solid $primary-color-light;
+        }
+      }
+    }
+  }
+}

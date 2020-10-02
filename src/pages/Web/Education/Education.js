@@ -3,26 +3,30 @@ import {Row, Col, Spin} from "antd";
 import {Helmet} from "react-helmet";
 import Courses from "../../../components/Web/Education/Courses";
 import {getCoursesApi} from "../../../api/education";
+import queryString from "query-string";
+import Pagination from "../../../components/Pagination/Pagination";
 import {LoadingOutlined} from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
 
 import "./Education.scss";
 
-export default function Education() {
+export default function Education(props) {
+  const { location, history } = props;
   const [courses, setCourses] = useState(null);
   const antIcon = <LoadingOutlined style={{fontSize: 24}} spin />;
-
+  const { page = 1 } = queryString.parse(location.search);
+  
   useEffect(() => {
     let unmounted = false;
-    getCoursesApi()
-      .then((response) => {
+    getCoursesApi(10, page)
+    .then((response) => {
           if (!unmounted) {
             setCourses(response.courses);
           }
       });
       window.scrollTo(0, 0);
       return () => {unmounted = true};
-  }, []);
+  }, [page]);
 
   const title = "Todos los cursos";
   const subtitle = "Todos los cursos que he realizado presenciales" +
@@ -54,22 +58,38 @@ export default function Education() {
               }}
             />
           ) : (
+            <>
             <QueueAnim
               type={["bottom", "top"]}
               duration={600}
               ease="easeInCubic"
             >
-              <div className="div"></div>
-              <Col span={24} key="courses">
-                <Courses
+              <div className="div" ></div>
+              <Col key="courses">
+                <Courses                  
                   numItems={1000}
                   title={title}
                   subtitle={subtitle}
-                  courses={courses}
+                  courses={courses.docs}
+                  location={location}
+                  history={history}
                 />
               </Col>
               <div className="div"></div>
-            </QueueAnim>
+            </QueueAnim>            
+            {courses.pages > 1 && (
+              <QueueAnim
+                type={["bottom", "top"]}
+                duration={600}
+                ease="easeInCubic"
+              >
+                <Col key="pagination">
+                  <Pagination courses={courses} location={location} history={history} />
+                </Col>
+              </QueueAnim>
+            )}
+            </>
+            
           )}
         </Col>
         <Col lg={1} />

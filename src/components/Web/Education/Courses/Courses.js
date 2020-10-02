@@ -8,8 +8,10 @@ import "./Courses.scss";
 
 export default function Courses(props) {
   const { courses, numItems, title, subtitle } = props;
+
   return (
     <>
+      <Row>
       <Col span={24} className="courses-list__title">
         <QueueAnim
           type={["bottom", "top"]}
@@ -26,6 +28,7 @@ export default function Courses(props) {
           <p key="subtitle">{subtitle}</p>
         </QueueAnim>
       </Col>
+      </Row>
       <div className="courses-list">
         <Row>
           {courses.slice(0, numItems).map((course) => (
@@ -50,6 +53,7 @@ function Course(props) {
   const { course } = props;
   const [image, setImage] = useState(null);
   const { Meta } = Card;
+  
   useEffect(() => {
     let unmounted = false;
     setImage();
@@ -67,25 +71,33 @@ function Course(props) {
 
   return (
     <>
-      <Card
-        className="courses-list__card"
-        cover={
-          <img src={image} alt={course.title} type="image/webp" />
-        }
+      <QueueAnim
+        type={["alpha"]}
+        duration={600}
+        ease="easeInCubic"
       >
-        <Meta description={course.title} />
-        <span className="courses-list__edit">
-          <EyeOutlined />
-        </span>
-        <div className="courses-list__tags">
-          <Tag className="courses-list__hours">
-            <b>{course.duration}</b> hrs
-          </Tag>
-          <Tag className="courses-list__tecnologies">
-            <b>{course.tags.length}</b> tech
-          </Tag>
+        <div key="course">
+          <Card
+            className="courses-list__card"
+            cover={
+              <img src={image} alt={course.title} type="image/webp" />
+            }
+          >
+            <Meta description={course.title} />
+            <span className="courses-list__edit">
+              <EyeOutlined />
+            </span>
+            <div className="courses-list__tags">
+              <Tag className="courses-list__hours">
+                <b>{course.duration}</b> hrs
+              </Tag>
+              <Tag className="courses-list__tecnologies">
+                <b>{course.tags.length}</b> tech
+              </Tag>
+            </div>
+          </Card>
         </div>
-      </Card>
+      </QueueAnim>
     </>
   );
 }

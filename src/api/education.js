@@ -1,7 +1,7 @@
 import { basePath, apiVersion } from "./config";
 
-export function getCoursesApi() {
-  const url = `${basePath}/${apiVersion}/get-courses`;
+export function getCoursesApi(limit, page) {
+  const url = `${basePath}/${apiVersion}/get-courses?limit=${limit}&page=${page}`;
 
   return fetch(url)
     .then((response) => {
