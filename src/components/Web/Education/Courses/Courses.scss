@@ -157,6 +157,7 @@
     -webkit-box-shadow: $box-shadow-card;
     -moz-box-shadow: $box-shadow-card;
     margin: 5px;
+    max-width: 340px;
     @media (min-width: $media-breakpoint-up-xs) {
       margin: 7px;
     }

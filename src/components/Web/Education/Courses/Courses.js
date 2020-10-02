@@ -60,12 +60,14 @@ function Course(props) {
     if (course.image) {
       getImageApi(course.image).then((response) => {
         if (!unmounted) {
-          setImage(response.url);
+          let filePath = response.url;
+          let fileName = filePath.split("/")[6];
+          let thumbnailName = 'thumb_'+ fileName;
+          let replaceName = filePath.replace(fileName, thumbnailName);
+          setImage(replaceName);
         }
       });
-    } else {
-      setImage(null);
-    }
+    } 
     return () => {unmounted = true};
   }, [course]);
 
