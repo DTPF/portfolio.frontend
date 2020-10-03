@@ -16,7 +16,7 @@ export default function Home() {
 
   useEffect(() => {
     let unmounted = false;
-    getCoursesApi(3, 1)
+    getCoursesApi(4, 1)
     .then((response) => {
           if (!unmounted) {
             setCourses(response.courses);
@@ -62,7 +62,7 @@ export default function Home() {
           >
             <Col span={24} key="courses">
               <Courses
-                numItems={3}
+                numItems={4}
                 title={title}
                 subtitle={subtitle}
                 courses={courses.docs}

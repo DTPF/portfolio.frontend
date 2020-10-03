@@ -18,7 +18,7 @@ export default function Education(props) {
   
   useEffect(() => {
     let unmounted = false;
-    getCoursesApi(9, page)
+    getCoursesApi(8, page)
     .then((response) => {
           if (!unmounted) {
             setCourses(response.courses);
@@ -88,8 +88,8 @@ export default function Education(props) {
                 </Col>
               </QueueAnim>
             )}
+            <div className="div" ></div>
             </>
-            
           )}
         </Col>
         <Col lg={1} />

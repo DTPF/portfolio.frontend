@@ -1,7 +1,7 @@
 import React from "react";
 import { logout } from "../../../api/auth";
 import { Button } from "antd";
-import Logo from "../../../assets/img/svg/logo512.svg";
+import Logo from "../../../assets/img/png/logo128.png";
 import { URL } from "../../../config/url";
 import {
   MenuUnfoldOutlined,
@@ -12,12 +12,11 @@ import {
 import "./MenuTop.scss";
 
 export default function MenuTop(props) {
-  const { menuCollapsed, setMenuCollapsed } = props;
+  const { menuCollapsed, setMenuCollapsed } = props;  
   const logoutUser = () => {
     logout();
     window.location.reload();
   };
-
   const reload = () => {
     window.location.href = URL + "ad1988";
   };

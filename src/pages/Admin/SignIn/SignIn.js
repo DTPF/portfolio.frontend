@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout, Tabs } from "antd";
 import { Redirect } from "react-router-dom";
-import Logo from "../../../assets/img/svg/logo512.svg";
+import Logo from "../../../assets/img/png/logo256.png";
 import RegisterForm from "../../../components/Admin/RegisterForm";
 import LoginForm from "../../../components/Admin/LoginForm";
 import { getAccessTokenApi } from "../../../api/auth";

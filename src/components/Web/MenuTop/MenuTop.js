@@ -4,7 +4,7 @@ import { NavLink, withRouter } from "react-router-dom";
 import { URL } from "../../../config/url";
 import { getMenuApi } from "./../../../api/menu";
 import SocialLinks from "../SocialLinks";
-import logoWhite from "../../../assets/img/webp/logo512.webp";
+import Logo from "../../../assets/img/png/logo128.png";
 import { 
   MenuOutlined,
   CloseCircleOutlined
@@ -42,7 +42,7 @@ function MenuTop(props) {
     >
       <Menu.Item className="menu-top-web__logo">
         <NavLink to={"/"} onClick={reload}>
-          <img src={logoWhite} alt="David Thomas Pizarro Frick" />
+          <img src={Logo} alt="David Thomas Pizarro Frick" />
         </NavLink>
       </Menu.Item>
       {menuData.map((item) => {

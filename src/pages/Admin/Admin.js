@@ -4,6 +4,7 @@ import { getMessagesUnreadApi } from "../../api/contact";
 import { getAccessTokenApi } from "../../api/auth";
 import { notifDelayErr } from '../../utils/notifications';
 import { checkUserLogin } from '../../providers/AuthProvider';
+import addNotification from 'react-push-notification';
 
 export default function Admin() {
   const [reloadMessages, setReloadMessages] = useState(false);
@@ -22,6 +23,10 @@ export default function Admin() {
           notification["warning"]({
             message: `Tienes ${messagesLenght} mensajes sin leer.`,
             duration: notifDelayErr,
+          });
+          addNotification({
+            title: `Tienes ${messagesLenght} mensajes sin leer.`,
+            native: true
           });
         }
       }

@@ -20,8 +20,11 @@ export default function ContactMe(props) {
         subject: inputs.subject,
         order: order
     }
+
+    let inputEmail = inputs.email;    
+    const replaceTab = inputEmail?.replace(" ", "");
     const emailValid = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,63}$/i;
-    const resultValidation = emailValid.test(inputs.email);
+    const resultValidation = emailValid.test(replaceTab);
 
     if (!inputs.email && !inputs.subject) {
       notification["warning"]({
@@ -63,6 +66,8 @@ export default function ContactMe(props) {
       <Form onFinish={onFinish}>
         <Form.Item>
           <Input
+            type="email"
+            name="email"
             prefix={<UserOutlined style={{ color: "rgba(0, 0, 0, 0.25)" }} />}
             placeholder="Correo electrónico"
             value={inputs.email}

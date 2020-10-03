@@ -47,8 +47,8 @@ function MenuSider(props) {
             <span className="nav-text">Mensajes</span>
           </Link>
         </Menu.Item>
-        <Menu.Item key="/home">
-          <Link to={"/home"}>
+        <Menu.Item key="/">
+          <Link to={"/"}>
             <ChromeOutlined />
             <span className="nac-text">Web</span>
           </Link>

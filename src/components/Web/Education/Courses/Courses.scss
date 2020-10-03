@@ -157,7 +157,7 @@
     -webkit-box-shadow: $box-shadow-card;
     -moz-box-shadow: $box-shadow-card;
     margin: 5px;
-    max-width: 340px;
+    max-width: 330px;
     @media (min-width: $media-breakpoint-up-xs) {
       margin: 7px;
     }
@@ -166,6 +166,7 @@
     }
     @media (min-width: $media-breakpoint-up-md) {
       margin: 11px;
+      min-width: 240px;
     }
     @media (min-width: $media-breakpoint-up-lg) {
       margin: 13px;
@@ -230,6 +231,7 @@
     justify-content: center;
     margin: 2px;
     height: 100%;
+    max-width: 1700px;
     @media (min-width: $media-breakpoint-up-xs) {
       margin: 3px;
     }

@@ -6,7 +6,6 @@ import { Notifications } from 'react-push-notification';
 import { Spin } from "antd";
 import { LoadingOutlined } from '@ant-design/icons';
 
-
 import "./App.scss";
 
 export default function App() {
@@ -30,9 +29,11 @@ export default function App() {
           style={{
             textAlign: "center",
             width: "100%",
+            height: "100vh",
             padding: "20px",
-            marginTop: "200px",
-            color: "white"
+            paddingTop: "200px",
+            color: "#E4E4E4",
+            backgroundColor: "#E4E4E4"
           }}
         />
       ) : (

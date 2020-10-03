@@ -75,7 +75,7 @@ function Course(props) {
     <>
       <QueueAnim
         type={["alpha"]}
-        duration={600}
+        duration={500}
         ease="easeInCubic"
       >
         <div key="course">
