@@ -4,8 +4,6 @@ import { getUsersActiveApi } from "../../../api/user";
 import { Spin } from "antd";
 import ListUsers from "../../../components/Admin/Users/ListUsers";
 
-import "./Users.scss";
-
 export default function Users() {
   const [usersActive, setUsersActive] = useState([]);
   const [usersInactive, setUsersInactive] = useState([]);

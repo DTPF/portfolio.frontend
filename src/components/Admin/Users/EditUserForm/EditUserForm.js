@@ -158,9 +158,7 @@ function UploadAvatar(props) {
       } else {
         setAvatar({ file, preview: URL.createObjectURL(file) });
       }
-    },
-    [setAvatar]
-  );
+  }, [setAvatar]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: "image/jpeg, image/png",

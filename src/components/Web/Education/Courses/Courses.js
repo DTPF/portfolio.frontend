@@ -91,7 +91,7 @@ function Course(props) {
             </span>
             <div className="courses-list__tags">
               <Tag className="courses-list__hours">
-                <b>{course.duration}</b> hrs
+                <b>{course.duration}</b> h
               </Tag>
               <Tag className="courses-list__tecnologies">
                 <b>{course.tags.length}</b> tech

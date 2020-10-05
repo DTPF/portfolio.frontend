@@ -1,0 +1,78 @@
+@import "../../../../scss/index.scss";
+
+.admin-tags {
+  .tag-divider {
+    color: $primary-color !important;
+  }
+  &__add-tag-form {
+    .ant-input-group {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      .ant-input-affix-wrapper {
+        width: 100%;
+        max-width: 200px;
+      }
+      button {
+        width: auto;
+        background-color: $btn-background-dark;
+        border: 1px solid $btn-border-dark;
+        box-shadow: $box-shadow-button;
+        -moz-box-shadow: $box-shadow-button;
+        -webkit-box-shadow: $box-shadow-button;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        padding: 0 7px;
+        span {
+            font-size: 1.1em;
+        }
+        &:hover {
+          background-color: $btn-background-dark-hover;
+          border: 1px solid $btn-color-border-hover;
+          span {
+            color: $btn-color-dark-hover !important;
+          }
+        }
+      }
+    }
+  }
+  &__tags {
+    > .ant-col {
+      margin: 5px 5px;
+      > span {
+        border-radius: 10px;
+        &:hover {
+            cursor: pointer;
+        }
+      }
+    }
+    .Laravel {
+      > span {
+        color: #fff;
+        background-color: red;
+      }
+    }
+    .PHP {
+      > span {
+        color: #fff;
+        background-color: rgb(103, 95, 181);
+      }
+    }
+    .Symfony {
+      > span {
+        color: #fff;
+        background-color: rgb(0, 0, 0);
+      }
+    }
+    .Postman {
+      > span {
+        background-color: rgba(252, 130, 16, 0.884);
+      }
+    }
+    .Robo3T {
+        > span {
+          background-color: rgb(55, 200, 26);
+        }
+      }
+  }
+}
