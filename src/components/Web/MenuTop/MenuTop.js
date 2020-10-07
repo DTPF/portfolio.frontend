@@ -1,39 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { Menu, Button } from "antd";
+import { Menu, Button, notification } from "antd";
 import { NavLink, withRouter } from "react-router-dom";
-import { URL } from "../../../config/url";
 import { getMenuApi } from "./../../../api/menu";
-import SocialLinks from "../SocialLinks";
 import Logo from "../../../assets/img/png/logo128.png";
 import { 
   MenuOutlined,
   CloseCircleOutlined
 } from "@ant-design/icons";
-
 import "./MenuTop.scss";
+import SocialLinks from "../SocialLinks";
 
 function MenuTop(props) {
   const [menuData, setMenuData] = useState([]);
   const { menuCollapsed, setMenuCollapsed, location } = props;
-
   useEffect(() => {
     let unmounted = false;
     getMenuApi().then((response) => {
       if (!unmounted) {
-        const arrayMenu = [];
-        response.menu.forEach((item) => {
-          item.active && arrayMenu.push(item);
-        });
-        setMenuData(arrayMenu);
+        if (response.status !== 200) {
+          notification['error']({
+            message: "Ha ocurrido un error en el servidor, vuelve más tarde y disculpa las molestias.",
+            duration: 15
+          });
+        } else {
+          const arrayMenu = [];
+          response.menu && response.menu.forEach((item) => {
+            item.active && arrayMenu.push(item);
+          });
+          setMenuData(arrayMenu);
+        }
       }
       return () => {unmounted = true};
     });
   }, []);
-
-  const reload = () => {
-    window.location.href = URL + " ";
-  };
-
   return (
     <Menu
       selectedKeys={[location.pathname]}
@@ -41,7 +40,7 @@ function MenuTop(props) {
       mode="horizontal"
     >
       <Menu.Item className="menu-top-web__logo">
-        <NavLink to={"/"} onClick={reload}>
+        <NavLink to={"/"} >
           <img src={Logo} alt="David Thomas Pizarro Frick" />
         </NavLink>
       </Menu.Item>

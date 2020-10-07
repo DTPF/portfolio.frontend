@@ -25,9 +25,10 @@
     }
 
     &-bar {
-      width: 100%;
+      display: block;
+      width: 100% !important;
       height: 2.5px;
-      background: $primary-color-dark;
+      background: $primary-color-dark !important;
       position: absolute;
       top: 143px;
       @media (max-width: $media-breakpoint-down-sm) {

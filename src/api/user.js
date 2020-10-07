@@ -1,6 +1,6 @@
 import { basePath, apiVersion } from "./config";
 
-export function signUpApi(data) {
+export async function signUpApi(data) {
   const url = `${basePath}/${apiVersion}/sign-up`;
   const params = {
     method: "POST",
@@ -9,20 +9,16 @@ export function signUpApi(data) {
       "Content-Type": "application/json",
     },
   };
-
-  return fetch(url, params)
-    .then((response) => {
-      return response.json();
-    })
-    .then((result) => {
-      return result;
-    })
-    .then((err) => {
-      return err;
-    });
+  try {
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
 }
 
-export function signInApi(data) {
+export async function signInApi(data) {
   const url = `${basePath}/${apiVersion}/sign-in`;
   const params = {
     method: "POST",
@@ -31,20 +27,16 @@ export function signInApi(data) {
       "Content-Type": "application/json",
     },
   };
-
-  return fetch(url, params)
-    .then((response) => {
-      return response.json();
-    })
-    .then((result) => {
-      return result;
-    })
-    .then((err) => {
-      return err;
-    });
+  try {
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
 }
 
-export function getUsersApi(token) {
+export async function getUsersApi(token) {
   const url = `${basePath}/${apiVersion}/users`;
   const params = {
     method: "GET",
@@ -53,20 +45,16 @@ export function getUsersApi(token) {
       Authorization: token,
     },
   };
-
-  return fetch(url, params)
-    .then((response) => {
-      return response.json();
-    })
-    .then((result) => {
-      return result;
-    })
-    .then((err) => {
-      return err;
-    });
+  try {
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
 }
 
-export function getUsersActiveApi(token, status) {
+export async function getUsersActiveApi(token, status) {
   const url = `${basePath}/${apiVersion}/users-active?active=${status}`;
   const params = {
     method: "GET",
@@ -75,20 +63,16 @@ export function getUsersActiveApi(token, status) {
       Authorization: token,
     },
   };
-
-  return fetch(url, params)
-    .then((response) => {
-      return response.json();
-    })
-    .then((result) => {
-      return result;
-    })
-    .then((err) => {
-      return err;
-    });
+  try {
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
 }
 
-export function uploadAvatarApi(token, avatar, userId) {
+export async function uploadAvatarApi(token, avatar, userId) {
   const url = `${basePath}/${apiVersion}/upload-avatar/${userId}`;
   const formData = new FormData();
   formData.append("avatar", avatar);
@@ -99,32 +83,26 @@ export function uploadAvatarApi(token, avatar, userId) {
       Authorization: token
     }
   };
-
-  return fetch(url, params)
-    .then(response => {
-      return response.json()
-    })
-    .then(result => {
-      return result;
-    })
-    .then(err => {
-      return err;
-    });
+  try {
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
 }
 
-export function getAvatarApi(avatarName) {
+export async function getAvatarApi(avatarName) {
   const url = `${basePath}/${apiVersion}/get-avatar/${avatarName}`;
-
-  return fetch(url)
-    .then(response => {
-      return response;
-    })
-    .then(err => {
-      return err;
-    });
+  try {
+    const response = await fetch(url);
+    return response;
+  } catch (err) {
+    return err;
+  }
 }
 
-export function updateUserApi(token, user, userId) {
+export async function updateUserApi(token, user, userId) {
   const url = `${basePath}/${apiVersion}/update-user/${userId}`;
   const params = {
     method: "PUT",
@@ -133,21 +111,17 @@ export function updateUserApi(token, user, userId) {
       Authorization: token
     },
     body: JSON.stringify(user)
+  };
+  try {
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
   }
-
-  return fetch(url, params)
-    .then(response => {
-      return response.json();
-    })
-    .then(result => {
-      return result;
-    })
-    .then(err => {
-      return err;
-    });
 }
 
-export function activateUserApi(token, userId, status) {
+export async function activateUserApi(token, userId, status) {
   const url = `${basePath}/${apiVersion}/activate-user/${userId}`;
   const params = {
     method: "PUT",
@@ -158,21 +132,17 @@ export function activateUserApi(token, userId, status) {
     body: JSON.stringify({
       active: status
     })
+  };
+  try {
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
   }
-
-  return fetch(url, params)
-    .then(response => {
-      return response.json();
-    })
-    .then(result => {
-      return result;
-    })
-    .then(err => {
-      return err;
-    });
 }
 
-export function deleteUserApi(token, userId) {
+export async function deleteUserApi(token, userId) {
   const url = `${basePath}/${apiVersion}/delete-user/${userId}`;
   const params = {
     method: "DELETE",
@@ -181,20 +151,16 @@ export function deleteUserApi(token, userId) {
       Authorization: token
     }
   };
-
-  return fetch(url, params)
-    .then(response => {
-      return response.json();
-    })
-    .then(result => {
-      return result;
-    })
-    .then(err => {
-      return err;
-    });
+  try {
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
 }
 
-export function signUpAdminApi(token, data) {
+export async function signUpAdminApi(token, data) {
   const url = `${basePath}/${apiVersion}/sign-up-admin`;
   const params = {
     method: "POST",
@@ -204,15 +170,11 @@ export function signUpAdminApi(token, data) {
     },
     body: JSON.stringify(data)
   };
-
-  return fetch(url, params)
-    .then(response => {
-      return response.json();
-    })
-    .then(result => {
-      return result;
-    })
-    .then(err => {
-      return err;
-    });
+  try {
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
 }

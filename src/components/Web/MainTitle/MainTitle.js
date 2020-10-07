@@ -1,7 +1,6 @@
 import React from "react";
 import Texty from "rc-texty";
 import TweenOne from "rc-tween-one";
-
 import "./MainTitle.scss";
 
 export default function MainTitle() {
@@ -78,9 +77,9 @@ export default function MainTitle() {
             animation={{
               delay: 300,
               width: 0,
-              x: 158,
+              x: 58,
               type: "from",
-              ease: "easeInOutQuart",
+              ease: "easeInOutCubic",
             }}
           />
           <Texty

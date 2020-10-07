@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Layout, Menu } from "antd";
-import { getMenuApi } from "./../../../api/menu";
+import { getMenuApi } from "../../../api/menu";
 import SocialLinks from "../SocialLinks";
-
 import "./MenuSider.scss";
 
 function MenuSider(props) {
@@ -12,12 +11,21 @@ function MenuSider(props) {
   const { Sider } = Layout;
 
   useEffect(() => {
+    let unmounted = false;
     getMenuApi().then((response) => {
-      const arrayMenu = [];
-      response.menu.forEach((item) => {
-        item.active && arrayMenu.push(item);
-      });
-      setMenuData(arrayMenu);
+      if (!unmounted) {
+        if (response.status !== 200) {
+          console.log("Error del servidor.");
+        } else {
+          const arrayMenu = [];
+          response.menu && response.menu.forEach((item) => {
+            item.active && arrayMenu.push(item);
+          });
+          setMenuData(arrayMenu);
+
+        }
+      }
+      return () => {unmounted = true};
     });
   }, []);
 

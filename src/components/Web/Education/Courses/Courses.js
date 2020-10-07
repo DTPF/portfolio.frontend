@@ -3,35 +3,21 @@ import { getImageApi } from "../../../../api/education";
 import { Row, Col, Card, Tag } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
-
 import "./Courses.scss";
 
 export default function Courses(props) {
   const { courses, numItems, title, subtitle } = props;
-
   return (
     <>
       <Row>
-      <Col span={24} className="courses-list__title">
-        <QueueAnim
-          type={["bottom", "top"]}
-          duration={400}
-          ease="easeInCubic"
-        >
+        <Col span={24} className="courses-list__title">
           <h1 key="title">{title}</h1>
-        </QueueAnim>
-        <QueueAnim
-          type={["bottom", "top"]}
-          duration={600}
-          ease="easeInCubic"
-        >
           <p key="subtitle">{subtitle}</p>
-        </QueueAnim>
-      </Col>
+        </Col>
       </Row>
       <div className="courses-list">
         <Row>
-          {courses.slice(0, numItems).map((course) => (
+          {courses && courses.slice(0, numItems).map((course) => (
             <Col
               key={course._id}
               span={12}
@@ -52,8 +38,7 @@ export default function Courses(props) {
 function Course(props) {
   const { course } = props;
   const [image, setImage] = useState(null);
-  const { Meta } = Card;
-  
+  const { Meta } = Card;  
   useEffect(() => {
     let unmounted = false;
     setImage();
@@ -70,19 +55,18 @@ function Course(props) {
     } 
     return () => {unmounted = true};
   }, [course]);
-
   return (
     <>
       <QueueAnim
         type={["alpha"]}
-        duration={500}
+        duration={400}
         ease="easeInCubic"
       >
         <div key="course">
           <Card
             className="courses-list__card"
             cover={
-              <img src={image} alt={course.title} type="image/webp" />
+              <img src={image} alt={course.title} type="image/jpg" />
             }
           >
             <Meta description={course.title} />

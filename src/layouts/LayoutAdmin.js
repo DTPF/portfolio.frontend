@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Layout } from "antd";
 import useAuth from "../hooks/useAuth";
-import MenuTop from "../components/Admin/MenuTop";
-import MenuSider from "../components/Admin/MenuSider";
 import AdminSignIn from "../pages/Admin/SignIn";
-
 import "./LayoutAdmin.scss";
+const MenuTop = lazy(() => import('../components/Admin/MenuTop'));
+const MenuSider = lazy(() => import('../components/Admin/MenuSider'));
 
 export default function LayoutAdmin( props ) {
   const { routes } = props;
@@ -29,19 +28,23 @@ export default function LayoutAdmin( props ) {
   if(user && !isLoading) {
     return (
       <Layout onClick={closeMenu}>
-        <MenuSider
-          menuCollapsed={menuCollapsed}
-          style={{ minHeight: 20 }}
-        />
+        <Suspense fallback={<></>}>
+          <MenuSider
+            menuCollapsed={menuCollapsed}
+            style={{ minHeight: 20 }}
+          />
+        </Suspense>
         <Layout
           className="layout-admin"
           style={{ marginLeft: menuCollapsed ? "0px" : "205px" }}          
         >
           <Header className="layout-admin__header" >
-            <MenuTop
-              menuCollapsed={menuCollapsed}
-              setMenuCollapsed={setMenuCollapsed}
-            />
+            <Suspense fallback={<></>}>
+              <MenuTop
+                menuCollapsed={menuCollapsed}
+                setMenuCollapsed={setMenuCollapsed}
+              />
+            </Suspense>
           </Header>
           <Content className="layout-admin__content">
             <LoadRoutes routes={routes} />

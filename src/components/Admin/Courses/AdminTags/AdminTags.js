@@ -24,7 +24,6 @@ import {
   PlusCircleOutlined,
 } from "@ant-design/icons";
 import "./AdminTags.scss";
-
 const { confirm } = Modal;
 
 export default function AdminTags(props) {
@@ -33,17 +32,13 @@ export default function AdminTags(props) {
   const [tag, setTag] = useState([]);
   const [reloadTags, setReloadTags] = useState(false);
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
-
   useEffect(() => {
     let unmounted = false;
-
     const url = courseData.url;
     if (!unmounted) {
       if (url !== undefined) {
-        getCourseApi(url).then((response) => {
-          if (response.course) {
-            setTags(response.course.tags);
-          }
+        getCourseApi(url).then((response) => {        
+          setTags(response.course.tags);          
         });
       }
     }
@@ -51,8 +46,7 @@ export default function AdminTags(props) {
     return () => {
       unmounted = true;
     };
-  }, [courseData, reloadTags, tag]);
-
+  }, [ courseData, reloadTags, tag]);
   const addTag = () => {
     const token = getAccessTokenApi();
     addTagApi(token, courseData._id, tag)
@@ -77,7 +71,6 @@ export default function AdminTags(props) {
         });
       });
   };
-
   const deleteTag = (tag) => {
     const token = getAccessTokenApi();
     confirm({
@@ -110,10 +103,9 @@ export default function AdminTags(props) {
       },
     });
   };
-
   return (
     <div>
-      {!tags ? (
+      {!courseData ? (
         <Spin
           indicator={antIcon}
           style={{
@@ -168,7 +160,7 @@ function AddTagForm(props) {
           <Input
             prefix={<TagOutlined />}
             placeholder="Añadir Tag"
-            value={tag ? tag.tags : ""}
+            value={tag && tag.tags}
             onChange={(e) => setTag({ ...tag, tags: e.target.value })}
           />
           <Button type="primary" htmlType="submit" className="btn-submit">

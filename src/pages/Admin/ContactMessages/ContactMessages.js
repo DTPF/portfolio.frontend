@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import { getMessagesUnreadApi } from "../../../api/contact";
 import { getAccessTokenApi } from "../../../api/auth";
-import ContactMessagesList from "../../../components/Admin/ContactMessagesList";
+const ContactMessagesList = lazy(() => import('../../../components/Admin/ContactMessagesList'));
 
 export default function ContactMessages() {
   const [messagesUnread, setMessagesUnread] = useState([]);
   const [messagesRead, setMessagesRead] = useState([]);
   const [reloadMessages, setReloadMessages] = useState(false);
   const token = getAccessTokenApi();
-
   useEffect(() => {
     let unmounted = false;
     getMessagesUnreadApi(token, false).then((response) => {
@@ -24,14 +23,15 @@ export default function ContactMessages() {
     setReloadMessages(false);
     return () => { unmounted = true }
   }, [reloadMessages, token]);
-
   return (
     <div>
-      <ContactMessagesList
-        messagesUnread={messagesUnread}
-        messagesRead={messagesRead}
-        setReloadMessages={setReloadMessages}
-      />
+      <Suspense fallback={<></>}>
+        <ContactMessagesList
+          messagesUnread={messagesUnread}
+          messagesRead={messagesRead}
+          setReloadMessages={setReloadMessages}
+        />
+      </Suspense>
     </div>
   );
 }

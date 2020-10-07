@@ -1,24 +1,11 @@
-import React from "react";
-import { Link } from 'react-router-dom';
-import { Result, Button } from "antd";
+import React, { Suspense, lazy } from "react";
+import "./Error404.scss";
+const ResultAntErr = lazy(() => import("../Errors"));
 
-import './Error404.scss';
-
-export default function Error404(props) {
+export default function Error404() {
   return (
-    <div className="error404">
-      <Result
-        status="404"
-        title="404"
-        subTitle="Lo sentimos, la página que visitas no existe."
-        extra={
-          <Button type="primary">
-            <Link to="/">
-              Volver
-            </Link>
-          </Button>
-        }
-      />
-    </div>
+    <Suspense fallback={<></>}>
+      <ResultAntErr />
+    </Suspense>
   );
 }

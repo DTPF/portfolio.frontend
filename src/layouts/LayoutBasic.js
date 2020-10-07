@@ -1,46 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import { Route, Switch } from "react-router-dom";
 import { Layout } from "antd";
-import MenuTop from "../components/Web/MenuTop";
-import MenuSider from "../components/Web/MenuSider";
-import Footer from "../components/Web/Footer";
-import QueueAnim from "rc-queue-anim";
-
 import "./LayoutBasic.scss";
+const MenuTop = lazy(() => import('../components/Web/MenuTop'));
+const MenuSider = lazy(() => import('../components/Web/MenuSider'));
+const Footer = lazy(() => import('../components/Web/Footer'));
+const QueueAnim = lazy(() => import('rc-queue-anim'));
 
 export default function LayoutBasic({ routes }) {
   const [menuCollapsed, setMenuCollapsed] = useState(true);
   const { Content } = Layout;
-
   const closeMenu = () => {
     if (menuCollapsed === false) {
       setMenuCollapsed(true);
     }
   };
-
   return (
     <div className="layout-basic" onClick={closeMenu}>
-      <QueueAnim type={["top", "bottom"]} duration={500} ease="easeInSine">
+          <Suspense fallback={<></>}>
         <div className="layout-basic__header" key="header">
-          <MenuTop
-            menuCollapsed={menuCollapsed}
-            setMenuCollapsed={setMenuCollapsed}
-          />
-          <MenuSider
-            menuCollapsed={menuCollapsed}
-            setMenuCollapsed={setMenuCollapsed}
-            style={{ minHeight: 20 }}
-          />
+            <MenuTop
+              menuCollapsed={menuCollapsed}
+              setMenuCollapsed={setMenuCollapsed}
+            />
+            <MenuSider
+              menuCollapsed={menuCollapsed}
+              setMenuCollapsed={setMenuCollapsed}
+              style={{ minHeight: 20 }}
+            />
         </div>
-      </QueueAnim>
         <Content className="layout-basic__content">
           <LoadRoutes routes={routes} />
         </Content>
         <QueueAnim type={["bottom", "top"]} duration={500} ease="easeInSine">
         <div className="layout-basic__footer" key="footer">
-          <Footer />
+            <Footer />
         </div>
         </QueueAnim>
+          </Suspense>
     </div>
   );
 }

@@ -1,8 +1,7 @@
 import { basePath, apiVersion } from "./config";
 
-export function addCourseApi(token, course) {
+export async function addCourseApi(token, course) {
   const url = `${basePath}/${apiVersion}/add-course`;
-
   const params = {
     method: "POST",
     headers: {
@@ -11,17 +10,13 @@ export function addCourseApi(token, course) {
     },
     body: JSON.stringify(course)
   };
-
-  return fetch(url, params)
-    .then(response => {
-      return response.json();
-    })
-    .then(result => {
-      return result;
-    })
-    .catch(err => {
-      return err;
-    });
+  try {
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
 }
 
 export async function updateCourseApi(token, id, data) {
@@ -65,19 +60,18 @@ export async function getCourseApi(urlCourse) {
   }
 }
 
-export function getImageApi(imageName) {
+export async function getImageApi(imageName) {
   const url = `${basePath}/${apiVersion}/get-image/${imageName}`;
 
-  return fetch(url)
-    .then(response => {
-      return response;
-    })
-    .catch(err => {
-      return err;
-    })
+  try {
+    const response = await fetch(url);
+    return response;
+  } catch (err) {
+    return err;
+  }
 }
 
-export function deleteCourseApi(token, id) {
+export async function deleteCourseApi(token, id) {
   const url = `${basePath}/${apiVersion}/delete-course/${id}`;
   const params = {
     method: "DELETE",
@@ -86,17 +80,13 @@ export function deleteCourseApi(token, id) {
       Authorization: token
     }
   };
-
-  return fetch(url, params)
-    .then(response => {
-      return response.json();
-    })
-    .then(result => {
-      return result;
-    })
-    .catch(err => {
-      return err;
-    });
+  try {
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
 }
 
 export async function addTagApi(token, id, data) {

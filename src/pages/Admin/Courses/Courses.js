@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import { Button, Spin } from "antd";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
-import Modal from "../../../components/Modal";
-import Pagination from "../../../components/Pagination";
 import { getCoursesApi } from "../../../api/education";
-import CoursesList from "../../../components/Admin/Courses/CoursesList";
-import AddEditCoursesForm from "../../../components/Admin/Courses/AddEditCoursesForm";
 import { LoadingOutlined } from "@ant-design/icons";
-
 import "./Courses.scss";
+const Modal = lazy(() => import('../../../components/Modal'));
+const Pagination = lazy(() => import('../../../components/Pagination'));
+const CoursesList = lazy(() => import('../../../components/Admin/Courses/CoursesList'));
+const AddEditCoursesForm = lazy(() => import('../../../components/Admin/Courses/AddEditCoursesForm'));
 
 function Courses(props) {
   const { location, history } = props;
@@ -20,7 +19,6 @@ function Courses(props) {
   const [modalContent, setModalContent] = useState(null);
   const { page = 1 } = queryString.parse(location.search);
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
-
   useEffect(() => {
     let unmounted = false;
     getCoursesApi(10, page).then((response) => {
@@ -32,43 +30,46 @@ function Courses(props) {
     setReloadCourses(false);
     return () => {unmounted = true};
   }, [page, reloadCourses]);
-
   const addCourse = () => {
     setIsVisibleModal(true);
     setModalTitle("Creando nueva Formación");
     setModalContent(
-      <AddEditCoursesForm
-        setIsVisibleModal={setIsVisibleModal}
-        setReloadCourses={setReloadCourses}
-        course={null}
-      />
+      <Suspense fallback={<></>}>
+        <AddEditCoursesForm
+          setIsVisibleModal={setIsVisibleModal}
+          setReloadCourses={setReloadCourses}
+          course={null}
+        />
+      </Suspense>
     );
   };
-
   const editCourse = (course) => {
     setIsVisibleModal(true);
     setModalTitle("Editar Curso");
     setModalContent(
-      <AddEditCoursesForm
-        setIsVisibleModal={setIsVisibleModal}
-        setReloadCourses={setReloadCourses}
-        course={course}
-      />
+      <Suspense fallback={<></>}>
+        <AddEditCoursesForm
+          setIsVisibleModal={setIsVisibleModal}
+          setReloadCourses={setReloadCourses}
+          course={course}
+        />
+      </Suspense>
     );
   };
-
   return (
     <div className="admin-courses">
       <div className="admin-courses__add-course">
         <Button type="primary" onClick={addCourse}>
-          Nuevo post
+          Nueva Formación
         </Button>
       </div>
-      <CoursesList
-        courses={courses}
-        setReloadCourses={setReloadCourses}
-        editCourse={editCourse}
-      />
+      <Suspense fallback={<></>}>
+        <CoursesList
+          courses={courses}
+          setReloadCourses={setReloadCourses}
+          editCourse={editCourse}
+        />
+      </Suspense>
       {!courses ? (
         <Spin
           indicator={antIcon}
@@ -83,23 +84,27 @@ function Courses(props) {
         />
       ) : (
         <>
-          {courses.totalPages > 1 && (
-            <Pagination
-              courses={courses}
-              location={location}
-              history={history}
-            />
-          )}
+          <Suspense fallback={<></>}>
+            {courses.totalPages > 1 && (
+              <Pagination
+                courses={courses}
+                location={location}
+                history={history}
+              />
+            )}
+          </Suspense>
         </>
       )}
-      <Modal
-        title={modalTitle}
-        isVisible={isVisibleModal}
-        setIsVisible={setIsVisibleModal}
-        width="75%"
-      >
+      <Suspense fallback={<></>}>
+        <Modal
+          title={modalTitle}
+          isVisible={isVisibleModal}
+          setIsVisible={setIsVisibleModal}
+          width="75%"
+        >
         {modalContent}
-      </Modal>
+        </Modal>
+      </Suspense>
     </div>
   );
 }

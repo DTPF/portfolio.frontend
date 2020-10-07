@@ -15,13 +15,11 @@ import { addCourseApi, updateCourseApi } from "../../../../api/education";
 import { LinkOutlined, FontSizeOutlined } from "@ant-design/icons";
 import moment from "moment";
 import "./AddEditCoursesForm.scss";
-
 const { TextArea } = Input;
 
 export default function AddEditCoursesForm(props) {
   const { setIsVisibleModal, setReloadCourses, course } = props;
   const [courseData, setCourseData] = useState([]);
-
   useEffect(() => {
     if (course) {
       setCourseData(course);
@@ -29,11 +27,10 @@ export default function AddEditCoursesForm(props) {
       setCourseData([]);
     }
   }, [course]);
-
   const processCourse = () => {
     const { title, url, description, duration } = courseData;
     if (!title || !url || !description || !duration) {
-      notification["error"]({
+      notification["warning"]({
         message:
           "Los campos de título, url, descripción y duración son obligatorios.",
       });
@@ -45,7 +42,6 @@ export default function AddEditCoursesForm(props) {
       }
     }
   };
-
   const addCourse = () => {
     const token = getAccessTokenApi();
     addCourseApi(token, courseData)
@@ -69,7 +65,6 @@ export default function AddEditCoursesForm(props) {
         });
       });
   };
-
   const updateCourse = () => {
     const token = getAccessTokenApi();
     updateCourseApi(token, course._id, courseData)
@@ -89,7 +84,6 @@ export default function AddEditCoursesForm(props) {
         });
       });
   };
-
   return (
     <div className="add-edit-course">
       <AddEditForm
@@ -104,7 +98,6 @@ export default function AddEditCoursesForm(props) {
 
 function AddEditForm(props) {
   const { courseData, setCourseData, course, processCourse } = props;
-
   return (
     <>
       <Form
@@ -143,7 +136,6 @@ function AddEditForm(props) {
               />
             </Form.Item>
           </Col>
-
           <Input.Group>
             <DatePicker
               style={{ width: "70%" }}
@@ -169,7 +161,6 @@ function AddEditForm(props) {
               }
             />
           </Input.Group>
-
           <Col span={24}>
             <TextArea
               rows={5}
