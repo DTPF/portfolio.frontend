@@ -17,7 +17,6 @@ const { confirm } = Modal;
 export default function CoursesList(props) {
   const { courses, setReloadCourses, editCourse } = props;
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
-
   const deleteCourse = (course) => {
     const accessToken = getAccessTokenApi();
     confirm({
@@ -44,7 +43,6 @@ export default function CoursesList(props) {
       },
     });
   };
-
   return (
     <div className="courses-list">
       {!courses ? (

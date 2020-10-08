@@ -8,8 +8,13 @@ import "./Home.scss";
 const MainTitle = lazy(() => import("../../../components/Web/MainTitle"));
 const Courses = lazy(() => import("../../../components/Web/Education/Courses"));
 
-export default function Home() {
+export default function Home(props) {
   const [courses, setCourses] = useState(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const title = "Últimos cursos";
+  const subtitle =
+    "Últimos cursos que he realizado para" + 
+    " mi preparación al mundo de IT";
   useEffect(() => {
     let unmounted = false;
     getCoursesApi(4, 1).then((response) => {
@@ -17,14 +22,10 @@ export default function Home() {
         setCourses(response.courses);
       }
     });
-    window.scrollTo(0, 0);
-    return () => {
-      unmounted = true;
-    };
+    setImageLoaded(false);
+    return () => {unmounted = true};
   }, []);
-  const title = "Últimos cursos";
-  const subtitle =
-    "Últimos cursos que he realizado para" + " mi preparación al mundo de IT";
+  window.scrollTo(0, 0);
   return (
     <>
       <Helmet>
@@ -44,13 +45,14 @@ export default function Home() {
                 title={title}
                 subtitle={subtitle}
                 courses={courses && courses.docs}
+                setImageLoaded={setImageLoaded}
               />
-              {courses && (
+              {imageLoaded && (
                 <QueueAnim
                   type={["alpha"]}
-                  delay={400}
-                  duration={100}
-                  ease="easeInCubic"
+                  delay={200}
+                  duration={200}
+                  ease="easeInOutCubic"
                 >
                   <div className="home__more" key="button">
                     <Link to="/education">

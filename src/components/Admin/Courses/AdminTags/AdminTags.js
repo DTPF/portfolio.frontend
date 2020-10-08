@@ -27,35 +27,33 @@ import "./AdminTags.scss";
 const { confirm } = Modal;
 
 export default function AdminTags(props) {
-  const { courseData } = props;
+  const { course, courseData, setReloadCourses } = props;
   const [tags, setTags] = useState([]);
   const [tag, setTag] = useState([]);
   const [reloadTags, setReloadTags] = useState(false);
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   useEffect(() => {
     let unmounted = false;
-    const url = courseData.url;
     if (!unmounted) {
-      if (url !== undefined) {
-        getCourseApi(url).then((response) => {        
-          setTags(response.course.tags);          
-        });
-      }
+      getCourseApi(course && course.url).then((response) => {
+        setTags(response.course.tags);
+      });
     }
     setReloadTags(false);
     return () => {
       unmounted = true;
     };
-  }, [ courseData, reloadTags, tag]);
+  }, [course, reloadTags, tag]);
   const addTag = () => {
     const token = getAccessTokenApi();
-    addTagApi(token, courseData._id, tag)
+    addTagApi(token, course._id, tag)
       .then((response) => {
         if (response.status === 200) {
           notification["success"]({
             message: `"${tag.tags}" añadido correctamente.`,
             duration: notifDelay,
           });
+          setReloadCourses(true);
           setReloadTags(true);
           setTag([]);
         } else {
@@ -87,6 +85,7 @@ export default function AdminTags(props) {
                 message: `"${tag}" eliminado correctamente.`,
                 duration: notifDelay,
               });
+              setReloadCourses(true);
               setReloadTags(true);
             } else {
               notification["warnig"]({

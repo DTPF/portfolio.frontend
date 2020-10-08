@@ -13,6 +13,8 @@ import SocialLinks from "../SocialLinks";
 function MenuTop(props) {
   const [menuData, setMenuData] = useState([]);
   const { menuCollapsed, setMenuCollapsed, location } = props;
+  let pathname = location.pathname;
+  const splitPathname = pathname.split("/")[2];
   useEffect(() => {
     let unmounted = false;
     getMenuApi().then((response) => {
@@ -41,7 +43,7 @@ function MenuTop(props) {
     >
       <Menu.Item className="menu-top-web__logo">
         <NavLink to={"/"} >
-          <img src={Logo} alt="David Thomas Pizarro Frick" />
+          <img src={Logo} alt="Logo de David Thomas Pizarro Frick" />
         </NavLink>
       </Menu.Item>
       {menuData.map((item) => {
@@ -56,7 +58,7 @@ function MenuTop(props) {
           );
         }
         return (
-          <Menu.Item key={item.url} className="menu-top-web__item">
+          <Menu.Item key={splitPathname ? item.url+'/'+splitPathname : item.url} className="menu-top-web__item">
             <NavLink to={item.url}>{item.title}</NavLink>
           </Menu.Item>
         );

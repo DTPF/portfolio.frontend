@@ -91,13 +91,14 @@ export default function AddEditCoursesForm(props) {
         setCourseData={setCourseData}
         course={course}
         processCourse={processCourse}
+        setReloadCourses={setReloadCourses}
       />
     </div>
   );
 }
 
 function AddEditForm(props) {
-  const { courseData, setCourseData, course, processCourse } = props;
+  const { courseData, setCourseData, course, processCourse, setReloadCourses } = props;
   return (
     <>
       <Form
@@ -131,6 +132,21 @@ function AddEditForm(props) {
                   setCourseData({
                     ...courseData,
                     url: transformTextToUrl(e.target.value),
+                  })
+                }
+              />
+            </Form.Item>
+          </Col>
+          <Col span={24}>
+            <Form.Item>
+              <Input
+                prefix={<LinkOutlined />}
+                placeholder="Plataforma"
+                value={courseData.platform}
+                onChange={(e) =>
+                  setCourseData({
+                    ...courseData,
+                    platform: e.target.value
                   })
                 }
               />
@@ -189,12 +205,19 @@ function AddEditForm(props) {
           {course ? "Actualizar curso" : "Crear curso"}
         </Button>
       </Form>
-      {course && <AdminTags courseData={courseData} />}
+      {course && 
+        <AdminTags
+          course={course}
+          courseData={courseData}
+          setReloadCourses={setReloadCourses}
+        />}
     </>
   );
 }
 
 function transformTextToUrl(text) {
-  const url = text.replace(" ", "-");
+  const u1 = text.replace(/ /g, "-");
+  const u2 = u1.replace(/,/g, "");
+  const url = u2.replace(/:/g, "");
   return url.toLowerCase();
 }
