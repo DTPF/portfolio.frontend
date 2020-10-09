@@ -63,7 +63,6 @@ function Course(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [course]);
   window.scrollTo(0, 0);
-  console.log(image);
   return (
     <>
       <QueueAnim type={["alpha"]} duration={400} ease="easeInCubic">

@@ -1,0 +1,30 @@
+@import "../../../../scss/index.scss";
+
+.info-banner {
+  min-height: 165px;
+  background-color: #cdd5dfb0;
+  margin-bottom: 20px;
+  &-elem {
+    margin-top: 15px;
+    text-align: center;
+  }
+  &-title {
+    color: $primary-color-dark;
+    text-align: center;
+    font-size: 58px !important;
+  }
+  &-text {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: $primary-color;
+    @media (min-width: $media-breakpoint-up-xs) {
+      font-size: 1.2em;
+    }
+    @media (min-width: $media-breakpoint-up-sm) {
+      font-size: 1.3em;
+    }
+    @media (min-width: $media-breakpoint-up-md) {
+      font-size: 1.4em;
+    }
+  }
+}

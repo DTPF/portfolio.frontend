@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
 import "moment/locale/es";
-import { Row, Col, Image, Tag, Button, Spin } from "antd";
+import { Row, Col, Image, Tag, Button } from "antd";
 import { getCourseApi, getImageApi } from "../../../../api/education";
 import QueueAnim from "rc-queue-anim";
 import { LinkOutlined, ArrowLeftOutlined } from "@ant-design/icons";

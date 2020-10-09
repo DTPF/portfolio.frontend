@@ -8,6 +8,7 @@ import "./Education.scss";
 const Pagination = lazy(() => import('../../../components/Pagination/Pagination'));
 const Courses = lazy(() => import('../../../components/Web/Education/Courses'));
 const CourseInfo = lazy(() => import('../../../components/Web/Education/CourseInfo'));
+const InfoBanner = lazy(() => import('../../../components/Web/Education/InfoBanner'));
 
 export default function Education(props) {
   const { location, history } = props;
@@ -47,6 +48,7 @@ export default function Education(props) {
             <div className="div" ></div>
             <Col key="courses">
               <Suspense fallback={<></>}>
+                <InfoBanner courses={courses && courses.docs}/>
                 <Courses                  
                   numItems={1000}
                   title={title}
