@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Row,
   Col,
@@ -6,20 +6,27 @@ import {
   Input,
   InputNumber,
   Button,
+  Image,
   DatePicker,
   notification,
 } from "antd";
+import { useDropzone } from "react-dropzone";
 import AdminTags from "../../../../components/Admin/Courses/AdminTags";
 import { getAccessTokenApi } from "../../../../api/auth";
-import { addCourseApi, updateCourseApi } from "../../../../api/education";
+import { addCourseApi, updateCourseApi, getImageApi, uploadImageApi } from "../../../../api/education";
 import { LinkOutlined, FontSizeOutlined } from "@ant-design/icons";
 import moment from "moment";
+import { notifDelay, notifDelayErr } from "../../../../utils/notifications";
+import NoImage from "../../../../assets/img/png/no-image.png";
 import "./AddEditCoursesForm.scss";
 const { TextArea } = Input;
 
 export default function AddEditCoursesForm(props) {
   const { setIsVisibleModal, setReloadCourses, course } = props;
+  const [image, setImage] = useState(null);
   const [courseData, setCourseData] = useState([]);
+  const token = getAccessTokenApi();
+
   useEffect(() => {
     if (course) {
       setCourseData(course);
@@ -27,6 +34,22 @@ export default function AddEditCoursesForm(props) {
       setCourseData([]);
     }
   }, [course]);
+  useEffect(() => {
+    if(course && course.image) {
+      getImageApi(course.image).then(response => {
+        setImage(response.url);
+      })
+    } else {
+      setImage(null);
+    }
+  }, [course]);  
+  useEffect(() => {
+    if (image) {
+      setCourseData({ ...courseData, image: image.file });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [image]);
+
   const processCourse = () => {
     const { title, url, description, duration } = courseData;
     if (!title || !url || !description || !duration) {
@@ -43,7 +66,6 @@ export default function AddEditCoursesForm(props) {
     }
   };
   const addCourse = () => {
-    const token = getAccessTokenApi();
     addCourseApi(token, courseData)
       .then((response) => {
         if (response.status !== 200) {
@@ -66,26 +88,66 @@ export default function AddEditCoursesForm(props) {
       });
   };
   const updateCourse = () => {
-    const token = getAccessTokenApi();
+    let userUpdate = courseData;
+    if (typeof userUpdate.image === "object") {
+      uploadImageApi(token, userUpdate.image, course._id)
+        .then(response => {
+          if(response.status === 200) {
+            userUpdate.image = response.image;
+            updateCourseApi(token, course._id, userUpdate).then(result => {
+              if (result.status === 200) {
+                notification["success"]({
+                  message: result.message,
+                  duration: notifDelay
+                });
+                setIsVisibleModal(false);
+                setReloadCourses(true);
+              } else {
+                notification["error"]({
+                  message: result.message,
+                  duration: notifDelayErr
+                });
+                setReloadCourses(true);
+              }      
+            }); 
+          } else {
+            notification["error"]({
+              message: response.message,
+              duration: notifDelay
+            });
+            setIsVisibleModal(false);
+            setReloadCourses(true);
+          }
+        });
+    } else {
     updateCourseApi(token, course._id, courseData)
       .then((response) => {
-        const typeNotification =
-          response.status === 200 ? "success" : "warning";
-        notification[typeNotification]({
-          message: response.message,
-        });
-        setIsVisibleModal(false);
-        setReloadCourses(true);
-        setCourseData([]);
+        if (response.status === 200) {
+          notification['success']({
+            message: response.message,
+          });
+          setIsVisibleModal(false);
+          setReloadCourses(true);
+          setCourseData([]);
+        } else {
+          const typeNotification = response.status === 500 ? "error" : "warning";
+          notification[typeNotification]({
+            message: response.message
+          });
+        }
       })
       .catch(() => {
         notification["error"]({
           message: "Error del servidor.",
         });
       });
+    }
   };
   return (
     <div className="add-edit-course">
+      {course && 
+        <UploadImage image={image} setImage={setImage} />
+      }
       <AddEditForm
         courseData={courseData}
         setCourseData={setCourseData}
@@ -97,8 +159,59 @@ export default function AddEditCoursesForm(props) {
   );
 }
 
+function UploadImage(props) {
+  const { image, setImage } = props;
+  const [imageUrl, setImageUrl] = useState(null);
+  useEffect(() => {
+    if(image) {
+      if(image.preview) {
+        setImageUrl(image.preview);
+      } else {
+        setImageUrl(image);
+      }
+    } else {
+      setImageUrl(null);
+    }
+  }, [image]);  
+  const onDrop = useCallback(
+    acceptedFiles => {
+      const file = acceptedFiles[0];
+      if(file === undefined) {
+        notification["error"]({
+          message: "Formato de imágen inválido.",
+          duration: notifDelay
+        });
+      } else {
+        setImage({ file, preview: URL.createObjectURL(file) });
+      }
+  }, [setImage]);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: "image/jpeg, image/png",
+    noKeyboard: true,
+    onDrop,
+  });
+  return (
+    <div className="upload-image" {...getRootProps()}>
+      <input {...getInputProps()} />
+      {isDragActive ? (
+        <Image size={150} src={ NoImage } preview={false} />
+      ) : (
+        <Image size={150} src={ imageUrl ? imageUrl : NoImage } preview={false} />
+      )}
+      <span>Tamaño de imágen: 750px x 422px</span>
+    </div>
+  );
+}
+
 function AddEditForm(props) {
   const { courseData, setCourseData, course, processCourse, setReloadCourses } = props;
+  const [proccessCourseState, setProccessCourseState] = useState(false);  
+  const loading = () => {
+    setProccessCourseState(true);
+  };
+  setTimeout(() => {
+    setProccessCourseState(false);
+  }, 6000);  
   return (
     <>
       <Form
@@ -201,7 +314,13 @@ function AddEditForm(props) {
             />
           </Col>
         </Row>
-        <Button type="primary" htmlType="submit" className="btn-submit">
+        <Button
+          type="primary"
+          htmlType="submit"
+          loading={proccessCourseState}
+          onClick={loading}
+          className="btn-submit"
+        >
           {course ? "Actualizar curso" : "Crear curso"}
         </Button>
       </Form>

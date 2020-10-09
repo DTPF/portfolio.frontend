@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Row, Col, Card, Tag } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
+import NoImage from '../../../../assets/img/png/no-image-s.png'
 import "./Courses.scss";
 
 export default function Courses(props) {
@@ -62,6 +63,7 @@ function Course(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [course]);
   window.scrollTo(0, 0);
+  console.log(image);
   return (
     <>
       <QueueAnim type={["alpha"]} duration={400} ease="easeInCubic">
@@ -69,7 +71,7 @@ function Course(props) {
           <Link to={`/education/${course.url}`}>
             <Card
               className="courses-list__card"
-              cover={<img src={image} alt={course.title} type="image/jpg" />}
+              cover={<img src={image ? image : NoImage} alt={course.title} type="image/jpg" />}
             >
               <Meta description={course.title} />
               <span className="courses-list__edit">

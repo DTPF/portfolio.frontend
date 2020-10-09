@@ -60,6 +60,26 @@ export async function getCourseApi(urlCourse) {
   }
 }
 
+export async function uploadImageApi(token, image, courseId) {
+  const url = `${basePath}/${apiVersion}/upload-image/${courseId}`;
+  const formData = new FormData();
+  formData.append("image", image);
+  const params = {
+    method: "PUT",
+    body: formData,
+    headers: {
+      Authorization: token
+    }
+  };
+  try {
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
+}
+
 export async function getImageApi(imageName) {
   const url = `${basePath}/${apiVersion}/get-image/${imageName}`;
 

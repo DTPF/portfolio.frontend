@@ -5,7 +5,8 @@ import "moment/locale/es";
 import { Row, Col, Image, Tag, Button, Spin } from "antd";
 import { getCourseApi, getImageApi } from "../../../../api/education";
 import QueueAnim from "rc-queue-anim";
-import { LoadingOutlined, LinkOutlined, ArrowLeftOutlined } from "@ant-design/icons";
+import { LinkOutlined, ArrowLeftOutlined } from "@ant-design/icons";
+import NoImage from '../../../../assets/img/png/no-image.png'
 import "./CourseInfo.scss";
 
 export default function CourseInfo(props) {
@@ -30,7 +31,6 @@ export default function CourseInfo(props) {
 function Course(props) {
   const { course } = props;
   const [image, setImage] = useState(null);
-  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   const goBack = useHistory().goBack;
   useEffect(() => {
     let unmounted = false;
@@ -47,68 +47,52 @@ function Course(props) {
   const link = course && course.link;
   return (
     <>
-      {!image ? (
-        <Spin
-          indicator={antIcon}
-          style={{
-            textAlign: "center",
-            width: "100%",
-            height: "100%",
-            padding: "20px",
-            marginTop: "200px",
-            color: "#5d718d",
-          }}
-        />
-      ) : (
-        <>
-          <Col className="course-info__title">
-            <h1>{course && course.title}</h1>
+      <Col className="course-info__title">
+        <h1>{course && course.title}</h1>
+      </Col>
+      <QueueAnim
+              type={["alpha"]}
+              duration={400}
+              ease="easeInCubic"
+            >
+        <Col span={24} className="course-info__image" key="image">
+          <Image
+            src={image ? image : NoImage}
+            alt={course && "Imágen de " + course.title}
+            type="image/jpg"
+          ></Image>
+        </Col>
+        <Row className="course-info__info" key="info">
+          <Col span={12} className="course-info__info-duration">
+            {course && course.duration}&nbsp;horas
           </Col>
-          <QueueAnim
-                  type={["alpha"]}
-                  duration={400}
-                  ease="easeInCubic"
-                >
-            <Col span={24} className="course-info__image" key="image">
-              <Image
-                src={image}
-                alt={course && "Imágen de " + course.title}
-                type="image/jpg"
-              ></Image>
-            </Col>
-            <Row className="course-info__info" key="info">
-              <Col span={12} className="course-info__info-duration">
-                {course && course.duration}&nbsp;horas
-              </Col>
-              <Col span={12} className="course-info__info-date">
-                Hace&nbsp;{course && moment(course.date).fromNow(true)}
-              </Col>
-            </Row>
-            <Col className="course-info__description" key="description">
-              {course && course.description}
-            </Col>
-            <Row className="course-info__tags" key="tags">
-              <Tags course={course} />
-            </Row>
-            <Row key="bar">
-              <Col span={12} className="course-info__link">
-                {link && (
-                  <a href={link} target="_blank" rel="noopener noreferrer">
-                  <LinkOutlined />
-                    Enlace a {course && course.platform}
-                  </a>
-                )}
-              </Col>
-              <Col span={12} className="course-info__button">
-                <Button type="primary" onClick={goBack}>
-                  <ArrowLeftOutlined />
-                  Volver
-                </Button>
-              </Col>
-            </Row>
-          </QueueAnim>
-        </>
-      )}
+          <Col span={12} className="course-info__info-date">
+            Hace&nbsp;{course && moment(course.date).fromNow(true)}
+          </Col>
+        </Row>
+        <Col className="course-info__description" key="description">
+          {course && course.description}
+        </Col>
+        <Row className="course-info__tags" key="tags">
+          <Tags course={course} />
+        </Row>
+        <Row key="bar">
+          <Col span={12} className="course-info__link">
+            {link && (
+              <a href={link} target="_blank" rel="noopener noreferrer">
+              <LinkOutlined />
+                Enlace a {course && course.platform}
+              </a>
+            )}
+          </Col>
+          <Col span={12} className="course-info__button">
+            <Button type="primary" onClick={goBack}>
+              <ArrowLeftOutlined />
+              Volver
+            </Button>
+          </Col>
+        </Row>
+      </QueueAnim>
     </>
   );
 }
