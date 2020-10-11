@@ -8,9 +8,7 @@ import { notifDelay, notifDelayErr } from "../../../../utils/notifications";
 import AddMenuWebForm from "../AddMenuWebForm";
 import EditMenuWebForm from "../EditMenuWebForm";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-
 import "./MenuWebList.scss";
-
 const { confirm } = ModalAntd;
 
 export default function MenuWebList(props) {
@@ -19,7 +17,6 @@ export default function MenuWebList(props) {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState(null);
-
   useEffect(() => {
     let unmounted = false;
     const listItemsArray = [];
@@ -41,10 +38,8 @@ export default function MenuWebList(props) {
     return () => { unmounted = true }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [menu]);
-
   const activateMenu = (menu, status) => {
-    const accessToken = getAccessTokenApi();
-    
+    const accessToken = getAccessTokenApi();    
     activateMenuApi(accessToken, menu._id, status)
     .then(response => {
         if(status === true) {
@@ -60,17 +55,14 @@ export default function MenuWebList(props) {
         }
       });
   };
-
   const onSort = (sortedList, dropEvent) => {
     const accessToken = getAccessTokenApi();
-
     sortedList.forEach(item => {
       const { _id } = item.content.props.item;
       const order = item.rank;
       updateMenuApi(accessToken, _id, { order });
     });
   };
-
   const addMenuWebModal = () => {
     setIsVisibleModal(true);
     setModalTitle("Creando nuevo menú");
@@ -81,7 +73,6 @@ export default function MenuWebList(props) {
       />
     );
   };
-
   const editMenuWebModal = menu => {
     setIsVisibleModal(true);
     setModalTitle(`Editando menu: ${menu.title}`);
@@ -93,10 +84,8 @@ export default function MenuWebList(props) {
       />
     )
   };
-
   const deleteMenu = menu => {
     const accessToken = getAccessTokenApi();
-
     confirm({
       title: "Eliminando menú",
       content: `¿Estás seguro que quieres eliminar el menú ${menu.title}?`,
@@ -121,7 +110,6 @@ export default function MenuWebList(props) {
       }
     });
   };
-
   return (
     <div className="menu-web-list">
       <div className="menu-web-list__header">
@@ -143,7 +131,6 @@ export default function MenuWebList(props) {
 
 function MenuItem(props) {
   const { item, activateMenu, editMenuWebModal, deleteMenu } = props;
-
   return (
     <List.Item
       actions={[

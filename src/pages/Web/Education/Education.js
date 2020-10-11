@@ -21,11 +21,11 @@ export default function Education(props) {
     let unmounted = false;
     getCoursesApi(8, page)
     .then((response) => {
-          if (!unmounted) {
-            setCourses(response.courses);
-          }
-      });
-      window.scrollTo(0, 0);
+        if (!unmounted) {
+          setCourses(response.courses);
+        }
+          });
+        window.scrollTo(0, 0);
       return () => {unmounted = true};
   }, [page]);
   const title = "Todos los cursos";
@@ -48,7 +48,7 @@ export default function Education(props) {
             <div className="div" ></div>
             <Col key="courses">
               <Suspense fallback={<></>}>
-                <InfoBanner courses={courses && courses.docs}/>
+                <InfoBanner />
                 <Courses                  
                   numItems={1000}
                   title={title}

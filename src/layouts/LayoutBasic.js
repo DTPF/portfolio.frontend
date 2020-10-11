@@ -1,10 +1,10 @@
 import React, { useState, Suspense, lazy } from "react";
-import { Route, Switch } from "react-router-dom";
 import { Layout } from "antd";
 import "./LayoutBasic.scss";
 const MenuTop = lazy(() => import("../components/Web/MenuTop"));
 const MenuSider = lazy(() => import("../components/Web/MenuSider"));
 const Footer = lazy(() => import("../components/Web/Footer"));
+const LoadRoutes = lazy(() => import("../providers/LoadRoutes"));
 
 export default function LayoutBasic(props) {
   const { routes } = props;
@@ -30,27 +30,12 @@ export default function LayoutBasic(props) {
           />
         </div>
         <Content className="layout-basic__content">
-          <LoadRoutes routes={routes} />
+          <LoadRoutes routes={routes && routes} />
         </Content>
         <div className="layout-basic__footer">
           <Footer />
         </div>
       </Suspense>
     </div>
-  );
-}
-
-function LoadRoutes({ routes }) {
-  return (
-    <Switch>
-      {routes.map((route, index) => (
-        <Route
-          key={index}
-          exact={route.exact}
-          path={route.path}
-          component={route.component}
-        />
-      ))}
-    </Switch>
   );
 }

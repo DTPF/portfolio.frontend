@@ -1,19 +1,20 @@
 import React, { useState, Suspense, lazy } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import { Layout } from "antd";
 import useAuth from "../hooks/useAuth";
 import AdminSignIn from "../pages/Admin/SignIn";
 import "./LayoutAdmin.scss";
-const MenuTop = lazy(() => import('../components/Admin/MenuTop'));
-const MenuSider = lazy(() => import('../components/Admin/MenuSider'));
+const MenuTop = lazy(() => import("../components/Admin/MenuTop"));
+const MenuSider = lazy(() => import("../components/Admin/MenuSider"));
+const LoadRoutes = lazy(() => import("../providers/LoadRoutes"));
 
-export default function LayoutAdmin( props ) {
+export default function LayoutAdmin(props) {
   const { routes } = props;
   const [menuCollapsed, setMenuCollapsed] = useState(false);
   const { Header, Content, Footer } = Layout;
   const { user, isLoading } = useAuth();
   const closeMenu = () => {
-    if(menuCollapsed === false) {
+    if (menuCollapsed === false) {
       setMenuCollapsed(true);
     }
   };
@@ -25,51 +26,31 @@ export default function LayoutAdmin( props ) {
       </>
     );
   }
-  if(user && !isLoading) {
+  if (user && !isLoading) {
     return (
       <Layout onClick={closeMenu}>
         <Suspense fallback={<></>}>
-          <MenuSider
-            menuCollapsed={menuCollapsed}
-            style={{ minHeight: 20 }}
-          />
+          <MenuSider menuCollapsed={menuCollapsed} style={{ minHeight: 20 }} />
+          <Layout
+            className="layout-admin"
+            style={{ marginLeft: menuCollapsed ? "0px" : "205px" }}
+          >
+            <Header className="layout-admin__header">
+                <MenuTop
+                  menuCollapsed={menuCollapsed}
+                  setMenuCollapsed={setMenuCollapsed}
+                />
+            </Header>
+            <Content className="layout-admin__content">
+                <LoadRoutes routes={routes} />
+            </Content>
+            <Footer className="layout-admin__footer">
+              David Thomas Pizarro Frick
+            </Footer>
+          </Layout>
         </Suspense>
-        <Layout
-          className="layout-admin"
-          style={{ marginLeft: menuCollapsed ? "0px" : "205px" }}          
-        >
-          <Header className="layout-admin__header" >
-            <Suspense fallback={<></>}>
-              <MenuTop
-                menuCollapsed={menuCollapsed}
-                setMenuCollapsed={setMenuCollapsed}
-              />
-            </Suspense>
-          </Header>
-          <Content className="layout-admin__content">
-            <LoadRoutes routes={routes} />
-          </Content>
-          <Footer className="layout-admin__footer">
-            David Thomas Pizarro Frick
-          </Footer>
-        </Layout>
       </Layout>
     );
   }
   return null;
-}
-
-function LoadRoutes({ routes }) {
-  return (
-    <Switch>
-      {routes.map((route, index) => (
-        <Route
-          key={index}
-          path={route.path}
-          exact={route.exact}
-          component={route.component}
-        />
-      ))}
-    </Switch>
-  );
 }
