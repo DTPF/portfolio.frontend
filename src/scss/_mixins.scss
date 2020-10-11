@@ -1,0 +1,68 @@
+@mixin buttonPrimary() {
+  color: #fff;
+  font-weight: bold;
+  background-color: $btn-background-dark;
+  border: 1px solid $btn-border-dark;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  box-shadow: $box-shadow-button;
+  -moz-box-shadow: $box-shadow-button;
+  -webkit-box-shadow: $box-shadow-button;
+  &:hover {
+    background-color: $btn-background-dark-hover;
+    border: 1px solid $btn-color-border-hover;
+    color: $btn-color-dark-hover;
+  }
+  @media (min-width: $media-breakpoint-up-xs) {
+    font-size: 13px;
+  }
+  @media (min-width: $media-breakpoint-up-sm) {
+    font-size: 14px;
+  }
+  @media (min-width: $media-breakpoint-up-md) {
+    font-size: 15px;
+  }
+}
+
+@mixin buttonPrimaryLight() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: $btn-color-light;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background-color: $btn-background-light;
+  border: 1px solid $btn-border-light;
+  box-shadow: $box-shadow-button;
+  -moz-box-shadow: $box-shadow-button;
+  -webkit-box-shadow: $box-shadow-button;
+  &:hover {
+    color: $btn-color-light-hover;
+    background-color: $btn-background-light-hover;
+    border: 1px solid $btn-border-light-hover;
+  }
+  @media (min-width: $media-breakpoint-up-xs) {
+    font-size: 13px;
+  }
+  @media (min-width: $media-breakpoint-up-sm) {
+    font-size: 14px;
+  }
+  @media (min-width: $media-breakpoint-up-md) {
+    font-size: 15px;
+  }
+}
+
+@mixin titleH1() {
+  color: $font-dark-primary;
+  font-weight: bold;
+  font-size: 1.5em;
+  @media (min-width: $media-breakpoint-up-sm) {
+    font-size: 1.6em;
+  }
+  @media (min-width: $media-breakpoint-up-md) {
+    font-size: 1.8em;
+  }
+}

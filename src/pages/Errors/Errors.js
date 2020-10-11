@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import { Result, Button } from "antd";
 
 export default function Errors() {
+  const goBack = useHistory().goBack;
   return (
     <div className="error404">
       <Result
@@ -10,8 +11,8 @@ export default function Errors() {
         title="404"
         subTitle="Lo sentimos, la página que visitas no existe."
         extra={
-          <Button type="primary">
-            <Link to="/">Volver</Link>
+          <Button type="primary" onClick={goBack}>
+            Volver
           </Button>
         }
       />

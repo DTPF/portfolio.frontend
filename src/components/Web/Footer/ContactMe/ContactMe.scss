@@ -1,4 +1,5 @@
-@import "../../../../scss/index.scss";
+@import "../../../../scss/variables";
+@import "../../../../scss/mixins";
 
 .contact-me {
   position: relative;
@@ -31,20 +32,10 @@
   }
 
   button {
+    @include buttonPrimaryLight();
+    text-transform: uppercase;   
     width: 100%;
     height: 100%;
-    font-size: $font-size-xs;
-    color: $btn-color-light;
-    background-color: $btn-background-light;
-    border: 1px solid $btn-border-light;
-    box-shadow: $box-shadow-button;
-    -moz-box-shadow: $box-shadow-button;
-    -webkit-box-shadow: $box-shadow-button;
-    &:hover {
-      color: $btn-color-light-hover;
-      background-color: $btn-background-light-hover;
-      border: 1px solid $btn-border-light-hover;
-    }
   }
 
 }

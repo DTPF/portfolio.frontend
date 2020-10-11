@@ -1,22 +1,10 @@
-@import '../../../scss/index.scss';
+@import "../../../scss/mixins";
+@import "../../../scss/variables";
 
 .error404 {
-    .ant-result-extra {
-        button {
-            background-color: $btn-background-dark;
-            border: 1px solid $btn-border-dark;
-            box-shadow: $box-shadow-button;
-            -moz-box-shadow: $box-shadow-button;
-            -webkit-box-shadow: $box-shadow-button;
-            &:hover {
-                background-color: $btn-background-dark-hover;
-                border: 1px solid $btn-color-border-hover;
-            }
-            a {
-                &:hover {
-                    color: $btn-color-dark-hover;
-                }
-            }
-        }
+  .ant-result-extra {
+    button {
+      @include buttonPrimary();
     }
+  }
 }

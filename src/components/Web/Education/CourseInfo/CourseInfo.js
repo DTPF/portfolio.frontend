@@ -5,8 +5,8 @@ import "moment/locale/es";
 import { Row, Col, Image, Tag, Button } from "antd";
 import { getCourseApi, getImageApi } from "../../../../api/education";
 import QueueAnim from "rc-queue-anim";
-import { LinkOutlined, ArrowLeftOutlined } from "@ant-design/icons";
-import NoImage from '../../../../assets/img/png/no-image.png'
+import { LinkOutlined } from "@ant-design/icons";
+import NoImage from "../../../../assets/img/png/no-image.png";
 import "./CourseInfo.scss";
 
 export default function CourseInfo(props) {
@@ -19,7 +19,9 @@ export default function CourseInfo(props) {
         setCourse(response.course);
       });
     }
-    return () => {unmounted = true};
+    return () => {
+      unmounted = true;
+    };
   }, [url]);
   return (
     <Row className="course-info">
@@ -42,7 +44,9 @@ function Course(props) {
         }
       });
     }
-    return () => {unmounted = true};
+    return () => {
+      unmounted = true;
+    };
   }, [course]);
   const link = course && course.link;
   return (
@@ -50,11 +54,7 @@ function Course(props) {
       <Col className="course-info__title">
         <h1>{course && course.title}</h1>
       </Col>
-      <QueueAnim
-              type={["alpha"]}
-              duration={400}
-              ease="easeInCubic"
-            >
+      <QueueAnim type={["alpha"]} duration={400} ease="easeInCubic">
         <Col span={24} className="course-info__image" key="image">
           <Image
             src={image ? image : NoImage}
@@ -80,14 +80,13 @@ function Course(props) {
           <Col span={12} className="course-info__link">
             {link && (
               <a href={link} target="_blank" rel="noopener noreferrer">
-              <LinkOutlined />
+                <LinkOutlined />
                 Enlace a {course && course.platform}
               </a>
             )}
           </Col>
           <Col span={12} className="course-info__button">
             <Button type="primary" onClick={goBack}>
-              <ArrowLeftOutlined />
               Volver
             </Button>
           </Col>
@@ -110,7 +109,9 @@ function Tags(props) {
         });
       }
     }
-    return () => {unmounted = true};
+    return () => {
+      unmounted = true;
+    };
   }, [course]);
   return (
     <>

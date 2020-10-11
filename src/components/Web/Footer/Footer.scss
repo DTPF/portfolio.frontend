@@ -1,28 +1,22 @@
-@import "../../../scss/index.scss";
+@import "../../../scss/variables";
 
 .footer {
   background-color: $primary-color;
-  // border: 1px solid $primary-color-dark;
   padding: 0;
   padding-bottom: 15px;
-  padding-top: 10px;
-  
+  padding-top: 10px;  
   &__content {
     display: flex;
     justify-content: center;
   }
   &__copyright {
     margin-top: 20px;
-    .ant-col {
-      
+    .ant-col {      
       color: #fff;
       display: flex;
       justify-content: center;
-      //   text-align: center;
       text-transform: uppercase;
-      &:last-of-type {
-        // text-align: right !important;
-      }
+
     }
   }
 }

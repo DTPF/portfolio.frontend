@@ -26,47 +26,68 @@ export default function InfoBanner(props) {
     return () => {unmounted = true};
   }, [courses]);
   return (
-    <div>
-      <BannerAnim
-        prefixCls="info-banner"
-        arrow={false}
-        thumb={false}
-        autoPlay
-        autoPlaySpeed={3900}
-        type={["vertical", "across"]}
-      >
-        <Element prefixCls="info-banner-elem" key="0">
-          <TweenOne
-            className="info-banner-title"
-            animation={{ y: 300, opacity: 0, type: "from" }}
-          >
-            <AnimationCountHours
-              totalDuration={totalDuration}
-            />
-          </TweenOne>
-          <TweenOne
-            className="info-banner-text"
-            animation={{ y: 300, opacity: 0, type: "from", delay: 100 }}
-          >
-            Horas de estudio presencial y online
-          </TweenOne>
-        </Element>
-        <Element prefixCls="info-banner-elem" key="1">
-          <TweenOne
-            className="info-banner-title"
-            animation={{ y: 300, opacity: 0, type: "from" }}
-          >
-            <Tecnologies courses={courses} />
-          </TweenOne>
-          <TweenOne
-            className="info-banner-text"
-            animation={{ y: 300, opacity: 0, type: "from", delay: 100 }}
-          >
-            Tecnologías utilizadas en los cursos
-          </TweenOne>
-        </Element>
-      </BannerAnim>
-    </div>
+    <BannerAnim
+      prefixCls="info-banner"
+      arrow={false}
+      thumb={false}
+      autoPlay
+      autoPlaySpeed={3500}
+      type={["vertical", "across"]}
+    >
+      <Element prefixCls="info-banner-elem" key="0">
+        <TweenOne
+          className="info-banner-title"
+          animation={{ y: 300, opacity: 0, type: "from" }}
+        >
+          <AnimationCountHours totalDuration={totalDuration} />
+        </TweenOne>
+        <TweenOne
+          className="info-banner-text"
+          animation={{ y: 300, opacity: 0, type: "from", delay: 100 }}
+        >
+          Horas de estudio presencial y online
+        </TweenOne>
+      </Element>
+      <Element prefixCls="info-banner-elem" key="1">
+        <TweenOne
+          className="info-banner-title"
+          animation={{ y: 300, opacity: 0, type: "from" }}
+        >
+          <Tecnologies courses={courses} />
+        </TweenOne>
+        <TweenOne
+          className="info-banner-text"
+          animation={{ y: 300, opacity: 0, type: "from", delay: 100 }}
+        >
+          Tecnologías utilizadas
+        </TweenOne>
+      </Element>
+    </BannerAnim>
+  );
+}
+
+function AnimationCountHours(props) {
+  const { totalDuration } = props;
+  const [state, setState] = useState(0);
+  useEffect(() => {
+    let unmounted = false;
+    if (!unmounted) {
+      setState({
+        animation: {
+          Children: {
+            value: totalDuration,
+            floatLength: 0,
+          },
+          duration: 2500,
+        },
+      });
+    }
+    return () => {unmounted = true};
+  }, [totalDuration]);
+  return (
+    <TweenOne animation={state.animation}>
+      {totalDuration === 0 ? 0 : totalDuration}
+    </TweenOne>
   );
 }
 
@@ -95,32 +116,5 @@ function Tecnologies(props) {
     }
     return () => {unmounted = true};
   }, [courses]);
-  return <>{tecnologies && tecnologies}</>;
-}
-
-function AnimationCountHours(props) {
-  const { totalDuration } = props;
-  const [state, setState] = useState({
-    animation: null,
-  });
-  useEffect(() => {
-    let unmounted = false;
-    if (!unmounted) {
-      setState({
-        animation: {
-          Children: {
-            value: totalDuration,
-            floatLength: 0,
-          },
-          duration: 2500,
-        },
-      });
-    }
-    return () => {unmounted = true};
-  }, [totalDuration]);
-  return (
-    <>
-      <TweenOne animation={state.animation} >0</TweenOne>
-    </>
-  );
+  return tecnologies;
 }

@@ -1,36 +1,19 @@
-@import "../../../../scss/index.scss";
+@import "../../../../scss/variables";
+@import "../../../../scss/mixins";
 
 .courses-list {
   display: flex;
   justify-content: center;
-  
   a {
     cursor: default;
   }
   &__title {
     text-align: center !important;
     h1 {
-      color: $font-dark-primary;
-      font-weight: bold;
-      font-size: 17px;
       text-transform: uppercase;
       margin: 0;
       margin-top: 0px;
-      @media (min-width: $media-breakpoint-up-xs) {
-        font-size: 19px;
-      }
-      @media (min-width: $media-breakpoint-up-sm) {
-        font-size: 21px;
-      }
-      @media (min-width: $media-breakpoint-up-md) {
-        font-size: 22px;
-      }
-      @media (min-width: $media-breakpoint-up-lg) {
-        font-size: 23px;
-      }
-      @media (min-width: $media-breakpoint-up-xl) {
-        font-size: 24px;
-      }
+      @include titleH1();
     }
     p {
       color: $font-light-primary;
