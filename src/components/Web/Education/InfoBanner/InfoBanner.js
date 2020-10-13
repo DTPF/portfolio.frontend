@@ -44,7 +44,8 @@ export default function InfoBanner(props) {
       arrow={false}
       thumb={false}
       autoPlay
-      autoPlaySpeed={3000}
+      autoPlaySpeed={2500}
+      dragPlay={false}
       type={["vertical", "across"]}
     >
       <Element prefixCls="info-banner-elem" key="0">
@@ -83,19 +84,15 @@ function AnimationCountHours(props) {
   const { totalDuration } = props;
   const [state, setState] = useState(null);
   useEffect(() => {
-    let unmounted = false;
-    if (!unmounted) {
       setState({
         animation: {
           Children: {
             value: totalDuration,
             floatLength: 0,
           },
-          duration: 2200,
+          duration: 1500,
         },
       });
-    }
-    return () => {unmounted = true};
   }, [totalDuration]);
   return (
     <TweenOne animation={state && state.animation}>

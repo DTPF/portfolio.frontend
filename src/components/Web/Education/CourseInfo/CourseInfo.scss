@@ -1,20 +1,91 @@
 @import "../../../../scss/index.scss";
 
 .course-info {
+  width: 100% !important;
   &__title {
     width: 100%;
+    max-width: 1050px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 10px;
 
     h1 {
-      padding: 0 5px;
-      margin-top: 5px;
+      padding-top: 10px;
       @include titleH1();
       @media (min-width: $media-breakpoint-up-lg) {
         font-size: 2em;
       }
     }
+
+    &-linkPrev,
+    &-linkNext {
+      display: none;
+      margin-top: 12px;
+      @media (min-width: $media-breakpoint-up-lg) {
+        display: block;
+      }
+      button {
+        @include buttonPrimary();
+        border-radius: 20px;
+        padding: 0 9px;
+        width: 40px;
+        &:active,
+        &:focus,
+        &:hover {
+          background-color: $primary-color !important;
+          border: 1px solid $primary-color-dark;
+          color: #fff;
+          &:hover {
+            color: $primary-color;
+            border: 1px solid $primary-color;
+            background-color: $primary-color-light !important;
+          }
+        }
+      }
+    }
+  }
+
+  &__linkPrevMobile,
+  &__linkNextMobile {
+    position: fixed;
+    z-index: 100;
+    bottom: 20px !important;
+    border-radius: 20px;
+    -webkit-box-shadow: -1px 4px 24px -2px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: -1px 4px 24px -2px rgba(0, 0, 0, 0.5);
+    box-shadow: -1px 4px 24px -2px rgba(0, 0, 0, 0.5);
+    @media (min-width: $media-breakpoint-up-lg) {
+      display: none;
+    }
+    button {
+      width: 40px;
+      @include buttonPrimary();
+      background-color: $primary-color-dark;
+      padding: 0 9px;
+      border-radius: 20px;
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: $primary-color !important;
+        border: 1px solid $primary-color-dark;
+        color: #fff;
+        &:hover {
+          color: $primary-color;
+          border: 1px solid $primary-color;
+          background-color: $primary-color-light !important;
+        }
+      }
+    }
+  }
+  &__linkPrevMobile {
+    left: 20px;
+  }
+
+  &__linkNextMobile {
+    right: 20px;
   }
 
   &__image {
@@ -27,7 +98,7 @@
       }
     }
   }
-  
+
   &__info {
     &-duration {
       color: $primary-color-dark;
@@ -44,34 +115,34 @@
     }
   }
 
-  &__link {
-    display: flex;
-    align-items: flex-end;
-    padding: 10px;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-    a {
-      color: $primary-color-dark;
-    }
-    span {
-      padding: 4px;
-      font-size: 1.2em;
-    }
-    &:hover {
-      span {
-        color: $primary-color;
-      }
-    }
-  }
   &__button {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 15px;
-    margin-bottom: 15px;
-    button {
-      @include buttonPrimary();
-      padding: 0 9px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+
+    &-link {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding: 10px;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+      font-weight: bold;
+      a {
+        display: flex;
+        align-items: center;
+        color: $primary-color-dark;
+      }
+      span {
+        padding: 4px;
+        font-size: 1.4em;
+      }
+      &:hover {
+        span {
+          color: $primary-color;
+        }
+      }
     }
   }
 
@@ -88,6 +159,7 @@
   }
 
   &__tags {
+    width: 100%;
     &-div {
       max-width: 1000px;
       text-align: center;
@@ -117,6 +189,47 @@
         }
       }
       @include tagsStyle();
+    }
+  }
+
+  &__goBack {
+    button {
+      @include buttonPrimary();
+      background-color: $primary-color-dark;
+      position: fixed;
+      z-index: 100;
+      left: 15px;
+      bottom: 15px;
+      margin: 0;
+      padding: 0;
+      min-width: 32px;
+      &:hover,
+      &:active,
+      &:focus {
+        color: #fff;
+        background-color: $primary-color;
+        border: 1px solid $primary-color-dark;
+      }
+      @media (max-width: $media-breakpoint-up-lg) {
+        background-color: transparent !important;
+        border: 0;
+        color: $primary-color-dark;
+        position: absolute;
+        top: 25px;
+        left: 5px;
+        box-shadow: unset;
+        z-index: 50;
+        &:hover,
+        &:active,
+        &:focus {
+          color: $primary-color-dark;
+          background-color: transparent !important;
+          border: 0 !important;
+        }
+      }
+      @media (max-width: $media-breakpoint-up-md) {
+        top: 22px;
+      }
     }
   }
 }

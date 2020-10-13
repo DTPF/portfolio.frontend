@@ -16,21 +16,21 @@ export default function Education(props) {
   const [courses, setCourses] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [imageLoaded, setImageLoaded] = useState(false);
-  const { page = 1 } = queryString.parse(location.search);  
+  const { page = 1 } = queryString.parse(location.search);
   useEffect(() => {
     let unmounted = false;
-    getCoursesApi(8, page)
-    .then((response) => {
-        if (!unmounted) {
-          setCourses(response.courses);
-        }
-          });
-        window.scrollTo(0, 0);
-      return () => {unmounted = true};
+    getCoursesApi(8, page).then((response) => {
+      if (!unmounted) {
+        setCourses(response.courses);
+      }
+    });
+    window.scrollTo(0, 0);
+    return () => {unmounted = true};
   }, [page]);
   const title = "Todos los cursos";
-  const subtitle = "Todos los cursos que he realizado presenciales" +
-                    " y online para mi preparación al mundo de IT";
+  const subtitle =
+    "Todos los cursos que he realizado presenciales" +
+    " y online para mi preparación al mundo de IT";
   return (
     <>
       <Helmet>
@@ -45,11 +45,11 @@ export default function Education(props) {
         <Row className="education">
           <Col lg={1} />
           <Col lg={22}>
-            <div className="div" ></div>
+            <div className="div"></div>
             <Col key="courses">
               <Suspense fallback={<></>}>
                 <InfoBanner />
-                <Courses                  
+                <Courses
                   numItems={1000}
                   title={title}
                   subtitle={subtitle}
@@ -74,13 +74,15 @@ export default function Education(props) {
                 </Col>
               </>
             )}
-            <div className="div" ></div>            
+            <div className="div"></div>
           </Col>
           <Col lg={1} />
         </Row>
       ) : (
         <Suspense fallback={<></>}>
-          <CourseInfo url={url} />
+          <Col key={url}>
+            <CourseInfo url={url} courses={courses} />
+          </Col>
         </Suspense>
       )}
     </>

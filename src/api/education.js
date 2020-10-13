@@ -60,6 +60,17 @@ export async function getCourseApi(urlCourse) {
   }
 }
 
+export async function getCourseByOrderApi(order) {
+  const url = `${basePath}/${apiVersion}/get-course-order/${order}`;
+  try {
+    const response = await fetch(url);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
+}
+
 export async function uploadImageApi(token, image, courseId) {
   const url = `${basePath}/${apiVersion}/upload-image/${courseId}`;
   const formData = new FormData();

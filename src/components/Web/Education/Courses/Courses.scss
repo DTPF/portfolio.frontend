@@ -156,15 +156,14 @@
       margin: 9px;
     }
     @media (min-width: $media-breakpoint-up-md) {
-      margin: 11px;
       min-width: 240px;
+      margin: 11px;
     }
     @media (min-width: $media-breakpoint-up-lg) {
       margin: 13px;
     }
     @media (min-width: $media-breakpoint-up-xl) {
       margin: 15px;
-      min-width: 250px;
     }
     
     .ant-card {
