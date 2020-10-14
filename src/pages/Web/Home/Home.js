@@ -10,7 +10,6 @@ const Courses = lazy(() => import("../../../components/Web/Education/Courses"));
 
 export default function Home(props) {
   const [courses, setCourses] = useState(null);
-  const [imageLoaded, setImageLoaded] = useState(false);
   const title = "Últimos cursos";
   const subtitle =
     "Últimos cursos que he realizado para" + 
@@ -22,7 +21,6 @@ export default function Home(props) {
         setCourses(response.courses);
       }
     });
-    setImageLoaded(false);
     return () => {unmounted = true};
   }, []);
   window.scrollTo(0, 0);
@@ -45,9 +43,7 @@ export default function Home(props) {
                 title={title}
                 subtitle={subtitle}
                 courses={courses && courses.docs}
-                setImageLoaded={setImageLoaded}
-              />
-              {imageLoaded && (
+              />              
                 <QueueAnim
                   type={["alpha"]}
                   delay={200}
@@ -59,8 +55,7 @@ export default function Home(props) {
                       <Button>Ver todos</Button>
                     </Link>
                   </div>
-                </QueueAnim>
-              )}
+                </QueueAnim>            
             </Col>
           </Row>
         </Suspense>

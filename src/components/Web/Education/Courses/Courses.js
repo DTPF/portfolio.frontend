@@ -8,7 +8,7 @@ import NoImage from '../../../../assets/img/png/no-image-s.png'
 import "./Courses.scss";
 
 export default function Courses(props) {
-  const { courses, numItems, title, subtitle, setImageLoaded } = props;
+  const { courses, numItems, title, subtitle } = props;
   return (
     <>
       <Row>
@@ -29,7 +29,7 @@ export default function Courses(props) {
                 xl={6}
                 className="courses-list__courses"
               >
-                <Course course={course} setImageLoaded={setImageLoaded} />
+                <Course course={course} />
               </Col>
             ))}
         </Row>
@@ -39,7 +39,7 @@ export default function Courses(props) {
 }
 
 function Course(props) {
-  const { course, setImageLoaded } = props;
+  const { course } = props;
   const [image, setImage] = useState(null);
   const { Meta } = Card;
   useEffect(() => {
@@ -53,7 +53,6 @@ function Course(props) {
           let thumbnailName = "thumb_" + fileName;
           let replaceName = filePath.replace(fileName, thumbnailName);
           setImage(replaceName);
-          setImageLoaded(true);
         }
       });
     }

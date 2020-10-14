@@ -15,7 +15,6 @@ export default function Education(props) {
   const { url } = useParams();
   const [courses, setCourses] = useState(null);
   // eslint-disable-next-line no-unused-vars
-  const [imageLoaded, setImageLoaded] = useState(false);
   const { page = 1 } = queryString.parse(location.search);
   useEffect(() => {
     let unmounted = false;
@@ -56,7 +55,6 @@ export default function Education(props) {
                   courses={courses && courses.docs}
                   location={location}
                   history={history}
-                  setImageLoaded={setImageLoaded}
                 />
               </Suspense>
             </Col>
