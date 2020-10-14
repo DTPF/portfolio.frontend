@@ -23,14 +23,12 @@ export default function CourseInfo(props) {
   const [course, setCourse] = useState(null);
   useEffect(() => {
     let unmounted = false;
-    if (!unmounted) {
-      getCourseApi(url).then((response) => {
+    getCourseApi(url).then((response) => {
+      if (!unmounted) {
         setCourse(response.course);
+      }
       });
-    }
-    return () => {
-      unmounted = true;
-    };
+    return () => {unmounted = true};
   }, [url]);
   return (
     <Row className="course-info">
@@ -51,7 +49,7 @@ function Course(props) {
   useEffect(() => {
     let unmounted = false;
     if (course) {
-      if (prev === coursesLength + 2 || !coursesLength) {
+      if (prev === coursesLength + 1 || !coursesLength) {
         getCourseByOrderApi(1).then((response) => {
           if (!unmounted) {
             setPrevCourse(response.course);
@@ -65,7 +63,7 @@ function Course(props) {
         });
       }
       if (next === 0) {
-        getCourseByOrderApi(coursesLength + 1).then((response) => {
+        getCourseByOrderApi(coursesLength).then((response) => {
           if (!unmounted) {
             setNextCourse(response.course);
           }
@@ -79,9 +77,7 @@ function Course(props) {
       }
       window.scrollTo(0, 0);
     }
-    return () => {
-      unmounted = true;
-    };
+    return () => {unmounted = true};
   }, [course, prev, next, coursesLength]);
   useEffect(() => {
     let unmounted = false;
@@ -93,9 +89,7 @@ function Course(props) {
         }
       });
     }
-    return () => {
-      unmounted = true;
-    };
+    return () => {unmounted = true};
   }, [course]);
   const link = course && course.link;
   const prevLink = `/education/${prevCourse.url}`;

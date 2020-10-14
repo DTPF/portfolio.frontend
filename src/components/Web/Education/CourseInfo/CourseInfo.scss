@@ -61,11 +61,15 @@
       display: none;
     }
     button {
-      width: 40px;
-      @include buttonPrimary();
+      width: 50px;
+      height: 40px;
+      @include buttonPrimary();      
       background-color: $primary-color-dark;
       padding: 0 9px;
       border-radius: 20px;
+      span {
+        font-size: 1.3em;
+      }
       &:active,
       &:focus,
       &:hover {

@@ -6,6 +6,12 @@
   justify-content: center;
   max-width: 1450px;
   margin: 0 auto;
+  &__element {
+    min-height: 200px;
+    @media (min-width: $media-breakpoint-up-lg) {
+      min-height: 310px;
+    }
+  }
   a {
     cursor: default;
   }
