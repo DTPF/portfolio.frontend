@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { useGetCourses } from "../../../../hooks/useGetCourses";
 import TweenOne from "rc-tween-one";
 import Children from "rc-tween-one/lib/plugin/ChildrenPlugin";
 import BannerAnim, { Element } from "rc-banner-anim";
-import { getCoursesApi } from "../../../../api/education";
 import "rc-banner-anim/assets/index.css";
 import "./InfoBanner.scss";
 TweenOne.plugins.push(Children);
 
-export default function InfoBanner(props) {
-  const [courses, setCourses] = useState(null);
+export default function InfoBanner() {
+  const [courses] = useGetCourses(10000, 1);
   const [totalDuration, setTotalDuration] = useState(0);
-  useEffect(() => {
+  const [duration, setDuration] = useState(0);
+  setTimeout(() => {
     let unmounted = false;
-    getCoursesApi(1000, 1).then((response) => {
-      if (!unmounted) {
-        setCourses(response.courses);
-      }
-    });
-    window.scrollTo(0, 0);
-    return () => {unmounted = true};
-  }, [totalDuration]);
+    if (!unmounted) {
+      setDuration(totalDuration);
+    }
+    return () => { unmounted = true };
+  }, 1);
   useEffect(() => {
     let unmounted = false;
     const duration = [];
@@ -36,15 +34,16 @@ export default function InfoBanner(props) {
         setTotalDuration(totalDuration);
       }
     });
-    return () => {unmounted = true};
+    return () => {unmounted = true };
   }, [courses]);
+
   return (
     <BannerAnim
       prefixCls="info-banner"
       arrow={false}
       thumb={false}
       autoPlay
-      autoPlaySpeed={2500}
+      autoPlaySpeed={3000}
       dragPlay={false}
       type={["vertical", "across"]}
     >
@@ -53,7 +52,10 @@ export default function InfoBanner(props) {
           className="info-banner-title"
           animation={{ y: 300, opacity: 0, type: "from" }}
         >
-          <AnimationCountHours totalDuration={totalDuration} />
+          <AnimationCountHours
+            totalDuration={totalDuration}
+            duration={duration}
+          />
         </TweenOne>
         <TweenOne
           className="info-banner-text"
@@ -80,29 +82,30 @@ export default function InfoBanner(props) {
   );
 }
 
-function AnimationCountHours(props) {
-  const { totalDuration } = props;
+function AnimationCountHours({ totalDuration, duration }) {
   const [state, setState] = useState(null);
   useEffect(() => {
+    let unmounted = false;
+    if (!unmounted) {
       setState({
         animation: {
           Children: {
             value: totalDuration,
             floatLength: 0,
           },
-          duration: 1500,
+          duration: 2000,
         },
       });
+    }
   }, [totalDuration]);
   return (
     <TweenOne animation={state && state.animation}>
-      {totalDuration === 0 ? 0 : totalDuration}
-    </TweenOne>
+      {duration && Math.round(duration)}
+    </TweenOne> 
   );
 }
 
-function Tecnologies(props) {
-  const { courses } = props;
+function Tecnologies({ courses }) {
   const [tecnologies, setTecnologies] = useState(0);
   useEffect(() => {
     let unmounted = false;

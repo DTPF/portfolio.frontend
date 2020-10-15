@@ -3,7 +3,9 @@
 .education {
   display: flex;
   justify-content: center;
-
+  &__info-courses {
+    min-height: 100vh;
+  }
   .div {
     margin-top: 30px;
   }

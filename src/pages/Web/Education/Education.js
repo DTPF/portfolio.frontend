@@ -1,37 +1,27 @@
-import React, { useState, useEffect, Suspense, lazy } from "react";
-import { Row, Col, Button, BackTop } from "antd";
+import React, { useEffect, Suspense, lazy } from "react";
+import { useGetCourses } from "../../../hooks/useGetCourses";
+import { useNearScreen } from "../../../hooks/useNearScreen";
 import { useParams, useHistory } from "react-router-dom";
+import { Row, Col, Button, BackTop } from "antd";
 import { Helmet } from "react-helmet";
-import { getCoursesApi } from "../../../api/education";
-import queryString from "query-string";
-import QueueAnim from "rc-queue-anim";
 import "./Education.scss";
 const Pagination = lazy(() => import("../../../components/Pagination/Pagination"));
 const Courses = lazy(() => import("../../../components/Web/Education/Courses"));
 const CourseInfo = lazy(() => import("../../../components/Web/Education/CourseInfo"));
 const InfoBanner = lazy(() => import("../../../components/Web/Education/InfoBanner"));
 
-export default function Education(props) {
-  const { location, history } = props;
+export default function Education({ location, history }) {
   const { url } = useParams();
-  const [courses, setCourses] = useState(null);
+  const [courses] = useGetCourses(100, location);
+  const [show, el] = useNearScreen();
   const goBack = useHistory().goBack;
-  // eslint-disable-next-line no-unused-vars
-  const { page = 1 } = queryString.parse(location.search);
-  useEffect(() => {
-    let unmounted = false;
-    getCoursesApi(20, page).then((response) => {
-      if (!unmounted) {
-        setCourses(response.courses);
-      }
-    });
-    window.scrollTo(0, 0);
-    return () => { unmounted = true };
-  }, [page]);
   const title = "Todos los cursos";
   const subtitle =
     "Todos los cursos que he realizado presenciales" +
     " y online para mi preparación al mundo de IT";
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, []);
   return (
     <>
       <Helmet>
@@ -44,18 +34,18 @@ export default function Education(props) {
       </Helmet>
       {!url ? (
         <Row className="education">
-          <BackTop />         
+          <BackTop duration={800} />
           <Col lg={1} />
           <Col lg={22}>
             <div className="div"></div>
-            <Col key="courses">
+            <Col className="education__info-courses" key="courses">
               <Suspense fallback={<></>}>
                 <InfoBanner />
                 <Courses
-                  numItems={1000}
+                  numItems={10000}
                   title={title}
                   subtitle={subtitle}
-                  courses={courses && courses.docs}
+                  courses={courses?.docs}
                   location={location}
                   history={history}
                 />
@@ -75,26 +65,20 @@ export default function Education(props) {
                 </Col>
               </>
             )}
-            <div className="div"></div>
-            <QueueAnim
-              type={["alpha"]}
-              delay={1000}
-              duration={100}
-              ease="easeInCubic"
-            >
-              <div className="education__button" key="volver">
+            <div className="education__button" ref={el}>
+              {show && (
                 <Button type="primary" onClick={goBack}>
                   Volver
                 </Button>
-              </div>
-            </QueueAnim>
+              )}
+            </div>
             <div className="div"></div>
           </Col>
           <Col lg={1} />
         </Row>
       ) : (
         <Suspense fallback={<></>}>
-          <Col key={url}>
+          <Col key={url} ref={el}>
             <CourseInfo url={url} courses={courses} />
           </Col>
         </Suspense>
