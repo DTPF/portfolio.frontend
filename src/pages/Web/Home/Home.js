@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 import "./Home.scss";
 const MainTitle = lazy(() => import("../../../components/Web/MainTitle"));
 const Courses = lazy(() => import("../../../components/Web/Education/Courses"));
+const BannerLastProject = lazy(() => import("../../../components/Web/BannerLastProject"));
 
 export default function Home() {
   const [courses] = useGetCourses(4, 1);
@@ -29,6 +30,7 @@ export default function Home() {
       </Helmet>
       <Suspense fallback={<></>}>
         <MainTitle />
+        <BannerLastProject />
         <Row className="home" key="row">
           <Col span={24} className="home__courses" key="courses">
             <Courses              

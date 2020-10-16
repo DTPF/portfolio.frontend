@@ -17,7 +17,7 @@ export default function MainTitle() {
                 { x: 130, type: "set" },
                 { x: 100, delay: -200, duration: 50 },
                 {
-                  ease: "easeOutQuart",
+                  ease: "linear",
                   duration: 50,
                   x: 0,
                 },
@@ -25,7 +25,7 @@ export default function MainTitle() {
                   letterSpacing: 0,
                   delay: -300,
                   scale: 0.9,
-                  ease: "easeInOutQuint",
+                  ease: "linear",
                   duration: 50,
                 },
                 {
@@ -33,7 +33,7 @@ export default function MainTitle() {
                   width: "100%",
                   delay: 0,
                   duration: 50,
-                  ease: "easeInOutQuint",
+                  ease: "linear",
                 },
               ],
             }}
@@ -49,7 +49,7 @@ export default function MainTitle() {
                 { x: 130, type: "set" },
                 { x: 100, delay: -200, duration: 50 },
                 {
-                  ease: "easeOutQuart",
+                  ease: "linear",
                   duration: 100,
                   x: 0,
                 },
@@ -57,7 +57,7 @@ export default function MainTitle() {
                   letterSpacing: 0,
                   delay: -300,
                   scale: 0.9,
-                  ease: "easeInOutQuint",
+                  ease: "linear",
                   duration: 50,
                 },
                 {
@@ -65,7 +65,7 @@ export default function MainTitle() {
                   width: "100%",
                   delay: 0,
                   duration: 100,
-                  ease: "easeInOutQuint",
+                  ease: "linear",
                 },
               ],
             }}
@@ -75,11 +75,11 @@ export default function MainTitle() {
           <TweenOne
             className="combined-bar"
             animation={{
-              delay: 300,
+              delay: 200,
               width: 0,
-              x: 58,
+              x: 258,
               type: "from",
-              ease: "easeInOutCubic",
+              ease: "linear",
             }}
           />
           <Texty

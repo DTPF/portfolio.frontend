@@ -66,3 +66,23 @@
     font-size: 1.8em;
   }
 }
+
+@mixin titleH2() {
+  font-weight: bold;
+  font-size: 1.2em;
+  @media (min-width: $media-breakpoint-up-sm) {
+    font-size: 1.3em;
+  }
+  @media (min-width: $media-breakpoint-up-md) {
+    font-size: 1.4em;
+  }
+}
+
+@mixin p() {
+  color: $primary-color;
+  font-size: 1em;
+  font-weight: 500;
+  @media (min-width: $media-breakpoint-up-sm) {
+    font-size: 1.1em;
+  }
+}

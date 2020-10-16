@@ -25,11 +25,10 @@
     }
 
     &-bar {
-      display: block;
-      width: 100% !important;
-      height: 2.5px;
-      background: $primary-color-dark !important;
       position: absolute;
+      width: 100% !important;
+      height: 3px;
+      background: $primary-color-dark !important;
       top: 143px;
       @media (max-width: $media-breakpoint-down-sm) {
         top: 141px;
@@ -43,7 +42,6 @@
       padding-top: 30px;
       position: absolute;
       width: 150px;
-      // overflow: hidden;
       color: $primary-color-dark;
       @media (max-width: $media-breakpoint-down-sm) {
         font-size: 30px;
@@ -59,7 +57,6 @@
       padding-top: 75px;
       position: absolute;
       width: 130px;
-      // overflow: hidden;
       color: $primary-color-dark;
       @media (max-width: $media-breakpoint-down-sm) {
         font-size: 30px;
@@ -73,8 +70,6 @@
       position: absolute;
       color: $primary-color-extra-dark;
       top: 160px;
-      // margin: 0 auto;
-      // padding: 0;
       @media (max-width: $media-breakpoint-down-sm) {
         font-size: 16px;
         top: 155px;

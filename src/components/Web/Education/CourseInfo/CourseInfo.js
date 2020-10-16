@@ -121,31 +121,11 @@ function Course(props) {
           )}
         </div>
       </QueueAnim>
-      <Col className="course-info__title">
-        <Col span={3} sm={2} className="course-info__title-linkPrev">
-          {prevCourse.url && (
-            <Link to={prevLink} key="prev">
-              <Button type="primary">
-                <ArrowLeftOutlined />
-              </Button>
-            </Link>
-          )}
-        </Col>
-        <Col span={18} sm={20}>
+        <Col span={24} className="course-info__title">
           <QueueAnim type={["alpha"]} duration={200} ease="easeInCubic">
             <h1 key="title">{course && course.title}</h1>
           </QueueAnim>
         </Col>
-        <Col span={3} sm={2} className="course-info__title-linkNext">
-          {nextCourse.url && (
-            <Link to={nextLink}>
-              <Button type="primary">
-                <ArrowRightOutlined />
-              </Button>
-            </Link>
-          )}
-        </Col>
-      </Col>
       <QueueAnim type={["alpha"]} duration={200} ease="easeInCubic">
         <div className="course-info__image" key="image">
           <Image
@@ -163,7 +143,7 @@ function Course(props) {
           </Col>
         </Row>
         <Col className="course-info__description" key="description">
-          {course && course.description}
+          <p>{course && course.description}</p>
         </Col>
         <Row className="course-info__tags" key="tags">
           <Tags course={course && course} />

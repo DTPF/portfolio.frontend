@@ -15,7 +15,7 @@ export default function Courses(props) {
       <Row>
         <Col span={24} className="courses-list__title">
           <h1 key="title">{title}</h1>
-          <p key="subtitle">{subtitle}</p>
+          <h2 key="subtitle">{subtitle}</h2>
         </Col>
       </Row>
       <div className="courses-list">
