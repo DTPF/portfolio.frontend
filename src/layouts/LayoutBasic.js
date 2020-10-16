@@ -2,9 +2,9 @@ import React, { useState, Suspense, lazy } from "react";
 import { useNearScreen } from "../hooks/useNearScreen";
 import { Layout } from "antd";
 import "./LayoutBasic.scss";
-const MenuTop = lazy(() => import("../components/Web/MenuTop"));
-const MenuSider = lazy(() => import("../components/Web/MenuSider"));
-const Footer = lazy(() => import("../components/Web/Footer"));
+const MenuTop = lazy(() => import("../components/Web/Layout/MenuTop"));
+const MenuSider = lazy(() => import("../components/Web/Layout/MenuSider"));
+const Footer = lazy(() => import("../components/Web/Layout/Footer"));
 const LoadRoutes = lazy(() => import("../providers/LoadRoutes"));
 
 export default function LayoutBasic({ routes }) {

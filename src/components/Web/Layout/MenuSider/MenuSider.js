@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Layout, Menu } from "antd";
-import { getMenuApi } from "../../../api/menu";
-import SocialLinks from "../SocialLinks";
+import { getMenuApi } from "../../../../api/menu";
+import SocialLinks from "../../SocialLinks";
 import "./MenuSider.scss";
 
 function MenuSider(props) {
-  const [menuData, setMenuData] = useState([]);
   const { menuCollapsed, setMenuCollapsed, location } = props;
+  const [menuData, setMenuData] = useState([]);
   const { Sider } = Layout;
-
   useEffect(() => {
     let unmounted = false;
     getMenuApi().then((response) => {
@@ -28,7 +27,6 @@ function MenuSider(props) {
       return () => {unmounted = true};
     });
   }, []);
-
   return (
     <Sider
       collapsible

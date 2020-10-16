@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout, Row, Col } from "antd";
 import MyInfo from "./MyInfo";
-import ContactMe from "../Footer/ContactMe";
+import ContactMe from "./ContactMe";
 import "./Footer.scss";
 
 export default function Footer() {

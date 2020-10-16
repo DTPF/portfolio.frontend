@@ -1,6 +1,6 @@
 import React from "react";
-import Logo from "../../../../assets/img/png/logo256.png";
-import SocialLinks from "../../SocialLinks";
+import Logo from "../../../../../assets/img/png/logo256.png";
+import SocialLinks from "../../../SocialLinks";
 
 import "./MyInfo.scss";
 
