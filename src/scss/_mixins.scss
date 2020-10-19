@@ -34,15 +34,15 @@
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  background-color: $btn-background-light;
   border: 1px solid $btn-border-light;
+  background-color: $btn-background-light;
   box-shadow: $box-shadow-button;
   -moz-box-shadow: $box-shadow-button;
   -webkit-box-shadow: $box-shadow-button;
   &:hover {
     color: $btn-color-light-hover;
     background-color: $btn-background-light-hover;
-    border: 1px solid $btn-border-light-hover;
+    border: 1px solid $btn-color-border-hover;
   }
   @media (min-width: $media-breakpoint-up-xs) {
     font-size: 13px;
@@ -56,7 +56,7 @@
 }
 
 @mixin titleH1() {
-  color: $font-dark-primary;
+  color: $font-primary-dark;
   font-weight: bold;
   font-size: 1.5em;
   @media (min-width: $media-breakpoint-up-sm) {
@@ -68,6 +68,7 @@
 }
 
 @mixin titleH2() {
+  color: $font-primary-dark;
   font-weight: bold;
   font-size: 1.2em;
   @media (min-width: $media-breakpoint-up-sm) {
@@ -85,4 +86,10 @@
   @media (min-width: $media-breakpoint-up-sm) {
     font-size: 1.1em;
   }
+}
+
+@mixin boxShadowPrimary() {
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
 }

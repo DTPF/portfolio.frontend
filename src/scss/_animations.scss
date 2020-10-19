@@ -1,0 +1,25 @@
+@mixin fadeIn() {
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  animation: fadeIn 800ms;
+}
+
+@mixin blur() {
+  @keyframes blur {
+    from {
+      filter: blur(3px);
+      opacity: 0;
+    }
+    to {
+      filter: blur(0);
+      opacity: 1;
+    }
+  }
+  animation: blur 0.4s;
+}

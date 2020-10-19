@@ -1,7 +1,7 @@
 import React, { useEffect, Suspense, lazy } from "react";
 import { useGetCourses } from "../../../hooks/useGetCourses";
 import { useNearScreen } from "../../../hooks/useNearScreen";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import { Row, Col, Button, BackTop } from "antd";
 import { Helmet } from "react-helmet";
 import "./Education.scss";
@@ -67,9 +67,16 @@ export default function Education({ location, history }) {
             )}
             <div className="education__button" ref={el}>
               {show && (
-                <Button type="primary" onClick={goBack}>
-                  Volver
-                </Button>
+                <>
+                  <Button className="education__button-left" type="primary" onClick={goBack}>
+                    Volver
+                  </Button>
+                  <Link to="/curriculum">                  
+                    <Button className="education__button-right" type="primary">
+                      Curriculum
+                    </Button>
+                  </Link>
+                </>
               )}
             </div>
             <div className="div"></div>

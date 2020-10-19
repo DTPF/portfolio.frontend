@@ -1,0 +1,35 @@
+@import "../../../../scss/mixins";
+@import "../../../../scss/variables";
+@import "../../../../scss/animations";
+
+.curriculum {
+  .languages {
+    margin: 0 auto;
+    @media (min-width: $media-breakpoint-up-xl) {
+      max-width: 250px;
+    }
+    .use-near-screen {
+      min-height: 120px;
+    }
+    h2 {
+      @include titleH2();
+      @include fadeIn();
+      text-align: center;
+      text-transform: uppercase;
+      margin-top: 15px;
+    }
+    &__item {
+      @include fadeIn();
+      display: flex;
+      justify-content: space-between;
+      max-width: 240px;
+      margin: 0 auto;
+      color: $font-medium-primary;
+      font-weight: 500;
+      font-size: 1.2em;
+      span {
+        color: $font-primary-dark;
+      }
+    }
+  }
+}

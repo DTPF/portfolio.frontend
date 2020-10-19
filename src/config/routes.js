@@ -10,10 +10,11 @@ import AdminMenuWeb from "../pages/Admin/MenuWeb";
 import AdminContactMessages from "../pages/Admin/ContactMessages";
 import AdminCourses from "../pages/Admin/Courses";
 
-// Pages
+// Web Pages
 import Home from "../pages/Web/Home";
 import Contact from "../pages/Web/AboutMe";
 import Courses from "../pages/Web/Education";
+import Curriculum from "../pages/Web/Curriculum";
 
 // Other
 import Error404 from "../pages/Errors/Error404";
@@ -83,6 +84,11 @@ const routes = [
         path: "/education/:url",
         exact: true,
         component: Courses
+      },
+      {
+        path: "/curriculum",
+        exact: true,
+        component: Curriculum
       },
       {
         component: Error404,

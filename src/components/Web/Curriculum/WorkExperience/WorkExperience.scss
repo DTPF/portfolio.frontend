@@ -1,0 +1,249 @@
+@import "../../../../scss/variables";
+@import "../../../../scss/mixins";
+@import "../../../../scss/animations";
+
+.curriculum {
+  .work-experience {
+    margin: 0 auto;
+    max-width: 900px;
+    min-height: 900px;
+    @media (min-width: $media-breakpoint-up-md) {
+      margin-bottom: 20px;
+    }
+    .use-near-screen {
+      min-height: 100px;
+    }
+    &__title {
+      @include titleH2();
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 10px;
+      @include fadeIn();
+    }
+    .container {
+      padding: 10px 40px;
+      position: relative;
+      background-color: inherit;
+      width: 50%;
+      padding-top: 10px !important;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        right: -17px;
+        background-color: $primary-color-light;
+        border: 4px solid $primary-color-dark;
+        top: 15px;
+        border-radius: 50%;
+        z-index: 10;
+        margin: 0 4px;
+        @include fadeIn();
+        animation-duration: 2500ms;
+      }
+    }
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 7px;
+        background-color: white;
+        top: 40px;
+        bottom: 10px;
+        left: 50%;
+        margin-left: -3px;
+        @include boxShadowPrimary();
+        z-index: 0;
+        border-radius: 5px;
+        @include blur();
+        animation-duration: 3s;
+      }
+    }
+    .left {
+      left: 0;
+      &::before {
+        content: " ";
+        height: 0;
+        position: absolute;
+        top: 18px;
+        width: 0;
+        z-index: 1;
+        right: 30px;
+        border: medium solid white;
+        border-width: 10px 0 10px 10px;
+        border-color: transparent transparent transparent white;
+      }
+    }
+    .right {
+      left: 50%;
+      &::before {
+        content: " ";
+        height: 0;
+        position: absolute;
+        top: 18px;
+        width: 0;
+        z-index: 1;
+        left: 30px;
+        border: medium solid white;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent white transparent transparent;
+      }
+      &::after {
+        left: -16px;
+      }
+    }
+    .title-left,
+    .title-right {
+      position: absolute;
+      width: 100%;
+      top: 15px;
+      h2 {
+        font-size: 1.1em;
+        color: $primary-color-dark;
+      }
+    }
+    .title-left {
+      right: -275px;
+      max-width: 250px;
+    }
+    .title-right {
+      right: 100%;
+      text-align: right;
+      margin-right: 23px;
+    }
+
+    .content {
+      padding: 10px 20px;
+      background-color: white;
+      border-radius: 6px;
+      h3 {
+        color: $primary-color;
+        margin: 0;
+        margin-top: 10px;
+        &:first-child {
+          margin-top: 0 !important;
+        }
+      }
+      p {
+        margin: 3px 0;
+        color: $primary-color-dark;
+        font-weight: 700;
+        font-size: 1em;
+      }
+    }
+    .work-collapse-panel {
+      background-color: #fff;
+      border: 0;
+      .ant-collapse-content-box {
+        padding: 5px;
+      }
+      &__text {
+        text-align: justify;
+        font-weight: 500 !important;
+        background-color: rgba(192, 192, 192, 0.123);
+        padding: 10px;
+        border-radius: 5px;
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+      }
+      .ant-collapse-header {
+        position: relative;
+        color: $font-primary-dark !important;
+        margin: 0;
+        margin-top: 10px;
+        font-weight: bold;
+        font-size: 1em;
+        padding: 5px 10px;
+        border: 0 !important;
+        &:first-child {
+          margin-top: 0 !important;
+        }
+        svg {
+          position: absolute;
+          top: -5px;
+          left: -19px;
+        }
+      }
+    }
+    .workx-7 {
+      animation: 400ms fadeIn;
+      &::after {
+        background-color: $secondary-color;
+        @include fadeIn();
+        animation-duration: 1500ms;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+      }
+    }
+    .workx-6 {
+      animation: 400ms fadeIn;
+    }
+    .workx-5 {
+      animation: 450ms fadeIn;
+    }
+    .workx-4 {
+      animation: 500ms fadeIn;
+    }
+    .workx-3,
+    .workx-2,
+    .workx-1 {
+      animation: 600ms fadeIn;
+    }
+
+    @media screen and (max-width: 600px) {
+      .timeline::after {
+        top: 58px !important;
+        left: 31px;
+        bottom: 30px;
+      }
+      .container {
+        width: 100%;
+        padding-left: 60px;
+        padding-right: 25px;
+        &::before {
+          left: 50px;
+          top: 35px;
+          border: medium solid white;
+          border-width: 10px 10px 10px 0;
+          border-color: transparent white transparent transparent;
+          margin: 0;
+        }
+        &::after {
+          margin: 0;
+        }
+      }
+      .left::after,
+      .right::after {
+        left: 18px;
+        top: 32px !important;
+      }
+      .right {
+        left: 0%;
+      }
+      .content {
+        margin: 20px 0;
+        padding: 10px;
+      }
+      .title-left,
+      .title-right {
+        width: auto;
+        top: -17px;
+        left: 50px;
+        right: 0;
+        z-index: 1;
+        padding: 0 !important;
+        margin-top: 20px;
+        margin-left: 20px;
+        text-align: left;
+        h2 {
+          @include titleH2();
+          font-size: 1em !important;
+        }
+      }
+    }
+  }
+}

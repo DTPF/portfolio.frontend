@@ -10,25 +10,15 @@
     margin-top: 30px;
   }
   &__button {
-      display: flex;
-      justify-content: center;
-      button {
-          @include buttonPrimary();
-          position: absolute !important;
-        //   left: 0;
-        bottom: 15px;
-      &:active,
-      &:focus,
-      &:hover {
-        background-color: $primary-color !important;
-        border: 1px solid $primary-color-dark;
-        color: #fff;
-        &:hover {
-          color: $primary-color;
-          border: 1px solid $primary-color;
-          background-color: $primary-color-light !important;
-        }
-      }
+    display: flex;
+    justify-content: center;
+    &-left {
+      @include buttonPrimaryLight();
+      margin: 0 5px;
+    }
+    &-right {
+      @include buttonPrimary();
+      margin: 0 5px;
     }
   }
 }

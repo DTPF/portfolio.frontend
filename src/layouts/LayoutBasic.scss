@@ -1,9 +1,8 @@
 @import "../scss/variables";
 
 .layout-basic {
-  background-image: url("../assets/img/webp/background-squares.webp");
-  background-repeat: no-repeat repeat-y;
-  background-position: 0 55px;
+  background-repeat: no-repeat;
+  background-position: 1% 1%;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;

@@ -64,7 +64,7 @@
     cursor: pointer;
     color: $font-medium-primary;
     &:hover {
-      color: $font-dark-primary;
+      color: $font-primary-dark;
       cursor: pointer;
     }
     @media (min-width: $media-breakpoint-up-xs) {
@@ -194,7 +194,7 @@
         }
         
         &-description {
-          color: $font-dark-primary;
+          color: $font-primary-dark;
           font-size: 10px;
           font-weight: bold;
           padding: 0 5px;
