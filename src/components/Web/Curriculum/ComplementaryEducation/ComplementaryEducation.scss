@@ -39,7 +39,7 @@
         width: 100% !important;
         max-width: 650px;
         border-radius: 7px;
-        @include boxShadowPrimary();
+        @include boxShadowMd();
         &-header {
           color: $font-primary-dark;
           font-weight: bold;
@@ -50,7 +50,7 @@
             padding-left: 28px;
             padding-right: 10px;
             li {
-              color: $font-medium-primary;
+              color: $font-primary;
               padding: 4px 0;
               &::marker {
                 padding: 0;

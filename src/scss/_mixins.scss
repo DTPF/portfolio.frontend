@@ -1,18 +1,18 @@
 @mixin buttonPrimary() {
   color: #fff;
   font-weight: bold;
-  background-color: $btn-background-dark;
-  border: 1px solid $btn-border-dark;
+  background-color: #5d718d;
+  border: 1px solid #556985;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  box-shadow: $box-shadow-button;
-  -moz-box-shadow: $box-shadow-button;
-  -webkit-box-shadow: $box-shadow-button;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
   &:hover {
-    background-color: $btn-background-dark-hover;
-    border: 1px solid $btn-color-border-hover;
-    color: $btn-color-dark-hover;
+    background-color: #cdd5df;
+    border: 1px solid #5d718d;
+    color: #273b56d3;
   }
   @media (min-width: $media-breakpoint-up-xs) {
     font-size: 13px;
@@ -30,19 +30,19 @@
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  color: $btn-color-light;
+  color: #273b56d3;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  border: 1px solid $btn-border-light;
-  background-color: $btn-background-light;
-  box-shadow: $box-shadow-button;
-  -moz-box-shadow: $box-shadow-button;
-  -webkit-box-shadow: $box-shadow-button;
+  border: 1px solid #273b56d3;
+  background-color: #cdd5df;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
   &:hover {
-    color: $btn-color-light-hover;
-    background-color: $btn-background-light-hover;
-    border: 1px solid $btn-color-border-hover;
+    color: #fff;
+    background-color: #5d718d;
+    border: 1px solid #5d718d;
   }
   @media (min-width: $media-breakpoint-up-xs) {
     font-size: 13px;
@@ -88,8 +88,20 @@
   }
 }
 
-@mixin boxShadowPrimary() {
+@mixin boxShadowMd() {
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+}
+
+@mixin boxShadowLg() {
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
+}
+
+@mixin boxShadowXl() {
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
 }

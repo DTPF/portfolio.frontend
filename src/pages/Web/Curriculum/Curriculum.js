@@ -35,13 +35,11 @@ export default function Curriculum() {
                 <Col span={24} md={14}><Projects /></Col>
               </Row>
             </Col>            
-          </Row>
-          
+          </Row>          
           <div className="curriculum__button">
             <Button type="primary" onClick={goBack}>
               Volver
             </Button>
-
           </div>
         </div>
       </Suspense>

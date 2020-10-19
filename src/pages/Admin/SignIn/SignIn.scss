@@ -23,7 +23,7 @@
       }
     }
     &-tabs {
-      background-color: $background-light;
+      background-color: #fff;
       .ant-tabs {
         width: 90vw;
         @media (min-width: $media-breakpoint-up-sm) {
@@ -41,7 +41,7 @@
         height: 60px !important;
         justify-content: center;
         color: $font-dark-light;
-        font-size: 0em + 19px / $defaultFontSize;
+        font-size: 0em + 19px / $font-size-sm;
         border: 0 !important;
         border-top: 4px solid $border-grey !important;
         border-radius: 0 !important;
@@ -50,7 +50,7 @@
           width: 215px;
         }
         @media (min-width: $media-breakpoint-up-md) {
-          font-size: 0em + 19px / $defaultFontSize;
+          font-size: 0em + 19px / $font-size-sm;
         }
         &:hover {
           color: $primary-color-hover;

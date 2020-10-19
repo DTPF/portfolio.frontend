@@ -1,4 +1,5 @@
 @import "../../../../scss/variables";
+@import "../../../../scss/mixins";
 
 .menu-sider-web {
   position: fixed;
@@ -9,9 +10,7 @@
   background-color: #fff;
   border-bottom-right-radius: $border-radius;
   margin-top: 0 !important;
-  -webkit-box-shadow: $box-shadow-primary;
-  -moz-box-shadow: $box-shadow-primary;
-  box-shadow: $box-shadow-primary;
+  @include boxShadowMd();
   @media (min-width: $media-breakpoint-down-md) {
     display: none !important;
   }
@@ -28,7 +27,7 @@
     display: flex;
     align-items: center;
     font-weight: bold;
-    font-size: $defaultFontSize;
+    font-size: $font-size-sm;
     width: 100% !important;
     @media (min-width: $media-breakpoint-up-sm) {
       font-size: $font-size-md;
@@ -39,7 +38,7 @@
       color: white !important;
     }
     a {
-      color: $font-medium-primary !important;
+      color: $font-primary !important;
       &:hover,
       &:focus {
         color: $font-primary-dark !important;

@@ -44,7 +44,7 @@
         width: 100% !important;
         max-width: 650px;
         margin-bottom: 5px;
-        @include boxShadowPrimary();
+        @include boxShadowMd();
         &-header {
           color: $font-primary-dark;
           font-weight: bold;
@@ -56,7 +56,7 @@
           border-bottom-left-radius: 7px;
           border-bottom-right-radius: 7px;
           h3 {
-            color: $font-medium-primary;
+            color: $font-primary;
             font-weight: bold;
             font-size: 1.1em;
           }
@@ -72,7 +72,7 @@
             text-align: justify;
           }
           li {
-            color: $font-medium-primary;
+            color: $font-primary;
             padding: 4px 0;
           }
         }

@@ -62,7 +62,7 @@
     right: 5px;
     font-size: 1em;
     cursor: pointer;
-    color: $font-medium-primary;
+    color: $font-primary;
     &:hover {
       color: $font-primary-dark;
       cursor: pointer;
@@ -141,9 +141,7 @@
     background-color: $primary-color;
     border-radius: 5px;
     overflow: hidden;
-    box-shadow: $box-shadow-card;
-    -webkit-box-shadow: $box-shadow-card;
-    -moz-box-shadow: $box-shadow-card;
+    @include boxShadowLg();
     margin: 5px;
     max-width: 330px;
     @media (min-width: $media-breakpoint-up-xs) {

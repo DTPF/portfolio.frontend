@@ -1,4 +1,5 @@
 @import "../../../../scss/variables";
+@import "../../../../scss/mixins";
 
 .add-edit-course {
   &-form {
@@ -19,16 +20,14 @@
       margin: 0 auto;
       margin-top: 10px;
       margin-bottom: 10px;
-      background-color: $btn-background-dark;
-      border: 1px solid $btn-border-dark;
-      box-shadow: $box-shadow-button;
-      -moz-box-shadow: $box-shadow-button;
-      -webkit-box-shadow: $box-shadow-button;
+      background-color: #5d718d;
+      border: 1px solid #556985;
+      @include boxShadowMd();
       &:hover {
-        background-color: $btn-background-dark-hover;
-        border: 1px solid $btn-color-border-hover;
+        background-color: #cdd5df;
+        border: 1px solid #5d718d;
         span {
-          color: $btn-color-dark-hover !important;
+          color: #273b56d3 !important;
         }
       }
     }

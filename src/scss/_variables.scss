@@ -1,11 +1,8 @@
-$defaultFontSize: 16px;
 $font-size-xs: 15px;
 $font-size-sm: 16px;
 $font-size-md: 17px;
 $font-size-lg: 18px;
 $font-size-xl: 20px;
-
-$primary-background-color: rgba(23, 23, 133, 0.787);
 
 $primary-color-extra-dark: #273b56d3;
 $primary-color-dark: #273b56;
@@ -16,61 +13,23 @@ $primary-color-hover: #326290;
 
 $secondary-color: rgb(255, 199, 62);
 
-$menu-color: #252527;
-
-// BUTTON DARK
-$btn-background-dark: #5d718d;
-$btn-border-dark:  #556985;
-// hover
-$btn-background-dark-hover: #cdd5df;
-$btn-color-dark-hover:#273b56d3;
-$btn-color-border-hover: #5d718d;
-// BUTTON LIGHT
-$btn-background-light: #cdd5df;
-$btn-color-light:  #273b56d3;
-$btn-border-light:  #273b56d3;
-// hover
-$btn-background-light-hover:#5d718d;
-$btn-color-light-hover:  #fff;
-$btn-border-light-hover:  #cdd5df;
-
 $font-light: #fff;
-$font-grey-light: #e8e8e8;
-$font-grey: #808080;
-$font-grey-dark: #595959;
 $font-dark-light: #4d4d53;
-$font-dark-medium: rgba(0, 0, 0, 0.733);
-$font-dark: #000;
-$font-light-primary:  #7b8593;
-$font-medium-primary: #384f6e;
+$font-primary: #384f6e;
+$font-primary-light:  #7b8593;
 $font-primary-dark:  #273b56;
 
-$border-light: #fff;
-$border-grey-light: #e8e8e8;
 $border-grey: #808080;
-$border-grey-dark: #595959;
-$border-dark-light: #252527;
-$border-dark: #000;
 $border-radius: 3px;
 
-$box-shadow-primary: 0.1px 0.1px 4px 0.2px $primary-color;
-$box-shadow-header: -1px 3px 22px -3px rgba(0, 0, 0, 0.69);
-$box-shadow-button: -1px 3px 17px -6px $primary-color;
-$box-shadow-card: 1px 0px 25px -3px $primary-color;
-
-$background-light: #fff;
 $background-grey-light: #e8e8e8;
-$background-grey: #808080;
-$background-grey-dark: #595959;
-$background-dark-light: #252527;
-$background-dark: #000;
 $background-success: #84b84c1f;
 $background-error: #ff00001f;
 
 $success: #84b84c;
 $error: #f00;
 
-// Sociial color
+// Social color
 $github: #333;
 $linkedin: #0077b5;
 
