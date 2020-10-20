@@ -24,21 +24,28 @@ export default function ComplementaryEducation() {
                 <Panel header="2020" key="1">
                   <ul>
                     <li>
-                      Curso “MERN Full Stack: MongoDB, Express, React y Node” –
+                      Master en Frameworks JavaScript: Angular, React, Vue - (26,5h)
+                    </li>
+                    <li>
+                      Curso “MERN Full Stack: MongoDB, Express, React y Node” -
                       Udemy (33,5h)
                     </li>
                     <li>Curso profesional de Git y GitHub – Platzi (6h)</li>
-                    <li>Vim – Udemy (1,5)</li>
+                    <li>Vim - Udemy (1,5h)</li>
+                    <li>
+                      Angular y NodeJS en producción - Configurar un servidor
+                      VPS - (2h)
+                    </li>
                     <li>
                       Curso “Master Full Stack: Angular, Node, Laravel y
-                      Symfony” – Udemy (34,5h)
+                      Symfony” - Udemy (34,5h)
                     </li>
                   </ul>
                 </Panel>
                 <Panel header="2019" key="2">
                   <ul>
-                    <li>Javascript – Udemy (10h)</li>
-                    <li>Bootstrap 4 – Udemy (20h)</li>
+                    <li>Javascript - Udemy (10h)</li>
+                    <li>Bootstrap 4 - Udemy (20h)</li>
                   </ul>
                 </Panel>
               </Collapse>

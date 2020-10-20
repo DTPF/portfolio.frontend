@@ -18,7 +18,7 @@ import {
 import NoImage from "../../../../assets/img/png/no-image.png";
 import "./CourseInfo.scss";
 
-export default function CourseInfo(props) {
+export default function CourseInfo(props: { url: any; courses: any }) {
   const { url, courses } = props;
   const [course, setCourse] = useState(null);
   useEffect(() => {
@@ -27,8 +27,10 @@ export default function CourseInfo(props) {
       if (!unmounted) {
         setCourse(response.course);
       }
-      });
-    return () => {unmounted = true};
+    });
+    return () => {
+      unmounted = true;
+    };
   }, [url]);
   return (
     <Row className="course-info">
@@ -37,15 +39,16 @@ export default function CourseInfo(props) {
   );
 }
 
-function Course(props) {
+function Course(props: { course: any; courses: any }) {
   const { course, courses } = props;
-  const [image, setImage] = useState(null);
-  const [prevCourse, setPrevCourse] = useState([]);
-  const [nextCourse, setNextCourse] = useState([]);
+  const [image, setImage] = useState("");
+  const [prevCourse, setPrevCourse] = useState(null);
+  const [nextCourse, setNextCourse] = useState(null);
   const goBack = useHistory().goBack;
   const prev = course && course.order + 1;
   const next = course && course.order - 1;
   const coursesLength = courses && courses.docs.length;
+  const link = course && course.link;
   useEffect(() => {
     let unmounted = false;
     if (course) {
@@ -58,7 +61,7 @@ function Course(props) {
       } else {
         getCourseByOrderApi(prev).then((response) => {
           if (!unmounted) {
-            setPrevCourse(response.course);
+              setPrevCourse(response.course);
           }
         });
       }
@@ -77,11 +80,12 @@ function Course(props) {
       }
       window.scrollTo(0, 0);
     }
-    return () => {unmounted = true};
+    return () => {
+      unmounted = true;
+    };
   }, [course, prev, next, coursesLength]);
   useEffect(() => {
     let unmounted = false;
-    setImage();
     if (course && course.image) {
       getImageApi(course.image).then((response) => {
         if (!unmounted) {
@@ -89,50 +93,30 @@ function Course(props) {
         }
       });
     }
-    return () => {unmounted = true};
+    return () => { unmounted = true };
   }, [course]);
-  const link = course && course.link;
-  const prevLink = `/education/${prevCourse.url}`;
-  const nextLink = `/education/${nextCourse.url}`;
+  
   return (
     <>
-      <QueueAnim type={["alpha"]} duration={150} ease="easeInCubic">
+      <QueueAnim type={"alpha"} duration={150} ease="easeInCubic">
         <div className="course-info__goBack" key="div">
           <Button type="primary" onClick={goBack}>
             <LeftOutlined />
           </Button>
         </div>
-        <div span={3} sm={2} className="course-info__linkPrevMobile" key="prevMob">
-          {prevCourse.url && (
-            <Link to={prevLink}>
-              <Button type="primary">
-                <ArrowLeftOutlined />
-              </Button>
-            </Link>
-          )}
-        </div>
-        <div className="course-info__linkNextMobile" key="nextMob">
-          {nextCourse.url && (
-            <Link to={nextLink}>
-              <Button type="primary">
-                <ArrowRightOutlined />
-              </Button>
-            </Link>
-          )}
-        </div>
+        <Links prevCourse={prevCourse} nextCourse={nextCourse} />
       </QueueAnim>
-        <Col span={24} className="course-info__title">
-          <QueueAnim type={["alpha"]} duration={200} ease="easeInCubic">
-            <h1 key="title">{course && course.title}</h1>
-          </QueueAnim>
-        </Col>
-      <QueueAnim type={["alpha"]} duration={200} ease="easeInCubic">
+      <Col span={24} className="course-info__title">
+        <QueueAnim type={"alpha"} duration={200} ease="easeInCubic">
+          <h1 key="title">{course && course.title}</h1>
+        </QueueAnim>
+      </Col>
+      <QueueAnim type={"alpha"} duration={200} ease="easeInCubic">
         <div className="course-info__image" key="image">
           <Image
             src={image ? image : NoImage}
             alt={course && "Imágen de " + course.title}
-            type="image/jpg"
-          ></Image>
+            ></Image>
         </div>
         <Row className="course-info__info" key="info">
           <Col span={12} className="course-info__info-duration">
@@ -163,7 +147,35 @@ function Course(props) {
   );
 }
 
-function Tags(props) {
+function Links(props: { prevCourse: any; nextCourse: any }) {
+  const { prevCourse, nextCourse } = props;
+  const prevLink = `/education/${prevCourse && prevCourse.url}`;
+  const nextLink = `/education/${nextCourse && nextCourse.url}`;
+  return (
+    <>
+      <div className="course-info__linkPrevMobile" key="prevMob">
+        {prevCourse && prevCourse.url && (
+          <Link to={prevLink}>
+            <Button type="primary">
+              <ArrowLeftOutlined />
+            </Button>
+          </Link>
+        )}
+      </div>
+      <div className="course-info__linkNextMobile" key="nextMob">
+        {nextCourse && nextCourse.url && (
+          <Link to={nextLink}>
+            <Button type="primary">
+              <ArrowRightOutlined />
+            </Button>
+          </Link>
+        )}
+      </div>
+    </>
+  );
+}
+
+function Tags(props: { course: any }) {
   const { course } = props;
   const [tags, setTags] = useState([]);
   useEffect(() => {
@@ -176,7 +188,7 @@ function Tags(props) {
         }
       });
     }
-    return () => {unmounted = true};
+    return () => { unmounted = true };
   }, [course]);
   return (
     <>
@@ -184,7 +196,7 @@ function Tags(props) {
         {tags &&
           tags.map((tag) => (
             <span key={tag} className={tag}>
-              <Tag tag={tag}>{tag}</Tag>
+              <Tag>{tag}</Tag>
             </span>
           ))}
       </div>

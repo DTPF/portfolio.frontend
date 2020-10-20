@@ -181,9 +181,7 @@
       }
       > span {
         > span {
-          -webkit-box-shadow: 0px 2px 13px -6px rgba(0, 0, 0, 1);
-          -moz-box-shadow: 0px 2px 13px -6px rgba(0, 0, 0, 1);
-          box-shadow: 0px 2px 13px -6px rgba(0, 0, 0, 1);
+          @include boxShadowMd();
           margin: 8px 5px;
           border: 0;
           border-radius: 10px;

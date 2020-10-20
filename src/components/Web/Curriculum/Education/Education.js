@@ -43,33 +43,32 @@ function DesarrolloAppFPN3() {
             >
               <h3>Marzo 2019 - Julio 2020</h3>
               <h4>Muévete Formación</h4>
-              <p>Programación web en el entorno cliente.</p>
+              <p>Programación web en el entorno cliente</p>
               <ul>
                 <li>
-                  Elaboración de documentos web mediante lenguajes de marca -
-                  HTML5, CSS3.
+                  Elaboración de documentos web mediante lenguajes de marca.
                 </li>
                 <li>
                   Desarrollo y reutilización de componentes software y
-                  multimedia mediante lenguajes de guión – Javascript, JQuery.
+                  multimedia mediante lenguajes de guión.
                 </li>
                 <li>
                   Aplicaciones técnicas de usabilidad y accesibilidad en el
-                  entorno cliente – AJAX, Axios.
+                  entorno cliente.
                 </li>
               </ul>
-              <p>Programación web en el entorno servidor.</p>
+              <p>Programación web en el entorno servidor</p>
               <ul>
                 <li>
-                  Desarrollo de aplicaciones web en el entorno servidor - PHP.
+                  Desarrollo de aplicaciones web en el entorno servidor.
                 </li>
                 <li>
-                  Acceso a datos en aplicaciones web del entorno servidor - SQL.
+                  Acceso a datos en aplicaciones web del entorno servidor.
                 </li>
                 <li>Desarrollo de aplicaciones web distribuidas.</li>
               </ul>
-              <p>Implantación de aplicaciones web en entorno internet.</p>
-              <p>Realización de Proyecto Final: https://recetasmsr.com/</p>
+              <p>Implantación de aplicaciones web en entorno internet</p>
+              <p>Realización de proyecto final: https://recetasmsr.com/</p>
             </Panel>
           </Collapse>
         </Col>

@@ -3,18 +3,16 @@
 
 .banner-last-project {
   margin: 0 auto;
-  max-width: 880px;
-  padding: 0 20px;
+  max-width: 750px;
   margin-top: 20px;
   margin-bottom: 30px;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.295);
-  padding: 20px 0;
-  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  padding: 20px 20px;
+  @include boxShadowMd();
   @media (min-width: $media-breakpoint-up-md) {
     margin-bottom: 50px;
+    margin-top: 10px;
     background-color: inherit;
     -webkit-box-shadow: inherit;
     -moz-box-shadow: inherit;
@@ -32,23 +30,17 @@
     }
   }
   &__image {
-    max-width: 340px;
+    max-width: 370px;
     padding: 10px;
     @media (min-width: $media-breakpoint-up-md) {
       padding: 0;
-      border: 1px solid rgba(152, 152, 152, 0.486);
       border-right: 0;
       border-radius: 8px;
-      -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-      -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+      @include boxShadowMd();
     }
     img {
-      max-width: 360px;
       border-radius: 5px;
-      -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-      -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+      @include boxShadowMd();
     }
   }
   &__content {
@@ -56,18 +48,16 @@
     padding: 5px 0;
     max-width: 450px;
     border-radius: 8px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    @media (min-width: 840px) {
-    }
     @media (min-width: $media-breakpoint-up-md) {
       background-color: rgba(255, 255, 255, 0.418);
       padding: 0 15px;
       border: 1px solid rgba(152, 152, 152, 0.486);
       border-left: 0;
-      -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-      -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+      @include boxShadowMd();
+    }
+    @media (min-width: 807px) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
     &-title {
       display: flex;
@@ -83,6 +73,23 @@
         color: $font-primary-dark;
         margin-top: 10px;
         margin-bottom: 5px;
+        a {
+          color: $primary-color;
+          padding: 0 15px;
+          &:hover,
+          &:active,
+          &:focus {
+            color: $font-primary-dark;
+          }
+        }
+        span {
+          cursor: pointer;
+          &:hover,
+          &:active,
+          &:focus {
+            color: $font-primary;
+          }
+        }
       }
     }
     &-text {
@@ -98,6 +105,17 @@
           margin-bottom: 10px;
           padding: 0;
         }
+        span {
+          display: block;
+          text-align: center;
+          font-weight: bold;
+          margin-top: 10px;
+          text-indent: 0;
+          @media (min-width: $media-breakpoint-up-md) {
+            text-align: left;
+            margin-top: 5px;
+          }
+        }
       }
     }
     &-link {
@@ -112,13 +130,28 @@
   }
 }
 
-.banner-last-project__divider {
-  margin: 30px;
-  @media (min-width: $media-breakpoint-up-md) {
-    margin-top: 40px;
+.ant-modal {
+  width: 100% !important;
+  &-content {
+    height: 90vh;
+    .ant-modal-title {
+      color: $font-primary-dark !important;
+      font-size: 1.3em !important;
+    }
   }
-  @media (min-width: $media-breakpoint-up-lg) {
-    visibility: hidden;
-    margin: 15px;
+  &-body {
+    object {
+      width: 100%;
+      height: 75vh;
+      padding: 0;
+      border-radius: 5px;
+      @media (min-width: $media-breakpoint-up-md) {
+        border: 1px solid rgb(170, 170, 170);
+      }
+      p {
+        color: $font-primary-dark;
+        font-weight: 500;
+      }
+    }
   }
 }

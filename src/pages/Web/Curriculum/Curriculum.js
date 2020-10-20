@@ -1,6 +1,7 @@
 import React, { useEffect, Suspense, lazy } from "react";
 import { Row, Col, Button, BackTop } from "antd";
 import { useHistory } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import "./Curriculum.scss";
 const WorkExperience = lazy(() => import("../../../components/Web/Curriculum/WorkExperience"));
 const Education = lazy(() => import("../../../components/Web/Curriculum/Education"));
@@ -16,6 +17,14 @@ export default function Curriculum() {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>Curriculum | Página de contacto</title>
+        <meta
+          name="description"
+          content="Curriculum | David Thomas Pizarro Frick"
+          data-react-helmet="true"
+        />
+      </Helmet>
       <Suspense fallback={<></>}>
         <BackTop />
           <div className="curriculum">

@@ -1,1 +1,1 @@
-export { default } from './CourseInfo';
+export { default } from './CourseInfo.tsx';
