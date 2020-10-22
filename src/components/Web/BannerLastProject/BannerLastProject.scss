@@ -75,19 +75,11 @@
         margin-bottom: 5px;
         a {
           color: $primary-color;
-          padding: 0 15px;
+          padding: 0 10px;
           &:hover,
           &:active,
           &:focus {
             color: $font-primary-dark;
-          }
-        }
-        span {
-          cursor: pointer;
-          &:hover,
-          &:active,
-          &:focus {
-            color: $font-primary;
           }
         }
       }
@@ -125,32 +117,6 @@
       margin-bottom: 10px;
       @media (min-width: $media-breakpoint-up-md) {
         justify-content: flex-start;
-      }
-    }
-  }
-}
-
-.ant-modal {
-  width: 100% !important;
-  &-content {
-    height: 90vh;
-    .ant-modal-title {
-      color: $font-primary-dark !important;
-      font-size: 1.3em !important;
-    }
-  }
-  &-body {
-    object {
-      width: 100%;
-      height: 75vh;
-      padding: 0;
-      border-radius: 5px;
-      @media (min-width: $media-breakpoint-up-md) {
-        border: 1px solid rgb(170, 170, 170);
-      }
-      p {
-        color: $font-primary-dark;
-        font-weight: 500;
       }
     }
   }

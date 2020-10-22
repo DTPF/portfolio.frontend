@@ -94,7 +94,7 @@ function Course(props) {
         <Button type="primary" onClick={() => editCourse(course)}>
           <EditOutlined />
         </Button>,
-        <Button type="danger" onClick={() => deleteCourse(course)}>
+        <Button type="primary" danger onClick={() => deleteCourse(course)}>
           <DeleteOutlined />
         </Button>,
       ]}

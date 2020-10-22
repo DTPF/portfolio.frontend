@@ -11,7 +11,7 @@ const BannerLastProject = lazy(
   () => import("../../../components/Web/BannerLastProject")
 );
 
-export default function Home() {
+export default () => {
   const [courses] = useGetCourses(4, 1);
   const [show, el] = useNearScreen();
   useEffect(() => {
@@ -32,33 +32,31 @@ export default function Home() {
   );
 }
 
-function RenderContent(props: { courses: any; el: any; show: any }) {
+const RenderContent = (props) => {
   const { courses, el, show } = props;
   const title = "Últimos cursos";
   const subtitle = `Últimos cursos que he realizado para mi preparación al mundo de IT`;
   return (
-    <>
-      <Suspense fallback={<></>}>
-        <MainTitle />
-        <BannerLastProject />
-        <Row className="home" key="row">
-          <Col span={24} className="home__courses" key="courses">
-            <Courses
-              numItems={4}
-              title={title}
-              subtitle={subtitle}
-              courses={courses && courses.docs}
-            />
-          </Col>
-        </Row>
-        <div className="home__more" key="button" ref={el}>
-          {show && (
-            <Link to="/education">
-              <Button className="home__more-button">Ver todos</Button>
-            </Link>
-          )}
-        </div>
-      </Suspense>
-    </>
+    <Suspense fallback={<></>}>
+      <MainTitle />
+      <BannerLastProject />
+      <Row className="home" key="row">
+        <Col span={24} className="home__courses" key="courses">
+          <Courses
+            numItems={4}
+            title={title}
+            subtitle={subtitle}
+            courses={courses && courses.docs}
+          />
+        </Col>
+      </Row>
+      <div className="home__more" key="button" ref={el}>
+        {show && (
+          <Link to="/education">
+            <Button className="home__more-button">Ver todos</Button>
+          </Link>
+        )}
+      </div>
+    </Suspense>
   );
 }

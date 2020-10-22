@@ -11,9 +11,14 @@ import {
   notification,
 } from "antd";
 import { useDropzone } from "react-dropzone";
-import AdminTags from "../../../../components/Admin/Courses/AdminTags";
+import AdminTags from "../AdminTags";
 import { getAccessTokenApi } from "../../../../api/auth";
-import { addCourseApi, updateCourseApi, getImageApi, uploadImageApi } from "../../../../api/education";
+import {
+  addCourseApi,
+  updateCourseApi,
+  getImageApi,
+  uploadImageApi,
+} from "../../../../api/education";
 import { LinkOutlined, FontSizeOutlined } from "@ant-design/icons";
 import moment from "moment";
 import { notifDelay, notifDelayErr } from "../../../../utils/notifications";
@@ -25,8 +30,6 @@ export default function AddEditCoursesForm(props) {
   const { setIsVisibleModal, setReloadCourses, course } = props;
   const [image, setImage] = useState(null);
   const [courseData, setCourseData] = useState([]);
-  const token = getAccessTokenApi();
-
   useEffect(() => {
     if (course) {
       setCourseData(course);
@@ -35,14 +38,40 @@ export default function AddEditCoursesForm(props) {
     }
   }, [course]);
   useEffect(() => {
-    if(course && course.image) {
-      getImageApi(course.image).then(response => {
+    if (course && course.image) {
+      getImageApi(course.image).then((response) => {
         setImage(response.url);
-      })
+      });
     } else {
       setImage(null);
     }
-  }, [course]);  
+  }, [course]);
+  return (
+    <div className="add-edit-course">
+      {course && <UploadImage image={image} setImage={setImage} />}
+      <AddEditForm
+        courseData={courseData}
+        setCourseData={setCourseData}
+        course={course}
+        setReloadCourses={setReloadCourses}
+        image={image}
+        setIsVisibleModal={setIsVisibleModal}
+      />
+    </div>
+  );
+}
+
+function AddEditForm(props) {
+  const {
+    courseData,
+    setCourseData,
+    course,
+    setReloadCourses,
+    image,
+    setIsVisibleModal,
+  } = props;
+  const [proccessCourseState, setProccessCourseState] = useState(false);
+  const token = getAccessTokenApi();
   useEffect(() => {
     if (image) {
       setCourseData({ ...courseData, image: image.file });
@@ -65,7 +94,64 @@ export default function AddEditCoursesForm(props) {
       }
     }
   };
+  const updateCourse = () => {
+    let userUpdate = courseData;
+    if (typeof userUpdate.image === "object") {
+      uploadImageApi(token, userUpdate.image, course._id).then((response) => {
+        if (response.status === 200) {
+          userUpdate.image = response.image;
+          updateCourseApi(token, course._id, userUpdate).then((result) => {
+            if (result.status === 200) {
+              notification["success"]({
+                message: result.message,
+                duration: notifDelay,
+              });
+              setIsVisibleModal(false);
+              setReloadCourses(true);
+            } else {
+              notification["error"]({
+                message: result.message,
+                duration: notifDelayErr,
+              });
+              setReloadCourses(true);
+            }
+          });
+        } else {
+          notification["error"]({
+            message: response.message,
+            duration: notifDelay,
+          });
+          setIsVisibleModal(false);
+          setReloadCourses(true);
+        }
+      });
+    } else {
+      updateCourseApi(token, course._id, courseData)
+        .then((response) => {
+          if (response.status === 200) {
+            notification["success"]({
+              message: response.message,
+            });
+            setIsVisibleModal(false);
+            setReloadCourses(true);
+            setCourseData([]);
+          } else {
+            const typeNotification =
+              response.status === 500 ? "error" : "warning";
+            notification[typeNotification]({
+              message: response.message,
+            });
+          }
+        })
+        .catch(() => {
+          notification["error"]({
+            message: "Error del servidor.",
+          });
+        });
+    }
+  };
   const addCourse = () => {
+    console.log(courseData);
     addCourseApi(token, courseData)
       .then((response) => {
         if (response.status !== 200) {
@@ -87,131 +173,13 @@ export default function AddEditCoursesForm(props) {
         });
       });
   };
-  const updateCourse = () => {
-    let userUpdate = courseData;
-    if (typeof userUpdate.image === "object") {
-      uploadImageApi(token, userUpdate.image, course._id)
-        .then(response => {
-          if(response.status === 200) {
-            userUpdate.image = response.image;
-            updateCourseApi(token, course._id, userUpdate).then(result => {
-              if (result.status === 200) {
-                notification["success"]({
-                  message: result.message,
-                  duration: notifDelay
-                });
-                setIsVisibleModal(false);
-                setReloadCourses(true);
-              } else {
-                notification["error"]({
-                  message: result.message,
-                  duration: notifDelayErr
-                });
-                setReloadCourses(true);
-              }      
-            }); 
-          } else {
-            notification["error"]({
-              message: response.message,
-              duration: notifDelay
-            });
-            setIsVisibleModal(false);
-            setReloadCourses(true);
-          }
-        });
-    } else {
-    updateCourseApi(token, course._id, courseData)
-      .then((response) => {
-        if (response.status === 200) {
-          notification['success']({
-            message: response.message,
-          });
-          setIsVisibleModal(false);
-          setReloadCourses(true);
-          setCourseData([]);
-        } else {
-          const typeNotification = response.status === 500 ? "error" : "warning";
-          notification[typeNotification]({
-            message: response.message
-          });
-        }
-      })
-      .catch(() => {
-        notification["error"]({
-          message: "Error del servidor.",
-        });
-      });
-    }
-  };
-  return (
-    <div className="add-edit-course">
-      {course && 
-        <UploadImage image={image} setImage={setImage} />
-      }
-      <AddEditForm
-        courseData={courseData}
-        setCourseData={setCourseData}
-        course={course}
-        processCourse={processCourse}
-        setReloadCourses={setReloadCourses}
-      />
-    </div>
-  );
-}
 
-function UploadImage(props) {
-  const { image, setImage } = props;
-  const [imageUrl, setImageUrl] = useState(null);
-  useEffect(() => {
-    if(image) {
-      if(image.preview) {
-        setImageUrl(image.preview);
-      } else {
-        setImageUrl(image);
-      }
-    } else {
-      setImageUrl(null);
-    }
-  }, [image]);  
-  const onDrop = useCallback(
-    acceptedFiles => {
-      const file = acceptedFiles[0];
-      if(file === undefined) {
-        notification["error"]({
-          message: "Formato de imágen inválido.",
-          duration: notifDelay
-        });
-      } else {
-        setImage({ file, preview: URL.createObjectURL(file) });
-      }
-  }, [setImage]);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: "image/jpeg, image/png",
-    noKeyboard: true,
-    onDrop,
-  });
-  return (
-    <div className="upload-image" {...getRootProps()}>
-      <input {...getInputProps()} />
-      {isDragActive ? (
-        <Image size={150} src={ NoImage } preview={false} />
-      ) : (
-        <Image size={150} src={ imageUrl ? imageUrl : NoImage } preview={false} />
-      )}
-      <span>Tamaño de imágen: 750px x 422px</span>
-    </div>
-  );
-}
-
-function AddEditForm(props) {
-  const { courseData, setCourseData, course, processCourse, setReloadCourses } = props;
-  const [proccessCourseState, setProccessCourseState] = useState(false);  
   const loading = () => {
     setProccessCourseState(true);
   };
   setTimeout(() => {
     setProccessCourseState(false);
-  }, 6000);  
+  }, 6000);
   return (
     <>
       <Form
@@ -259,7 +227,7 @@ function AddEditForm(props) {
                 onChange={(e) =>
                   setCourseData({
                     ...courseData,
-                    platform: e.target.value
+                    platform: e.target.value,
                   })
                 }
               />
@@ -324,19 +292,76 @@ function AddEditForm(props) {
           {course ? "Actualizar curso" : "Crear curso"}
         </Button>
       </Form>
-      {course && 
+      {course && (
         <AdminTags
           course={course}
           courseData={courseData}
           setReloadCourses={setReloadCourses}
-        />}
+        />
+      )}
     </>
+  );
+}
+
+function UploadImage(props) {
+  const { image, setImage } = props;
+  const [imageUrl, setImageUrl] = useState(null);
+  useEffect(() => {
+    if (image) {
+      if (image.preview) {
+        setImageUrl(image.preview);
+      } else {
+        setImageUrl(image);
+      }
+    } else {
+      setImageUrl(null);
+    }
+  }, [image]);
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      const file = acceptedFiles[0];
+      if (file === undefined) {
+        notification["error"]({
+          message: "Formato de imágen inválido.",
+          duration: notifDelay,
+        });
+      } else {
+        setImage({ file, preview: URL.createObjectURL(file) });
+      }
+    },
+    [setImage]
+  );
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: "image/jpeg, image/png",
+    noKeyboard: true,
+    onDrop,
+  });
+  return (
+    <div className="upload-image" {...getRootProps()}>
+      <input {...getInputProps()} />
+      {isDragActive ? (
+        <Image size={150} src={NoImage} preview={false} />
+      ) : (
+        <Image size={150} src={imageUrl ? imageUrl : NoImage} preview={false} />
+      )}
+      <span>Tamaño de imágen: 750px x 422px</span>
+    </div>
   );
 }
 
 function transformTextToUrl(text) {
   const u1 = text.replace(/ /g, "-");
   const u2 = u1.replace(/,/g, "");
-  const url = u2.replace(/:/g, "");
+  const u3 = u2.replace(/á/g, "a");
+  const u4 = u3.replace(/é/g, "e");
+  const u5 = u4.replace(/í/g, "i");
+  const u6 = u5.replace(/ó/g, "o");
+  const u7 = u6.replace(/ú/g, "u");
+  const u8 = u7.replace(/Á/g, "A");
+  const u9 = u8.replace(/É/g, "E");
+  const u10 = u9.replace(/Í/g, "I");
+  const u11 = u10.replace(/Ó/g, "O");
+  const u12 = u11.replace(/Ú/g, "U");
+  const url = u12.replace(/:/g, "");
   return url.toLowerCase();
 }

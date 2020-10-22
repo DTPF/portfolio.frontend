@@ -18,7 +18,7 @@ import {
 import NoImage from "../../../../assets/img/png/no-image.png";
 import "./CourseInfo.scss";
 
-export default function CourseInfo(props: { url: any; courses: any }) {
+export default function CourseInfo(props) {
   const { url, courses } = props;
   const [course, setCourse] = useState(null);
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function CourseInfo(props: { url: any; courses: any }) {
   );
 }
 
-function Course(props: { course: any; courses: any }) {
+function Course(props) {
   const { course, courses } = props;
   const [image, setImage] = useState("");
   const [prevCourse, setPrevCourse] = useState(null);
@@ -147,7 +147,7 @@ function Course(props: { course: any; courses: any }) {
   );
 }
 
-function Links(props: { prevCourse: any; nextCourse: any }) {
+function Links(props) {
   const { prevCourse, nextCourse } = props;
   const prevLink = `/education/${prevCourse && prevCourse.url}`;
   const nextLink = `/education/${nextCourse && nextCourse.url}`;
@@ -175,7 +175,7 @@ function Links(props: { prevCourse: any; nextCourse: any }) {
   );
 }
 
-function Tags(props: { course: any }) {
+function Tags(props) {
   const { course } = props;
   const [tags, setTags] = useState([]);
   useEffect(() => {

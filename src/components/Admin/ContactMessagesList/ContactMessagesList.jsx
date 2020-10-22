@@ -53,9 +53,8 @@ export default function ContactMessagesList(props) {
   );
 }
 
-export function MessagesUnread(props) {
+function MessagesUnread(props) {
   const { messagesUnread, setReloadMessages } = props;
-
   return (
     <List
       className="messages-unread"
@@ -114,7 +113,6 @@ function MessageUnread(props) {
 
 function MessagesRead(props) {
   const { messagesRead, setReloadMessages } = props;
-
   return (
     <List
       className="messages-read"
@@ -127,7 +125,7 @@ function MessagesRead(props) {
   );
 }
 
-export function MessageRead(props) {
+function MessageRead(props) {
   const { message, setReloadMessages } = props;
   const checkMessage = () => {
     const accessToken = getAccessTokenApi();
@@ -153,7 +151,7 @@ export function MessageRead(props) {
       content: `¿Estás seguro que quieres eliminar el mensaje de ${message.email}?`,
       okText: "Eliminar",
       okType: "danger",
-      cancaelText: "Cancelar",
+      cancelText: "Cancelar",
       onOk() {
         deleteContactMessageApi(accessToken, message._id)
           .then(response => {
@@ -179,7 +177,7 @@ export function MessageRead(props) {
         <Button type="primary" onClick={checkMessage}>
           <CheckOutlined />
         </Button>,
-        <Button type="danger" onClick={showDeleteConfirm}>
+        <Button type="primary" danger onClick={showDeleteConfirm}>
           <DeleteOutlined />
         </Button>,
       ]}

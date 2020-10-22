@@ -1,58 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Col, Image } from "antd";
-import Modal from "../../../components/Modal";
 import QueueAnim from "rc-queue-anim";
 import RECETASMSR from "../../../assets/img/webp/recetasmsr.webp";
-import memoriaRecetasPDF from "../../../assets/pdf/memoria-proyecto-final.pdf";
-import { LinkOutlined, FilePdfOutlined } from "@ant-design/icons";
+import { LinkOutlined } from "@ant-design/icons";
 import "./BannerLastProject.scss";
 
-export default function BannerLastProject() {
-  const [isVisibleModal, setIsVisibleModal] = useState(false);
+export default () => {
   return (
     <Row className="banner-last-project">
-      <ModalPDF
-        isVisibleModal={isVisibleModal}
-        setIsVisibleModal={setIsVisibleModal}
-      />
-      <Banner setIsVisibleModal={setIsVisibleModal} />
+      <Banner />
     </Row>
   );
 }
 
-function ModalPDF({ isVisibleModal, setIsVisibleModal }) {
-  return (
-    <Modal
-      title="Memória de Blog de Recetas"
-      isVisible={isVisibleModal}
-      setIsVisible={setIsVisibleModal}
-    >
-      <object type="application/pdf" data={memoriaRecetasPDF}>
-        <p>
-          Error al mostrar el PDF,
-          <a href="../../../assets/pdf/memoria-proyecto-final.pdf" download>
-            &nbsp;descarga&nbsp;
-          </a>
-          el PDF para ver la memória de proyecto final de Recetas Deliciosas
-          MSR's.
-        </p>
-      </object>
-    </Modal>
-  );
-}
-
-function Banner({ setIsVisibleModal }) {
+function Banner() {
   return (
     <>
       <Col span={24} className="banner-last-project__title">
-        <QueueAnim type={["alpha"]} duration={200} ease="easeInCubic">
+        <QueueAnim type={"alpha"} duration={200} ease="easeInCubic">
           <div key="title">
             <h1>Portfolio</h1>
           </div>
         </QueueAnim>
       </Col>
       <Col span={24} md={12} className="banner-last-project__image">
-        <QueueAnim type={["alpha"]} duration={250} ease="easeInCubic">
+        <QueueAnim type={"alpha"} duration={250} ease="easeInCubic">
           <div key="image">
             <Image src={RECETASMSR}></Image>
           </div>
@@ -60,7 +32,7 @@ function Banner({ setIsVisibleModal }) {
       </Col>
       <Col span={24} md={12} className="banner-last-project__content">
         <Col span={24} className="banner-last-project__content-title">
-          <QueueAnim type={["alpha"]} duration={300} ease="easeInCubic">
+          <QueueAnim type={"alpha"} duration={300} ease="easeInCubic">
             <div key="titleh2">
               <h2>
                 Recetas Deliciosas MSR's
@@ -71,15 +43,12 @@ function Banner({ setIsVisibleModal }) {
                 >
                   <LinkOutlined />
                 </a>
-                <span onClick={() => setIsVisibleModal(true)}>
-                  <FilePdfOutlined />
-                </span>
               </h2>
             </div>
           </QueueAnim>
         </Col>
         <Col span={24} className="banner-last-project__content-text">
-          <QueueAnim type={["alpha"]} duration={350} ease="easeInCubic">
+          <QueueAnim type={"alpha"} duration={350} ease="easeInCubic">
             <div key="p">
               <p>
                 Recetas Deliciosas MSR's es un blog de recetas de cocina, creado

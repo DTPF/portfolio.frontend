@@ -1,31 +1,45 @@
 import React, { useState } from "react";
 import { Form, Input, Button, notification } from "antd";
-import { subscribeContactApi, getMessagesApi } from "../../../../../api/contact";
+import {
+  subscribeContactApi,
+  getMessagesApi,
+} from "../../../../../api/contact";
 import { notifDelayErr } from "../../../../../utils/notifications";
 import { UserOutlined, MailOutlined } from "@ant-design/icons";
-
 import "./ContactMe.scss";
 
-export default function ContactMe(props) {
+export default function ContactMe() {
   const [inputs, setInputs] = useState({});
-  const [order, setOrder] = useState(0);
+  const [order, setOrder] = useState(0);  
+  return (
+    <div className="contact-me">
+      <h3>{"Contacta conmigo :)"}</h3>
+      <RenderForm
+        inputs={inputs}
+        setInputs={setInputs}
+        order={order}
+        setOrder={setOrder}
+      />
+    </div>
+  );
+}
 
+function RenderForm(props) {
+  const { inputs, setInputs, order, setOrder } = props;
   const onFinish = () => {
     getMessagesApi().then((result) => {
-        const data = result.messages +1;
-        setOrder(data);
+      const data = result.messages + 1;
+      setOrder(data);
     });
     let finalData = {
-        email: inputs.email,
-        subject: inputs.subject,
-        order: order
-    }
-
-    let inputEmail = inputs.email;    
+      email: inputs.email,
+      subject: inputs.subject,
+      order: order,
+    };
+    let inputEmail = inputs.email;
     const replaceTab = inputEmail?.replace(" ", "");
     const emailValid = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,63}$/i;
     const resultValidation = emailValid.test(replaceTab);
-
     if (!inputs.email && !inputs.subject) {
       notification["warning"]({
         message: "Los dos campos son requeridos.",
@@ -59,41 +73,32 @@ export default function ContactMe(props) {
       });
     }
   };
-  
+
   return (
-    <div className="contact-me">
-      <h3>Contacta conmigo :)</h3>
-      <Form onFinish={onFinish}>
-        <Form.Item>
-          <Input
-            type="email"
-            name="email"
-            prefix={<UserOutlined style={{ color: "rgba(0, 0, 0, 0.25)" }} />}
-            placeholder="Correo electrónico"
-            value={inputs.email}
-            onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
-          />
-        </Form.Item>
-        <Form.Item>
-          <Input
-            prefix={
-              <MailOutlined style={{ color: "rgba(0, 0, 0, 0.25)" }} />
-            }
-            placeholder="Asunto"
-            value={inputs.subject}
-            onChange={(e) => setInputs({ ...inputs, subject: e.target.value })}
-          />
-        </Form.Item>
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
-          >
-            Enviar
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
+    <Form onFinish={onFinish}>
+      <Form.Item>
+        <Input
+          type="email"
+          name="email"
+          prefix={<UserOutlined style={{ color: "rgba(0, 0, 0, 0.25)" }} />}
+          placeholder="Correo electrónico"
+          value={inputs.email}
+          onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
+        />
+      </Form.Item>
+      <Form.Item>
+        <Input
+          prefix={<MailOutlined style={{ color: "rgba(0, 0, 0, 0.25)" }} />}
+          placeholder="Asunto"
+          value={inputs.subject}
+          onChange={(e) => setInputs({ ...inputs, subject: e.target.value })}
+        />
+      </Form.Item>
+      <Form.Item>
+        <Button type="primary" htmlType="submit" className="login-form-button">
+          Enviar
+        </Button>
+      </Form.Item>
+    </Form>
   );
 }

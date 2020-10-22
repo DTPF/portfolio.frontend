@@ -4,7 +4,11 @@ import NoAvatar from "../../../../assets/img/png/no-avatar.png";
 import Modal from "../../../Modal";
 import EditUserForm from "../EditUserForm";
 import AddUserForm from "../AddUserForm";
-import { getAvatarApi, activateUserApi, deleteUserApi } from "../../../../api/user";
+import {
+  getAvatarApi,
+  activateUserApi,
+  deleteUserApi,
+} from "../../../../api/user";
 import { getAccessTokenApi } from "../../../../api/auth";
 import { notifDelay, notifDelayErr } from "../../../../utils/notifications";
 import {
@@ -20,19 +24,47 @@ const { confirm } = ModalDelete;
 
 export default function ListUsers(props) {
   const { usersActive, usersInactive, setReloadUsers } = props;
-  const [viewUsersActive, setViewUsersActive] = useState(true);
-  const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState(null);
+  return (
+    <div className="list-users">
+      <RenderContent
+        setModalTitle={setModalTitle}
+        setModalContent={setModalContent}
+        setReloadUsers={setReloadUsers}
+        usersActive={usersActive}
+        usersInactive={usersInactive}
+        modalTitle={modalTitle}
+        modalContent={modalContent}
+        />
+    </div>
+  );
+}
+
+function RenderContent(props) {
+  const {
+    usersActive,
+    usersInactive,
+    setModalTitle,
+    setModalContent,
+    setReloadUsers,
+    modalTitle,
+    modalContent,
+  } = props;
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [viewUsersActive, setViewUsersActive] = useState(true);
   const addUserModal = () => {
     setIsVisibleModal(true);
     setModalTitle("Creando nuevo usuario");
     setModalContent(
-      <AddUserForm setIsVisibleModal={setIsVisibleModal} setReloadUsers={setReloadUsers} />
-    )
+      <AddUserForm
+        setIsVisibleModal={setIsVisibleModal}
+        setReloadUsers={setReloadUsers}
+      />
+    );
   };
   return (
-    <div className="list-users">
+    <>
       <div className="list-users__header">
         <div className="list-users__header-switch">
           <Switch
@@ -48,7 +80,7 @@ export default function ListUsers(props) {
         <Button type="primary" onClick={addUserModal}>
           Nuevo Usuario
         </Button>
-      </div>      
+      </div>
       {viewUsersActive ? (
         <UsersActive
           usersActive={usersActive}
@@ -58,7 +90,10 @@ export default function ListUsers(props) {
           setReloadUsers={setReloadUsers}
         />
       ) : (
-        <UsersInactive usersInactive={usersInactive} setReloadUsers={setReloadUsers} />
+        <UsersInactive
+          usersInactive={usersInactive}
+          setReloadUsers={setReloadUsers}
+        />
       )}
       <Modal
         title={modalTitle}
@@ -67,7 +102,7 @@ export default function ListUsers(props) {
       >
         {modalContent}
       </Modal>
-    </div>
+    </>
   );
 }
 
@@ -77,7 +112,7 @@ function UsersActive(props) {
     setIsVisibleModal,
     setModalTitle,
     setModalContent,
-    setReloadUsers
+    setReloadUsers,
   } = props;
   const editUser = (user) => {
     setIsVisibleModal(true);
@@ -87,23 +122,24 @@ function UsersActive(props) {
       }`
     );
     setModalContent(
-      <EditUserForm 
+      <EditUserForm
         user={user}
         setIsVisibleModal={setIsVisibleModal}
         setReloadUsers={setReloadUsers}
-      />);
+      />
+    );
   };
   return (
     <List
       className="users-active"
       itemLayout="horizontal"
       dataSource={usersActive}
-      renderItem={user => (
+      renderItem={(user) => (
         <UserActive
-         user={user} 
-         editUser={editUser} 
-         setReloadUsers={setReloadUsers}
-       />
+          user={user}
+          editUser={editUser}
+          setReloadUsers={setReloadUsers}
+        />
       )}
     />
   );
@@ -111,54 +147,55 @@ function UsersActive(props) {
 
 function UserActive(props) {
   const { user, editUser, setReloadUsers } = props;
-  const [ avatar, setAvatar ] = useState(null);
+  const [avatar, setAvatar] = useState("");
   useEffect(() => {
     let unmounted = false;
-    // setAvatar();
-    if(user.avatar) {
-      getAvatarApi(user.avatar).then(response => {
+    if (user.avatar) {
+      getAvatarApi(user.avatar).then((response) => {
         if (!unmounted) {
           setAvatar(response.url);
         }
       });
     } else {
-      setAvatar(null);
+      setAvatar("");
     }
-    return () => { unmounted = true };
+    return () => {
+      unmounted = true;
+    };
   }, [user]);
 
   const deactivateUser = () => {
     const accessToken = getAccessTokenApi();
-    if (user.email === 'davidpizarrofrick@gmail.com') {
+    if (user.email === "davidpizarrofrick@gmail.com") {
       notification["error"]({
-        message: '¡Usuario protegido!',
-        duration: notifDelayErr
-      });      
-    } else {
-    activateUserApi(accessToken, user._id, false)
-      .then(response => {
-        notification["success"]({
-          message: response.message,
-          duration: notifDelay
-        });
-        setReloadUsers(true);
-      })
-      .catch(err => {
-        notification["error"]({
-          message: err.message,
-          duration: notifDelayErr
-        });
+        message: "¡Usuario protegido!",
+        duration: notifDelayErr,
       });
+    } else {
+      activateUserApi(accessToken, user._id, false)
+        .then((response) => {
+          notification["success"]({
+            message: response.message,
+            duration: notifDelay,
+          });
+          setReloadUsers(true);
+        })
+        .catch((err) => {
+          notification["error"]({
+            message: err.message,
+            duration: notifDelayErr,
+          });
+        });
     }
-  }
+  };
 
   const showDeleteConfirm = () => {
     const accessToken = getAccessTokenApi();
-    if (user.email === 'davidpizarrofrick@gmail.com') {
+    if (user.email === "davidpizarrofrick@gmail.com") {
       notification["error"]({
-        message: '¡Usuario protegido!',
-        duration: notifDelayErr
-      });      
+        message: "¡Usuario protegido!",
+        duration: notifDelayErr,
+      });
     } else {
       confirm({
         title: "Eliminando usuario",
@@ -168,20 +205,20 @@ function UserActive(props) {
         cancelText: "Cancelar",
         onOk() {
           deleteUserApi(accessToken, user._id)
-            .then(response => {
+            .then((response) => {
               notification["success"]({
                 message: response.message,
-                duration: notifDelay
+                duration: notifDelay,
               });
               setReloadUsers(true);
             })
-            .catch(err => {
+            .catch((err) => {
               notification["error"]({
                 message: err.message,
-                duration: notifDelayErr
+                duration: notifDelayErr,
               });
             });
-        }
+        },
       });
     }
   };
@@ -192,16 +229,10 @@ function UserActive(props) {
         <Button type="primary" onClick={() => editUser(user)}>
           <EditOutlined />
         </Button>,
-        <Button
-          type="danger"
-          onClick={deactivateUser}
-        >
+        <Button type="primary" danger onClick={deactivateUser}>
           <StopOutlined />
         </Button>,
-        <Button
-          type="danger"
-          onClick={showDeleteConfirm}
-        >
+        <Button type="primary" danger onClick={showDeleteConfirm}>
           <DeleteOutlined />
         </Button>,
       ]}
@@ -225,42 +256,46 @@ function UsersInactive(props) {
       className="users-active"
       itemLayout="horizontal"
       dataSource={usersInactive}
-      renderItem={(user) => <UserInactive user={user} setReloadUsers={setReloadUsers} />}
+      renderItem={(user) => (
+        <UserInactive user={user} setReloadUsers={setReloadUsers} />
+      )}
     />
   );
 }
 
 function UserInactive(props) {
   const { user, setReloadUsers } = props;
-  const [ avatar, setAvatar ] = useState(null);
+  const [avatar, setAvatar] = useState("");
   useEffect(() => {
     let unmounted = false;
-    if(user.avatar) {
-      getAvatarApi(user.avatar).then(response => {
+    if (user.avatar) {
+      getAvatarApi(user.avatar).then((response) => {
         if (!unmounted) {
           setAvatar(response.url);
         }
       });
     } else {
-      setAvatar(null);
+      setAvatar("");
     }
-    return () => { unmounted = true };    
+    return () => {
+      unmounted = true;
+    };
   }, [user]);
 
   const activateUser = () => {
     const accessToken = getAccessTokenApi();
     activateUserApi(accessToken, user._id, true)
-      .then(response => {
+      .then((response) => {
         notification["success"]({
           message: response.message,
-          duration: notifDelay
+          duration: notifDelay,
         });
         setReloadUsers(true);
       })
-      .catch(err => {
+      .catch((err) => {
         notification["error"]({
           message: err.message,
-          duration: notifDelayErr
+          duration: notifDelayErr,
         });
       });
   };
@@ -275,48 +310,42 @@ function UserInactive(props) {
       cancelText: "Cancelar",
       onOk() {
         deleteUserApi(accessToken, user._id)
-          .then(response => {
+          .then((response) => {
             notification["success"]({
               message: response.message,
-              duration: notifDelay
+              duration: notifDelay,
             });
             setReloadUsers(true);
           })
-          .catch(err => {
+          .catch((err) => {
             notification["error"]({
               message: err.message,
-              duration: notifDelayErr
+              duration: notifDelayErr,
             });
           });
-      }
+      },
     });
   };
 
   return (
     <List.Item
-          actions={[
-            <Button
-              type="primary"
-              onClick={activateUser}
-            >
-              <CheckOutlined />
-            </Button>,
-            <Button
-              type="danger"
-              onClick={showDeleteConfirm}
-            >
-              <DeleteOutlined />
-            </Button>,
-          ]}
-        >
-          <List.Item.Meta
-            avatar={<Avatar src={avatar ? avatar : NoAvatar} />}
-            title={`
+      actions={[
+        <Button type="primary" onClick={activateUser}>
+          <CheckOutlined />
+        </Button>,
+        <Button type="primary" danger onClick={showDeleteConfirm}>
+          <DeleteOutlined />
+        </Button>,
+      ]}
+    >
+      <List.Item.Meta
+        avatar={<Avatar src={avatar ? avatar : NoAvatar} />}
+        title={`
               ${user.name ? user.name : "..."} 
               ${user.lastname ? user.lastname : "..."}
             `}
-            description={user.email}
-          />
-        </List.Item>
+        description={user.email}
+      />
+    </List.Item>
   );
 }

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useGetCourses } from "../../../../hooks/useGetCourses";
 import TweenOne from "rc-tween-one";
-import Children from "rc-tween-one/lib/plugin/ChildrenPlugin";
+import Children from "rc-tween-one/lib/plugin/ChildrenPlugin.js";
 import BannerAnim, { Element } from "rc-banner-anim";
 import "rc-banner-anim/assets/index.css";
 import "./InfoBanner.scss";
-TweenOne.plugins.push(Children);
 
 export default function InfoBanner() {
+  TweenOne.plugins.push(Children);
   const [courses] = useGetCourses(10000, 1);
   const [totalDuration, setTotalDuration] = useState(0);
   const [duration, setDuration] = useState(0);

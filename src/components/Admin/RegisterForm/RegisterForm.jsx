@@ -2,12 +2,8 @@ import React, { useState } from "react";
 import { Form, Input, Button, Checkbox, notification } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { notifDelay, notifDelayErr } from "../../../utils/notifications";
-import {
-  emailValidation,
-  minLenghtValidation,
-} from "../../../utils/formValidation";
+import { emailValidation, minLenghtValidation } from "../../../utils/formValidation";
 import { signUpApi } from "../../../api/user";
-
 import "./RegisterForm.scss";
 
 export default function RegisterForm() {
@@ -23,7 +19,6 @@ export default function RegisterForm() {
     repeatPassword: false,
     privacyPolicy: false,
   });
-
   const changeForm = (e) => {
     if (e.target.name === "privacyPolicy") {
       setInputs({
@@ -37,10 +32,8 @@ export default function RegisterForm() {
       });
     }
   };
-
   const inputValidation = (e) => {
     const { type, name } = e.target;
-
     if (type === "email") {
       setFormValid({ ...formValid, [name]: emailValidation(e.target) });
     }
@@ -51,13 +44,11 @@ export default function RegisterForm() {
       setFormValid({ ...formValid, [name]: e.target.checked });
     }
   };
-
   const register = async (e) => {
     const emailVal = inputs.email;
     const passwordVal = inputs.password;
     const repeatPasswordVal = inputs.repeatPassword;
     const privacyPolicyVal = inputs.privacyPolicy;
-
     if (!emailVal || !passwordVal || !repeatPasswordVal || !privacyPolicyVal) {
       if (emailVal && passwordVal && repeatPasswordVal && !privacyPolicyVal) {
         notification["warning"]({
@@ -85,7 +76,7 @@ export default function RegisterForm() {
           });
           resetForm();
         } else {
-          let typeNotification = result.status === 500 ? "error" : "warning";
+          const typeNotification = result.status === 500 ? "error" : "warning";
           notification[typeNotification]({
             message: result.message,
             duration: notifDelayErr
@@ -94,22 +85,18 @@ export default function RegisterForm() {
       }
     }
   };
-
   const resetForm = () => {
     const input = document.getElementsByTagName("input");
-
     for (let i = 0; i < inputs.length; i++) {
       input[i].className.remove("success");
       input[i].className.remove("error");
     }
-
     setInputs({
       email: "",
       password: "",
       repeatPassword: "",
       privacyPolicy: false,
     });
-
     setFormValid({
       email: false,
       password: false,
@@ -117,7 +104,6 @@ export default function RegisterForm() {
       privacyPolicy: false,
     });
   };
-
   return (
     <Form className="register-form" onFinish={register} onChange={changeForm}>
       <Form.Item>

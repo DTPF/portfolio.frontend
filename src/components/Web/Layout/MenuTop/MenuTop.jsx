@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu, Button, notification } from "antd";
 import { NavLink, withRouter } from "react-router-dom";
-import { getMenuApi } from "./../../../../api/menu";
+import { getMenuApi } from "../../../../api/menu";
 import Logo from "../../../../assets/img/png/logo128.png";
 import { 
   MenuOutlined,

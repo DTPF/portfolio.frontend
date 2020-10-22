@@ -44,10 +44,8 @@ function Course(props) {
   const [show, el] = useNearScreen();
   const [image, setImage] = useState(null);
   const { Meta } = Card;
-
   useEffect(() => {
     let unmounted = false;
-    setImage();
     if (course.image) {
       getImageApi(course.image).then((response) => {
         let filePath = response.url;
@@ -66,7 +64,7 @@ function Course(props) {
     <>
       <div className="courses-list__element" ref={el}>
         {show && (
-          <QueueAnim type={["alpha"]} duration={400} ease="easeInCubic">
+          <QueueAnim type={"alpha"} duration={400} ease="easeInCubic">
             <div key="course">
               <Link to={`/education/${course.url}`}>
                 <Card
@@ -75,7 +73,6 @@ function Course(props) {
                     <img
                       src={image ? image : NoImage}
                       alt={course.title}
-                      type="image/jpg"
                     />
                   }
                 >

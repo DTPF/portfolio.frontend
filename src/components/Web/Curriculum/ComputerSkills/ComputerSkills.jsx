@@ -12,7 +12,7 @@ export default function ComputerSkills() {
   );
 }
 
-function Skills(props: { show: any; el: any }) {
+function Skills(props) {
   const { show, el } = props;
   return (
     <div className="use-near-screen" ref={el}>
@@ -59,7 +59,7 @@ function Skills(props: { show: any; el: any }) {
   );
 }
 
-function Skill(props: { percent: any; steps: any; skill: any }) {
+function Skill(props) {
   const { percent, steps, skill } = props;
   return (
     <div className="computer-skills__skill">

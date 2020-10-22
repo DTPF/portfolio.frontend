@@ -78,5 +78,45 @@
         }
       }
     }
+    &__pdf {
+      font-weight: 400;
+      cursor: pointer;
+      &:hover,
+      &:active,
+      &:focus {
+        color: $font-primary;
+      }
+      span {
+        font-size: 1.2em;
+      }
+    }
+  }
+}
+
+.education {
+  &__modal-pdf-curriculum {
+    width: 100% !important;
+    .ant-modal-content {
+      height: 90vh;
+      .ant-modal-title {
+        color: $font-primary-dark !important;
+        font-size: 1.3em !important;
+      }
+    }
+    .ant-modal-body {
+      object {
+        width: 100%;
+        height: 75vh;
+        padding: 0;
+        border-radius: 5px;
+        @media (min-width: $media-breakpoint-up-md) {
+          border: 1px solid rgb(170, 170, 170);
+        }
+        p {
+          color: $font-primary-dark;
+          font-weight: 500;
+        }
+      }
+    }
   }
 }

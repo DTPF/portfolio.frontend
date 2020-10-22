@@ -1,6 +1,6 @@
 // Layout
-import LayoutAdmin from "../layouts/LayoutAdmin";
-import LayoutBasic from "../layouts/LayoutBasic.tsx";
+import LayoutAdmin from "../layouts/LayoutAdmin.jsx";
+import LayoutBasic from "../layouts/LayoutBasic.jsx";
 
 // Admin Pages
 import AdminHome from "../pages/Admin";
@@ -13,7 +13,7 @@ import AdminCourses from "../pages/Admin/Courses";
 // Web Pages
 import Home from "../pages/Web/Home";
 import Contact from "../pages/Web/AboutMe";
-import Courses from "../pages/Web/Education";
+import Education from "../pages/Web/Education";
 import Curriculum from "../pages/Web/Curriculum";
 
 // Other
@@ -78,12 +78,12 @@ const routes = [
       {
         path: "/education",
         exact: true,
-        component: Courses
+        component: Education
       },
       {
         path: "/education/:url",
         exact: true,
-        component: Courses
+        component: Education
       },
       {
         path: "/curriculum",

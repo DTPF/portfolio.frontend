@@ -44,31 +44,6 @@ export default function AdminTags(props) {
       unmounted = true;
     };
   }, [course, reloadTags, tag]);
-  const addTag = () => {
-    const token = getAccessTokenApi();
-    addTagApi(token, course._id, tag)
-      .then((response) => {
-        if (response.status === 200) {
-          notification["success"]({
-            message: `"${tag.tags}" añadido correctamente.`,
-            duration: notifDelay,
-          });
-          setReloadCourses(true);
-          setReloadTags(true);
-          setTag([]);
-        } else {
-          notification["warning"]({
-            message: response.message,
-            duration: notifDelayErr,
-          });
-        }
-      })
-      .catch(() => {
-        notification["error"]({
-          message: "Error del servidor.",
-        });
-      });
-  };
   const deleteTag = (tag) => {
     const token = getAccessTokenApi();
     confirm({
@@ -88,7 +63,7 @@ export default function AdminTags(props) {
               setReloadCourses(true);
               setReloadTags(true);
             } else {
-              notification["warnig"]({
+              notification["warning"]({
                 message: response.message,
                 duration: notifDelay,
               });
@@ -125,15 +100,19 @@ export default function AdminTags(props) {
               <Col key={tag} className={tag}>
                 <TagAnt
                   tag={tag}
-                  courseData={courseData}
-                  setReloadTags={setReloadTags}
                   deleteTag={deleteTag}
                 />
               </Col>
             ))}
           </Row>
           <div className="admin-tags__add-tag">
-            <AddTagForm tag={tag} addTag={addTag} setTag={setTag} />
+            <AddTagForm
+              tag={tag}
+              course={course}
+              setTag={setTag}
+              setReloadCourses={setReloadCourses}
+              setReloadTags={setReloadTags}
+            />
           </div>
         </div>
       )}
@@ -143,15 +122,36 @@ export default function AdminTags(props) {
 
 function TagAnt(props) {
   const { tag, deleteTag } = props;
-  return (
-    <Tag tag={tag} onClick={() => deleteTag(tag)}>
-      {tag}
-    </Tag>
-  );
+  return <Tag onClick={() => deleteTag(tag)}>{tag}</Tag>;
 }
 
 function AddTagForm(props) {
-  const { tag, addTag, setTag } = props;
+  const { tag, setTag, course, setReloadCourses, setReloadTags } = props;
+  const addTag = () => {
+    const token = getAccessTokenApi();
+    addTagApi(token, course._id, tag)
+      .then((response) => {
+        if (response.status === 200) {
+          notification["success"]({
+            message: `"${tag.tags}" añadido correctamente.`,
+            duration: notifDelay,
+          });
+          setReloadCourses(true);
+          setReloadTags(true);
+          setTag([]);
+        } else {
+          notification["warning"]({
+            message: response.message,
+            duration: notifDelayErr,
+          });
+        }
+      })
+      .catch(() => {
+        notification["error"]({
+          message: "Error del servidor.",
+        });
+      });
+  };
   return (
     <div className="admin-tags__add-tag-form">
       <Form layout="inline" onFinish={addTag}>

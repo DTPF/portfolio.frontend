@@ -8,7 +8,7 @@ const MenuSider = lazy(() => import("../components/Web/Layout/MenuSider"));
 const Footer = lazy(() => import("../components/Web/Layout/Footer"));
 const LoadRoutes = lazy(() => import("../providers/LoadRoutes"));
 
-export default function LayoutBasic(props: { routes: any }) {
+export default function LayoutBasic(props) {
   const { routes } = props;
   const [menuCollapsed, setMenuCollapsed] = useState(true);
   const backgroundImage = window.innerWidth >= 650 ? desktopImage : mobileImage;

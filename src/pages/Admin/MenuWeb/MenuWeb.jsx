@@ -3,7 +3,7 @@ import { getMenuApi } from "../../../api/menu";
 const MenuWebList = lazy(() => import('../../../components/Admin/MenuWeb/MenuWebList'));
 
 export default function MenuWeb() {
-  const [menu, setMenu] = useState([]);
+  const [menu, setMenu] = useState(null);
   const [reloadMenuWeb, setReloadMenuWeb] = useState(false);
   useEffect(() => {
     let unmounted = false;

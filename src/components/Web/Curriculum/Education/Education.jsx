@@ -1,26 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNearScreen } from "../../../../hooks/useNearScreen";
 import { Row, Col, Collapse } from "antd";
-import { LeftCircleTwoTone } from "@ant-design/icons";
+import Modal from "../../../Modal";
+import memoriaRecetasPDF from "../../../../assets/pdf/memoria-proyecto-final.pdf";
+import { LeftCircleTwoTone, FilePdfOutlined } from "@ant-design/icons";
 import "./Education.scss";
 const { Panel } = Collapse;
 
 export default function Education() {
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
   return (
-    <Row className="education">
-      <Col span={24} className="education__title">
-        <h2>Formación oficial</h2>
-      </Col>
-      <DesarrolloAppFPN3 />
-      <CompetenciasClaveN3 />
-      <HerramientasWebN3 />
-      <AdministrativoN1 />
-      <GraduadoEscolar />
-    </Row>
+    <>
+      <Row className="education">
+        <Col span={24} className="education__title">
+          <h2>Formación oficial</h2>
+        </Col>
+        <DesarrolloAppFPN3 setIsVisibleModal={setIsVisibleModal} />
+        <CompetenciasClaveN3 />
+        <HerramientasWebN3 />
+        <AdministrativoN1 />
+        <GraduadoEscolar />
+      </Row>
+      <ModalPDF
+        isVisibleModal={isVisibleModal}
+        setIsVisibleModal={setIsVisibleModal}
+      />
+    </>
   );
 }
 
-function DesarrolloAppFPN3() {
+function ModalPDF({ isVisibleModal, setIsVisibleModal }) {
+  return (
+    <Modal
+      title="Memória de Blog de Recetas"
+      isVisible={isVisibleModal}
+      setIsVisible={setIsVisibleModal}
+      className="education__modal-pdf-curriculum"
+    >
+      <object type="application/pdf" data={memoriaRecetasPDF}>
+        <p>
+          Error al mostrar el PDF,
+          <a href="../../../assets/pdf/memoria-proyecto-final.pdf" download>
+            &nbsp;descarga&nbsp;
+          </a>
+          el PDF para ver la memória de proyecto final de Recetas Deliciosas
+          MSR's.
+        </p>
+      </object>
+    </Modal>
+  );
+}
+
+function DesarrolloAppFPN3({ setIsVisibleModal }) {
   const [show, el] = useNearScreen();
   return (
     <div className="use-near-screen" ref={el}>
@@ -59,16 +90,22 @@ function DesarrolloAppFPN3() {
               </ul>
               <p>Programación web en el entorno servidor</p>
               <ul>
-                <li>
-                  Desarrollo de aplicaciones web en el entorno servidor.
-                </li>
+                <li>Desarrollo de aplicaciones web en el entorno servidor.</li>
                 <li>
                   Acceso a datos en aplicaciones web del entorno servidor.
                 </li>
                 <li>Desarrollo de aplicaciones web distribuidas.</li>
               </ul>
               <p>Implantación de aplicaciones web en entorno internet</p>
-              <p>Realización de proyecto final: https://recetasmsr.com/</p>
+              <p>
+                Realización de proyecto final:{" "}
+                <span
+                  className="education__pdf"
+                  onClick={() => setIsVisibleModal(true)}
+                >
+                  Memória de proyecto <FilePdfOutlined />
+                </span>
+              </p>
             </Panel>
           </Collapse>
         </Col>
@@ -189,35 +226,30 @@ function AdministrativoN1() {
 }
 
 function GraduadoEscolar() {
-    const [show, el] = useNearScreen();
-    return (
-      <div className="use-near-screen" ref={el}>
-        {show && (
-          <Col span={24} className="education__collapse">
-            <Collapse
-              accordion
-              expandIconPosition={"right"}
-              expandIcon={({ isActive }) => (
-                <LeftCircleTwoTone
-                  twoToneColor="#5d718d"
-                  style={{ fontSize: "26px" }}
-                  rotate={isActive ? -90 : 0}
-                />
-              )}
-            >
-              <Panel
-                header="GRADUADO ESCOLAR"
-                key="1"
-              >
-                <h3>2006</h3>
-                <h4>IFOC</h4>
-                <p>
-                  Graduado en secundaria
-                </p>
-              </Panel>
-            </Collapse>
-          </Col>
-        )}
-      </div>
-    );
+  const [show, el] = useNearScreen();
+  return (
+    <div className="use-near-screen" ref={el}>
+      {show && (
+        <Col span={24} className="education__collapse">
+          <Collapse
+            accordion
+            expandIconPosition={"right"}
+            expandIcon={({ isActive }) => (
+              <LeftCircleTwoTone
+                twoToneColor="#5d718d"
+                style={{ fontSize: "26px" }}
+                rotate={isActive ? -90 : 0}
+              />
+            )}
+          >
+            <Panel header="GRADUADO ESCOLAR" key="1">
+              <h3>2006</h3>
+              <h4>IFOC</h4>
+              <p>Graduado en secundaria</p>
+            </Panel>
+          </Collapse>
+        </Col>
+      )}
+    </div>
+  );
 }

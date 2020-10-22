@@ -14,8 +14,22 @@ import "./AddUserForm.scss";
 export default function AddUserForm(props) {
   const { setIsVisibleModal, setReloadUsers } = props;
   const [userData, setUserData] = useState({});
+  return (
+    <div className="add-user-form">
+      <AddForm
+        userData={userData}
+        setUserData={setUserData}
+        setIsVisibleModal={setIsVisibleModal}
+        setReloadUsers={setReloadUsers}
+      />
+    </div>
+  );
+}
 
-  const addUser = (event) => {
+function AddForm(props) {
+  const { userData, setUserData, setIsVisibleModal, setReloadUsers } = props;
+  const { Option } = Select;
+  const addUser = () => {
     if (
       !userData.name ||
       !userData.lastname ||
@@ -35,7 +49,6 @@ export default function AddUserForm(props) {
       });
     } else {
       const accessToken = getAccessTokenApi();
-
       signUpAdminApi(accessToken, userData)
         .then((response) => {
           if (response.status === 200) {
@@ -61,20 +74,6 @@ export default function AddUserForm(props) {
         });
     }
   };
-  return (
-    <div className="add-user-form">
-      <AddForm
-        userData={userData}
-        setUserData={setUserData}
-        addUser={addUser}
-      />
-    </div>
-  );
-}
-
-function AddForm(props) {
-  const { userData, setUserData, addUser } = props;
-  const { Option } = Select;
 
   return (
     <Form className="form-add" onFinish={addUser}>

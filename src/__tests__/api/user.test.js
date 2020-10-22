@@ -28,7 +28,7 @@ describe("Api de user", () => {
                 done();
             });
         });
-    });    
+    });
     it("Login de usuarios", (done) => {
         let data = {
             "email": "david@gmail.com",
