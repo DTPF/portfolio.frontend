@@ -1,49 +1,61 @@
 import { testingRefreshToken } from "../../utils/constants";
 import {
-    getMenuApi,
-    updateMenuApi,
-    activateMenuApi,
-    addMenuApi,
-    deleteMenuApi
+  getMenuApi,
+  updateMenuApi,
+  activateMenuApi,
+  addMenuApi,
+  deleteMenuApi,
 } from "../../api/menu";
+const TOKEN = testingRefreshToken;
 
-const token = testingRefreshToken;
-
-describe("Api de menú", () => {
-    it("Obtener todo los menús", (done) => {
-        getMenuApi().then((data) => {
-            expect(data.status).toBe(200);
-            done();
-        });
+describe("Menu API", () => {
+  it("Create menu", async () => {
+    const MENUDATA = {
+      title: "BlogTest",
+      url: "https://msr.com",
+      order: 0,
+      active: false,
+    };
+    await addMenuApi(TOKEN, MENUDATA).then((data) => {
+      expect(data.status).toBe(200);
     });
-    it("Actualizar menú", (done) => {
-        let data = {
-            title: "Lorem"
-        };
-        updateMenuApi(token, '5f64d9e105d180621ac2176c', data).then((data) => {
-            expect(data.message).toBe('No se ha encontrado ningún menú.');
-            done();
-        });
+  });
+  it("Get menus", async () => {
+    await getMenuApi().then((data) => {
+      expect(data.status).toBe(200);
     });
-    it("Activar menú", (done) => {
-        activateMenuApi(token, '5f64d9e105d180621ac2176c', true).then((data) => {
-            expect(data.message).toBe('No se ha encontrado el menú.');
-            done();
-        });
+  });
+  it("Activate menu", async () => {
+    await getMenuApi().then( async (data) => {
+      expect(data.status).toBe(200);
+      let dataMenus = data.menu;
+      let testingMenu = dataMenus.find((title) => title.title === "BlogTest");
+      await activateMenuApi(TOKEN, testingMenu._id, true).then((data) => {
+        expect(data.status).toBe(200);
+      });
     });
-    it("Crear menú", (done) => {
-        let data = {
-            title: ""
-        };
-        addMenuApi(token, data).then((data) => {
-            expect(data.message).toBe('El título es obligatorio.');
-            done();
-        });
+  });
+  it("Update menu", async () => {
+    await getMenuApi().then( async (data) => {
+      expect(data.status).toBe(200);
+      const MENUDATA = {
+        url: "https://url.com",
+      };
+      let dataMenus = data.menu;
+      let testingMenu = dataMenus.find((title) => title.title === "BlogTest");
+      await updateMenuApi(TOKEN, testingMenu._id, MENUDATA).then((data) => {
+        expect(data.status).toBe(200);
+      });
     });
-    it("Eliminando menú", (done) => {
-        deleteMenuApi(token, '5f64d9e105d180621ac2176c').then((data) => {
-            expect(data.message).toBe('Menú no encontrado.');
-            done();
-        });
+  });
+  it("Remove menu", async () => {
+    await getMenuApi().then( async (data) => {
+      expect(data.status).toBe(200);
+      let dataMenus = data.menu;
+      let testingMenu = dataMenus.find((title) => title.title === "BlogTest");
+      await deleteMenuApi(TOKEN, testingMenu._id).then((data) => {
+        expect(data.status).toBe(200);
+      });
     });
+  });
 });

@@ -1,41 +1,33 @@
 import { apiVersion, basePath } from "./config";
 
-export function subscribeContactApi(data) {
+export async function subscribeContactApi(data) {
   const url = `${basePath}/${apiVersion}/contact-me/`;
   const params = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   };
-
-  return fetch(url, params)
-    .then((response) => {
-      return response.json();
-    })
-    .then((result) => {
-      return result;
-    })
-    .then((err) => {
-      return err;
-    });
+  try {
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
 }
 
-export function getMessagesApi() {
+export async function getMessagesApi() {
   const url = `${basePath}/${apiVersion}/get-contact-messages`;
-
-  return fetch(url)
-    .then((response) => {
-      return response.json();
-    })
-    .then((result) => {
-      return result;
-    })
-    .then((err) => {
-      return err;
-    });
+  try {
+    const response = await fetch(url);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
 }
 
-export function getMessagesUnreadApi(token, status) {
+export async function getMessagesUnreadApi(token, status) {
   const url = `${basePath}/${apiVersion}/get-contact-messages-unread?readed=${status}`;
   const params = {
     method: "GET",
@@ -44,20 +36,16 @@ export function getMessagesUnreadApi(token, status) {
       Authorization: token
     }
   }
-
-  return fetch(url, params)
-    .then((response => {
-      return response.json();
-    }))
-    .then((result => {
-      return result;
-    }))
-    .then((err) => {
-      return err;
-    });
+  try {
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
 }
 
-export function checkMessageApi(token, messageId, status) {
+export async function checkMessageApi(token, messageId, status) {
   const url = `${basePath}/${apiVersion}/check-contact-message/${messageId}`;
   const params = {
     method: "PUT",
@@ -67,20 +55,16 @@ export function checkMessageApi(token, messageId, status) {
     },
     body: JSON.stringify({ readed: status })
   }
-
-  return fetch(url, params)
-    .then(response => {
-      return response.json();
-    })
-    .then(result => {
-      return result;
-    })
-    .then(err => {
-      return err;
-    });
+  try {
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
 }
 
-export function deleteContactMessageApi(token, messageId) {
+export async function deleteContactMessageApi(token, messageId) {
   const url = `${basePath}/${apiVersion}/delete-contact-message/${messageId}`;
   const params = {
     method: "DELETE",
@@ -89,15 +73,11 @@ export function deleteContactMessageApi(token, messageId) {
       Authorization: token
     }
   }
-
-  return fetch(url, params)
-    .then(response => {
-      return response.json();
-    })
-    .then(result => {
-      return result;
-    })
-    .then(err => {
-      return err;
-    })
+  try {
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
 }

@@ -1,3 +1,3 @@
 export const ACCESS_TOKEN = "accessToken";
 export const REFRESH_TOKEN = "refreshToken";
-export const testingRefreshToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjVmNWJiNzRmMTYxZDcxNzY0MTFlMzk1MyIsImV4cCI6MTYwMzM3NzYwN30.mRtNLUup3lxTledKObDH5H9iMLpTKgzq2GVvi7Awhmg';
+export const testingRefreshToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjVmNmRhMWQwZWRmZGJiNjcxMzhjNDljNyIsImV4cCI6MTYwMzcwNjI4NH0.37DjTvn7h0L8ubMYvENsN_l0XGyn3gagZxMP17g8PtY';

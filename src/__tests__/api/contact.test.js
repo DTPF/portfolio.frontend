@@ -1,47 +1,55 @@
 import { testingRefreshToken } from "../../utils/constants";
 import {
-    subscribeContactApi,
-    getMessagesApi,
-    getMessagesUnreadApi,
-    checkMessageApi,
-    deleteContactMessageApi
+  subscribeContactApi,
+  getMessagesApi,
+  getMessagesUnreadApi,
+  checkMessageApi,
+  deleteContactMessageApi,
 } from "../../api/contact";
+const TOKEN = testingRefreshToken;
 
-const token = testingRefreshToken;
-
-describe("Api de contact", () => {
-    it("Enviar mensaje de contacto", (done) => {
-        let data = {
-            "email": "d@d.com",
-            "subject": "",
-        };
-        subscribeContactApi(data).then((data) => {
-            expect(data.message).toBe('El asunto es obligatorio.');
-            done();
-        });
+describe("Contact API", () => {
+  it("Send test message", async () => {
+    const CONTACTDATA = {
+      email: "d@d.com",
+      subject: "ContactTest",
+    };
+    await subscribeContactApi(CONTACTDATA).then((data) => {
+      expect(data.status).toBe(200);
     });
-    it("Obtener todos los mensajes", (done) => {
-        getMessagesApi(token).then((data) => {
-            expect(data.status).toBe(200);
-            done();
-        });
+  });
+  it("Get messages", async () => {
+    await getMessagesApi(TOKEN).then((data) => {
+      expect(data.status).toBe(200);
     });
-    it("Obtener los mensajes no leídos", (done) => {
-        getMessagesUnreadApi(token, false).then((data) => {
-            expect(data.status).toBe(200);
-            done();
-        });
+  });
+  it("Get unread messages", async () => {
+    await getMessagesUnreadApi(TOKEN, false).then((data) => {
+      expect(data.status).toBe(200);
     });
-    it("Checkear mensaje", (done) => {
-        checkMessageApi(token, '5f64d9e105d180621ac2176c', true).then((data) => {
-            expect(data.message).toBe('No se ha encontrado el mensaje.');
-            done();
-        });
+  });
+  it("Message marked as read", async () => {
+    await getMessagesUnreadApi(TOKEN, false).then( async (data) => {
+      expect(data.status).toBe(200);
+      let dataMessages = data.messages;
+      let testingMessage = dataMessages.find(
+        (subject) => subject.subject === "ContactTest"
+      );
+      await checkMessageApi(TOKEN, testingMessage._id, false).then((data) => {
+        expect(data.status).toBe(200);
+      });
     });
-    it("Eliminar mensaje", (done) => {
-        deleteContactMessageApi(token, '5f64d9e105d180621ac2176c').then((data) => {
-            expect(data.message).toBe('Mensaje no encontrado en la base de datos.');
-            done();
-        });
+  });
+  it("Remove test mensaje", async () => {
+    await getMessagesUnreadApi(TOKEN, false).then( async (data) => {
+      expect(data.status).toBe(200);
+      let dataMessages = data.messages;
+      let testingMessage = dataMessages.find(
+        (subject) => subject.subject === "ContactTest"
+      );
+      await deleteContactMessageApi(TOKEN, testingMessage._id).then((data) => {
+        expect(data.status).toBe(200);
+      });
     });
+  });
 });

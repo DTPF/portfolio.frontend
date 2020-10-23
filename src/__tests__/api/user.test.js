@@ -1,95 +1,102 @@
 import { testingRefreshToken } from "../../utils/constants";
 import {
-    signUpApi,
-    signInApi,
-    getUsersApi,
-    getUsersActiveApi,
-    getAvatarApi,
-    uploadAvatarApi,
-    updateUserApi,
-    activateUserApi,
-    deleteUserApi,
-    signUpAdminApi
+  signUpApi,
+  signInApi,
+  getUsersApi,
+  getUsersActiveApi,
+  getAvatarApi,
+  uploadAvatarApi,
+  updateUserApi,
+  activateUserApi,
+  deleteUserApi,
+  signUpAdminApi,
 } from "../../api/user";
+const TOKEN = testingRefreshToken;
 
-const token = testingRefreshToken;
+describe("User API", () => {
+  it("Create and activate user", async () => {
+    const USERDATA = {
+      email: "david@test.com",
+      password: 12345678,
+      repeatPassword: 12345678,
+    };
+    await signUpApi(USERDATA).then(async (data) => {
+      expect(data.status).toBe(200);
+      await activateUserApi(TOKEN, data.user._id, true).then((data) => {
+        expect(data.status).toBe(200);
 
-describe("Api de user", () => {
-    it("Registro y activación de usuario", (done) => {
-        let data = {
-            "email": "david@gmail.com",
-            "password": 12345678,
-            "repeatPassword": 12345678
-        }
-        signUpApi(data).then((data) => {
-            expect(data.status).toBe(200);
-            activateUserApi(token, data.user._id, true).then((data) => {
-                expect(data.status).toBe(200);
-                done();
-            });
-        });
+      });
+    });    
+  });
+  it("User login", async () => {
+    const USERDATA = {
+      email: "david@test.com",
+      password: "12345678",
+    };
+    await signInApi(USERDATA).then((data) => {
+      expect(data.status).toBe(200);
     });
-    it("Login de usuarios", (done) => {
-        let data = {
-            "email": "david@gmail.com",
-            "password": '12345678',
-        }
-        signInApi(data).then((data) => {
-            expect(data.status).toBe(200);
-            done();
-        });
+  });
+  it("Get active users", async () => {
+    await getUsersActiveApi(TOKEN, true).then((data) => {
+      expect(data.users.length).toBeGreaterThan(0);
     });
-    it("Obteniendo usuarios activos", (done) => {
-        getUsersActiveApi(token, true).then((data) => {
-            expect(data.users.length).toBeGreaterThan(0);
-            done();
-        });
+  });
+  it("Update user avatar", async () => {
+    let avatarName = "9Eg7ljRnmzpFntEq";
+    let userId = "sdsdff5ssdf5";
+    await uploadAvatarApi(TOKEN, avatarName, userId).then((data) => {
+      expect(data.status).toBe(404);
     });
-    it("Actualizando avatar de usuario", (done) => {
-        let avatarName = '9Eg7ljRnmzpFntEq';
-        let userId = 'sdsdff5ssdf5';
-        uploadAvatarApi(token, avatarName, userId).then((data) => {
-            expect(data.status).toBe(404);
-            done();
-        });
+  });
+  it("Get user avatar", async () => {
+    let avatarName = "9Eg7ljRnmzpFntEq";
+    await getAvatarApi(avatarName).then((data) => {
+      expect(data.status).toBe(404);
     });
-    it("Obteniendo avatar de usuario", (done) => {
-        let avatarName = '9Eg7ljRnmzpFntEq';
-        getAvatarApi(avatarName).then((data) => {
-            expect(data.status).toBe(404);
-            done();
-        });
+  });
+  it("Update user", async () => {
+    await getUsersApi(TOKEN).then( async (data) => {
+      expect(data.users.length).toBeGreaterThan(0);
+      const USERDATA = {
+        name: "Antonio",
+        lastname: "Jaramillo",
+        email: "david@test.com",
+      };
+      let dataUsers = data.users;
+      let testingEmail = dataUsers.find(
+        (email) => email.email === "david@test.com"
+      );
+      await updateUserApi(TOKEN, USERDATA, testingEmail._id).then((data) => {
+        expect(data.status).toBe(200);
+
+      });
     });
-    it("Actualizando usuario", (done) => {
-        let userData = ({
-            name: 'Antonio',
-            lastname: 'Jaramillo',
-            email: 'aj@gmail.com',
-        })
-        let userId = 'sd165s5cc562';
-        updateUserApi(token, userData, userId).then((data) => {
-            expect(data.status).toBe(404);
-            done();
-        });
+  });
+  it("User registration from admin panel", async () => {
+    const USERDATA = {
+      email: "davidtest@gmail.com",
+      password: "123456",
+    };
+    await signUpAdminApi(TOKEN, USERDATA).then( async (data) => {
+      expect(data.status).toBe(200);
+      await deleteUserApi(TOKEN, data.user._id).then((data) => {
+        expect(data.status).toBe(200);
+
+      });
     });
-    it("Registrando usuario desde el panel de administrador", (done) => {
-        let data = {
-            "email": "david@gmail.com",
-            "password": "123456"
-        }
-        signUpAdminApi(token, data).then((data) => {
-            expect(data.message).toBe('El usuario ya existe.');
-        });
-        done();
+  });
+  it("Remove user test", async () => {
+    await getUsersApi(TOKEN).then( async (data) => {
+      let dataUsers = data.users;
+      let testingEmail = dataUsers.find(
+        (email) => email.email === "david@test.com"
+      );
+      expect(data.users.length).toBeGreaterThan(0);
+      await deleteUserApi(TOKEN, testingEmail._id).then((data) => {
+        expect(data.status).toBe(200);
+        
+      });
     });
-    it("Obteniendo todos los usuarios y eliminando al usuario registrado para el test", (done) => {
-        getUsersApi(token).then((data) => {
-            const dat = data.users;
-            const testingEmail = dat.find(email => email.email === 'david@gmail.com');
-            expect(data.users.length).toBeGreaterThan(0);            
-            deleteUserApi(token, testingEmail._id).then((data) => {
-                done();
-            })
-        });
-    });
+  });
 });
