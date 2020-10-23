@@ -1,1 +1,1 @@
-export { default } from './Error404.jsx';
+export { default } from './Error404.tsx';

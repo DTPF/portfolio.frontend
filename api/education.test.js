@@ -46,6 +46,7 @@ describe("Education API", () => {
   });
   it("Get course by order", () => {
     getCourseByOrderApi(2).then((data) => {
+      console.log(data.course.order);
       expect(data.course.order).toBe(2);
     });
   });

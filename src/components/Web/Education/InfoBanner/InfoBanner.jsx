@@ -22,12 +22,11 @@ export default function InfoBanner() {
     let unmounted = false;
     const duration = [];
     let totalDuration = 0;
-    courses &&
-      courses.docs.forEach((course) => {
-        if (!unmounted) {
-          duration.push(course.duration);
-        }
-      });
+    courses.docs && courses.docs.forEach((course) => {
+      if (!unmounted) {
+        duration.push(course.duration);
+      }
+    });
     duration.forEach((num) => {
       totalDuration += num;
       if (!unmounted) {

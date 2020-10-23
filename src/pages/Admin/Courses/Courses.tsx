@@ -10,7 +10,7 @@ const Modal = lazy(() => import("../../../components/Modal"));
 const PaginationAnt = lazy(() => import("../../../components/Pagination"));
 const CoursesList = lazy(() => import("../../../components/Admin/Courses/CoursesList"));
 
-function Courses(props) {
+function Courses(props: any) {
   const { location, history } = props;
   const [courses, setCourses] = useState(null);
   const [reloadCourses, setReloadCourses] = useState(false);
@@ -39,7 +39,7 @@ function Courses(props) {
         setModalContent={setModalContent}
         setReloadCourses={setReloadCourses}
       />
-      <EditCourse
+      <RenderListCourses
         courses={courses}
         setIsVisibleModal={setIsVisibleModal}
         setModalTitle={setModalTitle}
@@ -59,13 +59,11 @@ function Courses(props) {
           }}
         />
       ) : (
-        <>
-          <Pagination
-            courses={courses}
-            location={location}
-            history={history}
-          />
-        </>
+        <Pagination
+          courses={courses}
+          location={location}
+          history={history}
+        />
       )}
       <Suspense fallback={<></>}>
         <Modal
@@ -81,7 +79,7 @@ function Courses(props) {
   );
 }
 
-function AddCourse(props) {
+function AddCourse(props: any) {
   const {
     setIsVisibleModal,
     setModalTitle,
@@ -108,7 +106,7 @@ function AddCourse(props) {
   );
 }
 
-function EditCourse(props) {
+function RenderListCourses(props: any) {
   const {
     courses,
     setIsVisibleModal,
@@ -116,7 +114,7 @@ function EditCourse(props) {
     setModalContent,
     setReloadCourses,
   } = props;
-  const editCourse = (course) => {
+  const editCourse = (course: any) => {
     setIsVisibleModal(true);
     setModalTitle("Editar Curso");
     setModalContent(
@@ -140,7 +138,7 @@ function EditCourse(props) {
   );
 }
 
-function Pagination(props) {
+function Pagination(props: any) {
   const { courses, location, history } = props;
   return (
     <Suspense fallback={<></>}>

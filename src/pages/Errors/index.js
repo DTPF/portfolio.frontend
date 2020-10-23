@@ -1,1 +1,1 @@
-export { default } from './Errors.jsx';
+export { default } from './Errors.tsx';

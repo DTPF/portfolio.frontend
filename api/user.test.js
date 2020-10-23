@@ -1,3 +1,4 @@
+import { testingRefreshToken } from "../../utils/constants";
 import {
   signUpApi,
   signInApi,
@@ -10,7 +11,6 @@ import {
   deleteUserApi,
   signUpAdminApi,
 } from "../../api/user";
-import { testingRefreshToken } from "../../utils/constants";
 const TOKEN = testingRefreshToken;
 
 describe("User API", () => {

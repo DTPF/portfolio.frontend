@@ -1,1 +1,1 @@
-export { default } from "./MenuWeb.jsx";
+export { default } from "./MenuWeb.tsx";

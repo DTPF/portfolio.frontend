@@ -1,6 +1,6 @@
 // Layout
-import LayoutAdmin from "../layouts/LayoutAdmin.jsx";
-import LayoutBasic from "../layouts/LayoutBasic.jsx";
+import LayoutAdmin from "../layouts/LayoutAdmin.tsx";
+import LayoutBasic from "../layouts/LayoutBasic.tsx";
 
 // Admin Pages
 import AdminHome from "../pages/Admin";

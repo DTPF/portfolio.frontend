@@ -8,8 +8,8 @@ const MenuTop = lazy(() => import("../components/Admin/MenuTop"));
 const MenuSider = lazy(() => import("../components/Admin/MenuSider"));
 const LoadRoutes = lazy(() => import("../providers/LoadRoutes"));
 
-export default function LayoutAdmin(props) {
-  const { routes } = props;
+export default function LayoutAdmin(props: any) {
+  const { routes } = props;  
   const [menuCollapsed, setMenuCollapsed] = useState(false);
   const { Header, Content, Footer } = Layout;
   const { user, isLoading } = useAuth();
@@ -30,7 +30,7 @@ export default function LayoutAdmin(props) {
     return (
       <Layout onClick={closeMenu}>
         <Suspense fallback={<></>}>
-          <MenuSider menuCollapsed={menuCollapsed} style={{ minHeight: 20 }} />
+          <MenuSider menuCollapsed={menuCollapsed} />
           <Layout
             className="layout-admin"
             style={{ marginLeft: menuCollapsed ? "0px" : "205px" }}

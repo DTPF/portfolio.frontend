@@ -26,10 +26,10 @@ export default function Admin() {
     return () => { unmounted = true };
   }, [reloadMessages, token]);
 
-  return <RenderContent messagesUnread={messagesUnread} user={user} />;
+  return <RenderAdmin messagesUnread={messagesUnread} user={user} />;
 }
 
-function RenderContent(props) {
+function RenderAdmin(props: any) {
   const { messagesUnread, user } = props;
   const [mssgLength, setMssgLength] = useState(0);
   useEffect(() => {
@@ -39,7 +39,6 @@ function RenderContent(props) {
     }
     return () => { unmounted = true };
   }, [messagesUnread]);
-
   let titulo;
   if (user) {
     titulo = (
@@ -58,7 +57,7 @@ function RenderContent(props) {
   );
 }
 
-function MessagesNotifications(props) {
+function MessagesNotifications(props: any) {
   const { mssgLength } = props;
   useEffect(() => {
     if (mssgLength > 0) {
