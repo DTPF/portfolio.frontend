@@ -10,9 +10,12 @@ const Courses = lazy(() => import("../../../components/Web/Education/Courses"));
 const CourseInfo = lazy(() => import("../../../components/Web/Education/CourseInfo"));
 const InfoBanner = lazy(() => import("../../../components/Web/Education/InfoBanner"));
 
-export default function Education(props) {
+export default function Education(props: any) {
   const { location, history } = props;
-  const { url } = useParams();
+  interface URL {
+    url: string
+  }
+  const { url } = useParams<URL>();
   const [courses] = useGetCourses(100, location);
   const [show, el] = useNearScreen();
   useEffect(() => {
@@ -28,7 +31,7 @@ export default function Education(props) {
           data-react-helmet="true"
           />
       </Helmet>
-      <RenderContent
+      <RenderEducation
         url={url}
         location={location}
         history={history}
@@ -40,7 +43,7 @@ export default function Education(props) {
   );
 }
 
-function RenderContent(props) {
+function RenderEducation(props: any) {
   const { url, location, history, courses, show, el } = props;
   const goBack = useHistory().goBack;
   const title = "Todos los cursos";

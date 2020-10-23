@@ -11,7 +11,7 @@ const BannerLastProject = lazy(
   () => import("../../../components/Web/BannerLastProject")
 );
 
-export default () => {
+export default function Home() {
   const [courses] = useGetCourses(4, 1);
   const [show, el] = useNearScreen();
   useEffect(() => {
@@ -27,13 +27,13 @@ export default () => {
           data-react-helmet="true"
         />
       </Helmet>
-      <RenderContent courses={courses} el={el} show={show} />
+      <RenderHome courses={courses} el={el} show={show} />
     </>
   );
 }
 
-const RenderContent = (props) => {
-  const { courses, el, show } = props;
+function RenderHome(props: any) {
+  const { courses, el, show } = props;  
   const title = "Últimos cursos";
   const subtitle = `Últimos cursos que he realizado para mi preparación al mundo de IT`;
   return (
@@ -59,4 +59,4 @@ const RenderContent = (props) => {
       </div>
     </Suspense>
   );
-}
+};
