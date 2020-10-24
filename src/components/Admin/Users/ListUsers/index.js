@@ -1,1 +1,1 @@
-export { default } from "./ListUsers.jsx"
+export { default } from "./ListUsers.tsx"

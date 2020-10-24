@@ -8,10 +8,11 @@ import { notifDelay, notifDelayErr } from "../../../../utils/notifications";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import "./EditUserForm.scss";
 
-export default function EditUserForm(props) {
+export default function EditUserForm(props: any) {
   const { user, setIsVisibleModal, setReloadUsers } = props;
   const [avatar, setAvatar] = useState(null);
   const [userData, setUserData] = useState({});
+  let avatarType: any = avatar;
   useEffect(() => {
     setUserData({
       name: user.name,
@@ -30,9 +31,14 @@ export default function EditUserForm(props) {
       setAvatar(null);
     }
   }, [user]);
+  useEffect(() => {
+    if (avatar) {
+      setUserData({ ...userData, avatar: avatarType.file });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [avatar]);
   return (
     <div className="edit-user-form">
-      <RenderUserAvatar avatar={avatar} userData={userData} setUserData={setUserData} />
       <UploadAvatar avatar={avatar} setAvatar={setAvatar} />
       <EditForm
         user={user}
@@ -45,20 +51,10 @@ export default function EditUserForm(props) {
   );
 }
 
-function RenderUserAvatar(props) {
-  const { userData, setUserData, avatar } = props;
-  useEffect(() => {
-    if (avatar) {
-      setUserData({ ...userData, avatar: avatar.file });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [avatar]);
-  return null
-}
-
-function UploadAvatar(props) {
+function UploadAvatar(props: any) {
   const { avatar, setAvatar } = props;
   const [avatarUrl, setAvatarUrl] = useState(null);
+  let avatarType: any = avatarUrl;
   useEffect(() => {
     if(avatar) {
       if(avatar.preview) {
@@ -93,16 +89,16 @@ function UploadAvatar(props) {
       {isDragActive ? (
         <Avatar size={150} src={ NoAvatar } />
       ) : (
-        <Avatar size={150} src={ avatarUrl ? avatarUrl : NoAvatar } />
+        <Avatar size={150} src={ avatarType ? avatarType : NoAvatar } />
       )}
     </div>
   );
 }
 
-function EditForm(props) {
+function EditForm(props: any) {
   const { user, userData, setUserData, setIsVisibleModal, setReloadUsers } = props;
   const { Option } = Select;
-  const updateUser = (e) => {
+  const updateUser = () => {
     const token = getAccessTokenApi();
     let userUpdate = userData;
     if(userUpdate.password || userUpdate.repeatPassword) {

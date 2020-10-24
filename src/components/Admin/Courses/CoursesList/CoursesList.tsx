@@ -1,5 +1,4 @@
-import React from "react";
-import Moment from "react-moment";
+import React, { Suspense, lazy } from "react";
 import "moment/locale/es";
 import { List, Button, Spin, Modal, notification } from "antd";
 import { getAccessTokenApi } from "../../../../api/auth";
@@ -11,13 +10,13 @@ import {
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
-
+const Moment = lazy(() => import("react-moment"));
 const { confirm } = Modal;
 
-export default function CoursesList(props) {
+export default function CoursesList(props: any) {
   const { courses, setReloadCourses, editCourse } = props;
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
-  const deleteCourse = (course) => {
+  const deleteCourse = (course: any) => {
     const accessToken = getAccessTokenApi();
     confirm({
       title: "Eliminando curso",
@@ -73,15 +72,15 @@ export default function CoursesList(props) {
   );
 }
 
-function Course(props) {
+function Course(props: any) {
   const { course, deleteCourse, editCourse } = props;
   const date = (
-    <>      
+    <Suspense fallback={<></>}>  
       Hace&nbsp;
       <Moment locale="es" fromNow ago>
         {course.date}
       </Moment>
-    </>
+    </Suspense>
   );
   return (
     <List.Item

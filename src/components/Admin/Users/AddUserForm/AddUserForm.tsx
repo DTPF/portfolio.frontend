@@ -11,7 +11,7 @@ import {
 
 import "./AddUserForm.scss";
 
-export default function AddUserForm(props) {
+export default function AddUserForm(props: any) {
   const { setIsVisibleModal, setReloadUsers } = props;
   const [userData, setUserData] = useState({});
   return (
@@ -26,7 +26,7 @@ export default function AddUserForm(props) {
   );
 }
 
-function AddForm(props) {
+function AddForm(props: any) {
   const { userData, setUserData, setIsVisibleModal, setReloadUsers } = props;
   const { Option } = Select;
   const addUser = () => {
@@ -74,7 +74,6 @@ function AddForm(props) {
         });
     }
   };
-
   return (
     <Form className="form-add" onFinish={addUser}>
       <Row gutter={24}>

@@ -3,14 +3,12 @@ import { Pagination as PaginationAntd } from "antd";
 
 import "./Pagination.scss";
 
-export default function Pagination(props) {
+export default function Pagination(props: any) {
   const { courses, location, history } = props;
-  const currentPage = parseInt(courses.page);  
-
-  const onChangePage = newPage => {
+  const currentPage = parseInt(courses.page);
+  const onChangePage = (newPage: any) => {
     history.push(`${location.pathname}?page=${newPage}`);
   };
-
   return (
     <PaginationAntd
       responsive

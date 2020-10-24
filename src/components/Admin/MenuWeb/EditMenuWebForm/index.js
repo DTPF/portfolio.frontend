@@ -1,1 +1,1 @@
-export { default } from "./EditMenuWebForm.jsx";
+export { default } from "./EditMenuWebForm.tsx";

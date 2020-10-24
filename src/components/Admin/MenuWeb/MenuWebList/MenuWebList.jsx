@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Switch, List, Button, Modal as ModalAntd, notification } from "antd";
 import Modal from "../../../Modal";
-import DragSortableList from "react-drag-sortable";
 import {
   updateMenuApi,
   activateMenuApi,
@@ -13,6 +12,7 @@ import AddMenuWebForm from "../AddMenuWebForm";
 import EditMenuWebForm from "../EditMenuWebForm";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import "./MenuWebList.scss";
+import DragSortableList from "react-drag-sortable";
 const { confirm } = ModalAntd;
 
 export default function MenuWebList(props) {

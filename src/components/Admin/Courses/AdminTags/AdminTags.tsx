@@ -26,16 +26,21 @@ import {
 import "./AdminTags.scss";
 const { confirm } = Modal;
 
-export default function AdminTags(props) {
+export default function AdminTags(props: {
+  course: { url: string };
+  courseData: { _id: string };
+  setReloadCourses: any;
+}) {
   const { course, courseData, setReloadCourses } = props;
   const [tags, setTags] = useState([]);
   const [tag, setTag] = useState([]);
   const [reloadTags, setReloadTags] = useState(false);
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+  let tagType: any = tag;
   useEffect(() => {
     let unmounted = false;
     if (!unmounted) {
-      getCourseApi(course && course.url).then((response) => {
+      getCourseApi(course.url).then((response) => {
         setTags(response.course.tags);
       });
     }
@@ -44,11 +49,11 @@ export default function AdminTags(props) {
       unmounted = true;
     };
   }, [course, reloadTags, tag]);
-  const deleteTag = (tag) => {
+  const deleteTag = (tag: string) => {
     const token = getAccessTokenApi();
     confirm({
-      title: "Eliminando curso",
-      content: `¿Estas seguro de eliminar el curso ${tag}?`,
+      title: "Eliminando tag",
+      content: `¿Estas seguro de eliminar el tag ${tag}?`,
       okText: "Eliminar",
       okType: "danger",
       cancelText: "Cancelar",
@@ -98,16 +103,13 @@ export default function AdminTags(props) {
           <Row className="admin-tags__tags">
             {tags.map((tag) => (
               <Col key={tag} className={tag}>
-                <TagAnt
-                  tag={tag}
-                  deleteTag={deleteTag}
-                />
+                <TagAnt tag={tag} deleteTag={deleteTag} />
               </Col>
             ))}
           </Row>
           <div className="admin-tags__add-tag">
             <AddTagForm
-              tag={tag}
+              tag={tagType}
               course={course}
               setTag={setTag}
               setReloadCourses={setReloadCourses}
@@ -120,12 +122,12 @@ export default function AdminTags(props) {
   );
 }
 
-function TagAnt(props) {
+function TagAnt(props: any) {
   const { tag, deleteTag } = props;
   return <Tag onClick={() => deleteTag(tag)}>{tag}</Tag>;
 }
 
-function AddTagForm(props) {
+function AddTagForm(props: any) {
   const { tag, setTag, course, setReloadCourses, setReloadTags } = props;
   const addTag = () => {
     const token = getAccessTokenApi();

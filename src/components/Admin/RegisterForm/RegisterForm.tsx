@@ -19,7 +19,7 @@ export default function RegisterForm() {
     repeatPassword: false,
     privacyPolicy: false,
   });
-  const changeForm = (e) => {
+  const changeForm = (e: any) => {
     if (e.target.name === "privacyPolicy") {
       setInputs({
         ...inputs,
@@ -32,7 +32,7 @@ export default function RegisterForm() {
       });
     }
   };
-  const inputValidation = (e) => {
+  const inputValidation = (e: any) => {
     const { type, name } = e.target;
     if (type === "email") {
       setFormValid({ ...formValid, [name]: emailValidation(e.target) });
@@ -44,7 +44,7 @@ export default function RegisterForm() {
       setFormValid({ ...formValid, [name]: e.target.checked });
     }
   };
-  const register = async (e) => {
+  const register = async () => {
     const emailVal = inputs.email;
     const passwordVal = inputs.password;
     const repeatPasswordVal = inputs.repeatPassword;
@@ -86,8 +86,9 @@ export default function RegisterForm() {
     }
   };
   const resetForm = () => {
-    const input = document.getElementsByTagName("input");
-    for (let i = 0; i < inputs.length; i++) {
+    const input: any = document.getElementsByTagName("input");
+    let inputsType: any = inputs;
+    for (let i = 0; i < inputsType.length; i++) {
       input[i].className.remove("success");
       input[i].className.remove("error");
     }

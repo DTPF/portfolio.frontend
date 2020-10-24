@@ -9,10 +9,9 @@ import {
   MessageOutlined,
   ReadOutlined
 } from "@ant-design/icons";
-
 import "./MenuSider.scss";
 
-function MenuSider(props) {
+function MenuSider(props: any) {
   const { menuCollapsed, location } = props;
   const { Sider } = Layout;
   return (

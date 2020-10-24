@@ -9,7 +9,6 @@ import {
   emailValidation,
   minLenghtValidation,
 } from "../../../utils/formValidation";
-
 import "./LoginForm.scss";
 
 export default function LoginForm() {
@@ -17,20 +16,17 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
-
   const [formValid, setFormValid] = useState({
     email: false,
     password: false,
   });
-
-  const changeForm = (e) => {
+  const changeForm = (e: any) => {
     setInputs({
       ...inputs,
       [e.target.name]: e.target.value,
     });
   };
-
-  const inputValidation = (e) => {
+  const inputValidation = (e: any) => {
     const { type, name } = e.target;
     if (type === "email") {
       setFormValid({ ...formValid, [name]: emailValidation(e.target) });
@@ -39,8 +35,7 @@ export default function LoginForm() {
       setFormValid({ ...formValid, [name]: minLenghtValidation(e.target, 6) });
     }
   };
-
-  const login = async e => {
+  const login = async () => {
     const result = await signInApi(inputs);
     if(result.message) {
       notification["error"]({
@@ -58,7 +53,6 @@ export default function LoginForm() {
       });
     }
   };
-
   return (
     <Form className="login-form" onFinish={login} onChange={changeForm}>
       <Form.Item>

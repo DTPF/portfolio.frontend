@@ -4,18 +4,31 @@ import { addMenuApi } from "../../../../api/menu";
 import { getAccessTokenApi } from "../../../../api/auth";
 import { notifDelay, notifDelayErr } from "../../../../utils/notifications";
 import { FontSizeOutlined } from "@ant-design/icons";
-
 import "./AddMenuWebForm.scss";
 
-export default function AddMenuWebForm(props) {
+export default function AddMenuWebForm(props: any) {
   const { setIsVisibleModal, setReloadMenuWeb } = props;
   const [menuWebData, setMenuWebData] = useState({});
-  const addMenu = event => {
-    let finalData = {
+  return (
+    <div className="add-menu-web-form">
+      <AddForm
+        menuWebData={menuWebData}
+        setMenuWebData={setMenuWebData}
+        setIsVisibleModal={setIsVisibleModal}
+        setReloadMenuWeb={setReloadMenuWeb}
+      />
+    </div>
+  );
+}
+
+function AddForm(props: any) {
+  const { menuWebData, setMenuWebData, setIsVisibleModal, setReloadMenuWeb } = props;
+  const { Option } = Select;
+  const addMenu = () => {
+    let finalData: any = {
       title: menuWebData.title,
       url: (menuWebData.http ? menuWebData.http : "http://") + menuWebData.url
     };
-
     if(!finalData.title || !finalData.url || !menuWebData.url) {
       notification["error"]({
         message: "Todos los campos son obligatorios.",
@@ -44,21 +57,6 @@ export default function AddMenuWebForm(props) {
         })
     }
   };
-
-  return (
-    <div className="add-menu-web-form">
-      <AddForm
-        menuWebData={menuWebData}
-        setMenuWebData={setMenuWebData}
-        addMenu={addMenu}
-      />
-    </div>
-  );
-}
-
-function AddForm(props) {
-  const { menuWebData, setMenuWebData, addMenu } = props;
-  const { Option } = Select;
   const selectBefore = (
     <Select
       placeholder="http://"
@@ -69,7 +67,6 @@ function AddForm(props) {
       <Option value="https://">https://</Option>
     </Select>
   );
-
   return (
     <Form className="form-add" onFinish={addMenu}>
       <Form.Item>

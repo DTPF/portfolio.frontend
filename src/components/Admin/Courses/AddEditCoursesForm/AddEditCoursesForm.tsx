@@ -26,10 +26,10 @@ import NoImage from "../../../../assets/img/png/no-image.png";
 import "./AddEditCoursesForm.scss";
 const { TextArea } = Input;
 
-export default function AddEditCoursesForm(props) {
+export default function AddEditCoursesForm(props: any) {
   const { setIsVisibleModal, setReloadCourses, course } = props;
   const [image, setImage] = useState(null);
-  const [courseData, setCourseData] = useState([]);
+  const [courseData, setCourseData] = useState([]);  
   useEffect(() => {
     if (course) {
       setCourseData(course);
@@ -61,7 +61,7 @@ export default function AddEditCoursesForm(props) {
   );
 }
 
-function AddEditForm(props) {
+function AddEditForm(props: any) {
   const {
     courseData,
     setCourseData,
@@ -151,7 +151,6 @@ function AddEditForm(props) {
     }
   };
   const addCourse = () => {
-    console.log(courseData);
     addCourseApi(token, courseData)
       .then((response) => {
         if (response.status !== 200) {
@@ -173,7 +172,6 @@ function AddEditForm(props) {
         });
       });
   };
-
   const loading = () => {
     setProccessCourseState(true);
   };
@@ -303,9 +301,10 @@ function AddEditForm(props) {
   );
 }
 
-function UploadImage(props) {
+function UploadImage(props: any) {
   const { image, setImage } = props;
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
+  let imageType: string = imageUrl;  
   useEffect(() => {
     if (image) {
       if (image.preview) {
@@ -314,7 +313,7 @@ function UploadImage(props) {
         setImageUrl(image);
       }
     } else {
-      setImageUrl(null);
+      setImageUrl("");
     }
   }, [image]);
   const onDrop = useCallback(
@@ -340,16 +339,16 @@ function UploadImage(props) {
     <div className="upload-image" {...getRootProps()}>
       <input {...getInputProps()} />
       {isDragActive ? (
-        <Image size={150} src={NoImage} preview={false} />
+        <Image src={NoImage} preview={false} />
       ) : (
-        <Image size={150} src={imageUrl ? imageUrl : NoImage} preview={false} />
+        <Image src={imageType ? imageType : NoImage} preview={false} />
       )}
       <span>Tamaño de imágen: 750px x 422px</span>
     </div>
   );
 }
 
-function transformTextToUrl(text) {
+function transformTextToUrl(text: string) {
   const u1 = text.replace(/ /g, "-");
   const u2 = u1.replace(/,/g, "");
   const u3 = u2.replace(/á/g, "a");

@@ -1,1 +1,1 @@
-export { default } from "./AdminTags.jsx";
+export { default } from "./AdminTags.tsx";

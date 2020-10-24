@@ -8,10 +8,9 @@ import {
   MenuFoldOutlined,
   PoweroffOutlined,
 } from "@ant-design/icons";
-
 import "./MenuTop.scss";
 
-export default function MenuTop(props) {
+export default function MenuTop(props: any) {
   const { menuCollapsed, setMenuCollapsed } = props;  
   const logoutUser = () => {
     logout();
@@ -20,7 +19,6 @@ export default function MenuTop(props) {
   const reload = () => {
     window.location.href = URL + "ad1988";
   };
-
   return (
     <div className="menu-top">
       <div className="menu-top__left">

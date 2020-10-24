@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useGetCourses } from "../../../../hooks/useGetCourses";
+import { message, notification } from "antd";
 import TweenOne from "rc-tween-one";
 import Children from "rc-tween-one/lib/plugin/ChildrenPlugin.js";
 import BannerAnim, { Element } from "rc-banner-anim";
@@ -22,17 +23,24 @@ export default function InfoBanner() {
     let unmounted = false;
     const duration = [];
     let totalDuration = 0;
-    courses.docs && courses.docs.forEach((course) => {
-      if (!unmounted) {
-        duration.push(course.duration);
-      }
-    });
-    duration.forEach((num) => {
-      totalDuration += num;
-      if (!unmounted) {
-        setTotalDuration(totalDuration);
-      }
-    });
+    if (courses) {
+      courses.docs && courses.docs.forEach((course) => {
+        if (!unmounted) {
+          duration.push(course.duration);
+        }
+      });
+      duration.forEach((num) => {
+        totalDuration += num;
+        if (!unmounted) {
+          setTotalDuration(totalDuration);
+        }
+      });
+    } else {
+      notification["error"]({
+        message: "Ha ocurrido un error en el servidor, vuelve más tarde y disculpa las molestias.",
+        duration: 10
+      });
+    }
     return () => {unmounted = true };
   }, [courses]);
 

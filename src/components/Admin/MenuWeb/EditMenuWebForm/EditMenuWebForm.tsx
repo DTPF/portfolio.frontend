@@ -4,18 +4,15 @@ import { updateMenuApi } from "../../../../api/menu";
 import { getAccessTokenApi } from "../../../../api/auth";
 import { notifDelay, notifDelayErr } from "../../../../utils/notifications";
 import { FontSizeOutlined, LinkOutlined } from "@ant-design/icons";
-
 import "./EditMenuWebForm.scss";
 
-export default function EditMenuWebForm(props) {
+export default function EditMenuWebForm(props: any) {
   const { setIsVisibleModal, setReloadMenuWeb, menu } = props;
   const [menuWebData, setMenuWebData] = useState(menu);
-
   useEffect(() => {
     setMenuWebData(menu);
   }, [menu]);
-
-  const editMenu = (event) => {
+  const editMenu = () => {
     if (!menuWebData.title || !menuWebData.url) {
       notification["error"]({
         message: "Todos  los campos son obligatorios.",
@@ -40,7 +37,6 @@ export default function EditMenuWebForm(props) {
         });
     }
   };
-
   return (
     <div className="edit-menu-web-form">
       <EditForm
@@ -52,9 +48,8 @@ export default function EditMenuWebForm(props) {
   );
 }
 
-function EditForm(props) {
+function EditForm(props: any) {
   const { menuWebData, setMenuWebData, editMenu } = props;
-
   return (
     <Form className="form-edit" onFinish={editMenu}>
       <Form.Item>

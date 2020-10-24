@@ -1,1 +1,1 @@
-export { default } from "./ContactMessagesList.jsx";
+export { default } from "./ContactMessagesList.tsx";

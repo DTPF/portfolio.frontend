@@ -17,18 +17,16 @@ import {
   DeleteOutlined,
   CheckOutlined,
 } from "@ant-design/icons";
-
 import "./ListUsers.scss";
-
 const { confirm } = ModalDelete;
 
-export default function ListUsers(props) {
+export default function ListUsers(props: any) {
   const { usersActive, usersInactive, setReloadUsers } = props;
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState(null);
   return (
     <div className="list-users">
-      <RenderContent
+      <RenderListUsers
         setModalTitle={setModalTitle}
         setModalContent={setModalContent}
         setReloadUsers={setReloadUsers}
@@ -41,7 +39,7 @@ export default function ListUsers(props) {
   );
 }
 
-function RenderContent(props) {
+function RenderListUsers(props: any) {
   const {
     usersActive,
     usersInactive,
@@ -106,7 +104,7 @@ function RenderContent(props) {
   );
 }
 
-function UsersActive(props) {
+function UsersActive(props: any) {
   const {
     usersActive,
     setIsVisibleModal,
@@ -114,7 +112,7 @@ function UsersActive(props) {
     setModalContent,
     setReloadUsers,
   } = props;
-  const editUser = (user) => {
+  const editUser = (user: any) => {
     setIsVisibleModal(true);
     setModalTitle(
       `Editar ${user.name ? user.name : "..."} ${
@@ -145,7 +143,7 @@ function UsersActive(props) {
   );
 }
 
-function UserActive(props) {
+function UserActive(props: any) {
   const { user, editUser, setReloadUsers } = props;
   const [avatar, setAvatar] = useState("");
   useEffect(() => {
@@ -163,7 +161,6 @@ function UserActive(props) {
       unmounted = true;
     };
   }, [user]);
-
   const deactivateUser = () => {
     const accessToken = getAccessTokenApi();
     if (user.email === "davidpizarrofrick@gmail.com") {
@@ -188,7 +185,6 @@ function UserActive(props) {
         });
     }
   };
-
   const showDeleteConfirm = () => {
     const accessToken = getAccessTokenApi();
     if (user.email === "davidpizarrofrick@gmail.com") {
@@ -222,7 +218,6 @@ function UserActive(props) {
       });
     }
   };
-
   return (
     <List.Item
       actions={[
@@ -249,7 +244,7 @@ function UserActive(props) {
   );
 }
 
-function UsersInactive(props) {
+function UsersInactive(props: any) {
   const { usersInactive, setReloadUsers } = props;
   return (
     <List
@@ -263,7 +258,7 @@ function UsersInactive(props) {
   );
 }
 
-function UserInactive(props) {
+function UserInactive(props: any) {
   const { user, setReloadUsers } = props;
   const [avatar, setAvatar] = useState("");
   useEffect(() => {
@@ -281,7 +276,6 @@ function UserInactive(props) {
       unmounted = true;
     };
   }, [user]);
-
   const activateUser = () => {
     const accessToken = getAccessTokenApi();
     activateUserApi(accessToken, user._id, true)
@@ -299,7 +293,6 @@ function UserInactive(props) {
         });
       });
   };
-
   const showDeleteConfirm = () => {
     const accessToken = getAccessTokenApi();
     confirm({
@@ -326,7 +319,6 @@ function UserInactive(props) {
       },
     });
   };
-
   return (
     <List.Item
       actions={[

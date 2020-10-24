@@ -5,7 +5,7 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import { Row, Col, Button, BackTop } from "antd";
 import { Helmet } from "react-helmet";
 import "./Education.scss";
-const Pagination = lazy(() => import("../../../components/Pagination/Pagination.jsx"));
+const Pagination = lazy(() => import("../../../components/Pagination"));
 const Courses = lazy(() => import("../../../components/Web/Education/Courses"));
 const CourseInfo = lazy(() => import("../../../components/Web/Education/CourseInfo"));
 const InfoBanner = lazy(() => import("../../../components/Web/Education/InfoBanner"));
