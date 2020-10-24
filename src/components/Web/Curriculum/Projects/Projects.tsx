@@ -8,9 +8,10 @@ import "./Projects.scss";
 
 export default function Projects() {
   const [show, el] = useNearScreen();
+  let ref: any = el;
   return (
     <div className="projects">
-      <div className="use-near-screen" ref={el}>
+      <div className="use-near-screen" ref={ref}>
         {show && (
           <>
             <h2>Proyectos</h2>

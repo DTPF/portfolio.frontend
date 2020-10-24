@@ -7,9 +7,10 @@ const { Panel } = Collapse;
 
 export default function ComplementaryEducation() {
   const [show, el] = useNearScreen();
+  let ref: any = el;
   return (
     <div className="complementary-education">
-      <div className="use-near-screen" ref={el}>
+      <div className="use-near-screen" ref={ref}>
         {show && (
           <>
             <h2>Formación Complementaria</h2>

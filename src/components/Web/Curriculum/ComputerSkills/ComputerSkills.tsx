@@ -5,17 +5,10 @@ import "./ComputerSkills.scss";
 
 export default function ComputerSkills() {
   const [show, el] = useNearScreen();
+  let ref: any = el;
   return (
     <div className="computer-skills">
-      <Skills show={show} el={el} />
-    </div>
-  );
-}
-
-function Skills(props) {
-  const { show, el } = props;
-  return (
-    <div className="use-near-screen" ref={el}>
+      <div className="use-near-screen" ref={ref}>
       {show && (
         <>
           <h2>Competencias Informáticas</h2>
@@ -56,10 +49,11 @@ function Skills(props) {
         </>
       )}
     </div>
+    </div>
   );
 }
 
-function Skill(props) {
+function Skill(props: any) {
   const { percent, steps, skill } = props;
   return (
     <div className="computer-skills__skill">

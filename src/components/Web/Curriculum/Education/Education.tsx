@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useNearScreen } from "../../../../hooks/useNearScreen";
 import { Row, Col, Collapse } from "antd";
 import Modal from "../../../Modal";
-import memoriaRecetasPDF from "../../../../assets/pdf/memoria-proyecto-final.pdf";
 import { LeftCircleTwoTone, FilePdfOutlined } from "@ant-design/icons";
 import "./Education.scss";
+const memoriaRecetasPDF = require("../../../../assets/pdf/memoria-proyecto-final.pdf");
 const { Panel } = Collapse;
 
 export default function Education() {
@@ -29,7 +29,8 @@ export default function Education() {
   );
 }
 
-function ModalPDF({ isVisibleModal, setIsVisibleModal }) {
+function ModalPDF(props: any) {
+  const { isVisibleModal, setIsVisibleModal } = props;
   return (
     <Modal
       title="Memória de Blog de Recetas"
@@ -51,10 +52,12 @@ function ModalPDF({ isVisibleModal, setIsVisibleModal }) {
   );
 }
 
-function DesarrolloAppFPN3({ setIsVisibleModal }) {
+function DesarrolloAppFPN3(props: any) {
+  const { setIsVisibleModal } = props;
   const [show, el] = useNearScreen();
+  let ref: any = el;
   return (
-    <div className="use-near-screen" ref={el}>
+    <div className="use-near-screen" ref={ref}>
       {show && (
         <Col span={24} className="education__collapse">
           <Collapse
@@ -116,8 +119,9 @@ function DesarrolloAppFPN3({ setIsVisibleModal }) {
 
 function CompetenciasClaveN3() {
   const [show, el] = useNearScreen();
+  let ref: any = el;
   return (
-    <div className="use-near-screen" ref={el}>
+    <div className="use-near-screen" ref={ref}>
       {show && (
         <Col span={24} className="education__collapse">
           <Collapse
@@ -149,8 +153,9 @@ function CompetenciasClaveN3() {
 
 function HerramientasWebN3() {
   const [show, el] = useNearScreen();
+  let ref: any = el;
   return (
-    <div className="use-near-screen" ref={el}>
+    <div className="use-near-screen" ref={ref}>
       {show && (
         <Col span={24} className="education__collapse">
           <Collapse
@@ -192,8 +197,9 @@ function HerramientasWebN3() {
 
 function AdministrativoN1() {
   const [show, el] = useNearScreen();
+  let ref: any = el;
   return (
-    <div className="use-near-screen" ref={el}>
+    <div className="use-near-screen" ref={ref}>
       {show && (
         <Col span={24} className="education__collapse">
           <Collapse
@@ -227,8 +233,9 @@ function AdministrativoN1() {
 
 function GraduadoEscolar() {
   const [show, el] = useNearScreen();
+  let ref: any = el;
   return (
-    <div className="use-near-screen" ref={el}>
+    <div className="use-near-screen" ref={ref}>
       {show && (
         <Col span={24} className="education__collapse">
           <Collapse

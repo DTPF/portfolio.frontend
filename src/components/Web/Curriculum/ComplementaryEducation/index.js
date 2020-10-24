@@ -1,1 +1,1 @@
-export { default } from './ComplementaryEducation.jsx'
+export { default } from './ComplementaryEducation.tsx'

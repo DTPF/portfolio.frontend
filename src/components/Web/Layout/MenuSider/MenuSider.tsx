@@ -5,7 +5,7 @@ import { getMenuApi } from "../../../../api/menu";
 import SocialLinks from "../../SocialLinks";
 import "./MenuSider.scss";
 
-function MenuSider(props) {
+function MenuSider(props: any) {
   const { menuCollapsed, setMenuCollapsed, location } = props;
   const [menuData, setMenuData] = useState([]);
   const { Sider } = Layout;
@@ -16,8 +16,8 @@ function MenuSider(props) {
         if (response.status !== 200) {
           console.log("Error del servidor.");
         } else {
-          const arrayMenu = [];
-          response.menu && response.menu.forEach((item) => {
+          const arrayMenu: any = [];
+          response.menu && response.menu.forEach((item: any) => {
             item.active && arrayMenu.push(item);
           });
           setMenuData(arrayMenu);
@@ -37,7 +37,7 @@ function MenuSider(props) {
       onClick={() => setMenuCollapsed(!menuCollapsed)}
     >
       <Menu selectedKeys={[location.pathname]}  mode="vertical">
-        {menuData.map((item) => {
+        {menuData.map((item: any) => {
           const external = item.url.indexOf("http") > -1 ? true : false;
           if (external) {
             return (

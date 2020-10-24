@@ -1,1 +1,1 @@
-export { default } from "./MenuSider.jsx";
+export { default } from "./MenuSider.tsx";

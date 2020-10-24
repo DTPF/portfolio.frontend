@@ -24,7 +24,7 @@ export default function ContactMe() {
   );
 }
 
-function RenderForm(props) {
+function RenderForm(props: any) {
   const { inputs, setInputs, order, setOrder } = props;
   const onFinish = () => {
     getMessagesApi().then((result) => {

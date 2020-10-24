@@ -1,1 +1,1 @@
-export { default } from "./Projects.jsx" 
+export { default } from "./Projects.tsx" 

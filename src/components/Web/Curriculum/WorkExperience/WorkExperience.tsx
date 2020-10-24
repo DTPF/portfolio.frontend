@@ -31,8 +31,9 @@ function ProximaExperiencia() {
     cursos online con y sin certificado, y de manera autodidacta para 
     ser desarrrollador de software.
   `;
+  let ref: any = el;
   return (
-    <div className="use-near-screen" ref={el}>
+    <div className="use-near-screen" ref={ref}>
       {show && (
         <div className="container workx-7 right">
           <div className="title-right workx-7">
@@ -69,8 +70,9 @@ function ProximaExperiencia() {
 
 function SupermercadoChipYChop() {
   const [show, el] = useNearScreen();
+  let ref: any = el;
   return (
-    <div className="use-near-screen" ref={el}>
+    <div className="use-near-screen" ref={ref}>
       {show && (
         <div className="container workx-6 left">
           <div className="title-left workx-6">
@@ -88,8 +90,9 @@ function SupermercadoChipYChop() {
 
 function TizonaSL() {
   const [show, el] = useNearScreen();
+  let ref: any = el;
   return (
-    <div className="use-near-screen" ref={el}>
+    <div className="use-near-screen" ref={ref}>
       {show && (
         <div className="container workx-5 right">
           <div className="title-right workx-5">
@@ -107,8 +110,9 @@ function TizonaSL() {
 
 function MoyaSaus() {
   const [show, el] = useNearScreen();
+  let ref: any = el;
   return (
-    <div className="use-near-screen" ref={el}>
+    <div className="use-near-screen" ref={ref}>
       {show && (
         <div className="container workx-4 left">
           <div className="title-left workx-4">
@@ -130,8 +134,9 @@ function MoyaSaus() {
 
 function IntegraTap() {
   const [show, el] = useNearScreen();
+  let ref: any = el;
   return (
-    <div className="use-near-screen" ref={el}>
+    <div className="use-near-screen" ref={ref}>
       {show && (
         <div className="container workx-3 right">
           <div className="title-right workx-3">
@@ -149,8 +154,9 @@ function IntegraTap() {
 
 function LlabresFeliu() {
   const [show, el] = useNearScreen();
+  let ref: any = el;
   return (
-    <div className="use-near-screen" ref={el}>
+    <div className="use-near-screen" ref={ref}>
       {show && (
         <div className="container workx-2 left">
           <div className="title-left workx-2">
@@ -168,8 +174,9 @@ function LlabresFeliu() {
 
 function TallerLaCabina() {
   const [show, el] = useNearScreen();
+  let ref: any = el;
   return (
-    <div className="use-near-screen" ref={el}>
+    <div className="use-near-screen" ref={ref}>
       {show && (
         <div className="container workx-1 right">
           <div className="title-right workx-1">

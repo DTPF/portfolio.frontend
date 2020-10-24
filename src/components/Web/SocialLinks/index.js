@@ -1,1 +1,1 @@
-export { default } from "./SocialLinks.jsx";
+export { default } from "./SocialLinks.tsx";

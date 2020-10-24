@@ -28,9 +28,7 @@ export default function CourseInfo(props: any) {
         setCourse(response.course);
       }
     });
-    return () => {
-      unmounted = true;
-    };
+    return () => { unmounted = true };
   }, [url]);
   return (
     <Row className="course-info">
@@ -80,9 +78,7 @@ function Course(props: any) {
       }
       window.scrollTo(0, 0);
     }
-    return () => {
-      unmounted = true;
-    };
+    return () => { unmounted = true };
   }, [course, prev, next, coursesLength]);
   useEffect(() => {
     let unmounted = false;
@@ -191,15 +187,13 @@ function Tags(props: any) {
     return () => { unmounted = true };
   }, [course]);
   return (
-    <>
-      <div className="course-info__tags-div">
-        {tags &&
-          tags.map((tag) => (
-            <span key={tag} className={tag}>
-              <Tag>{tag}</Tag>
-            </span>
-          ))}
-      </div>
-    </>
+    <div className="course-info__tags-div">
+      {tags &&
+        tags.map((tag) => (
+          <span key={tag} className={tag}>
+            <Tag>{tag}</Tag>
+          </span>
+        ))}
+    </div>
   );
 }

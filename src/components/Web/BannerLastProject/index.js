@@ -1,1 +1,1 @@
-export { default } from "./BannerLastProject.jsx"
+export { default } from "./BannerLastProject.tsx"

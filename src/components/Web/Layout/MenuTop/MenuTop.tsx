@@ -10,7 +10,7 @@ import {
 import "./MenuTop.scss";
 import SocialLinks from "../../SocialLinks";
 
-function MenuTop(props) {
+function MenuTop(props: any) {
   const [menuData, setMenuData] = useState([]);
   const { menuCollapsed, setMenuCollapsed, location } = props;
   let pathname = location.pathname;
@@ -25,8 +25,8 @@ function MenuTop(props) {
             duration: 15
           });
         } else {
-          const arrayMenu = [];
-          response.menu && response.menu.forEach((item) => {
+          const arrayMenu: any = [];
+          response.menu && response.menu.forEach((item: any) => {
             item.active && arrayMenu.push(item);
           });
           setMenuData(arrayMenu);
@@ -46,7 +46,7 @@ function MenuTop(props) {
           <img src={Logo} alt="Logo de David Thomas Pizarro Frick" />
         </NavLink>
       </Menu.Item>
-      {menuData.map((item) => {
+      {menuData.map((item: any) => {
         const external = item.url.indexOf("http") > -1 ? true : false;
         if (external) {
           return (

@@ -1,1 +1,1 @@
-export { default } from "./ComputerSkills.jsx"
+export { default } from "./ComputerSkills.tsx"

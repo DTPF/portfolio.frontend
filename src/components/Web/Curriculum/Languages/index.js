@@ -1,1 +1,1 @@
-export { default } from "./Languages.jsx"
+export { default } from "./Languages.tsx"

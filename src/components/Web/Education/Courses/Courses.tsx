@@ -8,7 +8,7 @@ import NoImage from "../../../../assets/img/png/no-image-s.png";
 import { useNearScreen } from "../../../../hooks/useNearScreen";
 import "./Courses.scss";
 
-export default function Courses(props) {
+export default function Courses(props: any) {
   const { courses, numItems, title, subtitle } = props;
   return (
     <>
@@ -21,7 +21,7 @@ export default function Courses(props) {
       <div className="courses-list">
         <Row>
           {courses &&
-            courses.slice(0, numItems).map((course) => (
+            courses.slice(0, numItems).map((course: any) => (
               <Col
                 key={course._id}
                 span={12}
@@ -32,18 +32,21 @@ export default function Courses(props) {
               >
                 <Course course={course} />
               </Col>
-            ))}
+            ))
+          }
         </Row>
       </div>
     </>
   );
 }
 
-function Course(props) {
+function Course(props: any) {
   const { course } = props;
   const [show, el] = useNearScreen();
   const [image, setImage] = useState(null);
   const { Meta } = Card;
+  let img: any = image;
+  let ref: any = el;
   useEffect(() => {
     let unmounted = false;
     if (course.image) {
@@ -61,39 +64,37 @@ function Course(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [course]);
   return (
-    <>
-      <div className="courses-list__element" ref={el}>
-        {show && (
-          <QueueAnim type={"alpha"} duration={400} ease="easeInCubic">
-            <div key="course">
-              <Link to={`/education/${course.url}`}>
-                <Card
-                  className="courses-list__card"
-                  cover={
-                    <img
-                      src={image ? image : NoImage}
-                      alt={course.title}
-                    />
-                  }
-                >
-                  <Meta description={course.title} />
-                  <span className="courses-list__edit">
-                    <EyeOutlined />
-                  </span>
-                  <div className="courses-list__tags">
-                    <Tag className="courses-list__hours">
-                      <b>{course.duration}</b> h
-                    </Tag>
-                    <Tag className="courses-list__tecnologies">
-                      <b>{course.tags.length}</b> tech
-                    </Tag>
-                  </div>
-                </Card>
-              </Link>
-            </div>
-          </QueueAnim>
-        )}
-      </div>
-    </>
+    <div className="courses-list__element" ref={ref}>
+      {show && (
+        <QueueAnim type={"alpha"} duration={400} ease="easeInCubic">
+          <div key="course">
+            <Link to={`/education/${course.url}`}>
+              <Card
+                className="courses-list__card"
+                cover={
+                  <img
+                    src={img ? img : NoImage}
+                    alt={course.title}
+                  />
+                }
+              >
+                <Meta description={course.title} />
+                <span className="courses-list__edit">
+                  <EyeOutlined />
+                </span>
+                <div className="courses-list__tags">
+                  <Tag className="courses-list__hours">
+                    <b>{course.duration}</b> h
+                  </Tag>
+                  <Tag className="courses-list__tecnologies">
+                    <b>{course.tags.length}</b> tech
+                  </Tag>
+                </div>
+              </Card>
+            </Link>
+          </div>
+        </QueueAnim>
+      )}
+    </div>
   );
 }

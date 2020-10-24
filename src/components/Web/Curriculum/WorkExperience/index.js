@@ -1,1 +1,1 @@
-export { default } from './WorkExperience.jsx'
+export { default } from './WorkExperience.tsx'

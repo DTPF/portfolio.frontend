@@ -5,18 +5,10 @@ import RECETASMSR from "../../../assets/img/webp/recetasmsr.webp";
 import { LinkOutlined } from "@ant-design/icons";
 import "./BannerLastProject.scss";
 
-export default () => {
+export default function BannerLastProject() {
   return (
     <Row className="banner-last-project">
-      <Banner />
-    </Row>
-  );
-}
-
-function Banner() {
-  return (
-    <>
-      <Col span={24} className="banner-last-project__title">
+       <Col span={24} className="banner-last-project__title">
         <QueueAnim type={"alpha"} duration={200} ease="easeInCubic">
           <div key="title">
             <h1>Portfolio</h1>
@@ -68,6 +60,6 @@ function Banner() {
           </QueueAnim>
         </Col>
       </Col>
-    </>
+    </Row>
   );
 }
