@@ -20,7 +20,12 @@ export default function App() {
   );
 }
 
-function RouteWithSubRoutes(route) {
+function RouteWithSubRoutes(route: {
+  path: string;
+  exact: boolean;
+  routes: {};
+  component: any;
+}) {
   return (
     <Route
       path={route.path}

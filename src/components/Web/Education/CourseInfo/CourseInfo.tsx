@@ -2,7 +2,7 @@ import React, { useState, useEffect, Suspense, lazy } from "react";
 import { Link, useHistory } from "react-router-dom";
 import moment from "moment";
 import "moment/locale/es";
-import { Row, Col, Image, Tag, Button, Spin } from "antd";
+import { Row, Col, Image, Tag, Button } from "antd";
 import { Helmet } from "react-helmet";
 import {
   getCourseApi,
@@ -14,28 +14,30 @@ import {
   ArrowLeftOutlined,
   ArrowRightOutlined,
   LeftOutlined,
-  LinkOutlined,
-  LoadingOutlined
+  LinkOutlined
 } from "@ant-design/icons";
 import NoImage from "../../../../assets/img/png/no-image.png";
 import "./CourseInfo.scss";
+const Spin = lazy(() => import("../../../../components/Spin"));
 const Error = lazy(() => import("../../../../pages/Errors"));
 
 export default function CourseInfo(props: any) {
   const { url, courses } = props;
   const [course, setCourse] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   useEffect(() => {
     let unmounted = false;
     getCourseApi(url).then((response) => {
       if (response.status === 200) {
         if (!unmounted) {
           setCourse(response.course);
-          setIsLoading(true)
+          setIsLoading(true);
         }        
       } else {
-        setCourse(null);
+        if (!unmounted) {
+          setCourse(null);
+          setIsLoading(true);
+        }
       }
     });
     return () => { unmounted = true;  };
@@ -43,23 +45,15 @@ export default function CourseInfo(props: any) {
   return (
     <Row className="course-info">
       {!isLoading ? (
-        <Spin
-          indicator={antIcon}
-          style={{
-            textAlign: "center",
-            width: "100%",
-            height: "100vh",
-            padding: "20px",
-            paddingTop: "200px",
-            color: "#5d718d"
-          }}
-        />
+        <Spin />
         ) : (
           <>
-            {!course ? (    
-              <Error
-                subtitle="Lo sentimos, el curso que buscas no existe."
-              />    
+            {!course ? ( 
+              <Suspense fallback={<></>}>
+                <Error
+                  subtitle="Lo sentimos, el curso que buscas no existe."
+                />    
+              </Suspense>   
             ) : (
               <Course course={course && course} courses={courses} />
             )}

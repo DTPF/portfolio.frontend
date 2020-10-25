@@ -7,7 +7,6 @@ import { Helmet } from "react-helmet";
 import "./Education.scss";
 import Courses from "../../../components/Web/Education/Courses";
 const Pagination = lazy(() => import("../../../components/Pagination"));
-// const Courses = lazy(() => import("../../../components/Web/Education/Courses"));
 const CourseInfo = lazy(() => import("../../../components/Web/Education/CourseInfo"));
 const InfoBanner = lazy(() => import("../../../components/Web/Education/InfoBanner"));
 
@@ -21,17 +20,14 @@ export default function Education(props: any) {
     window.scrollTo(0, 0)
   }, []);
   return (
-    <>
-
-      <RenderEducation
-        url={url}
-        location={location}
-        history={history}
-        courses={courses}
-        show={show}
-        el={el}
-      />
-    </>
+    <RenderEducation
+      url={url}
+      location={location}
+      history={history}
+      courses={courses}
+      show={show}
+      el={el}
+    />
   );
 }
 
@@ -104,14 +100,11 @@ function RenderEducation(props: any) {
         <Col lg={1} />
       </Row>
     ) : (
-      <>
-
-        <Suspense fallback={<></>}>
-          <Col key={url} ref={el}>
-            <CourseInfo url={url} courses={courses} />
-          </Col>
-        </Suspense>
-      </>
+      <Suspense fallback={<></>}>
+        <Col key={url} ref={el}>
+          <CourseInfo url={url} courses={courses} />
+        </Col>
+      </Suspense>
     )}
     </>
   );

@@ -1,21 +1,20 @@
 import React, { Suspense, lazy } from "react";
 import "moment/locale/es";
-import { List, Button, Spin, Modal, notification } from "antd";
+import { List, Button, Modal, notification } from "antd";
 import { getAccessTokenApi } from "../../../../api/auth";
 import { Link } from "react-router-dom";
 import { deleteCourseApi } from "../../../../api/education";
 import {
-  LoadingOutlined,
   EyeOutlined,
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
+const Spin = lazy(() => import("../../../../components/Spin"));
 const Moment = lazy(() => import("react-moment"));
 const { confirm } = Modal;
 
 export default function CoursesList(props: any) {
   const { courses, setReloadCourses, editCourse } = props;
-  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   const deleteCourse = (course: any) => {
     const accessToken = getAccessTokenApi();
     confirm({
@@ -45,17 +44,9 @@ export default function CoursesList(props: any) {
   return (
     <div className="courses-list">
       {!courses ? (
-        <Spin
-          indicator={antIcon}
-          style={{
-            textAlign: "center",
-            width: "100%",
-            height: "100%",
-            padding: "20px",
-            marginTop: "200px",
-            color: "#5d718d",
-          }}
-        />
+        <Suspense fallback={<></>}>
+          <Spin />
+        </Suspense>
       ) : (
         <List
           dataSource={courses.docs}

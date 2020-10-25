@@ -1,14 +1,14 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
-import { Button, Spin } from "antd";
+import { Button } from "antd";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import { getCoursesApi } from "../../../api/education";
-import { LoadingOutlined } from "@ant-design/icons";
 import "./Courses.scss";
-import AddEditCoursesForm from "../../../components/Admin/Courses/AddEditCoursesForm";
+const Spin = lazy(() => import("../../../components/Spin"));
 const Modal = lazy(() => import("../../../components/Modal"));
 const PaginationAnt = lazy(() => import("../../../components/Pagination"));
 const CoursesList = lazy(() => import("../../../components/Admin/Courses/CoursesList"));
+const AddEditCoursesForm = lazy(() => import("../../../components/Admin/Courses/AddEditCoursesForm"));
 
 function Courses(props: any) {
   const { location, history } = props;
@@ -18,7 +18,6 @@ function Courses(props: any) {
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState(null);
   const { page = 1 } = queryString.parse(location.search);
-  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   useEffect(() => {
     let unmounted = false;
     getCoursesApi(10, page).then((response) => {
@@ -47,17 +46,9 @@ function Courses(props: any) {
         setReloadCourses={setReloadCourses}
       />
       {!courses ? (
-        <Spin
-          indicator={antIcon}
-          style={{
-            textAlign: "center",
-            width: "100%",
-            height: "100%",
-            padding: "20px",
-            marginTop: "200px",
-            color: "#5d718d",
-          }}
-        />
+        <Suspense fallback={<></>}>
+          <Spin />
+        </Suspense>
       ) : (
         <Pagination
           courses={courses}
