@@ -5,16 +5,15 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import { Row, Col, Button, BackTop } from "antd";
 import { Helmet } from "react-helmet";
 import "./Education.scss";
+import Courses from "../../../components/Web/Education/Courses";
 const Pagination = lazy(() => import("../../../components/Pagination"));
-const Courses = lazy(() => import("../../../components/Web/Education/Courses"));
+// const Courses = lazy(() => import("../../../components/Web/Education/Courses"));
 const CourseInfo = lazy(() => import("../../../components/Web/Education/CourseInfo"));
 const InfoBanner = lazy(() => import("../../../components/Web/Education/InfoBanner"));
 
 export default function Education(props: any) {
   const { location, history } = props;
-  interface URL {
-    url: string
-  }
+  interface URL { url: string };
   const { url } = useParams<URL>();
   const [courses] = useGetCourses(100, location);
   const [show, el] = useNearScreen();
@@ -23,14 +22,7 @@ export default function Education(props: any) {
   }, []);
   return (
     <>
-      <Helmet>
-        <title>Formación | Mi formación en IT</title>
-        <meta
-          name="description"
-          content="Mi formación en tecnologías de la información"
-          data-react-helmet="true"
-          />
-      </Helmet>
+
       <RenderEducation
         url={url}
         location={location}
@@ -38,7 +30,7 @@ export default function Education(props: any) {
         courses={courses}
         show={show}
         el={el}
-        />
+      />
     </>
   );
 }
@@ -52,6 +44,14 @@ function RenderEducation(props: any) {
     " y online para mi preparación al mundo de IT";
   return (
     <>
+    <Helmet>
+      <title>Formación | Mi formación en IT</title>
+      <meta
+        name="description"
+        content="Mi formación en tecnologías de la información"
+        data-react-helmet="true"
+      />
+    </Helmet>
     {!url ? (
       <Row className="education">
         <BackTop duration={800} />
@@ -65,7 +65,7 @@ function RenderEducation(props: any) {
                 numItems={10000}
                 title={title}
                 subtitle={subtitle}
-                courses={courses?.docs}
+                courses={courses.docs}
                 location={location}
                 history={history}
               />
@@ -104,11 +104,14 @@ function RenderEducation(props: any) {
         <Col lg={1} />
       </Row>
     ) : (
-      <Suspense fallback={<></>}>
-        <Col key={url} ref={el}>
-          <CourseInfo url={url} courses={courses} />
-        </Col>
-      </Suspense>
+      <>
+
+        <Suspense fallback={<></>}>
+          <Col key={url} ref={el}>
+            <CourseInfo url={url} courses={courses} />
+          </Col>
+        </Suspense>
+      </>
     )}
     </>
   );

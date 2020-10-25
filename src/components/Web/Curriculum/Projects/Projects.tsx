@@ -2,8 +2,8 @@ import React from "react";
 import { useNearScreen } from "../../../../hooks/useNearScreen";
 import { Row, Col, Image } from "antd";
 import { Link } from "react-router-dom";
-import dtpfImage from "../../../../assets/img/webp/project-dtpf.webp";
-import recetasImage from "../../../../assets/img/webp/project-recetas.webp";
+import dtpfImage from "../../../../assets/img/jpg/project-dtpf.jpg";
+import recetasImage from "../../../../assets/img/jpg/project-recetas.jpg";
 import "./Projects.scss";
 
 export default function Projects() {

@@ -361,6 +361,8 @@ function transformTextToUrl(text: string) {
   const u10 = u9.replace(/Í/g, "I");
   const u11 = u10.replace(/Ó/g, "O");
   const u12 = u11.replace(/Ú/g, "U");
-  const url = u12.replace(/:/g, "");
+  const u13 = u12.replace(/ - /g, "-");
+  const u14 = u13.replace(/---/g, "-");
+  const url = u14.replace(/:/g, "");
   return url.toLowerCase();
 }

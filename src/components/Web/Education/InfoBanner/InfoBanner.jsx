@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useGetCourses } from "../../../../hooks/useGetCourses";
-import { message, notification } from "antd";
+import { notification } from "antd";
 import TweenOne from "rc-tween-one";
 import Children from "rc-tween-one/lib/plugin/ChildrenPlugin.js";
 import BannerAnim, { Element } from "rc-banner-anim";

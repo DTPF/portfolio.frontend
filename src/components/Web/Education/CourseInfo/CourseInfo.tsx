@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import { Link, useHistory } from "react-router-dom";
 import moment from "moment";
 import "moment/locale/es";
-import { Row, Col, Image, Tag, Button } from "antd";
+import { Row, Col, Image, Tag, Button, Spin } from "antd";
+import { Helmet } from "react-helmet";
 import {
   getCourseApi,
   getImageApi,
@@ -14,25 +15,56 @@ import {
   ArrowRightOutlined,
   LeftOutlined,
   LinkOutlined,
+  LoadingOutlined
 } from "@ant-design/icons";
 import NoImage from "../../../../assets/img/png/no-image.png";
 import "./CourseInfo.scss";
+const Error = lazy(() => import("../../../../pages/Errors"));
 
 export default function CourseInfo(props: any) {
   const { url, courses } = props;
   const [course, setCourse] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   useEffect(() => {
     let unmounted = false;
     getCourseApi(url).then((response) => {
-      if (!unmounted) {
-        setCourse(response.course);
+      if (response.status === 200) {
+        if (!unmounted) {
+          setCourse(response.course);
+          setIsLoading(true)
+        }        
+      } else {
+        setCourse(null);
       }
     });
-    return () => { unmounted = true };
-  }, [url]);
+    return () => { unmounted = true;  };
+  }, [url]);  
   return (
     <Row className="course-info">
-      <Course course={course && course} courses={courses} />
+      {!isLoading ? (
+        <Spin
+          indicator={antIcon}
+          style={{
+            textAlign: "center",
+            width: "100%",
+            height: "100vh",
+            padding: "20px",
+            paddingTop: "200px",
+            color: "#5d718d"
+          }}
+        />
+        ) : (
+          <>
+            {!course ? (    
+              <Error
+                subtitle="Lo sentimos, el curso que buscas no existe."
+              />    
+            ) : (
+              <Course course={course && course} courses={courses} />
+            )}
+          </>
+      )}
     </Row>
   );
 }
@@ -94,6 +126,14 @@ function Course(props: any) {
   
   return (
     <>
+      <Helmet>
+        <title>{course.title}</title>
+        <meta
+          name="description"
+          content={course.title}
+          data-react-helmet="true"
+        />
+      </Helmet>
       <QueueAnim type={"alpha"} duration={150} ease="easeInCubic">
         <div className="course-info__goBack" key="div">
           <Button type="primary" onClick={goBack}>
@@ -104,7 +144,7 @@ function Course(props: any) {
       </QueueAnim>
       <Col span={24} className="course-info__title">
         <QueueAnim type={"alpha"} duration={200} ease="easeInCubic">
-          <h1 key="title">{course && course.title}</h1>
+          <h1 key="title">{course.title}</h1>
         </QueueAnim>
       </Col>
       <QueueAnim type={"alpha"} duration={200} ease="easeInCubic">

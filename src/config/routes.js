@@ -17,7 +17,7 @@ import Education from "../pages/Web/Education";
 import Curriculum from "../pages/Web/Curriculum";
 
 // Other
-import Error404 from "../pages/Errors/Error404";
+import Errors from "../pages/Errors";
 
 const routes = [
   {
@@ -56,7 +56,7 @@ const routes = [
         component: AdminCourses
       },
       {
-        component: Error404,
+        component: Errors,
       },
     ],
   },
@@ -91,7 +91,7 @@ const routes = [
         component: Curriculum
       },
       {
-        component: Error404,
+        component: Errors,
       },
     ],
   },

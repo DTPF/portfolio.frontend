@@ -1,7 +1,7 @@
 import React from "react";
-import { Row, Col, Image } from "antd";
+import { Row, Col } from "antd";
 import QueueAnim from "rc-queue-anim";
-import RECETASMSR from "../../../assets/img/webp/recetasmsr.webp";
+import RECETASMSR from "../../../assets/img/jpg/recetasmsr.jpg";
 import { LinkOutlined } from "@ant-design/icons";
 import "./BannerLastProject.scss";
 
@@ -18,7 +18,9 @@ export default function BannerLastProject() {
       <Col span={24} md={12} className="banner-last-project__image">
         <QueueAnim type={"alpha"} duration={250} ease="easeInCubic">
           <div key="image">
-            <Image src={RECETASMSR}></Image>
+            <a href="https://www.recetasmsr.com" target="_blank" rel="noopener noreferrer">
+              <img width="100%" alt="Link a www.recetasmsr.com" src={RECETASMSR}></img>
+            </a>
           </div>
         </QueueAnim>
       </Col>

@@ -1,8 +1,8 @@
 import React, { useState, Suspense, lazy } from "react";
 import { Layout } from "antd";
 import "./LayoutBasic.scss";
-const desktopImage = require("../assets/img/webp/background-squares.webp");
-const mobileImage = require("../assets/img/webp/background-squares-mobile.webp");
+const desktopImage = require("../assets/img/jpg/background-squares.jpg");
+const mobileImage = require("../assets/img/jpg/background-squares-mobile.jpg");
 const MenuTop = lazy(() => import("../components/Web/Layout/MenuTop"));
 const MenuSider = lazy(() => import("../components/Web/Layout/MenuSider"));
 const Footer = lazy(() => import("../components/Web/Layout/Footer"));
