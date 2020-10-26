@@ -27,8 +27,8 @@ export default function ContactMe() {
 function RenderForm(props: any) {
   const { inputs, setInputs, order, setOrder } = props;
   const onFinish = () => {
-    getMessagesApi().then((result) => {
-      const data = result.messages + 1;
+    getMessagesApi().then((res) => {
+      let data = res.messages + 1;
       setOrder(data);
     });
     let finalData = {
@@ -36,10 +36,13 @@ function RenderForm(props: any) {
       subject: inputs.subject,
       order: order,
     };
-    let inputEmail = inputs.email;
-    const replaceTab = inputEmail?.replace(" ", "");
-    const emailValid = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,63}$/i;
-    const resultValidation = emailValid.test(replaceTab);
+    let inputEmail: string = inputs.email;
+    let inputSubject = inputs.subject;
+    let replaceTab = inputEmail?.replace(" ", "");
+    let emailValid = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,63}$/i;
+    let subjectIsNum = /^\d+$/.test(inputSubject);
+    let howManyTabs = inputSubject.split(" ").length;
+    let resultValidation = emailValid.test(replaceTab);
     if (!inputs.email && !inputs.subject) {
       notification["warning"]({
         message: "Los dos campos son requeridos.",
@@ -48,6 +51,16 @@ function RenderForm(props: any) {
     } else if (!resultValidation) {
       notification["warning"]({
         message: "El email no es válido.",
+        duration: notifDelayErr,
+      });
+    } else if (subjectIsNum) {
+      notification["warning"]({
+        message: "¿Es un código secreto? No entiendo el asunto...",
+        duration: notifDelayErr,
+      });
+    } else if (howManyTabs < 3) {
+      notification["warning"]({
+        message: "Especifica un poco más por favor.",
         duration: notifDelayErr,
       });
     } else {
@@ -73,7 +86,6 @@ function RenderForm(props: any) {
       });
     }
   };
-
   return (
     <Form onFinish={onFinish}>
       <Form.Item>
@@ -88,6 +100,8 @@ function RenderForm(props: any) {
       </Form.Item>
       <Form.Item>
         <Input
+          type="text"
+          name="text"
           prefix={<MailOutlined style={{ color: "rgba(0, 0, 0, 0.25)" }} />}
           placeholder="Asunto"
           value={inputs.subject}
