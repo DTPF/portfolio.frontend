@@ -42,11 +42,9 @@ export default function Courses(props: any) {
 
 function Course(props: any) {
   const { course } = props;
-  const [show, el] = useNearScreen();
-  const [image, setImage] = useState(null);
+  const [show, el] : any = useNearScreen();
+  const [image, setImage] : any = useState(null);
   const { Meta } = Card;
-  let img: any = image;
-  let ref: any = el;
   useEffect(() => {
     let unmounted = false;
     if (course.image) {
@@ -64,7 +62,7 @@ function Course(props: any) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [course]);
   return (
-    <div className="courses-list__element" ref={ref}>
+    <div className="courses-list__element" ref={el}>
       {show && (
         <QueueAnim type={"alpha"} duration={400} ease="easeInCubic">
           <div key="course">
@@ -73,7 +71,7 @@ function Course(props: any) {
                 className="courses-list__card"
                 cover={
                   <img
-                    src={img ? img : NoImage}
+                    src={image ? image : NoImage}
                     alt={course.title}
                   />
                 }

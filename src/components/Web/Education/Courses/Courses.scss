@@ -2,8 +2,6 @@
 @import "../../../../scss/mixins";
 
 .courses-list {
-  display: flex;
-  justify-content: center;
   max-width: 1450px;
   margin: 0 auto;
   &__element {

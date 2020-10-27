@@ -56,14 +56,14 @@
     @media (min-width: $media-breakpoint-up-md) {
       font-size: $font-size-md;
     }
-    @media (max-width: $media-breakpoint-down-md) {
+    @media (max-width: 840px) {
       display: none !important;
     }
     &-social {
       position: absolute !important;
       right: 0 !important;
       top: 17px !important;
-      @media (max-width: $media-breakpoint-down-md) {
+      @media (max-width: 840px) {
         display: none !important;
       }
       @media (min-width: $media-breakpoint-up-lg) {
@@ -97,7 +97,7 @@
     &:focus {
       color: #fff;
     }
-    @media (min-width: $media-breakpoint-down-md) {
+    @media (min-width: 840px) {
       display: none !important;
     }
   }

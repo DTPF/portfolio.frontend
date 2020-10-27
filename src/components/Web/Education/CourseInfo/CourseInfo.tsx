@@ -43,7 +43,7 @@ export default function CourseInfo(props: any) {
     return () => { unmounted = true;  };
   }, [url]);  
   return (
-    <Row className="course-info">
+    <div className="course-info">
       {!isLoading ? (
         <Spin />
         ) : (
@@ -59,7 +59,7 @@ export default function CourseInfo(props: any) {
             )}
           </>
       )}
-    </Row>
+    </div>
   );
 }
 
@@ -120,14 +120,14 @@ function Course(props: any) {
   
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <title>{course.title}</title>
         <meta
           name="description"
           content={course.title}
           data-react-helmet="true"
         />
-      </Helmet>
+      </Helmet> */}
       <QueueAnim type={"alpha"} duration={150} ease="easeInCubic">
         <div className="course-info__goBack" key="div">
           <Button type="primary" onClick={goBack}>

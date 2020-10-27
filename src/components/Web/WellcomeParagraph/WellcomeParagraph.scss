@@ -1,0 +1,28 @@
+@import "../../../scss/variables";
+@import "../../../scss/mixins";
+
+.wellcome-paragraph {
+  &__text {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: justify;
+    color: $font-primary-dark;
+    font-size: 1.1em;
+    font-weight: 500;
+    padding: 10px;
+    margin-bottom: 20px;
+    span {
+      font-size: 1.2em;
+      font-weight: 700;
+    }
+    @media (min-width: $media-breakpoint-down-sm) {
+      text-align: center;
+    }
+    @media (min-width: $media-breakpoint-down-md) {
+      font-size: 1.3em;
+      span {
+        font-size: 1.3em;
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Menu, Button, notification } from "antd";
+import React from "react";
+import useGetMenu from "../../../../hooks/useGetMenu";
+import { Menu, Button } from "antd";
 import { NavLink, withRouter } from "react-router-dom";
-import { getMenuApi } from "../../../../api/menu";
 import Logo from "../../../../assets/img/png/logo128.png";
 import { 
   MenuOutlined,
@@ -11,30 +11,10 @@ import "./MenuTop.scss";
 import SocialLinks from "../../SocialLinks";
 
 function MenuTop(props: any) {
-  const [menuData, setMenuData] = useState([]);
+  const menuData: any = useGetMenu();
   const { menuCollapsed, setMenuCollapsed, location } = props;
   let pathname = location.pathname;
   const splitPathname = pathname.split("/")[2];
-  useEffect(() => {
-    let unmounted = false;
-    getMenuApi().then((response) => {
-      if (!unmounted) {
-        if (response.status !== 200) {
-          notification['error']({
-            message: "Ha ocurrido un error en el servidor, vuelve más tarde y disculpa las molestias.",
-            duration: 15
-          });
-        } else {
-          const arrayMenu: any = [];
-          response.menu && response.menu.forEach((item: any) => {
-            item.active && arrayMenu.push(item);
-          });
-          setMenuData(arrayMenu);
-        }
-      }
-      return () => {unmounted = true};
-    });
-  }, []);
   return (
     <Menu
       selectedKeys={[location.pathname]}

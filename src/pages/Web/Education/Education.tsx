@@ -1,21 +1,20 @@
 import React, { useEffect, Suspense, lazy } from "react";
 import { useGetCourses } from "../../../hooks/useGetCourses";
-import { useNearScreen } from "../../../hooks/useNearScreen";
-import { useParams, useHistory, Link } from "react-router-dom";
-import { Row, Col, Button, BackTop } from "antd";
+import { useParams } from "react-router-dom";
+import { Row, Col, BackTop } from "antd";
 import { Helmet } from "react-helmet";
 import "./Education.scss";
-import Courses from "../../../components/Web/Education/Courses";
+const Courses = lazy(() => import("../../../components/Web/Education/Courses"));
 const Pagination = lazy(() => import("../../../components/Pagination"));
 const CourseInfo = lazy(() => import("../../../components/Web/Education/CourseInfo"));
 const InfoBanner = lazy(() => import("../../../components/Web/Education/InfoBanner"));
+const CategoriesBigButtons = lazy(() => import("../../../components/Web/CategoriesBigButtons/CategoriesBigButtons"));
 
 export default function Education(props: any) {
   const { location, history } = props;
   interface URL { url: string };
   const { url } = useParams<URL>();
   const [courses] = useGetCourses(100, location);
-  const [show, el] = useNearScreen();
   useEffect(() => {
     window.scrollTo(0, 0)
   }, []);
@@ -24,16 +23,13 @@ export default function Education(props: any) {
       url={url}
       location={location}
       history={history}
-      courses={courses}
-      show={show}
-      el={el}
+      courses={courses}  
     />
   );
 }
 
 function RenderEducation(props: any) {
-  const { url, location, history, courses, show, el } = props;
-  const goBack = useHistory().goBack;
+  const { url, location, history, courses } = props;
   const title = "Todos los cursos";
   const subtitle =
     "Todos los cursos que he realizado presenciales" +
@@ -81,27 +77,19 @@ function RenderEducation(props: any) {
               </Col>
             </>
           )}
-          <div className="education__button" ref={el}>
-            {show && (
-              <>
-                <Button className="education__button-left" type="primary" onClick={goBack}>
-                  Volver
-                </Button>
-                <Link to="/curriculum">                  
-                  <Button className="education__button-right" type="primary">
-                    Curriculum
-                  </Button>
-                </Link>
-              </>
-            )}
-          </div>
           <div className="div"></div>
+          <Suspense fallback={<></>}>
+            <CategoriesBigButtons
+              location={location.pathname}
+              extra="categories-big-buttons__extra"
+            />
+          </Suspense>
         </Col>
         <Col lg={1} />
       </Row>
     ) : (
       <Suspense fallback={<></>}>
-        <Col key={url} ref={el}>
+        <Col key={url}>
           <CourseInfo url={url} courses={courses} />
         </Col>
       </Suspense>

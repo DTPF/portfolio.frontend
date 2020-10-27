@@ -2,9 +2,9 @@
 
 .course-info {
   width: 100% !important;
+  margin: 0 auto;
   &__title {
-    width: 100%;
-    max-width: 1050px;
+    width: 100% !important;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -21,33 +21,6 @@
         font-size: 2em;
       }
     }
-
-    &-linkPrev,
-    &-linkNext {
-      display: none;
-      margin-top: 12px;
-      @media (min-width: $media-breakpoint-up-lg) {
-        display: block;
-      }
-      button {
-        @include buttonPrimary();
-        border-radius: 20px;
-        padding: 0 9px;
-        width: 40px;
-        &:active,
-        &:focus,
-        &:hover {
-          background-color: $primary-color !important;
-          border: 1px solid $primary-color-dark;
-          color: #fff;
-          &:hover {
-            color: $primary-color;
-            border: 1px solid $primary-color;
-            background-color: $primary-color-light !important;
-          }
-        }
-      }
-    }
   }
 
   &__linkPrevMobile,
@@ -59,9 +32,6 @@
     -webkit-box-shadow: -1px 4px 24px -2px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: -1px 4px 24px -2px rgba(0, 0, 0, 0.5);
     box-shadow: -1px 4px 24px -2px rgba(0, 0, 0, 0.5);
-    @media (min-width: $media-breakpoint-up-lg) {
-      // display: none;
-    }
     button {
       width: 50px;
       height: 40px;
@@ -95,17 +65,21 @@
   }
 
   &__image {
+    width: 100%;
     display: flex;
     justify-content: center;
     @media (min-width: $media-breakpoint-up-md) {
       margin-top: 8px;
       img {
+        width: 100% !important;
         border-radius: 5px;
       }
     }
   }
 
   &__info {
+    display: flex;
+    justify-content: center;
     &-duration {
       color: $primary-color-dark;
       font-weight: bold;
@@ -170,14 +144,15 @@
 
   &__tags {
     width: 100%;
+    margin: 0 auto;
     &-div {
       max-width: 1000px;
       text-align: center;
       @media (min-width: $media-breakpoint-up-sm) {
-        margin: 15px;
+        margin: 15px auto;
       }
       @media (min-width: $media-breakpoint-up-md) {
-        margin: 20px;
+        margin: 20px auto;
       }
       > span {
         > span {

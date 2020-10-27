@@ -21,7 +21,7 @@
     }
   }
   &__content {
-    min-height: 102vh;
+    min-height: calc(100vh - 335px);
     padding-top: 60px;
     @media (min-width: $media-breakpoint-up-md) {
       padding-top: 75px;

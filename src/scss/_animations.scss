@@ -23,3 +23,31 @@
   }
   animation: blur 0.4s;
 }
+
+@mixin slideinLeft() {
+  @keyframes slideinLeft {
+    from {
+      margin-left: 100%;
+      width: 200%;
+    }
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
+  animation: slideinLeft 1s;
+}
+
+@mixin slideinRight() {
+  @keyframes slideinRight {
+    from {
+      margin-right: 100%;
+      width: 300%;
+    }
+    to {
+      margin-right: 0%;
+      width: 100%;
+    }
+  }
+  animation: slideinRight 1s;
+}

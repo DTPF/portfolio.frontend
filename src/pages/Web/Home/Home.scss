@@ -1,27 +1,5 @@
-@import "../../../scss/variables";
-@import "../../../scss/mixins";
-
 .home {
-  &__courses {
-    min-height: 450px !important;
-    @media (min-width: $media-breakpoint-up-xl) {
-      min-height: 30vh;
-    }
-  }
-  &__more {
-    margin: 0 auto;
-    text-align: center;    
-    &-button {
-      @include buttonPrimary();
-      width: 230px;
-      height: 35px;
-      margin-top: 15px;
-      margin-bottom: 30px;
-    }
-  }
-}
-.ant-row {
+  min-height: 700px;
   display: flex;
   justify-content: center;
-  width: 100%;
 }

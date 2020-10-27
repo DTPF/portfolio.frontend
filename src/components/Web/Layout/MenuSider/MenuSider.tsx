@@ -1,32 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Layout, Menu } from "antd";
-import { getMenuApi } from "../../../../api/menu";
+import useGetMenu from "../../../../hooks/useGetMenu";
 import SocialLinks from "../../SocialLinks";
 import "./MenuSider.scss";
 
 function MenuSider(props: any) {
   const { menuCollapsed, setMenuCollapsed, location } = props;
-  const [menuData, setMenuData] = useState([]);
+  const menuData: any = useGetMenu();
   const { Sider } = Layout;
-  useEffect(() => {
-    let unmounted = false;
-    getMenuApi().then((response) => {
-      if (!unmounted) {
-        if (response.status !== 200) {
-          console.log("Error del servidor.");
-        } else {
-          const arrayMenu: any = [];
-          response.menu && response.menu.forEach((item: any) => {
-            item.active && arrayMenu.push(item);
-          });
-          setMenuData(arrayMenu);
-
-        }
-      }
-      return () => {unmounted = true};
-    });
-  }, []);
   return (
     <Sider
       collapsible
