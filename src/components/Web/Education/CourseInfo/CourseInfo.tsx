@@ -120,14 +120,14 @@ function Course(props: any) {
   
   return (
     <>
-      {/* <Helmet>
-        <title>{course.title}</title>
+      <Helmet>
+        <title>Formación | {course.title}</title>
         <meta
           name="description"
           content={course.title}
           data-react-helmet="true"
         />
-      </Helmet> */}
+      </Helmet>
       <QueueAnim type={"alpha"} duration={150} ease="easeInCubic">
         <div className="course-info__goBack" key="div">
           <Button type="primary" onClick={goBack}>

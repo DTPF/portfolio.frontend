@@ -2,13 +2,13 @@ import React, { useEffect, Suspense, lazy } from "react";
 import { useGetCourses } from "../../../hooks/useGetCourses";
 import { useParams } from "react-router-dom";
 import { Row, Col, BackTop } from "antd";
-import { Helmet } from "react-helmet";
 import "./Education.scss";
 const Courses = lazy(() => import("../../../components/Web/Education/Courses"));
 const Pagination = lazy(() => import("../../../components/Pagination"));
 const CourseInfo = lazy(() => import("../../../components/Web/Education/CourseInfo"));
 const InfoBanner = lazy(() => import("../../../components/Web/Education/InfoBanner"));
 const CategoriesBigButtons = lazy(() => import("../../../components/Web/CategoriesBigButtons/CategoriesBigButtons"));
+const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
 
 export default function Education(props: any) {
   const { location, history } = props;
@@ -19,12 +19,18 @@ export default function Education(props: any) {
     window.scrollTo(0, 0)
   }, []);
   return (
-    <RenderEducation
-      url={url}
-      location={location}
-      history={history}
-      courses={courses}  
-    />
+    <Suspense fallback={<></>}>
+      <HelmetAnalytics
+        titleHelmet="DTPF | Formación IT"
+        contentHelmet="Página de Formación en tecnologías de la información"
+      />
+      <RenderEducation
+        url={url}
+        location={location}
+        history={history}
+        courses={courses}  
+      />
+    </Suspense>
   );
 }
 
@@ -36,14 +42,6 @@ function RenderEducation(props: any) {
     " y online para mi preparación al mundo de IT";
   return (
     <>
-    <Helmet>
-      <title>Formación | Mi formación en IT</title>
-      <meta
-        name="description"
-        content="Mi formación en tecnologías de la información"
-        data-react-helmet="true"
-      />
-    </Helmet>
     {!url ? (
       <Row className="education">
         <BackTop duration={800} />
@@ -57,7 +55,7 @@ function RenderEducation(props: any) {
                 numItems={10000}
                 title={title}
                 subtitle={subtitle}
-                courses={courses.docs}
+                courses={courses && courses.docs}
                 location={location}
                 history={history}
               />

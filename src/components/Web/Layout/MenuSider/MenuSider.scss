@@ -4,15 +4,19 @@
 .menu-sider-web {
   position: fixed;
   right: 0;
-  top: 58px;
-  min-height: calc(100vh - 57px);
+  top: 56px;
+  min-height: calc(100vh - 56px);
   overflow: hidden;
   background-color: #fff;
   border-bottom-right-radius: $border-radius;
   margin-top: 0 !important;
   @include boxShadowMd();
-  @media (min-width: $media-breakpoint-down-md) {
+  @media (min-width: 840px) {
     display: none !important;
+  }
+  @media (min-width: $media-breakpoint-up-md) {
+    top: 61px;
+    min-height: calc(100vh - 61px);
   }
   .ant-menu-item-selected {
     background-color: $primary-color-extra-dark !important;
