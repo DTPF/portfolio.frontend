@@ -1,0 +1,23 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+@import "../../scss/animations";
+
+.CookieConsent {
+  background-color: $primary-color-dark !important;
+  display: flex;
+  align-items: center !important;
+  min-height: 100px;
+  @include boxShadowXl();
+  div {
+    height: 100% !important;
+    margin: 0 auto;
+    button {
+      color: $font-primary-dark !important;
+      border-radius: 7px !important;
+      background-color: $secondary-color !important;
+      font-weight: bold;
+      @include boxShadowXl();
+      @include acceptButtonBannerCookiesFade();
+    }
+  }
+}

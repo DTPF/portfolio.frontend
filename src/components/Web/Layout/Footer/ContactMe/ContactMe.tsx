@@ -6,11 +6,12 @@ import {
 } from "../../../../../api/contact";
 import { notifDelayErr } from "../../../../../utils/notifications";
 import { UserOutlined, MailOutlined } from "@ant-design/icons";
+import { gaEvent } from "../../../../../utils/analytics.js";
 import "./ContactMe.scss";
 
 export default function ContactMe() {
   const [inputs, setInputs] = useState({});
-  const [order, setOrder] = useState(0);  
+  const [order, setOrder] = useState(0);
   return (
     <div className="contact-me">
       <h3>{"Contacta conmigo :)"}</h3>
@@ -86,6 +87,9 @@ function RenderForm(props: any) {
       });
     }
   };
+  const clickMenuIcon = () => {
+    gaEvent("click_email_contact_me_footer", "clicks", "UI Clicks", true);
+  };
   return (
     <Form onFinish={onFinish}>
       <Form.Item>
@@ -95,6 +99,7 @@ function RenderForm(props: any) {
           prefix={<UserOutlined style={{ color: "rgba(0, 0, 0, 0.25)" }} />}
           placeholder="Correo electrónico"
           value={inputs.email}
+          onClick={() => clickMenuIcon()}
           onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
         />
       </Form.Item>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, Suspense, lazy } from "react";
 import { getMessagesUnreadApi } from "../../../api/contact";
 import { getAccessTokenApi } from "../../../api/auth";
 const ContactMessagesList = lazy(() => import('../../../components/Admin/ContactMessagesList'));
+const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
 
 export default function ContactMessages() {
   const [messagesUnread, setMessagesUnread] = useState([]);
@@ -26,6 +27,10 @@ export default function ContactMessages() {
   return (
     <div>
       <Suspense fallback={<></>}>
+        <HelmetAnalytics
+          titleHelmet="DTPF | Admin Mensajes"
+          contentHelmet="Página admin de Mensajes"
+        />
         <ContactMessagesList
           messagesUnread={messagesUnread}
           messagesRead={messagesRead}

@@ -9,6 +9,7 @@ const Modal = lazy(() => import("../../../components/Modal"));
 const PaginationAnt = lazy(() => import("../../../components/Pagination"));
 const CoursesList = lazy(() => import("../../../components/Admin/Courses/CoursesList"));
 const AddEditCoursesForm = lazy(() => import("../../../components/Admin/Courses/AddEditCoursesForm"));
+const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
 
 function Courses(props: any) {
   const { location, history } = props;
@@ -32,6 +33,12 @@ function Courses(props: any) {
 
   return (
     <div className="admin-courses">
+      <Suspense fallback={<></>}>
+        <HelmetAnalytics
+          titleHelmet="DTPF | Admin Cursos"
+          contentHelmet="Página Admin de Cursos"
+        />
+      </Suspense>
       <AddCourse
         setIsVisibleModal={setIsVisibleModal}
         setModalTitle={setModalTitle}

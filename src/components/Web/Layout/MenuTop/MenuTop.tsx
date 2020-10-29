@@ -9,12 +9,16 @@ import {
 } from "@ant-design/icons";
 import "./MenuTop.scss";
 import SocialLinks from "../../SocialLinks";
+import { gaEvent } from "../../../../utils/analytics.js";
 
 function MenuTop(props: any) {
   const menuData: any = useGetMenu();
   const { menuCollapsed, setMenuCollapsed, location } = props;
   let pathname = location.pathname;
   const splitPathname = pathname.split("/")[2];
+  const clickMenuIcon = () => {
+    gaEvent("click_menu_mobile_icon", "clicks", "UI Clicks", true);
+  };
   return (
     <Menu
       selectedKeys={[location.pathname]}
@@ -51,7 +55,7 @@ function MenuTop(props: any) {
           <Button
             type="link"
             className="menu-top-web__menu"
-            onClick={() => setMenuCollapsed(!menuCollapsed)}
+            onClick={() => {clickMenuIcon(); setMenuCollapsed(!menuCollapsed)}}
           >
             {React.createElement(
               menuCollapsed ? MenuOutlined : CloseCircleOutlined

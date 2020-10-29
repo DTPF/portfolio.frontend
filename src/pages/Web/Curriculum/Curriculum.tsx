@@ -1,6 +1,5 @@
 import React, { useEffect, Suspense, lazy } from "react";
 import { Row, Col, BackTop } from "antd";
-import { Helmet } from "react-helmet";
 import "./Curriculum.scss";
 const WorkExperience = lazy(() => import("../../../components/Web/Curriculum/WorkExperience"));
 const Education = lazy(() => import("../../../components/Web/Curriculum/Education"));
@@ -9,6 +8,7 @@ const ComputerSkills = lazy(() => import("../../../components/Web/Curriculum/Com
 const Languages = lazy(() => import("../../../components/Web/Curriculum/Languages"));
 const Projects = lazy(() => import("../../../components/Web/Curriculum/Projects"));
 const CategoriesBigButtons = lazy(() => import("../../../components/Web/CategoriesBigButtons/CategoriesBigButtons"));
+const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
 
 export default function Curriculum(props: any) {
   const { location } = props;
@@ -17,15 +17,11 @@ export default function Curriculum(props: any) {
   }, []);
   return (
     <>
-      <Helmet>
-        <title>Curriculum | Página de contacto</title>
-        <meta
-          name="description"
-          content="Curriculum | David Thomas Pizarro Frick"
-          data-react-helmet="true"
-        />
-      </Helmet>
       <Suspense fallback={<></>}>
+        <HelmetAnalytics
+          titleHelmet="DTPF | Curriculum"
+          contentHelmet="Curriculum de David Thomas Pizarro Frick"
+        />
         <BackTop />
         <div className="curriculum">
           <Row>

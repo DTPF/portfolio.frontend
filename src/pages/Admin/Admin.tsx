@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense, lazy } from "react";
 import { notification } from "antd";
 import { getMessagesUnreadApi } from "../../api/contact";
 import { getAccessTokenApi } from "../../api/auth";
 import { notifDelayErr } from "../../utils/notifications";
 import { checkUserLogin } from "../../providers/AuthProvider";
 import addNotification from "react-push-notification";
+const HelmetAnalytics = lazy(() => import("../../components/HelmetAnalytics"));
 
 export default function Admin() {
   const [reloadMessages, setReloadMessages] = useState(false);
@@ -26,7 +27,15 @@ export default function Admin() {
     return () => { unmounted = true };
   }, [reloadMessages, token]);
 
-  return <RenderAdmin messagesUnread={messagesUnread} user={user} />;
+  return (
+    <Suspense fallback={<></>}>
+      <HelmetAnalytics
+        titleHelmet="DTPF | Admin"
+        contentHelmet="Página principal de Admin"
+      />
+      <RenderAdmin messagesUnread={messagesUnread} user={user} />
+    </Suspense>
+  );
 }
 
 function RenderAdmin(props: any) {

@@ -1,17 +1,18 @@
-import React from "react";
-import { Helmet } from "react-helmet";
+import React, { useEffect, Suspense, lazy } from "react";
+const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
 
 export default function AboutMe() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
-      <Helmet>
-        <title>Sobre Mi | Página de contacto</title>
-        <meta
-          name="description"
-          content="Contacto | David Thomas Pizarro Frick"
-          data-react-helmet="true"
+      <Suspense fallback={<></>}>
+        <HelmetAnalytics
+          titleHelmet="DTPF | Sobre Mi"
+          contentHelmet="Página para contactar con David Thomas Pizarro Frick"
         />
-      </Helmet>
+      </Suspense>
       <div>
         <h1>Sobre Mi</h1>
       </div>
