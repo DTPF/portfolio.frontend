@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { getMessagesUnreadApi } from "../../../api/contact";
 import { getAccessTokenApi } from "../../../api/auth";
-const ContactMessagesList = lazy(() => import('../../../components/Admin/ContactMessagesList'));
+const ContactMessagesList = lazy(() => import("../../../components/Admin/ContactMessagesList"));
 const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
 
 export default function ContactMessages() {
@@ -11,19 +11,24 @@ export default function ContactMessages() {
   const token = getAccessTokenApi();
   useEffect(() => {
     let unmounted = false;
-    getMessagesUnreadApi(token, false).then((response) => {
-      if (!unmounted) {
-        setMessagesUnread(response.messages);
-      }
-    });
-    getMessagesUnreadApi(token, true).then((response) => {
-      if (!unmounted) {
-        setMessagesRead(response.messages);
-      }
-    });
-    setReloadMessages(false);
-    return () => { unmounted = true }
-  }, [reloadMessages, token]);
+    const interval = setInterval(() => {
+      getMessagesUnreadApi(token, false).then((response) => {
+        if (!unmounted) {
+          setMessagesUnread(response.messages);
+        }
+      });
+      getMessagesUnreadApi(token, true).then((response) => {
+        if (!unmounted) {
+          setMessagesRead(response.messages);
+        }
+      });
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+      unmounted = true;
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reloadMessages]);
   return (
     <div>
       <Suspense fallback={<></>}>

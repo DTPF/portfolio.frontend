@@ -7,6 +7,7 @@ import { signUpApi } from "../../../api/user";
 import "./RegisterForm.scss";
 
 export default function RegisterForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -45,6 +46,7 @@ export default function RegisterForm() {
     }
   };
   const register = async () => {
+    setIsLoading(true);
     const emailVal = inputs.email;
     const passwordVal = inputs.password;
     const repeatPasswordVal = inputs.repeatPassword;
@@ -61,12 +63,14 @@ export default function RegisterForm() {
           duration: notifDelayErr
         });
       }
+      setIsLoading(false);
     } else {
       if (passwordVal !== repeatPasswordVal) {
         notification["warning"]({
           message: "Las contraseñas tienen que ser iguales",
           duration: notifDelayErr
         });
+        setIsLoading(false);
       } else {
         const result = await signUpApi(inputs);
         if (result.status === 200) {
@@ -74,6 +78,7 @@ export default function RegisterForm() {
             message: result.message,
             duration: notifDelay
           });
+          setIsLoading(false);
           resetForm();
         } else {
           const typeNotification = result.status === 500 ? "error" : "warning";
@@ -81,6 +86,7 @@ export default function RegisterForm() {
             message: result.message,
             duration: notifDelayErr
           });
+          setIsLoading(false);
         }
       }
     }
@@ -150,7 +156,7 @@ export default function RegisterForm() {
         </Checkbox>
       </Form.Item>
       <Form.Item>
-        <Button type="link" htmlType="submit" className="register-form__button">
+        <Button type="link" htmlType="submit" className="register-form__button" loading={isLoading}>
           Crear cuenta
         </Button>
       </Form.Item>

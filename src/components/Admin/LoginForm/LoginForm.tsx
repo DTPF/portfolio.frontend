@@ -4,7 +4,6 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { signInApi } from "../../../api/user";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../../utils/constants";
 import { notifDelayErr } from "../../../utils/notifications";
-import addNotification from 'react-push-notification';
 import {
   emailValidation,
   minLenghtValidation,
@@ -12,6 +11,9 @@ import {
 import "./LoginForm.scss";
 
 export default function LoginForm() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [countLogin, setCountLogin] = useState(0);
+  const [timeToLogin, setTimeToLogin] = useState(0);
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -35,23 +37,28 @@ export default function LoginForm() {
       setFormValid({ ...formValid, [name]: minLenghtValidation(e.target, 6) });
     }
   };
-  const login = async () => {
-    const result = await signInApi(inputs);
-    if(result.message) {
-      notification["error"]({
-        message: result.message,
-        duration: notifDelayErr
-      });
-    } else {
-      const {accessToken, refreshToken} = result;
-      localStorage.setItem(ACCESS_TOKEN, accessToken);
-      localStorage.setItem(REFRESH_TOKEN, refreshToken);
-      window.location.href = "/ad1988";
-      addNotification({
-        title: 'Accediendo desde '+inputs.email,
-        native: true
-      });
-    }
+  const login = () => {
+    if (countLogin > 10) {
+      setTimeToLogin(30000);
+    } 
+    setIsLoading(true);
+    setTimeout( async function () {
+      let count = countLogin;
+      setCountLogin(count + 1);
+      const result = await signInApi(inputs);
+      if(result.message) {
+        notification["error"]({
+          message: result.message,
+          duration: notifDelayErr
+        });
+      } else {
+        const {accessToken, refreshToken} = result;
+        localStorage.setItem(ACCESS_TOKEN, accessToken);
+        localStorage.setItem(REFRESH_TOKEN, refreshToken);
+        window.location.href = "/ad1988";
+      }
+      setIsLoading(false);
+    }, timeToLogin);    
   };
   return (
     <Form className="login-form" onFinish={login} onChange={changeForm}>
@@ -76,7 +83,12 @@ export default function LoginForm() {
         />
       </Form.Item>
       <Form.Item>
-        <Button type="link" htmlType="submit" className="login-form__button">
+        <Button
+          type="link"
+          htmlType="submit"
+          className="login-form__button"
+          loading={isLoading}
+        >
           Entrar
         </Button>
       </Form.Item>

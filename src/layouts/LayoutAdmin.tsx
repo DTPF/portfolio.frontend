@@ -3,6 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import { Layout } from "antd";
 import useAuth from "../hooks/useAuth";
 import AdminSignIn from "../pages/Admin/SignIn";
+import { Notifications } from "react-push-notification";
 import "./LayoutAdmin.scss";
 const MenuTop = lazy(() => import("../components/Admin/MenuTop"));
 const MenuSider = lazy(() => import("../components/Admin/MenuSider"));
@@ -29,6 +30,7 @@ export default function LayoutAdmin(props: any) {
   if (user && !isLoading) {
     return (
       <Layout onClick={closeMenu}>
+        <Notifications />
         <Suspense fallback={<></>}>
           <MenuSider menuCollapsed={menuCollapsed} />
           <Layout
@@ -42,7 +44,7 @@ export default function LayoutAdmin(props: any) {
                 />
             </Header>
             <Content className="layout-admin__content">
-                <LoadRoutes routes={routes} />
+              <LoadRoutes routes={routes} />
             </Content>
             <Footer className="layout-admin__footer">
               David Thomas Pizarro Frick

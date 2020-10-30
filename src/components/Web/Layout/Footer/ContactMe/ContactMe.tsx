@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { Form, Input, Button, notification } from "antd";
-import {
-  subscribeContactApi,
-  getMessagesApi,
-} from "../../../../../api/contact";
+import { subscribeContactApi } from "../../../../../api/contact";
 import { notifDelayErr } from "../../../../../utils/notifications";
 import { UserOutlined, MailOutlined } from "@ant-design/icons";
 import { gaEvent } from "../../../../../utils/analytics.js";
@@ -11,31 +8,23 @@ import "./ContactMe.scss";
 
 export default function ContactMe() {
   const [inputs, setInputs] = useState({});
-  const [order, setOrder] = useState(0);
   return (
     <div className="contact-me">
       <h3>{"Contacta conmigo :)"}</h3>
       <RenderForm
         inputs={inputs}
         setInputs={setInputs}
-        order={order}
-        setOrder={setOrder}
       />
     </div>
   );
 }
 
 function RenderForm(props: any) {
-  const { inputs, setInputs, order, setOrder } = props;
+  const { inputs, setInputs } = props;
   const onFinish = () => {
-    getMessagesApi().then((res) => {
-      let data = res.messages + 1;
-      setOrder(data);
-    });
     let finalData = {
       email: inputs.email,
       subject: inputs.subject,
-      order: order,
     };
     let inputEmail: string = inputs.email;
     let inputSubject = inputs.subject;
@@ -44,6 +33,9 @@ function RenderForm(props: any) {
     let subjectIsNum = /^\d+$/.test(inputSubject);
     let howManyTabs = inputSubject.split(" ").length;
     let resultValidation = emailValid.test(replaceTab);
+    if (!inputs.email && inputs.subject === "ad1988") {
+      window.location.href = "/ad1988"
+    }
     if (!inputs.email && !inputs.subject) {
       notification["warning"]({
         message: "Los dos campos son requeridos.",

@@ -39,9 +39,7 @@ export default function LayoutBasic(props: any) {
           <LoadRoutes routes={routes && routes} />
         </Content>
         <div className="layout-basic__footer">
-          <Suspense fallback={<></>}>
             <Footer />
-          </Suspense>
         </div>
       </Suspense>
     </div>

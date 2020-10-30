@@ -1,11 +1,10 @@
 import React, { Suspense, lazy } from "react";
 import { useHistory } from "react-router-dom";
-import { Result, Button } from "antd";
-import "./Error.scss";
 const HelmetAnalytics = lazy(() => import("../../components/HelmetAnalytics"));
+const Error404 = lazy(() => import("../../components/Error/Error404"));
 
 export default function Error(props: {
-  title: string;
+  title: any;
   subtitle: string;
 }) {
   const { title, subtitle } = props;
@@ -17,19 +16,8 @@ export default function Error(props: {
         titleHelmet={`DTPF | Error ${title ? title : 404}`}
         contentHelmet="Error al buscar la página"
       />
+      <Error404 title={title} subtitle={subtitle} goBack={goBack} />
     </Suspense>
-    <div className="error-ant">
-      <Result
-        status="404"
-        title={title ? title : 404}
-        subTitle={subtitle ? subtitle : "Lo sentimos, la página que visitas no existe."}
-        extra={
-          <Button type="primary" onClick={goBack}>
-            Volver
-          </Button>
-        }
-      />
-    </div>
     </>
   );
 }

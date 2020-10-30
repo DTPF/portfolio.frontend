@@ -12,6 +12,7 @@ import {
 } from "../../api/user";
 import { testingRefreshToken } from "../../utils/constants";
 const TOKEN = testingRefreshToken;
+jest.setTimeout(6000);
 
 describe("User API", () => {
   it("Create and activate user", async () => {

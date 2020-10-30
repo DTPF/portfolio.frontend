@@ -1,17 +1,15 @@
 .admin-sider {
-    position: fixed;
-    left: 0;
-    top: 65px;
-    height: 100vh;
-    overflow: hidden;
+  position: fixed;
+  left: 0;
+  top: 65px;
+  height: 100vh;
+  overflow: hidden;
+  &__tag {
+    position: absolute;
+    right: 0;
+    margin-top: 8px;
+    color: #fff;
+    background-color: red;
+    border-radius: 15px;
+  }
 }
-
-// .ant-layout-sider-below {
-//     min-width: 135px;
-//     width: 135px;
-// }
-
-// .ant-layout-sider-zero-width {
-//     min-width: 0 !important;
-//     width: 0 !important;
-// }
