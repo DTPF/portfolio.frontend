@@ -18,11 +18,6 @@ describe("Contact API", () => {
       expect(data.status).toBe(200);
     });
   });
-  it("Get messages", async () => {
-    await getMessagesApi(TOKEN).then((data) => {
-      expect(data.status).toBe(200);
-    });
-  });
   it("Get unread messages", async () => {
     await getMessagesUnreadApi(TOKEN, false).then((data) => {
       expect(data.status).toBe(200);

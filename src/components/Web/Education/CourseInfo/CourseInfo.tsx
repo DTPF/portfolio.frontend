@@ -9,7 +9,6 @@ import {
   getImageApi,
   getCourseByOrderApi,
 } from "../../../../api/education";
-import QueueAnim from "rc-queue-anim";
 import {
   ArrowLeftOutlined,
   ArrowRightOutlined,
@@ -41,7 +40,7 @@ export default function CourseInfo(props: any) {
       }
     });
     return () => { unmounted = true;  };
-  }, [url]);  
+  }, [url]);   
   return (
     <div className="course-info">
       {!isLoading ? (
@@ -116,8 +115,7 @@ function Course(props: any) {
       });
     }
     return () => { unmounted = true };
-  }, [course]);
-  
+  }, [course]);  
   return (
     <>
       <Helmet>
@@ -128,27 +126,22 @@ function Course(props: any) {
           data-react-helmet="true"
         />
       </Helmet>
-      <QueueAnim type={"alpha"} duration={150} ease="easeInCubic">
-        <div className="course-info__goBack" key="div">
+        <div className="course-info__goBack">
           <Button type="primary" onClick={goBack}>
             <LeftOutlined />
           </Button>
         </div>
         <Links prevCourse={prevCourse} nextCourse={nextCourse} />
-      </QueueAnim>
       <Col span={24} className="course-info__title">
-        <QueueAnim type={"alpha"} duration={200} ease="easeInCubic">
-          <h1 key="title">{course.title}</h1>
-        </QueueAnim>
+          <h1>{course.title}</h1>
       </Col>
-      <QueueAnim type={"alpha"} duration={200} ease="easeInCubic">
-        <div className="course-info__image" key="image">
+        <div className="course-info__image">
           <Image
             src={image ? image : NoImage}
             alt={course && "Imágen de " + course.title}
             ></Image>
         </div>
-        <Row className="course-info__info" key="info">
+        <Row className="course-info__info">
           <Col span={12} className="course-info__info-duration">
             {course && course.duration}&nbsp;horas
           </Col>
@@ -156,13 +149,13 @@ function Course(props: any) {
             Hace&nbsp;{course && moment(course.date).fromNow(true)}
           </Col>
         </Row>
-        <Col className="course-info__description" key="description">
+        <Col className="course-info__description">
           <p>{course && course.description}</p>
         </Col>
-        <Row className="course-info__tags" key="tags">
+        <Row className="course-info__tags">
           <Tags course={course && course} />
         </Row>
-        <Row key="bar" className="course-info__button">
+        <Row className="course-info__button">
           <Col span={24} className="course-info__button-link">
             {link && (
               <a href={link} target="_blank" rel="noopener noreferrer">
@@ -172,7 +165,6 @@ function Course(props: any) {
             )}
           </Col>
         </Row>
-      </QueueAnim>
     </>
   );
 }

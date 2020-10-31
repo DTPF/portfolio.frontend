@@ -9,8 +9,9 @@ const Footer = lazy(() => import("../components/Web/Layout/Footer"));
 const LoadRoutes = lazy(() => import("../providers/LoadRoutes"));
 
 export default function LayoutBasic(props: any) {
-  const { routes } = props;
+  const { routes } = props;  
   const [menuCollapsed, setMenuCollapsed] = useState(true);
+  const [isLoading, setIsLoading] = useState(false); 
   const backgroundImage = window.innerWidth >= 650 ? desktopImage : mobileImage;
   const { Content } = Layout;
   const closeMenu = () => {
@@ -29,6 +30,7 @@ export default function LayoutBasic(props: any) {
           <MenuTop
             menuCollapsed={menuCollapsed}
             setMenuCollapsed={setMenuCollapsed}
+            setIsLoading={setIsLoading}       
           />
           <MenuSider
             menuCollapsed={menuCollapsed}
@@ -39,7 +41,9 @@ export default function LayoutBasic(props: any) {
           <LoadRoutes routes={routes && routes} />
         </Content>
         <div className="layout-basic__footer">
+          {isLoading && (
             <Footer />
+          )}
         </div>
       </Suspense>
     </div>

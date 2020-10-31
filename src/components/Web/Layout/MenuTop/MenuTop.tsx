@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useGetMenu from "../../../../hooks/useGetMenu";
 import { Menu, Button } from "antd";
 import { NavLink, withRouter } from "react-router-dom";
@@ -13,12 +13,19 @@ import { gaEvent } from "../../../../utils/analytics.js";
 
 function MenuTop(props: any) {
   const menuData: any = useGetMenu();
-  const { menuCollapsed, setMenuCollapsed, location } = props;
+  const { menuCollapsed, setMenuCollapsed, location, setIsLoading } = props;
   let pathname = location.pathname;
   const splitPathname = pathname.split("/")[2];
   const clickMenuIcon = () => {
     gaEvent("click_menu_mobile_icon", "clicks", "UI Clicks", true);
   };
+  useEffect(() => {
+    let unmounted = false;
+    if (!unmounted) {
+      setIsLoading(true);
+    }
+    return () => { unmounted = true };
+  })
   return (
     <Menu
       selectedKeys={[location.pathname]}

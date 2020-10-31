@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Result, Button } from "antd";
 import "./Error404.scss";
 
 export default function Error404(props: any) {
   const { title, subtitle, goBack } = props;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="error-ant">
       <Result
