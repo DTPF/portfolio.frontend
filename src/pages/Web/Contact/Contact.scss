@@ -1,0 +1,11 @@
+@import "../../../scss/variables";
+@import "../../../scss/mixins";
+
+.contact {
+  &__title {
+    @include titleH1();
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 20px;
+  }
+}

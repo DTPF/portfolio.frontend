@@ -12,9 +12,11 @@ import AdminCourses from "../pages/Admin/Courses";
 
 // Web Pages
 import Home from "../pages/Web/Home";
-import Contact from "../pages/Web/AboutMe";
+import AboutMe from "../pages/Web/AboutMe";
 import Education from "../pages/Web/Education";
 import Curriculum from "../pages/Web/Curriculum";
+import Projects from "../pages/Web/Projects";
+import Contact from "../pages/Web/Contact";
 
 // Other
 import Errors from "../pages/Errors";
@@ -71,11 +73,6 @@ const routes = [
         component: Home,
       },
       {
-        path: "/about-me",
-        exact: true,
-        component: Contact,
-      },
-      {
         path: "/education",
         exact: true,
         component: Education
@@ -89,6 +86,21 @@ const routes = [
         path: "/curriculum",
         exact: true,
         component: Curriculum
+      },
+      {
+        path: "/projects",
+        exact: true,
+        component: Projects
+      },
+      {
+        path: "/about-me",
+        exact: true,
+        component: AboutMe,
+      },
+      {
+        path: "/contact",
+        exact: true,
+        component: Contact
       },
       {
         component: Errors,

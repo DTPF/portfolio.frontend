@@ -24,18 +24,16 @@
   animation: blur 0.4s;
 }
 
-@mixin slideinLeft() {
+@mixin slideInLeftInfinite5() {
   @keyframes slideinLeft {
     from {
-      margin-left: 100%;
-      width: 200%;
+      margin-left: 5%;
     }
     to {
-      margin-left: 0%;
-      width: 100%;
+      margin-left: -5%;
     }
   }
-  animation: slideinLeft 1s;
+  animation: slideinLeft 3s infinite alternate;
 }
 
 @mixin slideinRight() {
@@ -62,4 +60,24 @@
     }
   }
   animation: slideIn 1s infinite alternate;
+}
+
+@mixin rotateInfiniteAlternate30() {
+  @keyframes rotating {
+    from {
+      -ms-transform: rotate(-30deg);
+      -moz-transform: rotate(-30deg);
+      -webkit-transform: rotate(-30deg);
+      -o-transform: rotate(-30deg);
+      transform: rotate(-30deg);
+    }
+    to {
+      -ms-transform: rotate(30deg);
+      -moz-transform: rotate(30deg);
+      -webkit-transform: rotate(30deg);
+      -o-transform: rotate(30deg);
+      transform: rotate(30deg);
+    }
+  }
+  animation: 3s rotating infinite alternate-reverse;
 }
