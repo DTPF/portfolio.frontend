@@ -20,9 +20,7 @@ export default function Curriculum(props: any) {
       setIsLoading(true);
     }
     window.scrollTo(0, 0);
-  }, []);
-  console.log(isLoading);
-  
+  }, []);  
   return (
     <>
       <Suspense fallback={<></>}>

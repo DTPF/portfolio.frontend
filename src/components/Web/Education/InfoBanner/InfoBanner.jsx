@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { useGetCourses } from "../../../../hooks/useGetCourses";
-import { notification } from "antd";
 import TweenOne from "rc-tween-one";
 import Children from "rc-tween-one/lib/plugin/ChildrenPlugin.js";
 import BannerAnim, { Element } from "rc-banner-anim";
@@ -35,11 +34,6 @@ export default function InfoBanner() {
         if (!unmounted) {
           setTotalDuration(totalDuration);
         }
-      });
-    } else {
-      notification["error"]({
-        message: "Ha ocurrido un error en el servidor, vuelve más tarde y disculpa las molestias.",
-        duration: 10
       });
     }
     return () => {unmounted = true };

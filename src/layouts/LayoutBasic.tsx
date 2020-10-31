@@ -1,4 +1,5 @@
 import React, { useState, Suspense, lazy } from "react";
+import useConnection from "../hooks/useConnection";
 import { Layout } from "antd";
 import "./LayoutBasic.scss";
 const desktopImage = require("../assets/img/jpg/background-squares.jpg");
@@ -7,11 +8,14 @@ const MenuTop = lazy(() => import("../components/Web/Layout/MenuTop"));
 const MenuSider = lazy(() => import("../components/Web/Layout/MenuSider"));
 const Footer = lazy(() => import("../components/Web/Layout/Footer"));
 const LoadRoutes = lazy(() => import("../providers/LoadRoutes"));
+const Spin = lazy(() => import("../components/Spin"));
+const Error = lazy(() => import("../pages/Errors"));
 
 export default function LayoutBasic(props: any) {
-  const { routes } = props;  
+  const { routes } = props;
+  const connection = useConnection();
   const [menuCollapsed, setMenuCollapsed] = useState(true);
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
   const backgroundImage = window.innerWidth >= 650 ? desktopImage : mobileImage;
   const { Content } = Layout;
   const closeMenu = () => {
@@ -30,7 +34,7 @@ export default function LayoutBasic(props: any) {
           <MenuTop
             menuCollapsed={menuCollapsed}
             setMenuCollapsed={setMenuCollapsed}
-            setIsLoading={setIsLoading}       
+            setIsLoading={setIsLoading}
           />
           <MenuSider
             menuCollapsed={menuCollapsed}
@@ -38,13 +42,21 @@ export default function LayoutBasic(props: any) {
           />
         </div>
         <Content className="layout-basic__content">
-          <LoadRoutes routes={routes && routes} />
-        </Content>
-        <div className="layout-basic__footer">
-          {isLoading && (
-            <Footer />
+          {!connection ? (
+            <Spin />
+            ) : (
+              <>
+              {connection === 200 ? (
+                <>
+              <LoadRoutes routes={routes && routes} />  
+              </>
+              ) : (
+                <Error status={500} />
+                )}
+            </>
           )}
-        </div>
+        </Content>
+        <div className="layout-basic__footer">{isLoading && <Footer />}</div>
       </Suspense>
     </div>
   );

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Form, Input, Button, notification } from "antd";
+import { Form, Input, Button, message as messageAnt } from "antd";
 import { subscribeContactApi } from "../../../../../api/contact";
-import { notifDelayErr } from "../../../../../utils/notifications";
 import { UserOutlined, MailOutlined } from "@ant-design/icons";
 import { gaEvent } from "../../../../../utils/analytics.js";
 import "./ContactMe.scss";
@@ -11,74 +10,65 @@ export default function ContactMe() {
   return (
     <div className="contact-me">
       <h3>{"Contacta conmigo :)"}</h3>
-      <RenderForm
-        inputs={inputs}
-        setInputs={setInputs}
-      />
+      <RenderForm inputs={inputs} setInputs={setInputs} />
     </div>
   );
 }
-
 function RenderForm(props: any) {
+  const message : any = messageAnt;
   const { inputs, setInputs } = props;
   const onFinish = () => {
     let finalData = {
       email: inputs.email,
       subject: inputs.subject,
     };
-    let inputEmail: string = inputs.email;
+    let inputEmail = inputs.email;
     let inputSubject = inputs.subject;
     let replaceTab = inputEmail?.replace(" ", "");
     let emailValid = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,63}$/i;
     let subjectIsNum = /^\d+$/.test(inputSubject);
-    let howManyTabs = inputSubject.split(" ").length;
+    let howManyTabs = inputSubject && inputSubject.split(" ").length;
     let resultValidation = emailValid.test(replaceTab);
     if (!inputs.email && inputs.subject === "ad1988") {
-      window.location.href = "/ad1988"
+      window.location.href = "/ad1988";
     }
     if (!inputs.email && !inputs.subject) {
-      notification["warning"]({
-        message: "Los dos campos son requeridos.",
-        duration: notifDelayErr,
-      });
+      message.warning("Los dos campos son requeridos.");
     } else if (!resultValidation) {
-      notification["warning"]({
-        message: "El email no es válido.",
-        duration: notifDelayErr,
-      });
+      message.warning("El email no es válido.");
     } else if (subjectIsNum) {
-      notification["warning"]({
-        message: "¿Es un código secreto? No entiendo el asunto...",
-        duration: notifDelayErr,
-      });
+      setInputs({email: "Desplegando misiles...", subject: 'Cuenta atrás iniciada...'});
+      message
+        .loading("Enviando mensaje...", 1.5)
+        .then(() => message.warning("Un momento...", 2))
+        .then(() => message.loading("Desplegando misiles...", 2.5))
+        .then(() =>
+        message.error(
+          `Codigo de Autodestrucción Activado. Desplegando misiles en ${inputSubject} segundos...`, 3.5),
+          setTimeout(() => {
+            message.info("!!Es broma!! Sigue con lo que estabas haciendo :)", 6)
+            setInputs({email: inputEmail, subject: inputSubject})
+          }, 13000),
+          );
     } else if (howManyTabs < 3) {
-      notification["warning"]({
-        message: "Especifica un poco más por favor.",
-        duration: notifDelayErr,
-      });
+      message.warning("Especifica un poco más por favor.");
     } else {
       subscribeContactApi(finalData).then((response) => {
         if (response.status === 200) {
-          notification["success"]({
-            message:
-              "!Enviado correctamente! Contestaré en la mayor brevedad posible.",
-            duration: 5,
-          });
+          message
+            .loading("Enviando mensaje...", 1.5)
+            .then(() => message.success("Enviado correctamente!!", 2.5))
+            .then(() => message.info( "Contestaré lo antes posible!!", 2.5 ));
           setInputs("");
         } else if (response.status === 500) {
-          notification["error"]({
-            message: response.message,
-            duration: notifDelayErr,
-          });
+          message.error(response.message);
         } else {
-          notification["warning"]({
-            message: response.message,
-            duration: notifDelayErr,
-          });
+          message.warning(response.message);
         }
       });
     }
   };
+
   const clickMenuIcon = () => {
     gaEvent("click_email_contact_me_footer", "clicks", "UI Clicks", true);
   };

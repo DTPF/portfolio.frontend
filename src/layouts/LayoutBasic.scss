@@ -1,5 +1,6 @@
 @import "../scss/variables";
 @import "../scss/mixins";
+@import "../scss/animations";
 
 .layout-basic {
   background-repeat: no-repeat;
@@ -21,7 +22,7 @@
     }
   }
   &__content {
-    min-height: calc(100vh - 335px);
+    min-height: 100vh !important;
     padding-top: 60px;
     @media (min-width: $media-breakpoint-up-md) {
       padding-top: 75px;

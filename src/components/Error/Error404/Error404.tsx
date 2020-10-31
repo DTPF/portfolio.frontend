@@ -11,9 +11,9 @@ export default function Error404(props: any) {
     <div className="error-ant">
       <Result
         status="404"
-        title={title ? title : 404}
+        title={title ? title : "Ups! Página no encontrada..."}
         subTitle={
-          subtitle ? subtitle : "Lo sentimos, la página que visitas no existe."
+          subtitle ? subtitle : "Lo siento, la página que buscas no existe."
         }
         extra={
           <Button type="primary" onClick={goBack}>

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { getMenuApi } from "../api/menu";
-import { notification } from "antd";
 
 export default function useGetMenu(ignoreMenu) {
   const [menuData, setMenuData] = useState([]);
@@ -8,11 +7,7 @@ export default function useGetMenu(ignoreMenu) {
     let unmounted = false;
     getMenuApi().then((response) => {
       if (response.status !== 200) {
-        notification["error"]({
-          message:
-            "Ha ocurrido un error en el servidor, vuelve más tarde y disculpa las molestias.",
-          duration: 15,
-        });
+        console.log("Error del servidor.");
       } else {
         const arrayMenu = [];
         if (!unmounted) {
