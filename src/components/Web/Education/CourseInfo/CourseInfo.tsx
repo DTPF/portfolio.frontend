@@ -18,7 +18,7 @@ import {
 import NoImage from "../../../../assets/img/png/no-image.png";
 import "./CourseInfo.scss";
 const Spin = lazy(() => import("../../../../components/Spin"));
-const Error = lazy(() => import("../../../../pages/Errors"));
+const Error404 = lazy(() => import("../../../../components/Error/Error404"));
 
 export default function CourseInfo(props: any) {
   const { url, courses } = props;
@@ -49,7 +49,7 @@ export default function CourseInfo(props: any) {
           <>
             {!course ? ( 
               <Suspense fallback={<></>}>
-                <Error
+                <Error404
                   subtitle="Lo sentimos, el curso que buscas no existe."
                 />    
               </Suspense>   
