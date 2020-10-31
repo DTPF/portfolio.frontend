@@ -3,7 +3,7 @@ import "./Projects.scss";
 const HelmetAnalytics = lazy(
   () => import("../../../components/HelmetAnalytics")
 );
-const Soon = lazy(() => import("../../../components/UI/Soon"));
+const CommingSoon = lazy(() => import("../../../components/UI/CommingSoon"));
 
 export default function Projects() {
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function Projects() {
         />
         <div className="projects">
           <h1 className="projects__title">Proyectos</h1>
-          <Soon />
+          <CommingSoon />
         </div>
       </Suspense>
     </>

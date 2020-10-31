@@ -1,7 +1,7 @@
 import React, { useEffect, Suspense, lazy } from "react";
 import "./Contact.scss";
 const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
-const Soon = lazy(() => import("../../../components/UI/Soon"));
+const CommingSoon = lazy(() => import("../../../components/UI/CommingSoon"));
 
 export default function Contact() {
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function Contact() {
       />
       <div className="contact">
         <h1 className="contact__title">Contacto</h1>
-        <Soon />
+        <CommingSoon />
       </div>
     </Suspense>
   );
