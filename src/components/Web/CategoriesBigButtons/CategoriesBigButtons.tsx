@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import useGetMenu from "../../../hooks/useGetMenu";
 import { Row, Col } from "antd";
 import "./CategoriesBigButtons.scss";
-const Spin = lazy(() => import("../../../components/Spin"));
+const Spin = lazy(() => import("../../../components/UI/Spin"));
 
 export default function CategoriesBigButtons(props: any) {
   const { location, extra } = props;

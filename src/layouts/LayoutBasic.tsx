@@ -8,7 +8,7 @@ const MenuTop = lazy(() => import("../components/Web/Layout/MenuTop"));
 const MenuSider = lazy(() => import("../components/Web/Layout/MenuSider"));
 const Footer = lazy(() => import("../components/Web/Layout/Footer"));
 const LoadRoutes = lazy(() => import("../providers/LoadRoutes"));
-const Spin = lazy(() => import("../components/Spin"));
+const Spin = lazy(() => import("../components/UI/Spin"));
 const Error = lazy(() => import("../pages/Errors"));
 
 export default function LayoutBasic(props: any) {

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Row, Col, BackTop } from "antd";
 import "./Education.scss";
 const Courses = lazy(() => import("../../../components/Web/Education/Courses"));
-const Pagination = lazy(() => import("../../../components/Pagination"));
+const Pagination = lazy(() => import("../../../components/UI/Pagination"));
 const CourseInfo = lazy(() => import("../../../components/Web/Education/CourseInfo"));
 const InfoBanner = lazy(() => import("../../../components/Web/Education/InfoBanner"));
 const CategoriesBigButtons = lazy(() => import("../../../components/Web/CategoriesBigButtons/CategoriesBigButtons"));

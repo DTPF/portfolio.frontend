@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { getAccessTokenApi } from "../../../api/auth";
 import { getUsersActiveApi } from "../../../api/user";
-const Spin = lazy(() => import("../../../components/Spin"));
+const Spin = lazy(() => import("../../../components/UI/Spin"));
 const ListUsers = lazy(() => import('../../../components/Admin/Users/ListUsers'));
 const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
 

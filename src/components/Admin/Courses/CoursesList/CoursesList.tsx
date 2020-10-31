@@ -9,7 +9,7 @@ import {
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
-const Spin = lazy(() => import("../../../../components/Spin"));
+const Spin = lazy(() => import("../../../../components/UI/Spin"));
 const Moment = lazy(() => import("react-moment"));
 const { confirm } = Modal;
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Switch, List, Button, Modal as ModalAntd, notification } from "antd";
-import Modal from "../../../Modal";
+import Modal from "../../../UI/Modal";
 import {
   updateMenuApi,
   activateMenuApi,

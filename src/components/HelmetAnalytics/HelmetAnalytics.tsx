@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Cookies } from "react-cookie";
-import CookiesConsent from "../CookiesConsent";
+import CookiesConsent from "../UI/CookiesConsent";
 
 export default function HelmetAnalytics(props: {
   titleHelmet: string;

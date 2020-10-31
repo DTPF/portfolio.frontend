@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNearScreen } from "../../../../hooks/useNearScreen";
 import { Row, Col, Collapse } from "antd";
-import Modal from "../../../Modal";
+import Modal from "../../../UI/Modal";
 import { LeftCircleTwoTone, FilePdfOutlined } from "@ant-design/icons";
 import "./Education.scss";
 const memoriaRecetasPDF = require("../../../../assets/pdf/memoria-proyecto-final.pdf");

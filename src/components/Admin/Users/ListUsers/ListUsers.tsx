@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Switch, List, Avatar, Button, Modal as ModalDelete, notification } from "antd";
 import NoAvatar from "../../../../assets/img/png/no-avatar.png";
-import Modal from "../../../Modal";
+import Modal from "../../../UI/Modal";
 import EditUserForm from "../EditUserForm";
 import AddUserForm from "../AddUserForm";
 import {

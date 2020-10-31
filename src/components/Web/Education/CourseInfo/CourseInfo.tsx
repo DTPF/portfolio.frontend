@@ -17,7 +17,7 @@ import {
 } from "@ant-design/icons";
 import NoImage from "../../../../assets/img/png/no-image.png";
 import "./CourseInfo.scss";
-const Spin = lazy(() => import("../../../../components/Spin"));
+const Spin = lazy(() => import("../../../../components/UI/Spin"));
 const Error = lazy(() => import("../../../../pages/Errors"));
 
 export default function CourseInfo(props: any) {

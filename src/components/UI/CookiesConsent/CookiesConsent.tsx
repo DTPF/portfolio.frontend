@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import CookieConsent from "react-cookie-consent";
-import gtag from "../../utils/gtag";
+import gtag from "../../../utils/gtag";
 import "./CookiesConsent.scss";
 
 export default function CookiesConsent() {

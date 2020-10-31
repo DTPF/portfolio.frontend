@@ -9,7 +9,7 @@ const Languages = lazy(() => import("../../../components/Web/Curriculum/Language
 const Projects = lazy(() => import("../../../components/Web/Curriculum/Projects"));
 const CategoriesBigButtons = lazy(() => import("../../../components/Web/CategoriesBigButtons/CategoriesBigButtons"));
 const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
-const Spin = lazy(() => import("../../../components/Spin"));
+const Spin = lazy(() => import("../../../components/UI/Spin"));
 
 export default function Curriculum(props: any) {
   const { location } = props;

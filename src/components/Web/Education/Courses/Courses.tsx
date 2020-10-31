@@ -7,7 +7,7 @@ import QueueAnim from "rc-queue-anim";
 import NoImage from "../../../../assets/img/png/no-image-s.png";
 import { useNearScreen } from "../../../../hooks/useNearScreen";
 import "./Courses.scss";
-const Spin = lazy(() => import("../../../../components/Spin"));
+const Spin = lazy(() => import("../../../../components/UI/Spin"));
 
 export default function Courses(props: any) {
   const { courses, numItems, title, subtitle } = props;
