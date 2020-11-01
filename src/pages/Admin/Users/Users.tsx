@@ -34,14 +34,14 @@ export default function Users() {
         </Suspense>
       ) : (
         <Suspense fallback={<></>}>
+          <HelmetAnalytics
+            titleHelmet="DTPF | Admin Usuarios"
+            contentHelmet="Página Admin de Usuarios"
+          />
           <ListUsers 
             usersActive={usersActive}
             usersInactive={usersInactive}
             setReloadUsers={setReloadUsers}
-          />
-          <HelmetAnalytics
-            titleHelmet="DTPF | Admin Usuarios"
-            contentHelmet="Página Admin de Usuarios"
           />
         </Suspense>
       )}      
