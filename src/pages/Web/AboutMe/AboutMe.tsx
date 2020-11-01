@@ -1,9 +1,11 @@
 import React, { useEffect, Suspense, lazy } from "react";
-import "./AboutMe.scss";
-const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
-const CommingSoon = lazy(() => import("../../../components/UI/CommingSoon"));
+const HelmetAnalytics = lazy(
+  () => import("../../../components/HelmetAnalytics")
+);
+const AboutMeWeb = lazy(() => import("../../../components/Web/AboutMeWeb"));
 
-export default function AboutMe() {
+export default function AboutMe(props: any) {
+  const { location } = props;
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -13,10 +15,7 @@ export default function AboutMe() {
         titleHelmet="DTPF | Sobre Mi"
         contentHelmet="Página sobre David Thomas Pizarro Frick"
       />
-      <div className="about-me">
-        <h1 className="about-me__title">Sobre Mi</h1>
-        <CommingSoon />
-      </div>
+      <AboutMeWeb location={location} />
     </Suspense>
   );
 }

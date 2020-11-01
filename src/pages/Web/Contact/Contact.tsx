@@ -1,9 +1,9 @@
 import React, { useEffect, Suspense, lazy } from "react";
-import "./Contact.scss";
 const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
-const CommingSoon = lazy(() => import("../../../components/UI/CommingSoon"));
+const ContactPage = lazy(() => import("../../../components/Web/Contact"));
 
-export default function Contact() {
+export default function Contact(props: any) {
+  const { location } = props;
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -13,10 +13,7 @@ export default function Contact() {
         titleHelmet="DTPF | Contacto"
         contentHelmet="Página para contactar con David Thomas Pizarro Frick"
       />
-      <div className="contact">
-        <h1 className="contact__title">Contacto</h1>
-        <CommingSoon />
-      </div>
+      <ContactPage location={location} />
     </Suspense>
   );
 }
