@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from "react";
+import React, { useState, useEffect } from "react";
 import { getImageApi } from "../../../../api/education";
 import { Link } from "react-router-dom";
 import { Row, Col, Card, Tag } from "antd";
@@ -6,8 +6,8 @@ import { EyeOutlined } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
 import NoImage from "../../../../assets/img/png/no-image-s.png";
 import { useNearScreen } from "../../../../hooks/useNearScreen";
+import Spin from "../../../../components/UI/Spin";
 import "./Courses.scss";
-const Spin = lazy(() => import("../../../../components/UI/Spin"));
 
 export default function Courses(props: any) {
   const { courses, numItems, title, subtitle } = props;
@@ -67,9 +67,7 @@ function Course(props: any) {
   return (
     <div className="courses-list__element" ref={el}>
       {!isLoading ? (
-        <Suspense fallback={<></>}>
-          <Spin paddingTop="150px" height="100%" />
-        </Suspense>
+        <Spin paddingTop="150px" height="100%" />
       ) : (
         <>
         {show && (

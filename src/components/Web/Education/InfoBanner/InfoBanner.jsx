@@ -1,11 +1,11 @@
-import React, { useState, useEffect, Suspense, lazy } from "react";
+import React, { useState, useEffect } from "react";
 import { useGetCourses } from "../../../../hooks/useGetCourses";
 import TweenOne from "rc-tween-one";
 import Children from "rc-tween-one/lib/plugin/ChildrenPlugin.js";
 import BannerAnim, { Element } from "rc-banner-anim";
 import "rc-banner-anim/assets/index.css";
 import "./InfoBanner.scss";
-const Spin = lazy(() => import("../../../../components/UI/Spin"));
+import Spin from "../../../../components/UI/Spin";
 
 export default function InfoBanner() {
   TweenOne.plugins.push(Children);
@@ -41,10 +41,8 @@ export default function InfoBanner() {
 
   return (
     <>
-    {totalDuration === 0 ? (
-      <Suspense fallback={<></>}>
+      {totalDuration === 0 ? (
         <Spin paddingTop="80px" height="200px" />
-      </Suspense>
       ) : (
         <>
         <BannerAnim
@@ -90,7 +88,7 @@ export default function InfoBanner() {
         </BannerAnim>
         </>
       )}
-      </>
+    </>
   );
 }
 

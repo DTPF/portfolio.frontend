@@ -17,7 +17,7 @@ import {
 } from "@ant-design/icons";
 import NoImage from "../../../../assets/img/png/no-image.png";
 import "./CourseInfo.scss";
-const Spin = lazy(() => import("../../../../components/UI/Spin"));
+import Spin from "../../../../components/UI/Spin";
 const Error = lazy(() => import("../../../../pages/Errors"));
 
 export default function CourseInfo(props: any) {
@@ -47,7 +47,9 @@ export default function CourseInfo(props: any) {
         <Spin />
         ) : (
           <>
-            {!course ? ( 
+            {course ? ( 
+              <Course course={course && course} courses={courses} />
+            ) : (
               <Suspense fallback={<></>}>
                 <Error
                   status={404}
@@ -55,8 +57,6 @@ export default function CourseInfo(props: any) {
                   subtitle="Lo siento, el curso que buscas no existe."
                 />    
               </Suspense>   
-            ) : (
-              <Course course={course && course} courses={courses} />
             )}
           </>
       )}
