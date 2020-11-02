@@ -1,207 +1,188 @@
 @mixin tagsStyle() {
-    $default-color: #fff;
-    $default-bg-color: rgba(83, 109, 130, 0.562);
-    $default-border-color: 3px solid rgb(83, 109, 130);
-    $text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.623);
-  
-    .Express,
-    .POO,
-    .MVC,
-    .SPA {
-      > span {
-        color: $default-color;
-        background-color: $default-bg-color;
-        border: $default-border-color;
-        text-shadow: $text-shadow;
-      }
+  $default-color: #fff;
+  $default-bg-color: rgba(83, 109, 130, 0.562);
+  $default-border-color: 3px solid rgb(83, 109, 130);
+  font-weight: bold;
+  $text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.623);
+  > span {
+    text-shadow: $text-shadow;
+  }
+  .Express,
+  .POO,
+  .MVC,
+  .SPA {
+    > span {
+      color: $default-color;
+      background-color: $default-bg-color;
+      border: $default-border-color;
     }
-    .Bootstrap {
-      > span {
-        color: #fff;
-        background-color: rgba(93, 42, 117, 0.479);
-        border: 3px solid rgb(93, 42, 117);
-        text-shadow: $text-shadow;
-      }
+  }
+  .Bootstrap {
+    > span {
+      color: #fff;
+      background-color: rgba(93, 42, 117, 0.479);
+      border: 3px solid rgb(93, 42, 117);
     }
-    .GitHub {
-      > span {
-        color: #fff;
-        background-color: rgba(0, 0, 0, 0.473);
-        border: 3px solid #000;
-        text-shadow: $text-shadow;
-      }
+  }
+  .GitHub {
+    > span {
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.473);
+      border: 3px solid #000;
     }
-    .GIT {
-      > span {
-        color: rgb(63, 52, 46);
-        background-color: #fff;
-        border: 3px solid rgb(247, 21, 49);
-        text-shadow: $text-shadow;
-      }
+  }
+  .GIT {
+    > span {
+      color: rgb(63, 52, 46);
+      background-color: #fff;
+      border: 3px solid rgb(247, 21, 49);
     }
-    .Visual, .Studio, .Code {
-      > span {
-        color: $default-color;
-        background-color: rgba(0, 109, 199, 0.493);
-        border: 3px solid rgb(0, 111, 199);
-        text-shadow: $text-shadow;
-      }
+  }
+  .Visual,
+  .Studio,
+  .Code {
+    > span {
+      color: $default-color;
+      background-color: rgba(0, 109, 199, 0.493);
+      border: 3px solid rgb(0, 111, 199);
     }
-    .Laravel {
-      > span {
-        color: #fff;
-        background-color: rgba(253, 44, 40, 0.555);
-        border: 3px solid rgb(253, 42, 40);
-        text-shadow: $text-shadow;
-      }
+  }
+  .Laravel {
+    > span {
+      color: #fff;
+      background-color: rgba(253, 44, 40, 0.555);
+      border: 3px solid rgb(253, 42, 40);
     }
-    .PHP {
-      > span {
-        color: #fff;
-        background-color: rgba(115, 120, 171, 0.671);
-        border: 3px solid  rgb(115, 120, 171);
-        text-shadow: $text-shadow;
-      }
+  }
+  .PHP {
+    > span {
+      color: #fff;
+      background-color: rgba(115, 120, 171, 0.671);
+      border: 3px solid rgb(115, 120, 171);
     }
-    .Symfony {
-      > span {
-        color: #fff;
-        background-color: rgba(0, 0, 0, 0.603);
-        border: 3px solid rgb(0, 0, 0);
-        text-shadow: $text-shadow;
-      }
+  }
+  .Symfony {
+    > span {
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.603);
+      border: 3px solid rgb(0, 0, 0);
     }
-    .Postman {
-      > span {
-        color: #fff;
-        background-color: rgba(254, 108, 63, 0.589);
-        border: 3px solid rgb(254, 106, 63);
-        text-shadow: $text-shadow;
-      }
+  }
+  .Postman {
+    > span {
+      color: #fff;
+      background-color: rgba(254, 108, 63, 0.589);
+      border: 3px solid rgb(254, 106, 63);
     }
-    .Robo3T {
-      > span {
-        color: #fff;
-        background-color: rgba(71, 168, 76, 0.589);
-        border: 3px solid rgb(71, 168, 76);
-        text-shadow: $text-shadow;
-      }
+  }
+  .Robo3T {
+    > span {
+      color: #fff;
+      background-color: rgba(71, 168, 76, 0.589);
+      border: 3px solid rgb(71, 168, 76);
     }
-    .JavaScript {
-      > span {
-        color: #000;
-        background-color: rgba(236, 225, 74, 0.541);
-        border: 3px solid rgb(236, 225, 74);
-        text-shadow: $text-shadow;
-      }
+  }
+  .JavaScript {
+    > span {
+      color: #000;
+      background-color: rgba(236, 225, 74, 0.541);
+      border: 3px solid rgb(236, 225, 74);
     }
-    .TypeScript {
-      > span {
-        color: #fff;
-        background-color: rgba(0, 110, 194, 0.59);
-        border: 3px solid rgb(0, 109, 194);
-        text-shadow: $text-shadow;
-      }
+  }
+  .TypeScript {
+    > span {
+      color: #fff;
+      background-color: rgba(0, 110, 194, 0.59);
+      border: 3px solid rgb(0, 109, 194);
     }
-    .Angular {
-      > span {
-        color: #fff;
-        background-color: rgba(241, 0, 56, 0.521);
-        border: 3px solid rgb(241, 0, 55);
-        text-shadow: $text-shadow;
-      }
+  }
+  .Angular {
+    > span {
+      color: #fff;
+      background-color: rgba(241, 0, 56, 0.521);
+      border: 3px solid rgb(241, 0, 55);
     }
-    .React,
-    .ReactJS,
-    .JSX {
-      > span {
-        color: #fff;
-        background-color: rgba(41, 213, 240, 0.404);
-        border: 3px solid rgb(41, 213, 240);
-        text-shadow: $text-shadow;
-      }
+  }
+  .React,
+  .ReactJS,
+  .JSX {
+    > span {
+      color: #fff;
+      background-color: rgba(41, 213, 240, 0.404);
+      border: 3px solid rgb(41, 213, 240);
     }
-    .Node,
-    .NodeJS {
-      > span {
-        color: #fff;
-        background-color: rgba(0, 120, 26, 0.514);
-        border: 3px solid rgb(0, 120, 26);
-        text-shadow: $text-shadow;
-      }
+  }
+  .Node,
+  .NodeJS {
+    > span {
+      color: #fff;
+      background-color: rgba(0, 120, 26, 0.514);
+      border: 3px solid rgb(0, 120, 26);
     }
-    .MongoDB {
-      > span {
-        color: #fff;
-        background-color: rgba(0, 166, 77, 0.5);
-        border: 3px solid rgb(0, 166, 77);
-        text-shadow: $text-shadow;
-      }
+  }
+  .MongoDB {
+    > span {
+      color: #fff;
+      background-color: rgba(0, 166, 77, 0.5);
+      border: 3px solid rgb(0, 166, 77);
     }
-    .Mongoose {
-      > span {
-        color: #fff;
-        background-color: rgba(148, 0, 10, 0.493);
-        border: 3px solid rgb(148, 0, 11);
-        text-shadow: $text-shadow;
-      }
+  }
+  .Mongoose {
+    > span {
+      color: #fff;
+      background-color: rgba(148, 0, 10, 0.493);
+      border: 3px solid rgb(148, 0, 11);
     }
-    .HTML5 {
-      > span {
-        color: #fff;
-        background-color: rgba(255, 81, 54, 0.493);
-        border: 3px solid rgb(255, 81, 54);
-        text-shadow: $text-shadow;
-      }
+  }
+  .HTML5 {
+    > span {
+      color: #fff;
+      background-color: rgba(255, 81, 54, 0.493);
+      border: 3px solid rgb(255, 81, 54);
     }
-    .CSS3 {
-      > span {
-        color: #fff;
-        background-color: rgba(70, 61, 234, 0.493);
-        border: 3px solid rgb(71, 61, 234);
-        text-shadow: $text-shadow;
-      }
+  }
+  .CSS3 {
+    > span {
+      color: #fff;
+      background-color: rgba(70, 61, 234, 0.493);
+      border: 3px solid rgb(71, 61, 234);
     }
-    .MySQL {
-      > span {
-        color: #fff;
-        background-color: rgba(0, 94, 135, 0.486);
-        border: 3px solid rgb(0, 94, 135);
-        text-shadow: $text-shadow;
-      }
+  }
+  .MySQL {
+    > span {
+      color: #fff;
+      background-color: rgba(0, 94, 135, 0.486);
+      border: 3px solid rgb(0, 94, 135);
     }
-    .MariaDB {
-      > span {
-        color: #fff;
-        background-color: rgba(195, 150, 110, 0.514);
-        border: 3px solid rgb(195, 149, 110);
-        text-shadow: $text-shadow;
-      }
+  }
+  .MariaDB {
+    > span {
+      color: #fff;
+      background-color: rgba(195, 150, 110, 0.514);
+      border: 3px solid rgb(195, 149, 110);
     }
-    .Vue,
-    .VueJS {
-      > span {
-        color: rgb(48, 70, 89);
-        background-color: rgba(0, 189, 132, 0.507);
-        border: 3px solid rgb(0, 189, 131);
-        text-shadow: $text-shadow;
-      }
+  }
+  .Vue,
+  .VueJS {
+    > span {
+      color: rgb(48, 70, 89);
+      background-color: rgba(0, 189, 132, 0.507);
+      border: 3px solid rgb(0, 189, 131);
     }
-    .SASS {
-      > span {
-        color: #fff;
-        background-color:  rgba(215, 75, 145, 0.5);
-        border: 3px solid rgb(215, 75, 146);
-        text-shadow: $text-shadow;
-      }
+  }
+  .SASS {
+    > span {
+      color: #fff;
+      background-color: rgba(215, 75, 145, 0.5);
+      border: 3px solid rgb(215, 75, 146);
     }
-    .AJAX,
-    .Ajax {
-      > span {
-        color: #fff;
-        background-color: rgba(20, 126, 192, 0.494);
-        border: 3px solid rgb(20, 126, 192);
-        text-shadow: $text-shadow;
-      }
+  }
+  .AJAX,
+  .Ajax {
+    > span {
+      color: #fff;
+      background-color: rgba(20, 126, 192, 0.494);
+      border: 3px solid rgb(20, 126, 192);
     }
+  }
 }

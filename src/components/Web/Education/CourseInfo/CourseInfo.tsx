@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import moment from "moment";
 import "moment/locale/es";
 import { Row, Col, Image, Tag, Button } from "antd";
@@ -12,7 +12,6 @@ import {
 import {
   ArrowLeftOutlined,
   ArrowRightOutlined,
-  LeftOutlined,
   LinkOutlined
 } from "@ant-design/icons";
 import NoImage from "../../../../assets/img/png/no-image.png";
@@ -24,6 +23,9 @@ export default function CourseInfo(props: any) {
   const { url, courses } = props;
   const [course, setCourse] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   useEffect(() => {
     let unmounted = false;
     getCourseApi(url).then((response) => {
@@ -47,7 +49,7 @@ export default function CourseInfo(props: any) {
         <Spin />
         ) : (
           <>
-            {course ? ( 
+            {course ? (
               <Course course={course && course} courses={courses} />
             ) : (
               <Suspense fallback={<></>}>
@@ -69,7 +71,6 @@ function Course(props: any) {
   const [image, setImage] = useState("");
   const [prevCourse, setPrevCourse] = useState(null);
   const [nextCourse, setNextCourse] = useState(null);
-  const goBack = useHistory().goBack;
   const prev = course && course.order + 1;
   const next = course && course.order - 1;
   const coursesLength = courses.docs && courses.docs.length;
@@ -103,7 +104,6 @@ function Course(props: any) {
           }
         });
       }
-      window.scrollTo(0, 0);
     }
     return () => { unmounted = true };
   }, [course, prev, next, coursesLength]);
@@ -128,11 +128,6 @@ function Course(props: any) {
           data-react-helmet="true"
         />
       </Helmet>
-        <div className="course-info__goBack">
-          <Button type="primary" onClick={goBack}>
-            <LeftOutlined />
-          </Button>
-        </div>
         <Links prevCourse={prevCourse} nextCourse={nextCourse} />
       <Col span={24} className="course-info__title">
           <h1>{course.title}</h1>

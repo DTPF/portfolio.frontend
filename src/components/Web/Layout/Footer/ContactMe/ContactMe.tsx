@@ -59,8 +59,7 @@ function RenderForm(props: any) {
       subscribeContactApi(finalData).then((response) => {
         if (response.status === 200) {
           message
-            .loading("Enviando mensaje...", 1.5)
-            .then(() => message.success("Enviado correctamente!!", 2.5))
+            .success("Enviado correctamente!!", 1.5)
             .then(() => message.info( "Contestaré lo antes posible!!", 2.5 ));
           setInputs("");
         } else if (response.status === 500) {

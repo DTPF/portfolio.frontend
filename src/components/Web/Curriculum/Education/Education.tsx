@@ -33,7 +33,7 @@ function ModalPDF(props: any) {
   const { isVisibleModal, setIsVisibleModal } = props;
   return (
     <Modal
-      title="Memória de Blog de Recetas"
+      title="Memoria de Blog de Recetas"
       isVisible={isVisibleModal}
       setIsVisible={setIsVisibleModal}
       className="education__modal-pdf-curriculum"
@@ -44,7 +44,7 @@ function ModalPDF(props: any) {
           <a href="../../../assets/pdf/memoria-proyecto-final.pdf" download>
             &nbsp;descarga&nbsp;
           </a>
-          el PDF para ver la memória de proyecto final de Recetas Deliciosas
+          el PDF para ver la memoria de proyecto final de Recetas Deliciosas
           MSR's.
         </p>
       </object>
@@ -106,7 +106,7 @@ function DesarrolloAppFPN3(props: any) {
                   className="education__pdf"
                   onClick={() => setIsVisibleModal(true)}
                 >
-                  Memória de proyecto <FilePdfOutlined />
+                  Memoria de proyecto <FilePdfOutlined />
                 </span>
               </p>
             </Panel>

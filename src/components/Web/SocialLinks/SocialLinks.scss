@@ -1,4 +1,5 @@
 @import "../../../scss/variables";
+@import "../../../scss/mixins";
 
 .social-links {
   display: flex;
@@ -8,9 +9,11 @@
   a {
     display: flex;
     margin-right: 10px;
-    padding: 4px 7px;
+    margin-top: -3px;
+    padding: 4px 5px;
     border-radius: 5px;
     color: white;
+    @include boxShadowMd();
     &.github {
       background-color: $github;
     }
@@ -18,10 +21,8 @@
       background-color: $linkedin;
     }
     svg {
-      min-width: 20px !important;
-      min-height: 25px !important;
-      padding: 0 !important;
-      margin: 0 !important;
+      min-width: 27px !important;
+      min-height: 27px !important;
     }
   }
 }

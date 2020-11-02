@@ -31,7 +31,7 @@ function RenderEducation(props: any) {
   const { url, location, history, courses } = props;
   const title = "Todos los cursos";
   const subtitle =
-    "Todos los cursos que he realizado presenciales" +
+    "Cursos realizados presencialmente" +
     " y online para mi preparación al mundo de IT";
   return (
     <>

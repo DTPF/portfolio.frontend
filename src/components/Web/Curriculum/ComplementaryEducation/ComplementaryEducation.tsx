@@ -16,7 +16,6 @@ export default function ComplementaryEducation() {
             <h2>Formación Complementaria</h2>
             <Col span={24} className="complementary-education__collapse">
               <Collapse
-                accordion
                 defaultActiveKey={["1"]}
                 expandIcon={({ isActive }) => (
                   <CaretRightOutlined rotate={isActive ? 90 : 0} />

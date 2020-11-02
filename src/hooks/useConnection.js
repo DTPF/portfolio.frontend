@@ -5,6 +5,7 @@ import { message } from "antd";
 export default function useConnection() {
   const [connection, setConnection] = useState(null);
   const [checkConnection, setCheckConnection] = useState(null);
+  const [timeToReload, setTimeToReload] = useState(1000);
   useEffect(() => {
     let unmounted = false;
     connectionApi().then((response) => {
@@ -24,7 +25,6 @@ export default function useConnection() {
     });
     return () => { unmounted = true };
   }, []);
-
   useEffect(() => {
     let unmounted = false;
     const interval = setInterval(() => {
@@ -33,16 +33,17 @@ export default function useConnection() {
           if (!unmounted) {
             setCheckConnection(response.status);
             setConnection(response.status);
+            setTimeToReload(30000);
           }
         } else {
           if (!unmounted) {
             setCheckConnection(500);
+            setTimeToReload(1000);
           }
         }
       });
-    }, 3000);
+    }, timeToReload);
     return () => { clearInterval(interval); unmounted = true };
-  }, []);
-
+  }, [timeToReload]);  
   return { connection, checkConnection };
 }

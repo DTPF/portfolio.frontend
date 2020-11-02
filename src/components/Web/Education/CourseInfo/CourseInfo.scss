@@ -11,7 +11,7 @@
     justify-content: center;
     text-align: center;
     margin-top: 10px;
-    margin-bottom: 10px;    
+    margin-bottom: 10px;
     h1 {
       @include titleH1();
       padding-top: 10px;
@@ -27,16 +27,14 @@
   &__linkNextMobile {
     position: fixed;
     z-index: 100;
-    bottom: 20px !important;
-    border-radius: 20px;
+    bottom: 40% !important;
     @include boxShadowLg();
     button {
-      width: 50px;
-      height: 40px;
-      @include buttonPrimary();      
-      background-color:  #273b56ab;
-      padding: 0 9px;
-      border-radius: 20px;
+      width: 35px;
+      height: 70px;
+      @include buttonPrimary();
+      background-color: #273b56ab;
+      padding: 0;
       span {
         font-size: 1.3em;
       }
@@ -55,11 +53,26 @@
     }
   }
   &__linkPrevMobile {
-    left: 20px;
+    left: 0px;
+    border-radius: 20px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    button {
+      border-radius: 20px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
   }
-
   &__linkNextMobile {
-    right: 20px;
+    right: 0px;
+    border-radius: 20px;
+    border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    button {
+      border-radius: 20px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
   }
 
   &__image {
@@ -133,7 +146,6 @@
       text-indent: 15px;
       text-align: justify;
       @include p();
-
     }
     @media (min-width: $media-breakpoint-up-md) {
       font-size: 1.2em;
@@ -143,7 +155,8 @@
 
   &__tags {
     width: 100%;
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
     &-div {
       max-width: 1000px;
       text-align: center;
@@ -176,23 +189,27 @@
 
   &__goBack {
     button {
-      background-color: transparent !important;
+      background-color:  rgba(255, 200, 62, 0.4) !important;
       border: 0;
       color: $primary-color-dark;
       position: absolute;
-      top: 25px;
-      left: 5px;
-      box-shadow: unset;
+      top: -10px;
+      left: 0px;
       z-index: 50;
+      font-size: 1.2em;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 20px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      @include boxShadowLg();
       &:hover,
       &:active,
       &:focus {
         color: $primary-color-dark;
-        background-color: transparent !important;
+        background-color:  rgba(255, 200, 62, 0.6) !important;
         border: 0 !important;
-      }
-      @media (max-width: $media-breakpoint-up-md) {
-        top: 22px;
       }
     }
   }

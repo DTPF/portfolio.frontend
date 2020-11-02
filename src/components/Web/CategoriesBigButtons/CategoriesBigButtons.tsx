@@ -22,7 +22,7 @@ export default function CategoriesBigButtons(props: any) {
                     return "Desde que decidí introducirme en este mundo";
                   }
                   if (classname === "curriculum") {
-                    return "Un resumen de mi trayectoría";
+                    return "Trayectoria profesional";
                   }
                   if (classname === "projects") {
                     return "Aún son pocos, pero crecerán";
