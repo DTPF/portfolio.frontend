@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { getMessagesUnreadApi } from "../../../api/contact";
+import { getLastMessageApi, getMessagesLengthApi } from "../../../api/contact";
 import { getAccessTokenApi } from "../../../api/auth";
 import { Link, withRouter } from "react-router-dom";
-import { Layout, Menu, Tag, notification } from "antd";
+import { Layout, Menu, Tag, message } from "antd";
 import {
   HomeOutlined,
   UserOutlined,
@@ -16,14 +16,14 @@ import addNotification from "react-push-notification";
 
 function MenuSider(props: any) {
   const { menuCollapsed, location } = props;
-  const [messagesUnread, setMessagesUnread] = useState({});
+  const [messagesUnreadLength, setMessagesUnreadLength] = useState(undefined);
   const token = getAccessTokenApi();
   useEffect(() => {
     let unmounted = false;
     const interval = setInterval(() => {
-      getMessagesUnreadApi(token, false).then((response) => {
+      getMessagesLengthApi().then((response) => {
         if (!unmounted) {
-          setMessagesUnread(response.messages);
+          setMessagesUnreadLength(response.messagesLength);
         }
       });
     }, 1000);
@@ -31,10 +31,10 @@ function MenuSider(props: any) {
       clearInterval(interval);
       unmounted = true;
     };
-  }, [token]);
+  }, [token, messagesUnreadLength]);
   return (
     <RenderMenuSider
-      messagesUnread={messagesUnread}
+      messagesUnreadLength={messagesUnreadLength}
       menuCollapsed={menuCollapsed}
       location={location}
     />
@@ -42,36 +42,44 @@ function MenuSider(props: any) {
 }
 
 function RenderMenuSider(props: any) {
-  const { messagesUnread, menuCollapsed, location } = props;
-  const [messagesUnreadLength, setMessagesUnreadLength] = useState(0);
-  const [newMessage, setNewMessage] = useState(0);
-  let lastMessage = messagesUnread && messagesUnread[0];
-  const lastMessageEmail = lastMessage && lastMessage.email;
-  const { Sider } = Layout;
+  const { messagesUnreadLength, menuCollapsed, location } = props;
+  const [newMessage, setNewMessage] = useState(messagesUnreadLength);
   useEffect(() => {
     let unmounted = false;
-    if (!unmounted) {
-      if (messagesUnread) {
-        setMessagesUnreadLength(messagesUnread.length);
+    if (messagesUnreadLength !== undefined) {
+      if (!unmounted) {
         setNewMessage(messagesUnreadLength);
-        if (newMessage < messagesUnreadLength) {
-          notification["success"]({
-            message: `Mensaje de ${lastMessageEmail}`,
-          });
-          addNotification({
-            title: `Mensaje de ${lastMessageEmail}`,
-            native: true,
-          });
-        }
-      } else {
-        notification["error"]({
-          message: `Error del servidor.`,
-        });
       }
     }
     return () => { unmounted = true };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [messagesUnread]);
+  }, [newMessage, messagesUnreadLength]);  
+  return (
+    <NextRender
+      menuCollapsed={menuCollapsed}
+      location={location}
+      messagesUnreadLength={messagesUnreadLength}
+      newMessage={newMessage}
+    />
+  );
+}
+
+function NextRender(props: any) {
+  const { menuCollapsed, location, messagesUnreadLength, newMessage } = props;
+  const { Sider } = Layout;
+  useEffect(() => {
+    getLastMessageApi().then((response) => {
+      if (response.email) {
+        if (newMessage < messagesUnreadLength) {
+          message.success(`Mensaje de ${response.email}`, 10);
+          addNotification({
+            title: `Mensaje de ${response.email}`,
+            native: true,
+            duration: 10000,
+          });
+        }
+      }
+    });
+  }, [messagesUnreadLength, newMessage]);
   return (
     <Sider
       collapsible
@@ -107,7 +115,7 @@ function RenderMenuSider(props: any) {
           <Link to="/ad1988/contact-messages">
             <MessageOutlined />
             <span className="nav-text">Mensajes</span>
-            {messagesUnreadLength ? (
+            {messagesUnreadLength > 0 ? (
               <Tag className="admin-sider__tag">{messagesUnreadLength}</Tag>
             ) : (
               <></>

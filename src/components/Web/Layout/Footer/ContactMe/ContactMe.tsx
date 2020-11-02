@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Button, message as messageAnt } from "antd";
 import { subscribeContactApi } from "../../../../../api/contact";
+import { reloadMessagesTrueApi } from "../../../../../api/utils";
 import { UserOutlined, MailOutlined } from "@ant-design/icons";
 import { gaEvent } from "../../../../../utils/analytics.js";
 import "./ContactMe.scss";
@@ -14,10 +15,12 @@ export default function ContactMe() {
     </div>
   );
 }
+
 function RenderForm(props: any) {
   const message : any = messageAnt;
   const { inputs, setInputs } = props;
-  const onFinish = () => {
+  const onFinish = async () => {
+    await reloadMessagesTrueApi();
     let finalData = {
       email: inputs.email,
       subject: inputs.subject,

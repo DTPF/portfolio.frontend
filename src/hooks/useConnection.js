@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { connectionApi } from "../api/system";
+import { connectionApi } from "../api/utils";
 import { message } from "antd";
 
 export default function useConnection() {
@@ -27,7 +27,7 @@ export default function useConnection() {
 
   useEffect(() => {
     let unmounted = false;
-    setInterval(() => {
+    const interval = setInterval(() => {
       connectionApi().then((response) => {
         if (response.status) {
           if (!unmounted) {
@@ -41,7 +41,7 @@ export default function useConnection() {
         }
       });
     }, 3000);
-    return () => { unmounted = true };
+    return () => { clearInterval(interval); unmounted = true };
   }, []);
 
   return { connection, checkConnection };

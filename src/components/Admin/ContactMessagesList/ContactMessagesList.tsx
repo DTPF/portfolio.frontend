@@ -1,13 +1,19 @@
-import React, { useState } from "react";
-import Moment from 'react-moment';
-import 'moment/locale/es';
-import { Switch, List, Button, Modal as ModalDelete, notification } from "antd";
+import React, { useState, Suspense, lazy } from "react";
+import {
+  Switch,
+  List,
+  Button,
+  Modal as ModalDelete,
+  message as messageAnt,
+} from "antd";
 import Modal from "../../UI/Modal";
 import { checkMessageApi, deleteContactMessageApi } from "../../../api/contact";
 import { getAccessTokenApi } from "../../../api/auth";
-import { notifDelay, notifDelayErr } from "../../../utils/notifications";
+import { reloadMessagesTrueApi } from "../../../api/utils";
 import { CheckOutlined, DeleteOutlined } from "@ant-design/icons";
 import "./ContactMessagesList.scss";
+import "moment/locale/es";
+const Moment = lazy(() => import("react-moment"));
 const { confirm } = ModalDelete;
 
 export default function ContactMessagesList(props: any) {
@@ -72,22 +78,19 @@ function MessageUnread(props: any) {
   const { message, setReloadMessages } = props;
   const checkMessage = () => {
     const accessToken = getAccessTokenApi();
-    checkMessageApi(accessToken, message._id, true)
-      .then((response) => {
-        notification["success"]({
-          message: response.message,
-          duration: notifDelay,
+    reloadMessagesTrueApi().then(() => {
+      checkMessageApi(accessToken, message._id, true)
+        .then((response) => {
+          messageAnt.success(response.message);
+          setReloadMessages(true);
+        })
+        .catch((err) => {
+          messageAnt.error(err.message);
         });
-        setReloadMessages(true);
-      })
-      .catch((err) => {
-        notification["error"]({
-          message: err.message,
-          duration: notifDelayErr,
-        });
-      });
+
+    });
   };
-  
+
   return (
     <List.Item
       actions={[
@@ -95,13 +98,17 @@ function MessageUnread(props: any) {
           <CheckOutlined />
         </Button>,
       ]}
-    >      
+    >
       <List.Item.Meta
         title={
-        <span>
-          {message.name ? message.name + ' - Hace ' : "Anónimo - Hace "}
-          <Moment locale="es" fromNow ago>{message.date}</Moment>
-        </span>
+          <span>
+            {message.name ? message.name + " - Hace " : "Anónimo - Hace "}
+            <Suspense fallback={<></>}>
+              <Moment locale="es" fromNow ago>
+                {message.date}
+              </Moment>
+            </Suspense>
+          </span>
         }
         description={message.subject + " - " + message.email}
       />
@@ -129,17 +136,11 @@ function MessageRead(props: any) {
     const accessToken = getAccessTokenApi();
     checkMessageApi(accessToken, message._id, false)
       .then((response) => {
-        notification["success"]({
-          message: response.message,
-          duration: notifDelay,
-        });
+        messageAnt.success(response.message);
         setReloadMessages(true);
       })
       .catch((err) => {
-        notification["error"]({
-          message: err.message,
-          duration: notifDelayErr,
-        });
+        messageAnt.error(err.message);
       });
   };
   const showDeleteConfirm = () => {
@@ -152,23 +153,20 @@ function MessageRead(props: any) {
       cancelText: "Cancelar",
       onOk() {
         deleteContactMessageApi(accessToken, message._id)
-          .then(response => {
-            const typeNotification = response.status === 200 ? "success" : "warning";
-              notification[typeNotification]({
-                message: response.message,
-                duration: notifDelay
-              });
-              setReloadMessages(true);
+          .then((response) => {
+            if (response.status === 200) {
+              messageAnt.success(response.message);
+            } else {
+              messageAnt.warning(response.message);
+            }
+            setReloadMessages(true);
           })
-          .catch(err => {
-            notification["error"]({
-              message: err.message,
-              duration: notifDelayErr
-            });
+          .catch((err) => {
+            messageAnt.error(err.message);
           });
-      }
+      },
     });
-  }
+  };
   return (
     <List.Item
       actions={[
@@ -182,10 +180,12 @@ function MessageRead(props: any) {
     >
       <List.Item.Meta
         title={
-        <span>
-          {message.name ? message.name + ' - Hace ' : "Anónimo - Hace "}
-          <Moment locale="es" fromNow ago>{message.date}</Moment>
-        </span>
+          <span>
+            {message.name ? message.name + " - Hace " : "Anónimo - Hace "}
+            <Moment locale="es" fromNow ago>
+              {message.date}
+            </Moment>
+          </span>
         }
         description={message.subject + " - " + message.email}
       />

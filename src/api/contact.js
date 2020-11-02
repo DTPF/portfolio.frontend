@@ -81,3 +81,26 @@ export async function deleteContactMessageApi(token, messageId) {
     return err;
   }
 }
+
+export async function getMessagesLengthApi() {
+  const url = `${basePath}/${apiVersion}/get-messages-length`;
+  try {
+    const response = await fetch(url);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
+}
+
+export async function getLastMessageApi() {
+  const url = `${basePath}/${apiVersion}/get-last-message`;
+  try {
+    const response = await fetch(url);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    return err;
+  }
+}
+
