@@ -29,7 +29,7 @@ const { TextArea } = Input;
 export default function AddEditCoursesForm(props: any) {
   const { setIsVisibleModal, setReloadCourses, course } = props;
   const [image, setImage] = useState(null);
-  const [courseData, setCourseData] = useState([]);  
+  const [courseData, setCourseData] = useState([]);
   useEffect(() => {
     if (course) {
       setCourseData(course);
@@ -304,7 +304,7 @@ function AddEditForm(props: any) {
 function UploadImage(props: any) {
   const { image, setImage } = props;
   const [imageUrl, setImageUrl] = useState("");
-  let imageType: string = imageUrl;  
+  let imageType: string = imageUrl;
   useEffect(() => {
     if (image) {
       if (image.preview) {
@@ -349,20 +349,15 @@ function UploadImage(props: any) {
 }
 
 function transformTextToUrl(text: string) {
-  const u1 = text.replace(/ /g, "-");
-  const u2 = u1.replace(/,/g, "");
-  const u3 = u2.replace(/á/g, "a");
-  const u4 = u3.replace(/é/g, "e");
-  const u5 = u4.replace(/í/g, "i");
-  const u6 = u5.replace(/ó/g, "o");
-  const u7 = u6.replace(/ú/g, "u");
-  const u8 = u7.replace(/Á/g, "A");
-  const u9 = u8.replace(/É/g, "E");
-  const u10 = u9.replace(/Í/g, "I");
-  const u11 = u10.replace(/Ó/g, "O");
-  const u12 = u11.replace(/Ú/g, "U");
-  const u13 = u12.replace(/ - /g, "-");
-  const u14 = u13.replace(/---/g, "-");
-  const url = u14.replace(/:/g, "");
+  const url = text
+    .replace(/[:,()]/g, "")
+    .replace(/ /g, "-")
+    .replace(/ - /g, "-")
+    .replace(/---/g, "-")
+    .replace(/á/gi, "a")
+    .replace(/é/gi, "e")
+    .replace(/í/gi, "i")
+    .replace(/ó/gi, "o")
+    .replace(/ú/gi, "u")
   return url.toLowerCase();
 }
