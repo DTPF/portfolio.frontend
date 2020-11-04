@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useGetMenu from "../../../hooks/useGetMenu";
 import { Row, Col } from "antd";
@@ -8,13 +8,49 @@ import Spin from "../../../components/UI/Spin";
 export default function CategoriesBigButtons(props: any) {
   const { location, extra } = props;
   const menuData: any = useGetMenu(location);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    let unmounted = false;
+    if (!unmounted) {
+      setIsLoading(true);
+    }
+    window.scrollTo(0, 0);
+    return () => { unmounted = true };
+  }, []);
   return (
-    <Row className={`categories-big-buttons ${extra}`}>
-      <>
-        {menuData.length === 0 ? (
-          <Spin paddingTop="40px"/>
+    <>
+      {!isLoading ? (
+        <Spin />
+      ) : (
+        <Row className={`categories-big-buttons ${extra}`}>
+          <RenderButton menuData={menuData} />
+        </Row>
+      )}
+    </>
+  );
+}
+
+function RenderButton(props: any) {
+  const { menuData } = props;
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    let unmounted = false;
+    if (!unmounted) {
+      setIsLoading(true);
+    }
+    window.scrollTo(0, 0);
+    return () => { unmounted = true };
+  }, []);
+  return (
+    <>
+      {!isLoading ? (
+        <Spin />
+      ) : (
+        <>
+          {menuData.length === 0 ? (
+            <Spin paddingTop="40px" />
           ) : (
-          <>
+            <>
               {menuData.map((item: any) => {
                 let classname: string = item.url.split("/")[1];
                 const subtitle = () => {
@@ -43,9 +79,10 @@ export default function CategoriesBigButtons(props: any) {
                   </Col>
                 );
               })}
-          </>
-        )}
-      </>
-    </Row>
+            </>
+          )}
+        </>
+      )}
+    </>
   );
 }
