@@ -15,16 +15,18 @@ export default function Curriculum(props: any) {
     let unmounted = false;
     if (!unmounted) {
       setIsLoading(true);
+      window.scrollTo(0, 0);
     }
-    window.scrollTo(0, 0);
+    return () => { unmounted = true };
   }, []);  
   return (
     <>
-      <Suspense fallback={<></>}>
         {!isLoading ? (
-          <Spin />
+          <Suspense fallback={<></>}>
+            <Spin />
+          </Suspense>
         ) : (
-          <>
+          <Suspense fallback={<></>}>
             <BackTop />
             <HelmetAnalytics
               titleHelmet="DTPF | Curriculum"
@@ -32,9 +34,8 @@ export default function Curriculum(props: any) {
             />
             <ButtonGoBack goBack={goBack} eventGoBack="curriculum" />
             <CurriculumWeb location={location} />
-          </>
+          </Suspense>
         )}
-      </Suspense>
     </>
   );
 }

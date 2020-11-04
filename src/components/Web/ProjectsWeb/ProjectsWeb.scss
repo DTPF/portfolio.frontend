@@ -1,11 +1,13 @@
 @import "../../../scss/variables";
 @import "../../../scss/mixins";
 
-.projects {
+.projects-web {
+  max-width: 1200px;
+  margin: 0 auto;
   &__title {
     @include titleH1();
     text-transform: uppercase;
     text-align: center;
-    margin-top: 20px;
+    margin: 20px 0;
   }
 }

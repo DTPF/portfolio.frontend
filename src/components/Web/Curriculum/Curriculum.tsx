@@ -19,7 +19,8 @@ export default function Curriculum(props: any) {
       setIsLoading(true);
     }
     window.scrollTo(0, 0);
-  }, []);  
+    return () => { unmounted = true };
+  }, []);
   return (
     <>
       {!isLoading ? (

@@ -8,18 +8,20 @@ export default function Projects(props: any) {
   const { location } = props;
   const goBack = useHistory().goBack;
   useEffect(() => {
-    window.scrollTo(0, 0);
+    let unmounted = false;
+    if (!unmounted) {
+      window.scrollTo(0, 0);  
+    }
+    return () => { unmounted = true };
   }, []);
   return (
-    <>
-      <Suspense fallback={<></>}>
-        <HelmetAnalytics
-          titleHelmet="DTPF | Proyectos"
-          contentHelmet="Página de proyectos realizados por David Thomas Pizarro Frick"
-        />
-        <ButtonGoBack goBack={goBack} eventGoBack="proyectos" />
-        <ProjectsWeb location={location} />
-      </Suspense>
-    </>
+    <Suspense fallback={<></>}>
+      <HelmetAnalytics
+        titleHelmet="DTPF | Proyectos"
+        contentHelmet="Página de proyectos realizados por David Thomas Pizarro Frick"
+      />
+      <ButtonGoBack goBack={goBack} eventGoBack="proyectos" />
+      <ProjectsWeb location={location} />
+    </Suspense>
   );
 }

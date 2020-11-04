@@ -131,8 +131,8 @@ function Tecnologies({ courses }) {
       let tecnologies = arrayTags[i];
       for (let j = 0; j < tecnologies.length; j++) {
         let tecnology = tecnologies[j];
-        if (!tec.includes(tecnology)) {
-          if (!unmounted) {
+        if (!unmounted) {
+          if (!tec.includes(tecnology)) {
             tec.push(tecnology);
           }
         }
