@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Form, Input, Button, message as messageAnt } from "antd";
 import { subscribeContactApi } from "../../../../../api/contact";
 import { reloadMessagesTrueApi } from "../../../../../api/utils";
-import { UserOutlined, MailOutlined } from "@ant-design/icons";
 import { gaEvent } from "../../../../../utils/analytics.js";
+import { Form, Input, Button, message as messageAnt } from "antd";
+import { UserOutlined, MailOutlined } from "@ant-design/icons";
 import "./ContactMe.scss";
 
 export default function ContactMe() {
@@ -19,8 +19,7 @@ export default function ContactMe() {
 function RenderForm(props: any) {
   const message : any = messageAnt;
   const { inputs, setInputs } = props;
-  const onFinish = async () => {
-    await reloadMessagesTrueApi();
+  const onFinish = () => {
     let finalData = {
       email: inputs.email,
       subject: inputs.subject,
@@ -53,16 +52,17 @@ function RenderForm(props: any) {
             setInputs({email: inputEmail, subject: inputSubject})
           }, 13000),
           );
-    } else if (howManyTabs < 3) {
-      message.warning("Especifica un poco más por favor.");
+        } else if (howManyTabs < 3) {
+          message.warning("Especifica un poco más por favor.");
     } else {
-      subscribeContactApi(finalData).then((response) => {
+      subscribeContactApi(finalData).then( async (response) => {
         if (response.status === 200) {
+          await reloadMessagesTrueApi();
           message
             .success("Enviado correctamente!!", 1.5)
             .then(() => message.info( "Contestaré lo antes posible!!", 2.5 ));
-          setInputs("");
-        } else if (response.status === 500) {
+            setInputs("");
+          } else if (response.status === 500) {
           message.error(response.message);
         } else {
           message.warning(response.message);
@@ -70,7 +70,7 @@ function RenderForm(props: any) {
       });
     }
   };
-
+  
   const clickMenuIcon = () => {
     gaEvent("click_email_contact_me_footer", "clicks", "UI Clicks", true);
   };
