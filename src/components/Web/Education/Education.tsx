@@ -52,8 +52,8 @@ function RenderEducation(props: any) {
   }, []);
   const title = "Todos los cursos";
   const subtitle =
-    "Cursos realizados presencialmente" +
-    " y online para mi preparación al mundo de IT";
+    "Cursos realizados online y " +
+    "presenciales para mi preparación al mundo de IT";
   return (
     <>
       {!url ? (

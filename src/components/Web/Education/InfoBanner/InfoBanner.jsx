@@ -68,7 +68,7 @@ export default function InfoBanner() {
               className="info-banner-text"
               animation={{ y: 300, opacity: 0, type: "from", delay: 100 }}
             >
-              Horas de estudio presencial y online
+              Horas de estudio presenciales y online
             </TweenOne>
           </Element>
           <Element prefixCls="info-banner-elem" key="1">

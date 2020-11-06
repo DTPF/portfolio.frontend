@@ -13,7 +13,8 @@
   .SPA,
   .JWT,
   .Helmet,
-  .WebSocket {
+  .WebSockets,
+  .Socketio {
     > span {
       color: $default-color;
       background-color: $default-bg-color;
@@ -41,9 +42,7 @@
       border: 3px solid rgb(247, 21, 49);
     }
   }
-  .Visual,
-  .Studio,
-  .Code {
+  .VisualStudioCode {
     > span {
       color: $default-color;
       background-color: rgba(0, 109, 199, 0.493);
@@ -99,6 +98,13 @@
       border: 3px solid rgb(0, 109, 194);
     }
   }
+  .JQuery {
+    > span {
+      color: #fff;
+      background-color: rgba(12, 100, 167, 0.5);
+      border: 3px solid rgb(12, 101, 167);
+    }
+  }
   .Angular {
     > span {
       color: #fff;
@@ -151,7 +157,7 @@
       border: 3px solid rgb(71, 61, 234);
     }
   }
-  .Ant {
+  .AntDesign {
     > span {
       color: #fff;
       background-color: rgba(52, 96, 240, 0.5);
@@ -195,7 +201,7 @@
       border: 3px solid rgb(20, 126, 192);
     }
   }
-  .Analytics {
+  .GoogleAnalytics {
     > span {
       color: #fff;
       background-color: rgb(255, 172, 56);
