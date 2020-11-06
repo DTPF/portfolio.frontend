@@ -1,11 +1,11 @@
-import { testingRefreshToken } from "../../utils/constants";
+import { testingAccessToken } from "../../utils/constants";
 import {
   subscribeContactApi,
   getMessagesUnreadApi,
   checkMessageApi,
   deleteContactMessageApi,
 } from "../../api/contact";
-const TOKEN = testingRefreshToken;
+const TOKEN = testingAccessToken;
 
 describe("Contact API", () => {
   it("Send test message", async () => {
@@ -25,10 +25,6 @@ describe("Contact API", () => {
   it("Message marked as read", async () => {
     await getMessagesUnreadApi(TOKEN, false).then( async (data) => {
       expect(data.status).toBe(200);
-      let dataMessages = data.messages;
-      let testingMessage = dataMessages.find(
-        (subject) => subject.subject === "ContactTest"
-      );
       await checkMessageApi(TOKEN, "id", false).then((data) => {
         expect(data.status).toBe(500);
       });
