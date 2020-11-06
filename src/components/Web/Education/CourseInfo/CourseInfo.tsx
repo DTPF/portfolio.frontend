@@ -212,11 +212,14 @@ function Tags(props: any) {
   return (
     <div className="course-info__tags-div">
       {tags &&
-        tags.map((tag) => (
-          <span key={tag} className={tag}>
-            <Tag>{tag}</Tag>
-          </span>
-        ))}
+        tags.map((tag: any) => {
+          let tagToClassname = tag.replace(/[ .]/g, "");
+          return (
+            <span key={tag} className={tagToClassname}>
+              <Tag>{tag}</Tag>
+            </span>
+          )
+      })}
     </div>
   );
 }

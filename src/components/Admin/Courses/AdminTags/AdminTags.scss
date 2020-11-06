@@ -24,7 +24,7 @@
         border-bottom-left-radius: 0;
         padding: 0 7px;
         span {
-            font-size: 1.1em;
+          font-size: 1.1em;
         }
         &:hover {
           background-color: #cdd5df;
@@ -37,6 +37,8 @@
     }
   }
   &__tags {
+    display: flex;
+    justify-content: center;
     > .ant-col {
       margin: 5px 5px;
       > span {

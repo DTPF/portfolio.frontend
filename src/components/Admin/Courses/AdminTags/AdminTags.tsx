@@ -71,11 +71,14 @@ export default function AdminTags(props: {
         <div className="admin-tags">
           <Divider className="tag-divider">Tags</Divider>
           <Row className="admin-tags__tags">
-            {tags.map((tag) => (
-              <Col key={tag} className={tag}>
-                <TagAnt tag={tag} deleteTag={deleteTag} />
-              </Col>
-            ))}
+            {tags.map((tag: any) => {
+              let tagToClassname = tag.replace(/[ .]/g, "");
+              return (
+                <Col key={tag} className={tagToClassname}>
+                  <TagAnt tag={tag} deleteTag={deleteTag} />
+                </Col>
+              )
+            })}
           </Row>
           <div className="admin-tags__add-tag">
             <AddTagForm
