@@ -7,6 +7,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "4.0.0",
+    "@types/socket.io-client": "^1.4.34",
     "antd": "^4.6.3",
     "intersection-observer": "^0.11.0",
     "jwt-decode": "^2.2.0",
@@ -27,7 +28,8 @@
     "react-helmet": "^6.1.0",
     "react-moment": "^0.9.7",
     "react-push-notification": "^1.3.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "socket.io-client": "^2.3.1"
   },
   "scripts": {
     "dev": "react-scripts start",
@@ -63,6 +65,6 @@
     "react-scripts": "3.4.3",
     "react-test-renderer": "^16.13.1",
     "serve": "^11.3.2",
-    "typescript": "^4.0.3"
+    "typescript": "^4.0.5"
   }
 }

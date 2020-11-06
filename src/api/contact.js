@@ -16,17 +16,6 @@ export async function subscribeContactApi(data) {
   }
 }
 
-export async function getMessagesApi() {
-  const url = `${basePath}/${apiVersion}/get-contact-messages`;
-  try {
-    const response = await fetch(url);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
-}
-
 export async function getMessagesUnreadApi(token, status) {
   const url = `${basePath}/${apiVersion}/get-contact-messages-unread?readed=${status}`;
   const params = {
@@ -82,21 +71,17 @@ export async function deleteContactMessageApi(token, messageId) {
   }
 }
 
-export async function getMessagesLengthApi() {
-  const url = `${basePath}/${apiVersion}/get-messages-length`;
-  try {
-    const response = await fetch(url);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
+export async function getLastMessageApi(token) {
+  const url = `${basePath}/${apiVersion}/get-last-message-email`;
+  const params = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token
+    }
   }
-}
-
-export async function getLastMessageApi() {
-  const url = `${basePath}/${apiVersion}/get-last-message`;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, params);
     const result = await response.json();
     return result;
   } catch (err) {

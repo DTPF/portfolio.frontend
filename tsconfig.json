@@ -20,6 +20,6 @@
     "jsx": "react"
   },
   "include": [
-    "src", "apisdfsdf"
+    "src", "apisdfsdf", "src/webSockets/hooks/.js"
   ]
 }

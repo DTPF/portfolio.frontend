@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getLastMessageApi, getMessagesLengthApi } from "../../../api/contact";
-import { getAccessTokenApi } from "../../../api/auth";
+import { getLastMessageApi } from "../../../api/contact";
 import { Link, withRouter } from "react-router-dom";
 import { Layout, Menu, Tag, message } from "antd";
 import {
@@ -12,26 +11,13 @@ import {
   ReadOutlined,
 } from "@ant-design/icons";
 import "./MenuSider.scss";
+import { getAccessTokenApi } from "../../../api/auth";
 import addNotification from "react-push-notification";
+import useMessagesUnreadLength from "../../../webSockets/hooks/useMessagesUnreadLength";
 
 function MenuSider(props: any) {
   const { menuCollapsed, location } = props;
-  const [messagesUnreadLength, setMessagesUnreadLength] = useState(undefined);
-  const token = getAccessTokenApi();
-  useEffect(() => {
-    let unmounted = false;
-    const interval = setInterval(() => {
-      getMessagesLengthApi().then((response) => {
-        if (!unmounted) {
-          setMessagesUnreadLength(response.messagesLength);
-        }
-      });
-    }, 1000);
-    return () => {
-      clearInterval(interval);
-      unmounted = true;
-    };
-  }, [token, messagesUnreadLength]);
+  const messagesUnreadLength = useMessagesUnreadLength();  
   return (
     <RenderMenuSider
       messagesUnreadLength={messagesUnreadLength}
@@ -52,7 +38,7 @@ function RenderMenuSider(props: any) {
       }
     }
     return () => { unmounted = true };
-  }, [newMessage, messagesUnreadLength]);  
+  }, [newMessage, messagesUnreadLength]);
   return (
     <NextRender
       menuCollapsed={menuCollapsed}
@@ -66,11 +52,12 @@ function RenderMenuSider(props: any) {
 function NextRender(props: any) {
   const { menuCollapsed, location, messagesUnreadLength, newMessage } = props;
   const { Sider } = Layout;
+  const token = getAccessTokenApi();
   useEffect(() => {
-    getLastMessageApi().then((response) => {
+    getLastMessageApi(token).then((response) => {
       if (response.email) {
         if (newMessage < messagesUnreadLength) {
-          message.success(`Mensaje de ${response.email}`, 10);
+          message.success(`Mensaje de ${response.email}`, 5);
           addNotification({
             title: `Mensaje de ${response.email}`,
             native: true,
@@ -79,7 +66,7 @@ function NextRender(props: any) {
         }
       }
     });
-  }, [messagesUnreadLength, newMessage]);
+  }, [messagesUnreadLength, newMessage, token]);
   return (
     <Sider
       collapsible
