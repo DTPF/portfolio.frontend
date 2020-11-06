@@ -10,7 +10,10 @@
   .Express,
   .POO,
   .MVC,
-  .SPA {
+  .SPA,
+  .JWT,
+  .Helmet,
+  .WebSocket {
     > span {
       color: $default-color;
       background-color: $default-bg-color;
@@ -148,6 +151,13 @@
       border: 3px solid rgb(71, 61, 234);
     }
   }
+  .Ant {
+    > span {
+      color: #fff;
+      background-color: rgba(52, 96, 240, 0.5);
+      border: 3px solid rgb(52, 97, 240);
+    }
+  }
   .MySQL {
     > span {
       color: #fff;
@@ -183,6 +193,13 @@
       color: #fff;
       background-color: rgba(20, 126, 192, 0.494);
       border: 3px solid rgb(20, 126, 192);
+    }
+  }
+  .Analytics {
+    > span {
+      color: #fff;
+      background-color: rgb(255, 172, 56);
+      border: 3px solid rgb(241, 107, 40);
     }
   }
 }
