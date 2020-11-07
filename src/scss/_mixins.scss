@@ -38,8 +38,8 @@
   @include boxShadowMd();
   &:hover {
     color: #fff;
-    background-color: #5d718d;
-    border: 1px solid #5d718d;
+    background-color: #273b56;
+    border: 1px solid #273b56;
   }
   @media (min-width: $media-breakpoint-up-xs) {
     font-size: 13px;

@@ -1,5 +1,6 @@
 @import "../../../../../scss/variables";
 @import "../../../../../scss/mixins";
+@import "../../../../../scss/animations";
 
 .contact-me {
   position: relative;
@@ -18,12 +19,19 @@
   .ant-input-affix-wrapper {
     padding: 3px !important;
     padding-left: 5px !important;
+    @include boxShadowMd();
   }
-
   h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #fff;
     font-weight: bold;
     text-align: center;
+    span {
+      @include rotateInfiniteAlternate30();
+      font-size: 1.5em;
+    }
   }
 
   input {

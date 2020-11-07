@@ -2,70 +2,70 @@ import React, { useState } from "react";
 import { subscribeContactApi } from "../../../../../api/contact";
 import { reloadMessagesTrueApi } from "../../../../../api/utils";
 import { gaEvent } from "../../../../../utils/analytics.js";
-import { Form, Input, Button, message as messageAnt } from "antd";
-import { UserOutlined, MailOutlined } from "@ant-design/icons";
+import { Form, Input, Button, message } from "antd";
+import { UserOutlined, MailOutlined, SmileOutlined } from "@ant-design/icons";
 import "./ContactMe.scss";
 
 export default function ContactMe() {
   const [inputs, setInputs] = useState({});
   return (
     <div className="contact-me">
-      <h3>{"Contacta conmigo :)"}</h3>
+      <h3>Contacta conmigo&nbsp;<SmileOutlined /></h3>
       <RenderForm inputs={inputs} setInputs={setInputs} />
     </div>
   );
 }
 
 function RenderForm(props: any) {
-  const message : any = messageAnt;
+  const messageAnt : any = message;
   const { inputs, setInputs } = props;
   const onFinish = () => {
     let finalData = {
       email: inputs.email,
-      subject: inputs.subject,
+      message: inputs.message,
     };
     let inputEmail = inputs.email;
-    let inputSubject = inputs.subject;
+    let inputMessage = inputs.message;
     let replaceTab = inputEmail?.replace(" ", "");
     let emailValid = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,63}$/i;
-    let subjectIsNum = /^\d+$/.test(inputSubject);
-    let howManyTabs = inputSubject && inputSubject.split(" ").length;
+    let messageIsNum = /^\d+$/.test(inputMessage);
+    let howManyTabs = inputMessage && inputMessage.split(" ").length;
     let resultValidation = emailValid.test(replaceTab);
-    if (!inputs.email && inputs.subject === "ad1988") {
+    if (!inputs.email && inputs.message === "ad1988") {
       window.location.href = "/ad1988";
     }
-    if (!inputs.email && !inputs.subject) {
-      message.warning("Los dos campos son requeridos.");
+    if (!inputs.email && !inputs.message) {
+      messageAnt.warn("Los dos campos son necesarios.");
     } else if (!resultValidation) {
-      message.warning("El email no es válido.");
-    } else if (subjectIsNum) {
-      setInputs({email: "Desplegando misiles...", subject: 'Cuenta atrás iniciada...'});
-      message
+      messageAnt.warn("El email no es válido.");
+    } else if (messageIsNum) {
+      setInputs({email: "Desplegando misiles...", message: 'Cuenta atrás iniciada...'});
+      messageAnt
         .loading("Enviando mensaje...", 1.5)
-        .then(() => message.warning("Un momento...", 2))
-        .then(() => message.loading("Desplegando misiles...", 2.5))
+        .then(() => messageAnt.warn("Un momento...", 2))
+        .then(() => messageAnt.loading("Desplegando misiles...", 2.5))
         .then(() =>
-        message.error(
-          `Codigo de Autodestrucción Activado. Desplegando misiles en ${inputSubject} segundos...`, 3.5),
+        messageAnt.error(
+          `Codigo de Autodestrucción Activado. Desplegando misiles en ${inputMessage} segundos...`, 3.5),
           setTimeout(() => {
-            message.info("!!Es broma!! Sigue con lo que estabas haciendo :)", 6)
-            setInputs({email: inputEmail, subject: inputSubject})
+            messageAnt.info("!!Es broma!! Sigue con lo que estabas haciendo :)", 6)
+            setInputs({email: inputEmail, message: inputMessage})
           }, 13000),
           );
         } else if (howManyTabs < 3) {
-          message.warning("Especifica un poco más por favor.");
+          messageAnt.warn("Especifica un poco más por favor.");
     } else {
       subscribeContactApi(finalData).then( async (response) => {
         if (response.status === 200) {
           await reloadMessagesTrueApi();
-          message
+          setInputs("");
+          messageAnt
             .success("Enviado correctamente!!", 1.5)
             .then(() => message.info( "Contestaré lo antes posible!!", 2.5 ));
-            setInputs("");
           } else if (response.status === 500) {
-          message.error(response.message);
+            messageAnt.error(response.message);
         } else {
-          message.warning(response.message);
+          messageAnt.warn(response.message);
         }
       });
     }
@@ -92,9 +92,9 @@ function RenderForm(props: any) {
           type="text"
           name="text"
           prefix={<MailOutlined style={{ color: "rgba(0, 0, 0, 0.25)" }} />}
-          placeholder="Asunto"
-          value={inputs.subject}
-          onChange={(e) => setInputs({ ...inputs, subject: e.target.value })}
+          placeholder="Mensaje"
+          value={inputs.message}
+          onChange={(e) => setInputs({ ...inputs, message: e.target.value })}
         />
       </Form.Item>
       <Form.Item>
