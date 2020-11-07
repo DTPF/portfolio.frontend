@@ -1,4 +1,4 @@
-import { testingAccessToken } from "../../utils/constants";
+import { testingRefreshToken } from "../../utils/constants";
 import {
   getMenuApi,
   updateMenuApi,
@@ -6,7 +6,7 @@ import {
   addMenuApi,
   deleteMenuApi,
 } from "../../api/menu";
-const TOKEN = testingAccessToken;
+const TOKEN = testingRefreshToken;
 
 describe("Menu API", () => {
   it("Create menu", async () => {

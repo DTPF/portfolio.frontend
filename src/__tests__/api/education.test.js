@@ -1,4 +1,4 @@
-import { testingAccessToken } from "../../utils/constants";
+import { testingRefreshToken } from "../../utils/constants";
 import {
   addCourseApi,
   updateCourseApi,
@@ -11,7 +11,7 @@ import {
   addTagApi,
   deleteTagApi,
 } from "../../api/education";
-const TOKEN = testingAccessToken;
+const TOKEN = testingRefreshToken;
 
 describe("Education API", () => {  
   it("Create new course", async () => {

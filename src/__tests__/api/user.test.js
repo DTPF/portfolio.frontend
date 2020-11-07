@@ -10,8 +10,8 @@ import {
   deleteUserApi,
   signUpAdminApi,
 } from "../../api/user";
-import { testingAccessToken } from "../../utils/constants";
-const TOKEN = testingAccessToken;
+import { testingRefreshToken } from "../../utils/constants";
+const TOKEN = testingRefreshToken;
 jest.setTimeout(6000);
 
 describe("User API", () => {

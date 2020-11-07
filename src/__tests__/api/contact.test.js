@@ -1,11 +1,11 @@
-import { testingAccessToken } from "../../utils/constants";
+import { testingRefreshToken } from "../../utils/constants";
 import {
   subscribeContactApi,
   getMessagesUnreadApi,
   checkMessageApi,
   deleteContactMessageApi,
 } from "../../api/contact";
-const TOKEN = testingAccessToken;
+const TOKEN = testingRefreshToken;
 
 describe("Contact API", () => {
   it("Send test message", async () => {
