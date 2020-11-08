@@ -3,7 +3,7 @@ import { subscribeContactApi } from "../../../../../api/contact";
 import { reloadMessagesTrueApi } from "../../../../../api/utils";
 import { gaEvent } from "../../../../../utils/analytics.js";
 import { Form, Input, Button, message } from "antd";
-import { UserOutlined, MailOutlined, SmileOutlined } from "@ant-design/icons";
+import { UserOutlined, SmileOutlined } from "@ant-design/icons";
 import "./ContactMe.scss";
 
 export default function ContactMe() {
@@ -19,6 +19,7 @@ export default function ContactMe() {
 function RenderForm(props: any) {
   const messageAnt : any = message;
   const { inputs, setInputs } = props;
+  const { TextArea } : any = Input;
   const onFinish = () => {
     let finalData = {
       email: inputs.email,
@@ -82,19 +83,20 @@ function RenderForm(props: any) {
           name="email"
           prefix={<UserOutlined style={{ color: "rgba(0, 0, 0, 0.25)" }} />}
           placeholder="Correo electrónico"
+          allowClear
           value={inputs.email}
           onClick={() => clickMenuIcon()}
           onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
-        />
+          />
       </Form.Item>
       <Form.Item>
-        <Input
-          type="text"
-          name="text"
-          prefix={<MailOutlined style={{ color: "rgba(0, 0, 0, 0.25)" }} />}
-          placeholder="Mensaje"
+        <TextArea
+          placeholder="Escribe aquí tu mensaje"
+          autoSize={{ minRows: 1, maxRows: 6 }}
+          allowClear
+          maxLength={500}
           value={inputs.message}
-          onChange={(e) => setInputs({ ...inputs, message: e.target.value })}
+          onChange={(e: any) => setInputs({ ...inputs, message: e.target.value })}
         />
       </Form.Item>
       <Form.Item>

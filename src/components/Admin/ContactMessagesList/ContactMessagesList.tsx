@@ -110,7 +110,13 @@ function MessageUnread(props: any) {
             </Suspense>
           </span>
         }
-        description={message.subject + " - " + message.email}
+        description={
+          <div>
+            <em>{message.email}</em>
+            <div>{message.phone_number}</div>
+            <p>{message.message}</p>
+          </div>
+        }
       />
     </List.Item>
   );
@@ -182,12 +188,20 @@ function MessageRead(props: any) {
         title={
           <span>
             {message.name ? message.name + " - Hace " : "Anónimo - Hace "}
-            <Moment locale="es" fromNow ago>
-              {message.date}
-            </Moment>
+            <Suspense fallback={<></>}>
+              <Moment locale="es" fromNow ago>
+                {message.date}
+              </Moment>
+            </Suspense>
           </span>
         }
-        description={message.subject + " - " + message.email}
+        description={
+          <div>
+            <em>{message.email}</em>
+            <div>{message.phone_number}</div>
+            <p>{message.message}</p>
+          </div>
+        }
       />
     </List.Item>
   );

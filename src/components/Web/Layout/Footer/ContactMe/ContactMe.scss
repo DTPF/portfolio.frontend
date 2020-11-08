@@ -16,10 +16,14 @@
   @media (max-width: $media-breakpoint-down-xs) {
   }
 
-  .ant-input-affix-wrapper {
-    padding: 3px !important;
-    padding-left: 5px !important;
-    @include boxShadowMd();
+  .ant-input {
+    letter-spacing: 0.05em;
+    &-affix-wrapper {
+      @include boxShadowMd();
+      &-textarea-with-clear-btn {
+        padding: 0 !important;
+      }
+    }
   }
   h3 {
     display: flex;
@@ -34,16 +38,10 @@
     }
   }
 
-  input {
-    font-size: $font-size-xs;
-    padding: 0 !important;
-  }
-
   button {
     @include buttonPrimaryLight();
-    text-transform: uppercase;   
+    text-transform: uppercase;
     width: 100%;
     height: 100%;
   }
-
 }
