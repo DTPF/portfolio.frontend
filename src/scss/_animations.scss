@@ -62,6 +62,18 @@
   animation: slideIn 1s infinite alternate;
 }
 
+@mixin slideUpDownInfinite5px() {
+  @keyframes slideUpDownInfinite {
+    from {
+      margin-bottom: 0px;
+    }
+    to {
+      margin-top: 6px;
+    }
+  }
+  animation: slideUpDownInfinite 1s infinite alternate;
+}
+
 @mixin rotateInfiniteAlternate30() {
   @keyframes rotating {
     from {

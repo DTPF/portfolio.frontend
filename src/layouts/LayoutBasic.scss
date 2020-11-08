@@ -55,4 +55,15 @@
       }
     }
   }
+  .ant-back-top-content {
+    background-color: $secondary-color-transparent !important;
+    @include boxShadowLg();
+    @include slideUpDownInfinite5px();
+    &:hover {
+      background-color: $secondary-color !important;
+    }
+    svg {
+      color: $primary-color-dark;
+    }
+  }
 }

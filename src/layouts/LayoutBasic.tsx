@@ -1,6 +1,7 @@
 import React, { useState, Suspense, lazy } from "react";
 import useConnection from "../hooks/useConnection";
-import { Layout } from "antd";
+import { gaEvent } from "../utils/analytics.js";
+import { Layout, BackTop } from "antd";
 import "./LayoutBasic.scss";
 const desktopImage = require("../assets/img/jpg/background-squares.jpg");
 const mobileImage = require("../assets/img/jpg/background-squares-mobile.jpg");
@@ -29,14 +30,14 @@ export default function LayoutBasic(props: any) {
     );
   }
   return (
-    <RenderLayoutBasic
-      routes={routes}
-      isLoading={isLoading}
-      setIsLoading={setIsLoading}
-      menuCollapsed={menuCollapsed}
-      setMenuCollapsed={setMenuCollapsed}
-      connection={connection}
-    />
+      <RenderLayoutBasic
+        routes={routes}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+        menuCollapsed={menuCollapsed}
+        setMenuCollapsed={setMenuCollapsed}
+        connection={connection}
+      />
   );
 }
 
@@ -56,12 +57,16 @@ function RenderLayoutBasic(props: any) {
       setMenuCollapsed(true);
     }
   };
+  const clickBackTop = () => {
+    gaEvent("click_back_top", "clicks", "UI Clicks", true);
+  };
   return (
     <div
       className="layout-basic"
       onClick={closeMenu}
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
+      <BackTop duration={600} onClick={clickBackTop}/>
       <Suspense fallback={<></>}>
         <div className="layout-basic__header">
           <MenuTop

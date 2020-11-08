@@ -36,7 +36,9 @@
   border: 1px solid #273b56d3;
   background-color: #cdd5df;
   @include boxShadowMd();
-  &:hover {
+  &:hover,
+  &:active,
+  &:focus {
     color: #fff;
     background-color: #273b56;
     border: 1px solid #273b56;

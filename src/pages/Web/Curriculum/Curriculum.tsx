@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
-import { BackTop } from "antd";
 import { useHistory } from "react-router-dom";
 import "./Curriculum.scss";
 const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
@@ -27,7 +26,6 @@ export default function Curriculum(props: any) {
           </Suspense>
         ) : (
           <Suspense fallback={<></>}>
-            <BackTop />
             <HelmetAnalytics
               titleHelmet="DTPF | Curriculum"
               contentHelmet="Curriculum de David Thomas Pizarro Frick"

@@ -58,17 +58,19 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     button {
+      border-left: 0 !important;
       border-radius: 20px;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
   }
   &__linkNextMobile {
-    right: 0px;
+    right: 0px;  
     border-radius: 20px;
     border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+    border-bottom-right-radius: 0;
     button {
+      border-right: 0 !important;
       border-radius: 20px;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;

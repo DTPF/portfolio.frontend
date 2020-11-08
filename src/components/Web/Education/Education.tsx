@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { useGetCourses } from "../../../hooks/useGetCourses";
 import { useParams } from "react-router-dom";
-import { Row, Col, BackTop } from "antd";
+import { Row, Col } from "antd";
 import "./Education.scss";
 import Courses from "../../../components/Web/Education/Courses";
 import InfoBanner from "../../../components/Web/Education/InfoBanner";
@@ -62,7 +62,6 @@ function RenderEducation(props: any) {
             <Spin />
           ) : (
             <Row className="education">
-              <BackTop duration={800} />
               <Col lg={1} />
               <Col lg={22}>
                 <div className="div"></div>

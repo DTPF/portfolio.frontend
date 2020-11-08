@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, BackTop } from "antd";
+import { Row, Col } from "antd";
 import Spin from "../../../components/UI/Spin";
 import WorkExperience from "../../../components/Web/Curriculum/WorkExperience";
 import Education from "../../../components/Web/Curriculum/Education";
@@ -27,7 +27,6 @@ export default function Curriculum(props: any) {
         <Spin />
       ) : (
         <>
-          <BackTop />
           <div className="curriculum">
             <Row>
               <Col span={24}>

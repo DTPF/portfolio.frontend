@@ -49,9 +49,9 @@ function RenderForm(props: any) {
         messageAnt.error(
           `Codigo de Autodestrucción Activado. Desplegando misiles en ${inputMessage} segundos...`, 3.5),
           setTimeout(() => {
-            messageAnt.info("!!Es broma!! Sigue con lo que estabas haciendo :)", 6)
+            messageAnt.info("!!Es broma!! Sigue con lo que estabas haciendo :)", 2)
             setInputs({email: inputEmail, message: inputMessage})
-          }, 13000),
+          }, 10000),
           );
         } else if (howManyTabs < 3) {
           messageAnt.warn("Especifica un poco más por favor.");
@@ -59,7 +59,10 @@ function RenderForm(props: any) {
       subscribeContactApi(finalData).then( async (response) => {
         if (response.status === 200) {
           await reloadMessagesTrueApi();
-          setInputs("");
+          setInputs({email: "", message: response.message});
+          setTimeout(() => {
+            setInputs({email: "", message: ""});
+          }, 4000);
           messageAnt
             .success("Enviado correctamente!!", 1.5)
             .then(() => message.info( "Contestaré lo antes posible!!", 2.5 ));
@@ -70,11 +73,10 @@ function RenderForm(props: any) {
         }
       });
     }
-  };
-  
+  };  
   const clickMenuIcon = () => {
     gaEvent("click_email_contact_me_footer", "clicks", "UI Clicks", true);
-  };
+  };  
   return (
     <Form onFinish={onFinish}>
       <Form.Item>
