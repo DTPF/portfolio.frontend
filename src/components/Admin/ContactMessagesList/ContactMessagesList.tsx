@@ -200,6 +200,7 @@ function MessageRead(props: any) {
             <em>{message.email}</em>
             <div>{message.phone_number}</div>
             <p>{message.message}</p>
+            <p>{message.subject}</p>
           </div>
         }
       />
