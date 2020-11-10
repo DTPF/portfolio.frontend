@@ -38,6 +38,9 @@
       margin: 0 auto;
       padding-top: 100px;
     }
+    @media (min-height: 950px) {
+      min-height: calc(100vh - 333px) !important;
+    }
   }
 
   &__footer {
