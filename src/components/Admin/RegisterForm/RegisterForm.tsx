@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, Button, Checkbox, notification } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { notifDelay, notifDelayErr } from "../../../utils/notifications";
-import { emailValidation, minLenghtValidation } from "../../../utils/formValidation";
+import { emailValidationClass, minLenghtValidationClass } from "../../../utils/formValidation";
 import { signUpApi } from "../../../api/user";
 import "./RegisterForm.scss";
 
@@ -36,10 +36,10 @@ export default function RegisterForm() {
   const inputValidation = (e: any) => {
     const { type, name } = e.target;
     if (type === "email") {
-      setFormValid({ ...formValid, [name]: emailValidation(e.target) });
+      setFormValid({ ...formValid, [name]: emailValidationClass(e.target) });
     }
     if (type === "password") {
-      setFormValid({ ...formValid, [name]: minLenghtValidation(e.target, 6) });
+      setFormValid({ ...formValid, [name]: minLenghtValidationClass(e.target, 6) });
     }
     if (type === "checkbox") {
       setFormValid({ ...formValid, [name]: e.target.checked });

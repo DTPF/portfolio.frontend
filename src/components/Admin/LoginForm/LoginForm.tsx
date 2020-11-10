@@ -5,8 +5,8 @@ import { signInApi } from "../../../api/user";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../../utils/constants";
 import { notifDelayErr } from "../../../utils/notifications";
 import {
-  emailValidation,
-  minLenghtValidation,
+  emailValidationClass,
+  minLenghtValidationClass,
 } from "../../../utils/formValidation";
 import "./LoginForm.scss";
 
@@ -31,10 +31,10 @@ export default function LoginForm() {
   const inputValidation = (e: any) => {
     const { type, name } = e.target;
     if (type === "email") {
-      setFormValid({ ...formValid, [name]: emailValidation(e.target) });
+      setFormValid({ ...formValid, [name]: emailValidationClass(e.target) });
     }
     if (type === "password") {
-      setFormValid({ ...formValid, [name]: minLenghtValidation(e.target, 6) });
+      setFormValid({ ...formValid, [name]: minLenghtValidationClass(e.target, 6) });
     }
   };
   const login = () => {
