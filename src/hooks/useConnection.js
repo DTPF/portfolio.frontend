@@ -5,7 +5,7 @@ import { message } from "antd";
 export default function useConnection() {
   const [connection, setConnection] = useState(null);
   const [checkConnection, setCheckConnection] = useState(null);
-  const [timeToReload, setTimeToReload] = useState(1000);
+  const [timeToReload, setTimeToReload] = useState(0);
   useEffect(() => {
     let unmounted = false;
     connectionApi().then((response) => {
@@ -18,7 +18,7 @@ export default function useConnection() {
           setConnection(500);
           message.error(
             "Ha ocurrido un error en el servidor, vuelve más tarde y disculpa las molestias.",
-            10
+            5
           );
         }
       }
