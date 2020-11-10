@@ -1,0 +1,66 @@
+@import "../../../../scss/variables";
+
+.contact__info {
+  &-title {
+    text-align: center;
+    p {
+      color: $font-primary;
+      font-weight: 500;
+      font-size: 1.1em;
+      padding: 0 10px;
+      @media (min-width: $media-breakpoint-down-md) {
+        font-size: 1.3em;
+      }
+    }
+    h2 {
+      color: $font-primary-dark;
+      font-size: 1.5em;
+      @media (min-width: $media-breakpoint-down-md) {
+        margin-top: 30px;
+        font-size: 1.6em;
+      }
+    }
+  }
+  &-email,
+  &-phone {
+    display: flex;
+    align-items: flex-start;
+    h3 {
+      color: $font-primary;
+      padding-top: 2px;
+      font-size: 1.1em;
+    }
+    .anticon {
+      font-size: 2.2em;
+    }
+  }
+  &-email {
+    justify-content: center;
+    @media (min-width: $media-breakpoint-down-md) {
+      justify-content: flex-end;
+      padding-right: 15px;
+    }
+    .anticon {
+      &-mail {
+        margin-right: 5px;
+        color: $primary-color-dark;
+      }
+    }
+  }
+  &-phone {
+    justify-content: center;
+    @media (min-width: $media-breakpoint-down-md) {
+      justify-content: flex-start;
+      padding-left: 15px;
+    }
+    .anticon {
+      &-whats-app {
+        margin-right: 5px;
+        color: rgb(0, 210, 96);
+      }
+      &-phone {
+        margin-right: 5px;
+      }
+    }
+  }
+}

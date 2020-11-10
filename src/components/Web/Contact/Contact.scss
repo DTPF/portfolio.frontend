@@ -8,4 +8,27 @@
     text-align: center;
     margin-top: 20px;
   }
+  .ant-image {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    margin: 0 auto;  
+    img {
+      margin: 0 auto;
+      margin-top: 10px;
+      margin-bottom: 10px !important;
+      @include boxShadowLg();
+      @media (min-width: $media-breakpoint-up-sm) {
+        margin-bottom: 15px !important;
+
+      }
+      @media (min-width: 840px) {
+        margin-bottom: 0px !important;
+      }
+      @media (min-width: $media-breakpoint-up-xl) {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+      }
+    }
+  }
 }

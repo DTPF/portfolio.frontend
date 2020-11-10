@@ -1,0 +1,99 @@
+@import "../../../../scss/variables";
+@import "../../../../scss/mixins";
+@import "../../../../scss/animations";
+
+.contact__form {
+  margin: 0 auto !important;
+  text-align: center;
+  max-width: 600px;
+  padding: 20px;
+  padding-top: 0;
+  margin-top: 20px !important;
+  display: flex;
+  align-items: center;
+  @media (min-width: $media-breakpoint-down-lg) {
+    max-width: 1200px;
+  }
+  &-column-left,
+  &-column-right {
+    @media (min-width: $media-breakpoint-down-lg) {
+      padding: 10px;
+      padding-bottom: 0;
+    }
+  }
+  .ant-form-item {
+    display: flex;
+    align-items: flex-start;
+    input,
+    textarea {
+      margin: 0 !important;
+      padding: 5px !important;
+      color: $font-primary-extra-dark !important;
+      border: 0;
+      font-size: 1.1em;
+      border-radius: 5px;
+      @include boxShadowMd();
+      &:hover,
+      &:active,
+      &:focus {
+        border: 0 !important;
+        @include boxShadowLg();
+      }
+    }
+    input {
+      margin-top: 10px;
+      align-items: center !important;
+    }
+    
+    &-label {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 85px;
+      text-align: left !important;
+      label {
+        color: $font-primary-dark !important;
+        font-size: 1.1em;
+        font-weight: 500;
+      }
+    }
+    margin-bottom: 10px;
+    @media (min-width: $media-breakpoint-down-sm) {
+      margin-bottom: 20px;
+    }
+  }
+  &-button {
+    text-align: center;
+    margin: 0 !important;
+    padding: 0 !important;
+    @media (min-width: $media-breakpoint-down-sm) {
+      text-align: right;
+    }
+    @media (min-width: $media-breakpoint-down-lg) {
+      padding-right: 20px !important;
+    }
+    &-submit,
+    &-reset {
+      margin-top: 10px;
+      cursor: pointer;
+      @include boxShadowMd();
+      @media (min-width: $media-breakpoint-down-sm) {
+        margin-top: 0;
+      }
+    }
+    &-submit {
+      width: 150px;
+      margin-left: 5px;
+      @include buttonPrimary();
+    }
+    &-reset {
+      margin-right: 5px;
+      color: $font-primary-extra-dark;
+      @include fadeIn();
+      @include buttonPrimaryLight();
+    }
+    .ant-form-item {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+}
