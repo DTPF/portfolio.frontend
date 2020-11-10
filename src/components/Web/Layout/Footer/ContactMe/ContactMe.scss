@@ -13,12 +13,44 @@
     padding-left: 5px;
     margin-top: 2px;
   }
-  @media (max-width: $media-breakpoint-down-xs) {
-  }
-
-  .ant-input {
+  .ant-form-item {
     letter-spacing: 0.05em;
-    &-affix-wrapper {
+    border-radius: 5px;
+    border: 0;
+    &-input-content {
+      &:hover,
+      &:active,
+      &:focus {
+        @include boxShadowLg();
+      }
+    }
+    input,
+    textarea {
+      border-radius: 5px;
+      color: $font-primary-extra-dark;
+      font-size: 1.1em;
+      border: 0 !important;
+      &:hover,
+      &:active,
+      &:focus {
+        @include boxShadowLg();
+        border: 0 !important;
+      }
+    }
+    input {
+      padding: 3px 0;
+      padding-left: 3px;
+    }
+    textarea {
+      margin: 0;
+      padding: 4px;
+      padding-left: 10px;
+    }
+    .ant-input-affix-wrapper {
+      border: 0 !important;
+      border-radius: 5px !important;
+      padding: 1px;
+      padding-left: 5px;
       @include boxShadowMd();
       &-textarea-with-clear-btn {
         padding: 0 !important;
@@ -32,12 +64,12 @@
     color: #fff;
     font-weight: bold;
     text-align: center;
+    margin-bottom: 15px;
     span {
       @include rotateInfiniteAlternate30();
       font-size: 1.5em;
     }
   }
-
   button {
     @include buttonPrimaryLight();
     text-transform: uppercase;

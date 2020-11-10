@@ -5,6 +5,12 @@ import { gaEvent } from "../../../../../utils/analytics.js";
 import { Form, Input, Button, message } from "antd";
 import { UserOutlined, SmileOutlined } from "@ant-design/icons";
 import "./ContactMe.scss";
+import {
+  emailValidation,
+  emailValidationClass,
+  isNumberValidation,
+  isNotNumberValidationClass
+} from "../../../../../utils/formValidation";
 
 export default function ContactMe() {
   const [inputs, setInputs] = useState({});
@@ -20,6 +26,23 @@ function RenderForm(props: any) {
   const messageAnt : any = message;
   const { inputs, setInputs } = props;
   const { TextArea } : any = Input;
+  const [formValid, setFormValid] = useState({
+    email: false,
+    message: false,
+  });
+  const inputValidation = (e: any) => {
+    const { type, name } = e.target;
+    if (type === "email") {
+      setFormValid({ ...formValid, [name]: emailValidationClass(e.target, "noInitialClass") });
+    }
+
+    if (type === "textarea") {
+      setFormValid({
+        ...formValid,
+        [name]: isNotNumberValidationClass(e.target, "noSuccessClass"),
+      });
+    }
+  };
   const onFinish = () => {
     let finalData = {
       email: inputs.email,
@@ -27,16 +50,15 @@ function RenderForm(props: any) {
     };
     let inputEmail = inputs.email;
     let inputMessage = inputs.message;
-    let replaceTab = inputEmail?.replace(" ", "");
-    let emailValid = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,63}$/i;
-    let messageIsNum = /^\d+$/.test(inputMessage);
-    let howManyTabs = inputMessage && inputMessage.split(" ").length;
-    let resultValidation = emailValid.test(replaceTab);
+    let emailSplit = inputEmail?.replace(/ /g, "");
+    let resultValidation = emailValidation(emailSplit);
+    let messageIsNum = isNumberValidation(inputMessage);
+    let countWords = inputMessage && inputMessage.split(" ").length;
     if (!inputs.email && inputs.message === "ad1988") {
       window.location.href = "/ad1988";
     }
     if (!inputs.email && !inputs.message) {
-      messageAnt.warn("Los dos campos son necesarios.");
+      messageAnt.warn("Los dos campos son obligatorios.");
     } else if (!resultValidation) {
       messageAnt.warn("El email no es válido.");
     } else if (messageIsNum) {
@@ -53,8 +75,8 @@ function RenderForm(props: any) {
             setInputs({email: inputEmail, message: inputMessage})
           }, 10000),
           );
-        } else if (howManyTabs < 3) {
-          messageAnt.warn("Especifica un poco más por favor.");
+        } else if (countWords < 3) {
+          messageAnt.warn("Especifica un poco más en el mensaje por favor.");
     } else {
       subscribeContactApi(finalData).then( async (response) => {
         if (response.status === 200) {
@@ -65,7 +87,7 @@ function RenderForm(props: any) {
           }, 4000);
           messageAnt
             .success("Enviado correctamente!!", 1.5)
-            .then(() => message.info( "Contestaré lo antes posible!!", 2.5 ));
+            .then(() => messageAnt.info( "Contestaré lo antes posible!!", 2.5 ));
           } else if (response.status === 500) {
             messageAnt.error(response.message);
         } else {
@@ -74,7 +96,7 @@ function RenderForm(props: any) {
       });
     }
   };  
-  const clickMenuIcon = () => {
+  const clickEmailFormFooter = () => {
     gaEvent("click_email_contact_me_footer", "clicks", "UI Clicks", true);
   };  
   return (
@@ -85,9 +107,9 @@ function RenderForm(props: any) {
           name="email"
           prefix={<UserOutlined style={{ color: "rgba(0, 0, 0, 0.25)" }} />}
           placeholder="Correo electrónico"
-          allowClear
           value={inputs.email}
-          onClick={() => clickMenuIcon()}
+          onInput={inputValidation}
+          onClick={() => clickEmailFormFooter()}
           onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
           />
       </Form.Item>
@@ -95,9 +117,9 @@ function RenderForm(props: any) {
         <TextArea
           placeholder="Escribe aquí tu mensaje"
           autoSize={{ minRows: 1, maxRows: 6 }}
-          allowClear
           maxLength={500}
           value={inputs.message}
+          onInput={inputValidation}
           onChange={(e: any) => setInputs({ ...inputs, message: e.target.value })}
         />
       </Form.Item>
