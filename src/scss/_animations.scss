@@ -9,6 +9,17 @@
   }
   animation: fadeIn 800ms;
 }
+@mixin fadeInfinite($from, $to, $duration) {
+  @keyframes fade {
+    from {
+      opacity: $from;
+    }
+    to {
+      opacity: $to;
+    }
+  }
+  animation: fade $duration infinite alternate-reverse;
+}
 
 @mixin blur() {
   @keyframes blur {

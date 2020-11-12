@@ -1,17 +1,24 @@
 @mixin buttonPrimary() {
   color: #fff;
-  font-weight: bold;
   background-color: #5d718d;
   border: 1px solid #556985;
+  font-weight: bold;
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  @include boxShadowMd();
   border-radius: 5px;
+  @include boxShadowMd();
+  &:focus,
+  &:active {
+    color: #fff;
+    background-color: #5d718d;
+    border: 1px solid #556985;
+  }
   &:hover {
+    color: #273b56d3;
     background-color: #cdd5df;
     border: 1px solid #5d718d;
-    color: #273b56d3;
+    @include boxShadowLg();
   }
   @media (min-width: $media-breakpoint-up-xs) {
     font-size: 14px;
@@ -22,21 +29,26 @@
 }
 
 @mixin buttonPrimaryLight() {
-  font-weight: bold;
   color: #273b56d3;
+  background-color: #cdd5df;
+  border: 1px solid #273b56d3;
+  font-weight: bold;
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  border: 1px solid #273b56d3;
-  background-color: #cdd5df;
   border-radius: 5px;
   @include boxShadowMd();
-  &:hover,
   &:active,
   &:focus {
+    color: #273b56d3;
+    background-color: #cdd5df;
+    border: 1px solid #273b56d3;
+  }
+  &:hover {
     color: #fff;
     background-color: #273b56;
     border: 1px solid #273b56;
+    @include boxShadowLg();
   }
   @media (min-width: $media-breakpoint-up-xs) {
     font-size: 14px;

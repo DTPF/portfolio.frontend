@@ -1,4 +1,5 @@
 @import "./scss/variables";
+@import "./scss/mixins"; 
 
 .success {
   background-color: $background-success;
@@ -6,4 +7,18 @@
 
 .error {
   background-color: $background-error;
+}
+
+.ant-message-notice {
+  &:first-child {
+    margin-top: 15px;
+  }
+  &-content {
+    background-color: $primary-color-dark;
+    border: 2px solid $primary-color-extra-dark;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 5px;
+    @include boxShadowXl();
+  }
 }

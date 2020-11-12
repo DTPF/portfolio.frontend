@@ -87,7 +87,6 @@ function MessageUnread(props: any) {
         .catch((err) => {
           messageAnt.error(err.message);
         });
-
     });
   };
 
@@ -114,6 +113,9 @@ function MessageUnread(props: any) {
           <div>
             <em>{message.email}</em>
             <div>{message.phone_number}</div>
+            {message.subject !== "Sin asunto" && message.subject && (
+              <div>Asunto: {message.subject}</div>
+            )}
             <p>{message.message}</p>
           </div>
         }
@@ -199,8 +201,10 @@ function MessageRead(props: any) {
           <div>
             <em>{message.email}</em>
             <div>{message.phone_number}</div>
+            {message.subject !== "Sin asunto" && message!.subject && (
+              <div>Asunto: {message.subject}</div>
+            )}
             <p>{message.message}</p>
-            <p>{message.subject}</p>
           </div>
         }
       />
