@@ -9,6 +9,7 @@
     "@ant-design/icons": "4.0.0",
     "@types/socket.io-client": "^1.4.34",
     "antd": "^4.6.3",
+    "emailjs-com": "^2.6.3",
     "intersection-observer": "^0.11.0",
     "jwt-decode": "^2.2.0",
     "moment": "^2.29.0",
@@ -35,8 +36,8 @@
     "dev": "react-scripts start",
     "dev:profile": "yarn build --profile && serve -s build",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:coverage": "react-scripts test --coverage",
+    "test": "react-scripts test /__tests__/api/",
+    "test:coverage": "react-scripts test --coverage /__tests__/api/",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
