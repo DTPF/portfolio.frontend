@@ -49,7 +49,6 @@ function RenderLayoutAdmin(props: any) {
         <MenuSider menuCollapsed={menuCollapsed} />
         <Layout
           className="layout-admin"
-          style={{ marginLeft: menuCollapsed ? "0px" : "205px" }}
         >
           <Header className="layout-admin__header">
             <MenuTop
