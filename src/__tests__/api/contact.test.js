@@ -4,6 +4,7 @@ import {
   getMessagesUnreadApi,
   checkMessageApi,
   deleteContactMessageApi,
+  getLastMessageApi
 } from "../../api/contact";
 const TOKEN = testingRefreshToken;
 
@@ -11,7 +12,7 @@ describe("Contact API", () => {
   it("Send test message", async () => {
     const CONTACTDATA = {
       email: "",
-      subject: "ContactTest",
+      message: "ContactTest",
     };
     await subscribeContactApi(CONTACTDATA).then((data) => {
       expect(data.status).toBe(404);
@@ -41,5 +42,11 @@ describe("Contact API", () => {
         expect(data.status).toBe(500);
       });
     });
+  });
+  it("Get last message email", async () => {
+    getLastMessageApi(TOKEN).then((data) => {
+      expect(data.status).toBe(200);
+      console.log(data);
+    })
   });
 });
