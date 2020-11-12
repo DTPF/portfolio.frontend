@@ -11,11 +11,10 @@ export async function connectionApi() {
   }
 }
 
-export async function reloadMessagesTrueApi(data) {
+export async function reloadMessagesTrueApi() {
   const url = `${basePath}/${apiVersion}/reload-messages-true`;
   const params = {
     method: "POST",
-    body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
     },
