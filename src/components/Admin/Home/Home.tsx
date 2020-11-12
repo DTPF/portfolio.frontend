@@ -3,17 +3,16 @@ import { useHistory } from "react-router";
 import { useCookies } from "react-cookie";
 import { Button } from "antd";
 
-export default function Home(props: any) {
-  const { userData } = props;
+export default function Home({userData}: any) {
+  const { name, lastname } = userData.user;
   const history = useHistory();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"]);
   const deleteCookies = () => {
-    var cookiesA = document.cookie.split(";");
-    if (cookiesA.length > 1) {
-      console.log(cookiesA.length);
-      for (let i = 0; i < cookiesA.length; i++) {
-        removeCookie(cookiesA[i]);
+    const getCookies = document.cookie.split(";");
+    if (getCookies.length > 1) {
+      for (let i = 0; i < getCookies.length; i++) {
+        removeCookie(getCookies[i]);
       }
     }
     history.go(0);
@@ -23,8 +22,8 @@ export default function Home(props: any) {
     titulo = (
       <h1>
         Hola
-        {userData.user.name ? " " + userData.user.name : " Anónimo"}
-        {userData.user.lastname ? " " + userData.user.lastname : ""}
+        {name ? " " + name : " Anónimo"}
+        {lastname ? " " + lastname : ""}
       </h1>
     );
   }
