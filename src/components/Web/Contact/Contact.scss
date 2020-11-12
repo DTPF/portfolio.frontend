@@ -1,5 +1,6 @@
 @import "../../../scss/variables";
 @import "../../../scss/mixins";
+@import "../../../scss/animations";
 
 .contact {
   &__title {
@@ -9,25 +10,24 @@
     margin-top: 20px;
   }
   .ant-image {
-    width: 100%;
-    max-width: 1200px;
     display: flex;
-    margin: 0 auto;  
+    max-width: 1200px;
+    margin: 0 auto;
     img {
       margin: 0 auto;
       margin-top: 10px;
-      margin-bottom: 10px !important;
+      margin-bottom: 10px;
       @include boxShadowLg();
+      @include fadeIn();
       @media (min-width: $media-breakpoint-up-sm) {
-        margin-bottom: 15px !important;
-
+        margin-bottom: 15px;
       }
       @media (min-width: 840px) {
-        margin-bottom: 0px !important;
+        margin-bottom: 0px;
       }
       @media (min-width: $media-breakpoint-up-xl) {
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
       }
     }
   }

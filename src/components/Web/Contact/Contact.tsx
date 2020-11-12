@@ -17,12 +17,12 @@ export default function Contact(props: any) {
   return (
     <div className="contact">
       <h1 className="contact__title">Contacto</h1>
-      <ContactInfo />
+      <ContactInfo innerWidth={innerWidth} />
       <ContactForm />
       {innerWidth <= 650 ? (
-        <Image src={mobileMapImage} />
+        <Image src={mobileMapImage} preview={false} />
       ) : (
-        <Image src={desktopMapImage} />
+        <Image src={desktopMapImage} preview={false} />
       )}
       <CategoriesBigButtons
         location={location.pathname}

@@ -6,24 +6,55 @@
   margin: 0 auto !important;
   text-align: center;
   max-width: 600px;
-  padding: 20px;
+  padding: 0 20px;
   padding-top: 0;
-  margin-top: 20px !important;
   display: flex;
   align-items: center;
-  @media (min-width: $media-breakpoint-down-lg) {
+  @media (min-width: $media-breakpoint-up-lg) {
     max-width: 1200px;
+    margin-top: 10px !important;
   }
   &-column-left,
   &-column-right {
-    @media (min-width: $media-breakpoint-down-lg) {
+    @media (min-width: $media-breakpoint-up-lg) {
       padding: 10px;
       padding-bottom: 0;
     }
   }
+  &-item {
+    width: 100% !important;
+    text-align: left;
+    justify-content: center;
+    margin: 0 !important;
+    @media (min-width: $media-breakpoint-up-lg) {
+      display: inline-flex;
+    }
+    &-label {
+      padding-bottom: 5px !important;
+      @media (min-width: $media-breakpoint-up-lg) {
+        padding-bottom: 0 !important;
+      }
+      label {
+        display: flex;
+        margin-top: 5px !important;
+        width: 80px;
+        text-align: left !important;
+        color: $font-primary-dark !important;
+        font-size: 1.1em;
+        font-weight: 500;
+        span {
+          color: rgba(255, 0, 0, 0.897);
+          margin-left: -12px !important;
+        }
+      }
+    }
+  }
   .ant-form-item {
-    display: flex;
-    align-items: flex-start;
+    width: 100% !important;
+    margin-bottom: 15px;
+    @media (min-width: $media-breakpoint-up-lg) {
+      margin-bottom: 20px;
+    }
     input,
     textarea {
       margin: 0 !important;
@@ -40,35 +71,16 @@
         @include boxShadowLg();
       }
     }
-    input {
-      margin-top: 10px;
-      align-items: center !important;
-    }
-    
-    &-label {
-      margin: 0 !important;
-      padding: 0 !important;
-      width: 85px;
-      text-align: left !important;
-      label {
-        color: $font-primary-dark !important;
-        font-size: 1.1em;
-        font-weight: 500;
-      }
-    }
-    margin-bottom: 10px;
-    @media (min-width: $media-breakpoint-down-sm) {
-      margin-bottom: 20px;
+    textarea {
+      text-align: justify;
     }
   }
   &-button {
     text-align: center;
-    margin: 0 !important;
-    padding: 0 !important;
-    @media (min-width: $media-breakpoint-down-sm) {
+    @media (min-width: $media-breakpoint-up-sm) {
       text-align: right;
     }
-    @media (min-width: $media-breakpoint-down-lg) {
+    @media (min-width: $media-breakpoint-up-lg) {
       padding-right: 20px !important;
     }
     &-submit,
@@ -76,8 +88,8 @@
       margin-top: 10px;
       cursor: pointer;
       @include boxShadowMd();
-      @media (min-width: $media-breakpoint-down-sm) {
-        margin-top: 0;
+      @media (min-width: $media-breakpoint-up-lg) {
+        margin-top: 5px;
       }
     }
     &-submit {
@@ -90,10 +102,6 @@
       color: $font-primary-extra-dark;
       @include fadeIn();
       @include buttonPrimaryLight();
-    }
-    .ant-form-item {
-      margin: 0 !important;
-      padding: 0 !important;
     }
   }
 }

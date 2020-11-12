@@ -15,22 +15,25 @@ import {
   minLenghtIsNotNumberValidationClass,
 } from "../../../../utils/formValidation";
 import { RedoOutlined } from "@ant-design/icons";
+import emailjs from "emailjs-com";
 
-export default function ContactForm(props: any) {
+export default function ContactForm() {
   const { TextArea } = Input;
   const Form: any = FormAnt;
   const messageAnt: any = msg;
-  let removeclassName: any = document.getElementsByClassName("ant-input");
+  const removeclassName: any = document.getElementsByClassName("ant-input");
   const [inputs, setInputs] = useState({
     name: "",
     email: "",
     phone_number: "",
+    subject: "",
     message: "",
   });
   const [formValid, setFormValid] = useState({
     name: false,
     email: false,
     phoneNumber: false,
+    subject: false,
     message: false,
   });
   const inputValidation = (e: any) => {
@@ -58,30 +61,55 @@ export default function ContactForm(props: any) {
     }
   };
   const onFinish = async (e: any) => {
-    const { name, email, phone_number, message } = inputs;
+    const { name, email, phone_number, subject, message } = inputs;
+    const emailReplace = email.replace(/ /g, "");
     let finalData = {
-      name: name,
-      email: email,
-      phone_number: phone_number,
+      name: name ? name : "Anónimo",
+      email: emailReplace,
+      phone_number: phone_number ? phone_number : "Ninguno",
+      subject: subject ? subject : "Sin asunto",
       message: message,
     };
-    let nameIsNumberValidat = isNumberValidation(name);
-    let nameMinLengthValidat = minLenghtValidation(name, 3, "notRequierd");
-    let emailValidat = emailValidation(email);
-    let phoneValidat = isPhoneNumberValidation(phone_number, "notRequierd");
-    let messageValidat = isNumberValidation(message);
-    let countWords = message && message.split(" ").length;
+    const nameIsNumberValidat = isNumberValidation(name);
+    const nameMinLengthValidat = minLenghtValidation(name, 3, "notRequierd");
+    const emailValidat = emailValidation(emailReplace);
+    const phoneValidat = isPhoneNumberValidation(phone_number, "notRequierd");
+    const subjectReplace = subject.replace(/ /g, "");
+    const subjectIsNumberValidat = isNumberValidation(subjectReplace);
+    const subjectMinLengthValidat = minLenghtValidation(
+      subject,
+      3,
+      "notRequierd"
+    );
+    const messageReplace = message.replace(/ /g, "");
+    const messageIsNumberValidat = isNumberValidation(messageReplace);
+    const messageMinLengthValidat = minLenghtValidation(
+      message,
+      3,
+      "notRequierd"
+    );
+    const countWords = message && message.split(" ").length;
     if (nameIsNumberValidat) {
       messageAnt.warn(`Seguro que te llamas ${name}??`);
     } else if (!nameMinLengthValidat) {
       messageAnt.warn("El nombre requiere un mínimo de 3 carácteres.");
+    } else if (!email && !message) {
+      messageAnt.warn("El email y el mensaje son obligatorios.");
+    } else if (!email) {
+      messageAnt.warn("El email es obligatorio.");
     } else if (!emailValidat) {
       messageAnt.warn("El email no es correcto.");
     } else if (!phoneValidat) {
       messageAnt.warn("El número de teléfono no es correcto.");
     } else if (!message) {
       messageAnt.warn("El mensaje es obligatorio.");
-    } else if (messageValidat) {
+    } else if (!subjectMinLengthValidat) {
+      messageAnt.warn("El asunto requiere un mínimo de 3 carácteres.");
+    } else if (subjectIsNumberValidat) {
+      messageAnt.warn("El asunto no pueden ser todo números...");
+    } else if (!messageMinLengthValidat) {
+      messageAnt.warn("El mensaje requiere un mínimo de 3 carácteres.");
+    } else if (messageIsNumberValidat) {
       messageAnt.warn("El mensaje no pueden ser todo números...");
     } else if (!email && !message) {
       messageAnt.warn("El email y el mensaje son obligatorios.");
@@ -90,12 +118,33 @@ export default function ContactForm(props: any) {
     } else {
       await subscribeContactApi(finalData).then(async (response) => {
         if (response.status === 200) {
+          emailjs
+            .send(
+              "default_service",
+              "template_2uj79vj",
+              finalData,
+              "user_EKNrzyANZUei9pNTOFMd6"
+            )
+            .then(
+              (response) => {
+                console.log(response.text);
+              },
+              (err) => {
+                console.log("FAILED...", err);
+              }
+            );
           await reloadMessagesTrueApi();
           for (let i = 0; i < removeclassName.length; i++) {
             removeclassName[i].classList.remove("success");
             removeclassName[i].classList.remove("error");
           }
-          setInputs({ name: "", email: "", phone_number: "", message: "" });
+          setInputs({
+            name: "",
+            email: "",
+            phone_number: "",
+            subject: "",
+            message: "",
+          });
           messageAnt
             .success("Enviado correctamente!!", 1.5)
             .then(() => messageAnt.info("Contestaré lo antes posible!!", 2.5));
@@ -108,7 +157,13 @@ export default function ContactForm(props: any) {
     }
   };
   const resetForm = () => {
-    setInputs({ name: "", email: "", phone_number: "", message: "" });
+    setInputs({
+      name: "",
+      email: "",
+      phone_number: "",
+      subject: "",
+      message: "",
+    });
     for (let i = 0; i < removeclassName.length; i++) {
       removeclassName[i].classList.remove("success");
       removeclassName[i].classList.remove("error");
@@ -118,47 +173,91 @@ export default function ContactForm(props: any) {
     <Form name="contact-message" onFinish={onFinish}>
       <Row className="contact__form">
         <Col span={24} lg={12} className="contact__form-column-left">
-          <Form.Item label="Nombre">
-            <Input
-              type="text"
-              name="name"
-              value={inputs.name}
-              onInput={inputValidation}
-              onChange={(e) => setInputs({ ...inputs, name: e.target.value })}
-            />
-          </Form.Item>
-          <Form.Item label="*Email">
-            <Input
-              type="email"
-              value={inputs.email}
-              onInput={inputValidation}
-              onChange={(e) => {
-                setInputs({ ...inputs, email: e.target.value });
-              }}
-            />
-          </Form.Item>
-          <Form.Item label="Teléfono">
-            <Input
-              type="tel"
-              value={inputs.phone_number}
-              onInput={inputValidation}
-              onChange={(e) =>
-                setInputs({ ...inputs, phone_number: e.target.value })
-              }
-            />
-          </Form.Item>
+          <div className="contact__form-item">
+            <div className="contact__form-item-label">
+              <label title="email">
+                <span>*&nbsp;</span>Email
+              </label>
+            </div>
+            <Form.Item>
+              <Input
+                type="email"
+                name="email"
+                value={inputs.email}
+                onInput={inputValidation}
+                onChange={(e) => {
+                  setInputs({ ...inputs, email: e.target.value });
+                }}
+              />
+            </Form.Item>
+          </div>
+          <div className="contact__form-item">
+            <div className="contact__form-item-label">
+              <label title="name">Nombre</label>
+            </div>
+            <Form.Item>
+              <Input
+                type="text"
+                name="name"
+                value={inputs.name}
+                onInput={inputValidation}
+                onChange={(e) => {
+                  setInputs({ ...inputs, name: e.target.value });
+                }}
+              />
+            </Form.Item>
+          </div>
+          <div className="contact__form-item">
+          <div className="contact__form-item-label">
+            <label title="phone_number">Teléfono</label>
+            </div>
+            <Form.Item>
+              <Input
+                type="tel"
+                name="phone_number"
+                value={inputs.phone_number}
+                onInput={inputValidation}
+                onChange={(e) =>
+                  setInputs({ ...inputs, phone_number: e.target.value })
+                }
+              />
+            </Form.Item>
+          </div>
+          <div className="contact__form-item">
+          <div className="contact__form-item-label">
+            <label title="subject">Asunto</label>
+            </div>
+            <Form.Item>
+              <Input
+                type="text"
+                name="subject"
+                value={inputs.subject}
+                onInput={inputValidation}
+                onChange={(e) =>
+                  setInputs({ ...inputs, subject: e.target.value })
+                }
+              />
+            </Form.Item>
+          </div>
         </Col>
         <Col span={24} lg={12} className="contact__form-column-right">
-          <Form.Item label="*Mensaje">
-            <TextArea
-              autoSize={{ minRows: 6, maxRows: 16 }}
-              value={inputs.message}
-              onInput={inputValidation}
-              onChange={(e) =>
-                setInputs({ ...inputs, message: e.target.value })
-              }
-            />
-          </Form.Item>
+          <div className="contact__form-item">
+          <div className="contact__form-item-label">
+            <label title="message">
+              <span>*&nbsp;</span>Mensaje
+            </label>
+            </div>
+            <Form.Item>
+              <TextArea
+                autoSize={{ minRows: 8, maxRows: 16 }}
+                value={inputs.message}
+                onInput={inputValidation}
+                onChange={(e) =>
+                  setInputs({ ...inputs, message: e.target.value })
+                }
+              />
+            </Form.Item>
+          </div>
         </Col>
         <Col span={24} className="contact__form-button">
           <Form.Item>
