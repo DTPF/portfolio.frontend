@@ -66,7 +66,7 @@ function DesarrolloAppFPN3(props: any) {
             expandIcon={({ isActive }) => (
               <LeftCircleTwoTone
                 twoToneColor="#5d718d"
-                style={{ fontSize: "26px" }}
+                // style={{ fontSize: "26px" }}
                 rotate={isActive ? -90 : 0}
               />
             )}

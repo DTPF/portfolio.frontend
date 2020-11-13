@@ -47,6 +47,7 @@ export default function ProyectLayout(props: any) {
           />
         }
       </Modal>
+      <div className="clearfix">
       <Row className={"project-layout project-layout-" + align}>
         {innerWidth <= 767 ? (
           <>
@@ -76,11 +77,13 @@ export default function ProyectLayout(props: any) {
                   setIsVisibleModal={setIsVisibleModal}
                 />
                 <Image image={image} link={link} imageAlt={imageAlt} />
+              
               </>
             )}
           </>
         )}
       </Row>
+     </div>
     </>
   );
 }
@@ -170,13 +173,14 @@ function ModalContent(props: any) {
           ></ImageAnt>
         </Col>
       </Row>
-      <Col span={24} className="project-layout__modal-date">
+      <div className="project-layout__modal-content">
+      <Col span={24} className="project-layout__modal-content-date">
         <span>{modalDate}</span>
       </Col>
-      <Col span={24} className="project-layout__modal-introduction">
+      <Col span={24} className="project-layout__modal-content-introduction">
         <p>{modalIntroduction}</p>
       </Col>
-      <Col span={24} className="project-layout__modal-large-text">
+      <Col span={24} className="project-layout__modal-content-large-text">
         {modalText && 
           modalText.map((text: any, key: any) => {
             return (
@@ -188,6 +192,7 @@ function ModalContent(props: any) {
           })
         }
       </Col>
+      </div>
       <Col span={24} className="project-layout__modal-tags">
         {modalTags &&
           modalTags.map((tag: any) => {

@@ -14,7 +14,8 @@
   .JWT,
   .Helmet,
   .WebSockets,
-  .Socketio {
+  .Socketio,
+  .MomentJS {
     > span {
       color: $default-color;
       background-color: $default-bg-color;
@@ -206,6 +207,13 @@
       color: #fff;
       background-color: rgb(255, 172, 56);
       border: 3px solid rgb(241, 107, 40);
+    }
+  }
+  .EmailJS {
+    > span {
+      color: #fff;
+      background-color: rgba(255, 160, 96, 0.664);
+      border: 3px solid rgb(255, 159, 96);
     }
   }
 }

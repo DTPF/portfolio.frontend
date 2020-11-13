@@ -49,7 +49,10 @@
           color: $font-primary-dark;
           font-weight: bold;
           span {
-            margin: 0 -10px;
+            position: absolute !important;
+            top: 10px !important;
+            font-size: 1.8em !important;
+            margin: 0 -5px;
           }
         }
         &-content {

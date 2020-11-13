@@ -27,9 +27,9 @@ function ProximaExperiencia() {
   const textA = `En búsqueda activa de empleo.`;
   const textB = `
     Desde septiembre de 2018 formándome en diferentes lenguajes 
-    y tecnologías en un centro formativo (FP), complementado con 
+    y tecnologías en un centro formativo (FP), complementándolo con 
     cursos online con y sin certificado, y de manera autodidacta para 
-    ser desarrrollador de software.
+    ser desarrollador de software.
   `;
   let ref: any = el;
   return (

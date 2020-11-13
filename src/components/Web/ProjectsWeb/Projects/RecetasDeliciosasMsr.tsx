@@ -31,8 +31,10 @@ export default function RecetasDeliciosasMsr(props: any) {
         de sus familiares. 
       "
       modalText={[
-        `Es una aplicación monolítica de Laravel, con una arquitectura MVC. MySQL
-        como sistema de gestión de base de datos. HTML5 y CSS3 para las vistas 
+        `La web está creada desde cero por mi y es el proyecto final de curso 
+        del FP3 de Desarrollo de Aplicaciones Web.`,
+        `Es una aplicación web monolítica de Laravel, con una arquitectura MVC. MySQL
+        como sistema de gestión de base de datos. HTML5 y CSS3 para la estructura
         y estilos, haciendo uso de las plantillas blade. Tiene sistema de gestión 
         de usuarios con roles de usuario, un único administrador con todos los 
         privilegios como gestión de contenido, gestión de usuarios, datos de interés 
@@ -42,7 +44,8 @@ export default function RecetasDeliciosasMsr(props: any) {
         la web y por petición de la propietaria. Se podría destacar como mejores 
         utilidades la capacidad de compartir recetas via email con estilos acorde 
         a la web, filtros y búsqueda avanzada de recetas, gestión autónoma del 
-        administrador para la gestión de contenido y de usuarios, entre otras cosas.`
+        administrador para la gestión de contenido y de usuarios. Además, esta 
+        adaptada para todos los dispositivos.`
       ]}
       modalTags={[
         "PHP",
