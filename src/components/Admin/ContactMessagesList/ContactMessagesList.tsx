@@ -201,7 +201,7 @@ function MessageRead(props: any) {
           <div>
             <em>{message.email}</em>
             <div>{message.phone_number}</div>
-            {message.subject !== "Sin asunto" && message!.subject && (
+            {message.subject !== "Sin asunto" && message.subject && (
               <div>Asunto: {message.subject}</div>
             )}
             <p>{message.message}</p>
