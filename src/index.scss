@@ -20,33 +20,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.ant-notification {
-  display: flex;
-  justify-content: center;
-  width: 100% !important;
-  margin: 0 auto !important;
-  &-notice {
-    text-align: left;
-    margin-top: 10px;
-    padding: 0;
-    padding-top: 7px;
-    padding-left: 7px;
-    background-color: $primary-color-dark;
-    border: 2px solid $primary-color-extra-dark;
-    border-radius: 5px;
-    @include boxShadowLg();
-    @media (min-width: $media-breakpoint-up-md) {
-      margin-top: 20px;
-    }
-    &-message {
-      color: #fff !important;
-    }
-  }
-  &-close-x {
-    color: $secondary-color !important;
-    position: absolute !important;
-    top: -7px !important;
-    right: -15px;
-  }
-}
