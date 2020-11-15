@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import routes from "./config/routes";
 import AuthProvider from "./providers/AuthProvider";
 import "./App.scss";
+import { notification } from "antd";
+import * as serviceWorker from "./serviceWorker";
 
 export default function App() {
+  useEffect(() => {
+    serviceWorker.register({
+      onUpdate: (registration: any) => {
+        const reload = () => {
+          if (registration && registration.waiting) {
+            registration.waiting.postMessage({ type: "SKIP_WAITING" });
+          }
+          window.location.reload();
+        };
+        const args = {
+          message: "Nueva actualización de la web",
+          duration: 0,
+          closeIcon: "Recargar",
+          onClose: () => {reload()}
+        };
+        notification.open(args);
+      },
+    });
+  }, []);
   return (
     <AuthProvider>
       <Router>
