@@ -27,10 +27,9 @@
       padding: 0 10px;
       margin: 15px auto;
       max-width: 500px;
-      
     }
   }
-  
+
   &__courses {
     display: flex;
     justify-content: center;
@@ -53,7 +52,7 @@
       }
     }
   }
-  
+
   &__edit {
     position: absolute;
     bottom: 3px;
@@ -79,7 +78,7 @@
       font-size: 1.3em;
     }
   }
-  
+
   &__tags {
     position: absolute;
     bottom: 4px;
@@ -93,7 +92,7 @@
       left: 8px;
     }
   }
-  
+
   &__hours {
     font-size: 0.7em;
     color: #fff;
@@ -115,7 +114,7 @@
       padding-bottom: 2px;
     }
   }
-  
+
   &__tecnologies {
     font-size: 0.7em;
     color: $primary-color-dark;
@@ -133,7 +132,7 @@
       padding-bottom: 2px;
     }
   }
-  
+
   &__card {
     border: 0;
     background-color: $primary-color;
@@ -158,7 +157,7 @@
     @media (min-width: $media-breakpoint-up-xl) {
       margin: 15px;
     }
-    
+
     .ant-card {
       &-cover {
         cursor: pointer;
@@ -170,12 +169,13 @@
         padding: 0;
         padding-bottom: 35px;
       }
-      
+
       &-meta {
         display: flex;
         align-items: center;
         justify-content: center;
         min-height: 80px;
+        background-color: $primary-color-light;
         @media (min-width: $media-breakpoint-up-xs) {
           min-height: 85px;
         }
@@ -188,7 +188,7 @@
         @media (min-width: $media-breakpoint-up-lg) {
           min-height: 105px;
         }
-        
+
         &-description {
           color: $font-primary-dark;
           font-size: 10px;
@@ -211,7 +211,7 @@
       }
     }
   }
-  
+
   .ant-row {
     display: flex;
     justify-content: center;
