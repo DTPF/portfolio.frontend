@@ -151,7 +151,12 @@ export default function ContactForm() {
         } else if (response.status === 500) {
           messageAnt.error(response.message);
         } else {
-          messageAnt.warn(response.message);
+          if (response.message === "Failed to fetch") {
+            messageAnt.error("No se ha podido enviar el mensaje.", 2)
+              .then(() => messageAnt.warn("Comprueba tu conexión a internet."));
+          } else {
+            messageAnt.warn(response.message);
+          }
         }
       });
     }
