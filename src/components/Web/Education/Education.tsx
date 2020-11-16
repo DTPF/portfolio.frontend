@@ -5,7 +5,6 @@ import { Row, Col } from "antd";
 import "./Education.scss";
 import Courses from "../../../components/Web/Education/Courses";
 import InfoBanner from "../../../components/Web/Education/InfoBanner";
-import CategoriesBigButtons from "../../../components/Web/CategoriesBigButtons/CategoriesBigButtons";
 import Spin from "../../../components/UI/Spin";
 const Pagination = lazy(() => import("../../../components/UI/Pagination"));
 const CourseInfo = lazy(() => import("../../../components/Web/Education/CourseInfo"));
@@ -91,10 +90,6 @@ function RenderEducation(props: any) {
                   </>
                 )}
                 <div className="div"></div>
-                <CategoriesBigButtons
-                  location={location.pathname}
-                  extra="categories-big-buttons__extra"
-                />
               </Col>
               <Col lg={1} />
             </Row>

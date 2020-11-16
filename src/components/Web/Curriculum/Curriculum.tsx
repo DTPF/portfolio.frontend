@@ -7,11 +7,9 @@ import ComplementaryEducation from "../../../components/Web/Curriculum/Complemen
 import ComputerSkills from "../../../components/Web/Curriculum/ComputerSkills";
 import Languages from "../../../components/Web/Curriculum/Languages";
 import Projects from "../../../components/Web/Curriculum/Projects";
-import CategoriesBigButtons from "../../../components/Web/CategoriesBigButtons";
 import "./Curriculum.scss";
 
-export default function Curriculum(props: any) {
-  const { location } = props;
+export default function Curriculum() {
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     let unmounted = false;
@@ -46,10 +44,6 @@ export default function Curriculum(props: any) {
               </Col>
             </Row>
           </div>
-          <CategoriesBigButtons
-            location={location.pathname}
-            extra="categories-big-buttons__extra"
-          />
         </>
       )}
     </>
