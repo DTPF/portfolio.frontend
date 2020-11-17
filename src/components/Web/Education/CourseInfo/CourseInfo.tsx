@@ -155,10 +155,12 @@ function Course(props: any) {
         <Row className="course-info__button">
           <Col span={24} className="course-info__button-link">
             {link && (
-              <a href={link} target="_blank" rel="noopener noreferrer">
-                <LinkOutlined />
-                Enlace a {course && course.platform}
-              </a>
+              <Button>
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                  <LinkOutlined />
+                  Enlace a Certificación
+                </a>
+              </Button>
             )}
           </Col>
         </Row>
@@ -212,8 +214,8 @@ function Tags(props: any) {
   return (
     <div className="course-info__tags-div">
       {tags &&
-        tags.map((tag: any) => {
-          let tagToClassname = tag.replace(/[ .]/g, "");
+        tags.map((tag: string) => {
+          const tagToClassname = tag.replace(/[ .]/g, "");
           return (
             <span key={tag} className={tagToClassname}>
               <Tag>{tag}</Tag>

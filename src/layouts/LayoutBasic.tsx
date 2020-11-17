@@ -26,7 +26,7 @@ export default function LayoutBasic(props: any) {
           </Tag>
           <Alert
             className="offline-message-alert"
-            message="Comprueba tu conexión a internet para disfrutar de la web al completo."
+            message="Comprueba tu conexión a internet para visualizar ver todo el contenido."
             type="info"
             closeText="Cerrar aviso"
           />

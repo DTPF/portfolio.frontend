@@ -15,8 +15,8 @@
     h1 {
       @include titleH1();
       padding-top: 10px;
-      padding-left: 50px;
-      padding-right: 50px;
+      padding-left: 30px;
+      padding-right: 30px;
       @media (min-width: $media-breakpoint-up-lg) {
         font-size: 2em;
       }
@@ -113,7 +113,6 @@
     margin: 0 auto;
     width: 100%;
     max-width: 1000px;
-
     &-link {
       text-align: center;
       display: flex;
@@ -123,19 +122,16 @@
       padding-bottom: 15px;
       margin-bottom: 15px;
       font-weight: bold;
-      a {
-        display: flex;
+      button {
+        @include buttonPrimaryLight();
+        @include boxShadowLg();
         align-items: center;
-        color: $primary-color-dark;
+        display: flex;
+        // border-radius: 50px;
       }
       span {
-        padding: 4px;
+        padding-right: 4px;
         font-size: 1.4em;
-      }
-      &:hover {
-        span {
-          color: $primary-color;
-        }
       }
     }
   }
@@ -183,36 +179,37 @@
           @media (min-width: $media-breakpoint-up-md) {
             margin: 8px 8px;
           }
+          border-radius: 50px;
         }
       }
       @include tagsStyle();
     }
   }
 
-  &__goBack {
-    button {
-      background-color:  rgba(255, 200, 62, 0.4) !important;
-      border: 0;
-      color: $primary-color-dark;
-      position: absolute;
-      top: -10px;
-      left: 0px;
-      z-index: 50;
-      font-size: 1.2em;
-      padding: 0;
-      width: 30px;
-      height: 30px;
-      border-radius: 20px;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      @include boxShadowLg();
-      &:hover,
-      &:active,
-      &:focus {
-        color: $primary-color-dark;
-        background-color:  rgba(255, 200, 62, 0.6) !important;
-        border: 0 !important;
-      }
-    }
-  }
+  // &__goBack {
+  //   button {
+  //     background-color:  rgba(255, 200, 62, 0.4) !important;
+  //     border: 0;
+  //     color: $primary-color-dark;
+  //     position: absolute;
+  //     top: -10px;
+  //     left: 0px;
+  //     z-index: 50;
+  //     font-size: 1.2em;
+  //     padding: 0;
+  //     width: 30px;
+  //     height: 30px;
+  //     border-radius: 20px;
+  //     border-top-left-radius: 0;
+  //     border-bottom-left-radius: 0;
+  //     @include boxShadowLg();
+  //     &:hover,
+  //     &:active,
+  //     &:focus {
+  //       color: $primary-color-dark;
+  //       background-color:  rgba(255, 200, 62, 0.6) !important;
+  //       border: 0 !important;
+  //     }
+  //   }
+  // }
 }
