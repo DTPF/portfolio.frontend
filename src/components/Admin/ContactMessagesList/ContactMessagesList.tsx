@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from "react";
+import React, { useState } from "react";
 import {
   Switch,
   List,
@@ -12,8 +12,8 @@ import { getAccessTokenApi } from "../../../api/auth";
 import { reloadMessagesTrueApi } from "../../../api/utils";
 import { CheckOutlined, DeleteOutlined } from "@ant-design/icons";
 import "./ContactMessagesList.scss";
+import moment from "moment";
 import "moment/locale/es";
-const Moment = lazy(() => import("react-moment"));
 const { confirm } = ModalDelete;
 
 export default function ContactMessagesList(props: any) {
@@ -100,14 +100,9 @@ function MessageUnread(props: any) {
     >
       <List.Item.Meta
         title={
-          <span>
-            {message.name ? message.name + " - Hace " : "Anónimo - Hace "}
-            <Suspense fallback={<></>}>
-              <Moment locale="es" fromNow ago>
-                {message.date}
-              </Moment>
-            </Suspense>
-          </span>
+          `${message.name ? message.name : "Anónimo"} - Hace ${
+            message && moment(message.date).fromNow(true)
+          }`
         }
         description={
           <div>
@@ -188,14 +183,9 @@ function MessageRead(props: any) {
     >
       <List.Item.Meta
         title={
-          <span>
-            {message.name ? message.name + " - Hace " : "Anónimo - Hace "}
-            <Suspense fallback={<></>}>
-              <Moment locale="es" fromNow ago>
-                {message.date}
-              </Moment>
-            </Suspense>
-          </span>
+          `${message.name ? message.name : "Anónimo"} - Hace ${
+            message && moment(message.date).fromNow(true)
+          }`
         }
         description={
           <div>

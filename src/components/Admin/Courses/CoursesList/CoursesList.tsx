@@ -1,16 +1,16 @@
 import React, { Suspense, lazy } from "react";
+import { getAccessTokenApi } from "../../../../api/auth";
+import { deleteCourseApi } from "../../../../api/education";
+import { Link } from "react-router-dom";
+import moment from "moment";
 import "moment/locale/es";
 import { List, Button, Modal, notification } from "antd";
-import { getAccessTokenApi } from "../../../../api/auth";
-import { Link } from "react-router-dom";
-import { deleteCourseApi } from "../../../../api/education";
 import {
   EyeOutlined,
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
 const Spin = lazy(() => import("../../../../components/UI/Spin"));
-const Moment = lazy(() => import("react-moment"));
 const { confirm } = Modal;
 
 export default function CoursesList(props: any) {
@@ -65,14 +65,7 @@ export default function CoursesList(props: any) {
 
 function Course(props: any) {
   const { course, deleteCourse, editCourse } = props;
-  const date = (
-    <Suspense fallback={<></>}>  
-      Hace&nbsp;
-      <Moment locale="es" fromNow ago>
-        {course.date}
-      </Moment>
-    </Suspense>
-  );
+  const date = `Hace ${course && moment(course.date).fromNow(true)}`;
   return (
     <List.Item
       actions={[
