@@ -52,9 +52,9 @@ function Course(props: any) {
     if (course.image) {
       getImageApi(course.image).then((response) => {
         let filePath = response.url;
-        let fileName = filePath.split("/")[6];
-        let thumbnailName = "thumb_" + fileName;
-        let replaceName = filePath.replace(fileName, thumbnailName);
+        const fileName = filePath.split("/")[6];
+        const thumbnailName = `thumb_${fileName}`;
+        const replaceName = filePath.replace(fileName, thumbnailName);
         if (!unmounted) {
           setImage(replaceName);
           setIsLoading(true);
