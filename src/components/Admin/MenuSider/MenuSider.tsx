@@ -14,10 +14,12 @@ import "./MenuSider.scss";
 import { getAccessTokenApi } from "../../../api/auth";
 import addNotification from "react-push-notification";
 import useMessagesUnreadLength from "../../../webSockets/hooks/useMessagesUnreadLength";
+const sound = require("../../../assets/audio/sound.mp3");
+const soundOGG = require("../../../assets/audio/sound.ogg");
 
 function MenuSider(props: any) {
   const { menuCollapsed, location } = props;
-  const messagesUnreadLength = useMessagesUnreadLength();  
+  const messagesUnreadLength = useMessagesUnreadLength();
   return (
     <RenderMenuSider
       messagesUnreadLength={messagesUnreadLength}
@@ -53,6 +55,10 @@ function NextRender(props: any) {
   const { menuCollapsed, location, messagesUnreadLength, newMessage } = props;
   const { Sider } = Layout;
   const token = getAccessTokenApi();
+  const playSound = (): any => {
+    const a : any = document.getElementById('sound');
+    a.play();
+  }
   useEffect(() => {
     getLastMessageApi(token).then((response) => {
       if (response.email) {
@@ -61,68 +67,76 @@ function NextRender(props: any) {
           addNotification({
             title: `Mensaje de ${response.email}`,
             native: true,
-            duration: 10000,
+            duration: 5000
           });
+          playSound();
         }
       }
     });
   }, [messagesUnreadLength, newMessage, token]);
   return (
-    <Sider
-      collapsible
-      collapsedWidth="0"
-      breakpoint="lg"
-      className="admin-sider"
-      collapsed={menuCollapsed}
-    >
-      <Menu
-        theme="dark"
-        mode="inline"
-        defaultSelectedKeys={[location.pathname]}
+    <>
+      <Sider
+        collapsible
+        collapsedWidth="0"
+        breakpoint="lg"
+        className="admin-sider"
+        collapsed={menuCollapsed}
       >
-        <Menu.Item key="/ad1988">
-          <Link to={"/ad1988"}>
-            <HomeOutlined />
-            <span className="nav-text">Home</span>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="/ad1988/users">
-          <Link to={"/ad1988/users"}>
-            <UserOutlined />
-            <span className="nac-text">Usuarios</span>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="/ad1988/menu">
-          <Link to={"/ad1988/menu"}>
-            <MenuOutlined />
-            <span className="nac-text">Menú</span>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="ad1988/contact-messages">
-          <Link to="/ad1988/contact-messages">
-            <MessageOutlined />
-            <span className="nav-text">Mensajes</span>
-            {messagesUnreadLength > 0 ? (
-              <Tag className="admin-sider__tag">{messagesUnreadLength}</Tag>
-            ) : (
-              <></>
-            )}
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="ad1988/courses">
-          <Link to="/ad1988/courses">
-            <ReadOutlined />
-            <span className="nav-text">Formación</span>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="/">
-          <Link to={"/"}>
-            <ChromeOutlined />
-            <span className="nac-text">Web</span>
-          </Link>
-        </Menu.Item>
-      </Menu>
-    </Sider>
+        <Menu
+          theme="dark"
+          mode="inline"
+          defaultSelectedKeys={[location.pathname]}
+        >
+          <Menu.Item key="/ad1988">
+            <Link to={"/ad1988"}>
+              <HomeOutlined />
+              <span className="nav-text">Home</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="/ad1988/users">
+            <Link to={"/ad1988/users"}>
+              <UserOutlined />
+              <span className="nac-text">Usuarios</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="/ad1988/menu">
+            <Link to={"/ad1988/menu"}>
+              <MenuOutlined />
+              <span className="nac-text">Menú</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="ad1988/contact-messages">
+            <Link to="/ad1988/contact-messages">
+              <MessageOutlined />
+              <span className="nav-text">Mensajes</span>
+              {messagesUnreadLength > 0 ? (
+                <Tag className="admin-sider__tag">{messagesUnreadLength}</Tag>
+              ) : (
+                <></>
+              )}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="ad1988/courses">
+            <Link to="/ad1988/courses">
+              <ReadOutlined />
+              <span className="nav-text">Formación</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="/">
+            <Link to={"/"}>
+              <ChromeOutlined />
+              <span className="nac-text">Web</span>
+            </Link>
+          </Menu.Item>
+        </Menu>
+      </Sider>
+      <audio id="sound" preload="auto">
+        <source src={sound} type="audio/mpeg" />
+        <source src={soundOGG} type='audio/ogg' />
+        <embed hidden={true} src={sound} />
+      </audio>
+    </>
   );
 }
 
