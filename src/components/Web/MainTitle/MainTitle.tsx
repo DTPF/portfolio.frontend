@@ -77,7 +77,7 @@ export default function MainTitle() {
             animation={{
               delay: 200,
               width: 0,
-              x: 258,
+              x: 50,
               type: "from",
               ease: "linear",
             }}

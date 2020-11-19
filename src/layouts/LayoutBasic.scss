@@ -22,7 +22,7 @@
     }
   }
   &__content {
-    min-height: 100vh !important;
+    min-height: 100vh;
     padding-top: 60px;
     @media (min-width: $media-breakpoint-up-md) {
       padding-top: 75px;
@@ -39,14 +39,14 @@
       padding-top: 100px;
     }
     @media (min-height: 950px) {
-      min-height: calc(100vh - 333px) !important;
+      min-height: calc(100vh - 333px);
     }
   }
 
   &__footer {
     font-weight: bold;
     @include boxShadowXl();
-    min-height: 300px !important;
+    min-height: 300px;
     @media (min-width: $media-breakpoint-up-xxl) {
       width: 90vw;
       margin: 0 auto;
