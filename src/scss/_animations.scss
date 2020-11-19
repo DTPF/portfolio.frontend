@@ -61,18 +61,6 @@
   animation: slideinRight 1s;
 }
 
-@mixin acceptButtonBannerCookiesFade() {
-  @keyframes slideIn {
-    from {
-      opacity: 0.5;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  animation: slideIn 1s infinite alternate;
-}
-
 @mixin slideUpDownInfinite5px() {
   @keyframes slideUpDownInfinite {
     from {

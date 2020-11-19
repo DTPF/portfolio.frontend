@@ -81,6 +81,17 @@
     font-size: 1.4em;
   }
 }
+@mixin titleH3() {
+  color: $font-primary-dark;
+  font-weight: bold;
+  font-size: 1.1em;
+  @media (min-width: $media-breakpoint-up-sm) {
+    font-size: 1.2em;
+  }
+  @media (min-width: $media-breakpoint-up-md) {
+    font-size: 1.3em;
+  }
+}
 
 @mixin p() {
   color: $primary-color;
