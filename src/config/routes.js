@@ -19,6 +19,7 @@ import Projects from "../pages/Web/Projects";
 import Contact from "../pages/Web/Contact";
 
 // Other
+import PrivacyPolicy from "../pages/PrivacyPolicy";
 import Errors from "../pages/Errors";
 
 const routes = [
@@ -101,6 +102,11 @@ const routes = [
         path: "/contact",
         exact: true,
         component: Contact
+      },
+      {
+        path: "/privacy-policy",
+        exact: true,
+        component: PrivacyPolicy
       },
       {
         component: Errors,
