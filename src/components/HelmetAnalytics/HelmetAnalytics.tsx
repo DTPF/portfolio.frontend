@@ -1,7 +1,6 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { Helmet } from "react-helmet";
 import { Cookies } from "react-cookie";
-const CookiesConsent = lazy(() => import("../UI/CookiesConsent"));
 
 export default function HelmetAnalytics(props: {
   titleHelmet: string;
@@ -13,19 +12,14 @@ export default function HelmetAnalytics(props: {
   return (
     <>
       {!_gaCookies ? (
-        <>
-          <Suspense fallback={<></>}>
-            <CookiesConsent />
-          </Suspense>
-          <Helmet>
-            <title>{titleHelmet}</title>
-            <meta
-              name="description"
-              content={contentHelmet}
-              data-react-helmet="true"
-            />
-          </Helmet>
-        </>
+        <Helmet>
+          <title>{titleHelmet}</title>
+          <meta
+            name="description"
+            content={contentHelmet}
+            data-react-helmet="true"
+          />
+        </Helmet>
       ) : (
         <Helmet>
           <title>{titleHelmet}</title>

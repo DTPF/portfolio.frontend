@@ -4,6 +4,7 @@ import { Layout, Tag } from "antd";
 import useAuth from "../hooks/useAuth";
 import useConnection from "../hooks/useConnection";
 import AdminSignIn from "../pages/Admin/SignIn";
+import { Cookies } from "react-cookie";
 import { Notifications } from "react-push-notification";
 import { StopOutlined } from "@ant-design/icons";
 import "./LayoutAdmin.scss";
@@ -11,16 +12,24 @@ const MenuTop = lazy(() => import("../components/Admin/MenuTop"));
 const MenuSider = lazy(() => import("../components/Admin/MenuSider"));
 const LoadRoutes = lazy(() => import("../providers/LoadRoutes"));
 const Error = lazy(() => import("../pages/Errors"));
+const CookiesConsent = lazy(() => import("../components/UI/CookiesConsent"));
 
 export default function LayoutAdmin(props: any) {
   const { routes } = props;
   const { connection, isOnline } = useConnection();
   const { user, isLoading } = useAuth();
+  const cookie = new Cookies();
+  const _gaCookies = cookie.get("_gaCookies");
   if (!user && !isLoading) {
     return (
       <>
         <Route path="/ad1988/login" component={AdminSignIn} />
         <Redirect to="/ad1988/login" />
+        {!_gaCookies && (
+          <Suspense fallback={<></>}>
+            <CookiesConsent />
+          </Suspense>
+        )}
       </>
     );
   }
@@ -31,6 +40,11 @@ export default function LayoutAdmin(props: any) {
           <Tag className="offline-message" icon={<StopOutlined />}>
             Offline
           </Tag>
+        )}
+        {!_gaCookies && (
+          <Suspense fallback={<></>}>
+            <CookiesConsent />
+          </Suspense>
         )}
         <RenderLayoutAdmin routes={routes} connection={connection} />
       </>
@@ -61,7 +75,7 @@ function RenderLayoutAdmin(props: any) {
             />
           </Header>
           <Content className="layout-admin__content">
-            {connection !== 500 ? (
+            {!connection || connection === 200 ? (
               <LoadRoutes routes={routes && routes} />
             ) : (
               <Error status={500} />

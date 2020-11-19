@@ -1,10 +1,10 @@
-import React, { useEffect, Suspense, lazy } from "react";
+import React, { useEffect } from "react";
+import WellcomeParagraph from "../../../components/Web/WellcomeParagraph/WellcomeParagraph";
+import MainTitle from "../../../components/Web/MainTitle";
+import CategoriesBigButtonsStatic from "../../../components/Web/CategoriesBigButtonsStatic/CategoriesBigButtonsStatic";
+import HelmetAnalytics from "../../../components/HelmetAnalytics";
 import { Row } from "antd";
 import "./Home.scss";
-const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
-const WellcomeParagraph = lazy(() => import("../../../components/Web/WellcomeParagraph/WellcomeParagraph"))
-const MainTitle = lazy(() => import("../../../components/Web/MainTitle"));
-const CategoriesBigButtonsStatic = lazy(() => import("../../../components/Web/CategoriesBigButtonsStatic/CategoriesBigButtonsStatic"));
 
 export default function Home() {
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function Home() {
     return () => { unmounted = true };
   }, []);
   return (
-    <Suspense fallback={<></>}>
+    <>
       <HelmetAnalytics
         titleHelmet="DTPF | Página principal"
         contentHelmet="Página principal de David Thomas Pizarro Frick"
@@ -25,6 +25,6 @@ export default function Home() {
           <WellcomeParagraph />
           <CategoriesBigButtonsStatic />
       </Row>
-    </Suspense>
+    </>
   );
 }
