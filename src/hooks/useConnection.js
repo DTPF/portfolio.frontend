@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { connectionApi } from "../api/utils";
-import { message } from "antd";
 
 export default function useConnection() {
   const [connection, setConnection] = useState(null);
@@ -8,7 +7,7 @@ export default function useConnection() {
   const [timeToReload, setTimeToReload] = useState(1000);
   useEffect(() => {
     let unmounted = false;
-    let onLine = window.navigator.onLine;
+    const onLine = window.navigator.onLine;
     if (onLine) {
       if (!unmounted) {
         setIsOnline(onLine);
@@ -21,10 +20,6 @@ export default function useConnection() {
         } else {
           if (!unmounted) {
             setConnection(500);
-            message.error(
-              "Ha ocurrido un error en el servidor, vuelve más tarde y disculpa las molestias.",
-              5
-            );
           }
         }
       });
@@ -39,7 +34,7 @@ export default function useConnection() {
   useEffect(() => {
     let unmounted = false;
     const interval = setInterval(() => {
-      let onLine = window.navigator.onLine;
+      const onLine = window.navigator.onLine;
       if (onLine) {
         if (!unmounted) {
           setIsOnline(onLine);
