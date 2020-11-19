@@ -76,14 +76,15 @@
       }
     }
   }
-  h3 {
+  &__title {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff;
     font-weight: bold;
     text-align: center;
     margin-bottom: 15px;
+    @include titleH3();
+    color: #fff;
     span {
       @include rotateInfiniteAlternate30();
       font-size: 1.5em;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { subscribeContactApi } from "../../../../../api/contact";
 import { reloadMessagesTrueApi } from "../../../../../api/utils";
 import { gaEvent } from "../../../../../utils/analytics.js";
+import { Cookies } from "react-cookie";
 import { Form, Input, Button, message } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
 import "./ContactMe.scss";
@@ -17,18 +18,20 @@ export default function ContactMe() {
   const [inputs, setInputs] = useState({});
   return (
     <div className="contact-me">
-      <h3>
+      <span className="contact-me__title">
         Contacta conmigo&nbsp;
         <SmileOutlined />
-      </h3>
+      </span>
       <RenderForm inputs={inputs} setInputs={setInputs} />
     </div>
   );
 }
 
 function RenderForm(props: any) {
-  const messageAnt: any = message;
   const { inputs, setInputs } = props;
+  const cookie = new Cookies();
+  const _gaCookies = cookie.get("_gaCookies");
+  const messageAnt: any = message;
   const { TextArea }: any = Input;
   const [formValid, setFormValid] = useState({
     email: false,
@@ -64,8 +67,9 @@ function RenderForm(props: any) {
     const countWords = message && message.split(" ").length;
     if (!email && message === "1988") {
       window.location.href = "/ad1988";
-    }
-    if (!email && !message) {
+    } else if (!_gaCookies) {
+      messageAnt.warn("Acepta las cookies para enviar el mensaje.");
+    } else if (!email && !message) {
       messageAnt.warn("El email y el mensaje son obligatorios.");
     } else if (!email) {
       messageAnt.warn("El email es obligatorio.");
