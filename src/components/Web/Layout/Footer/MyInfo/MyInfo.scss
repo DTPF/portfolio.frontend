@@ -1,4 +1,5 @@
 @import "../../../../../scss/variables";
+@import "../../../../../scss/mixins";
 
 .my-info {
   display: flex;
@@ -16,10 +17,11 @@
     margin-bottom: 15px;
   }
 
-  h4 {
+  p {
     margin-bottom: 20px;
-    color: #fff;
     text-align: center;
+    @include titleH3();
+    color: #fff;
     @media (max-width: $media-breakpoint-down-sm) {
       padding-left: 10px;
       padding-right: 10px;

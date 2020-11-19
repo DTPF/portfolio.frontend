@@ -8,9 +8,9 @@ export default function MyInfo() {
   return (
     <div className="my-info">
       <img src={Logo} alt="Logo de DTPF" />
-      <h4>
+      <p>
           Mi afición al Hardware nace de mi devoción por el Software
-      </h4>
+      </p>
       <SocialLinks />
     </div>
   );
