@@ -1,0 +1,27 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.privacy-policy {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 15px;
+  h1 {
+    text-align: center;
+    @include titleH1();
+    color: $font-primary-dark;
+  }
+  h2 {
+    color: $font-primary-dark;
+  }
+  p {
+    color: $font-primary;
+    text-align: justify;
+  }
+  li {
+    color: $font-primary;
+    &::marker {
+      color: $primary-color-dark;
+      font-size: 1.2em;
+    }
+  }
+}
