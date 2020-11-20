@@ -94,7 +94,7 @@ function RenderForm(props: any) {
             ),
           setTimeout(() => {
             messageAnt.info(
-              "!!Es broma!! Sigue con lo que estabas haciendo :)",
+              "!!Es broma!! Sigue con lo que estabas haciendo 😁",
               2
             );
             setInputs({ email: email, message: message });
@@ -121,10 +121,7 @@ function RenderForm(props: any) {
               }
             );
           await reloadMessagesTrueApi();
-          setInputs({ email: "", message: response.message });
-          setTimeout(() => {
-            setInputs({ email: "", message: "" });
-          }, 3000);
+          setInputs({ email: "", message: "" });
           messageAnt
             .success("Enviado correctamente!!", 1.5)
             .then(() => messageAnt.info("Contestaré lo antes posible!!", 2.5));
@@ -163,6 +160,7 @@ function RenderForm(props: any) {
           autoSize={{ minRows: 1, maxRows: 6 }}
           maxLength={500}
           value={inputs.message}
+          onPressEnter={onFinish}
           onInput={inputValidation}
           onChange={(e: any) =>
             setInputs({ ...inputs, message: e.target.value })
