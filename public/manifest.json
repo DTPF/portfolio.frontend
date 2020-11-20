@@ -1,17 +1,23 @@
 {
+  "name": "Portfolio David Thomas Pizarro Frick",
   "short_name": "DTPF",
-  "name": "David Thomas Pizarro Frick",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64",
-      "type": "image/x-icon"
+      "type": "image/x-icon",
+      "sizes": "64x64"
     },
     {
       "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "logo192_maskable.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
     },
     {
       "src": "logo512.png",
@@ -21,7 +27,7 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#E4E4E4",
+  "theme_color": "#5d718d",
   "background_color": "#E4E4E4",
   "permissions": [
     "notifications"
