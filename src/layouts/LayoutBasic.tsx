@@ -20,6 +20,9 @@ export default function LayoutBasic(props: any) {
   const [menuCollapsed, setMenuCollapsed] = useState(true);
   const cookie = new Cookies();
   const _gaCookies = cookie.get("_gaCookies");
+  const clickBackTop = () => {
+    gaEvent("click_back_top", "clicks", "UI Clicks", true);
+  };
   return (
     <>
       <RenderLayoutBasic
@@ -28,6 +31,7 @@ export default function LayoutBasic(props: any) {
         setMenuCollapsed={setMenuCollapsed}
         connection={connection}
       />
+      <BackTop duration={600} onClick={() => clickBackTop} />
       {!isOnline && (
         <>
           <Tag className="offline-message" icon={<StopOutlined />}>
@@ -62,16 +66,12 @@ function RenderLayoutBasic(props: any) {
       setMenuCollapsed(true);
     }
   };
-  const clickBackTop = () => {
-    gaEvent("click_back_top", "clicks", "UI Clicks", true);
-  };
   return (
     <div
       className="layout-basic"
       onClick={closeMenu}
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <BackTop duration={600} onClick={clickBackTop} />
         <div className="layout-basic__header">
           <MenuTop
             menuCollapsed={menuCollapsed}
