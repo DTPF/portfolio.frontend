@@ -4,12 +4,17 @@ import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import { getCoursesApi } from "../../../api/education";
 import "./Courses.scss";
-const Spin = lazy(() => import("../../../components/UI/Spin"));
 const Modal = lazy(() => import("../../../components/UI/Modal"));
 const PaginationAnt = lazy(() => import("../../../components/UI/Pagination"));
-const CoursesList = lazy(() => import("../../../components/Admin/Courses/CoursesList"));
-const AddEditCoursesForm = lazy(() => import("../../../components/Admin/Courses/AddEditCoursesForm"));
-const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
+const CoursesList = lazy(
+  () => import("../../../components/Admin/Courses/CoursesList")
+);
+const AddEditCoursesForm = lazy(
+  () => import("../../../components/Admin/Courses/AddEditCoursesForm")
+);
+const HelmetAnalytics = lazy(
+  () => import("../../../components/HelmetAnalytics")
+);
 
 function Courses(props: any) {
   const { location, history } = props;
@@ -26,11 +31,9 @@ function Courses(props: any) {
         setCourses(response.courses);
       }
     });
-    window.scrollTo(0, 0);
     setReloadCourses(false);
     return () => { unmounted = true };
   }, [page, reloadCourses]);
-
   return (
     <div className="admin-courses">
       <Suspense fallback={<></>}>
@@ -52,23 +55,15 @@ function Courses(props: any) {
         setModalContent={setModalContent}
         setReloadCourses={setReloadCourses}
       />
-      {!courses ? (
-        <Suspense fallback={<></>}>
-          <Spin />
-        </Suspense>
-      ) : (
-        <Pagination
-          courses={courses}
-          location={location}
-          history={history}
-        />
+      {courses && (
+        <Pagination courses={courses} location={location} history={history} />
       )}
       <Suspense fallback={<></>}>
         <Modal
           title={modalTitle}
           isVisible={isVisibleModal}
           setIsVisible={setIsVisibleModal}
-          width="75%"
+          className={null}
         >
           {modalContent}
         </Modal>
@@ -116,34 +111,34 @@ function RenderListCourses(props: any) {
     setIsVisibleModal(true);
     setModalTitle("Editar Curso");
     setModalContent(
-      <Suspense fallback={<></>}>
-        <AddEditCoursesForm
-          setIsVisibleModal={setIsVisibleModal}
-          setReloadCourses={setReloadCourses}
-          course={course}
-        />
-      </Suspense>
+      <AddEditCoursesForm
+        setIsVisibleModal={setIsVisibleModal}
+        setReloadCourses={setReloadCourses}
+        course={course}
+      />
     );
   };
   return (
-    <Suspense fallback={<></>}>
-      <CoursesList
-        courses={courses}
-        setReloadCourses={setReloadCourses}
-        editCourse={editCourse}
-      />
-    </Suspense>
+    <CoursesList
+      courses={courses}
+      setReloadCourses={setReloadCourses}
+      editCourse={editCourse}
+    />
   );
 }
 
 function Pagination(props: any) {
   const { courses, location, history } = props;
   return (
-    <Suspense fallback={<></>}>
+    <>
       {courses.totalPages > 1 && (
-        <PaginationAnt courses={courses} location={location} history={history} />
+        <PaginationAnt
+          courses={courses}
+          location={location}
+          history={history}
+        />
       )}
-    </Suspense>
+    </>
   );
 }
 

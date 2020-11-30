@@ -97,6 +97,7 @@ function RenderListUsers(props: any) {
         title={modalTitle}
         isVisible={isVisibleModal}
         setIsVisible={setIsVisibleModal}
+        className={null}
       >
         {modalContent}
       </Modal>

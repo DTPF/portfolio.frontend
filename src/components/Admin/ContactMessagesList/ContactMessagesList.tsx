@@ -49,7 +49,8 @@ export default function ContactMessagesList(props: any) {
       <Modal
         title={modalTitle}
         isVisible={isVisibleModal}
-        setIsVisibleModal={setIsVisibleModal}
+        setIsVisible={setIsVisibleModal}
+        className={null}
       >
         {modalContent}
       </Modal>
