@@ -35,8 +35,7 @@
     "dev:profile": "yarn build --profile && serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test /__tests__/api/",
-    "test:coverage": "react-scripts test --coverage /__tests__/api/",
-    "eject": "react-scripts eject"
+    "test:coverage": "react-scripts test --coverage /__tests__/api/"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -55,10 +54,12 @@
   },
   "devDependencies": {
     "@testing-library/dom": "^7.26.6",
-    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^11.1.2",
     "@testing-library/user-event": "^12.2.2",
-    "@types/react": "^16.9.56",
+    "@types/node": "^14.14.10",
+    "@types/react": "^16.14.0",
+    "@types/react-dom": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
     "@types/react-router-dom": "^5.1.6",
     "@types/socket.io-client": "^1.4.34",
@@ -66,6 +67,6 @@
     "react-scripts": "^3.4.4",
     "react-test-renderer": "^16.14.0",
     "serve": "^11.3.2",
-    "typescript": "^4.0.5"
+    "typescript": "^3.2.1"
   }
 }
