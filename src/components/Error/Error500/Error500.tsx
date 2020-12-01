@@ -1,16 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Result, Button } from "antd";
-import { URL } from "../../../config/url";
-import "./Error500.scss";
+import "../Error.scss";
 
-export default function Error500(props: any) {
-  const { title, subtitle } = props;
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  const goBack = () => {
-    window.location.href = URL;
-  };
+export default function Error500(props: {
+  title?: string;
+  subtitle?: string;
+  urlHistory: any;
+}) {
+  const { title, subtitle, urlHistory } = props;
   return (
     <div className="error-ant">
       <Result
@@ -22,8 +19,8 @@ export default function Error500(props: any) {
             : "Lo siento, ha ocurrido un error en el servidor, vuelve más tarde."
         }
         extra={
-          <Button type="primary" onClick={goBack}>
-            Recargar
+          <Button type="primary" onClick={urlHistory.goBack}>
+            Volver
           </Button>
         }
       />

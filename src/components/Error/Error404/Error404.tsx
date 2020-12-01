@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Result, Button } from "antd";
-import "./Error404.scss";
+import "../Error.scss";
 
-export default function Error404(props: any) {
-  const { title, subtitle, goBack } = props;
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+export default function Error404(props: {
+  title?: string;
+  subtitle?: string;
+  urlHistory: any;
+}) {
+  const { title, subtitle, urlHistory } = props;
   return (
     <div className="error-ant">
       <Result
@@ -16,7 +17,7 @@ export default function Error404(props: any) {
           subtitle ? subtitle : "Lo siento, la página que buscas no existe."
         }
         extra={
-          <Button type="primary" onClick={goBack}>
+          <Button type="primary" onClick={urlHistory.goBack}>
             Volver
           </Button>
         }

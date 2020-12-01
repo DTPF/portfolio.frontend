@@ -5,27 +5,24 @@ const Error404 = lazy(() => import("../../components/Error/Error404"));
 const Error500 = lazy(() => import("../../components/Error/Error500"));
 
 export default function Error(props: {
-  title: any;
-  subtitle: string;
+  title?: string;
+  subtitle?: string;
   status: number;
 }) {
-  const { title, subtitle, status = 404 } = props;
-  const goBack = useHistory().goBack;
-  const history = useHistory();
+  const { title, subtitle, status } = props;
+  const urlHistory = useHistory();
   return (
-    <>
     <Suspense fallback={<></>}>
       <HelmetAnalytics
-        titleHelmet={`DTPF | Error ${status}`}
+        titleHelmet={`DTPF | Error ${status ? status : 404}`}
         contentHelmet={title ? title : "Recurso no encontrado."}
       />
       {(!status || status === 404) && (
-        <Error404 title={title} subtitle={subtitle} goBack={goBack} history={history} />
+        <Error404 title={title} subtitle={subtitle} urlHistory={urlHistory} />
       )}
       {status === 500 && (
-        <Error500 title={title} subtitle={subtitle} />
+        <Error500 title={title} subtitle={subtitle} urlHistory={urlHistory} />
       )}
     </Suspense>
-    </>
   );
 }
