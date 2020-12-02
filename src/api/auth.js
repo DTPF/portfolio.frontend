@@ -25,12 +25,11 @@ export function refreshAccessTokenApi(refreshToken) {
   };
   const params = {
     method: "POST",
-    body: JSON.stringify(bodyObj),
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify(bodyObj),
   };
-
   fetch(url, params)
     .then((response) => {
       if (response.status !== 200) {
@@ -46,6 +45,9 @@ export function refreshAccessTokenApi(refreshToken) {
         localStorage.setItem(ACCESS_TOKEN, accessToken);
         localStorage.setItem(REFRESH_TOKEN, refreshToken);
       }
+    })
+    .catch((err) => {
+      return err;
     });
 }
 
