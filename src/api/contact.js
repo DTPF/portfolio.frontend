@@ -1,91 +1,34 @@
 import { apiVersion, basePath } from "./config";
+import { makeRequest } from "../api/utils/makeRequest";
 
-export async function subscribeContactApi(data) {
-  const url = `${basePath}/${apiVersion}/contact-me/`;
-  const params = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  };
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+export function subscribeContactApi(data) {
+  const url = `${basePath}/${apiVersion}/contact-me`;
+  return makeRequest(url, true, true, "POST", null, JSON.stringify(data));
 }
 
-export async function getMessagesUnreadApi(token, status) {
+export function getMessagesUnreadApi(token, status) {
   const url = `${basePath}/${apiVersion}/get-contact-messages-unread?readed=${status}`;
-  const params = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token
-    }
-  }
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "GET", token);
 }
 
-export async function checkMessageApi(token, messageId, status) {
+export function checkMessageApi(token, messageId, status) {
   const url = `${basePath}/${apiVersion}/check-contact-message/${messageId}`;
-  const params = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token
-    },
-    body: JSON.stringify({ readed: status })
-  }
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(
+    url,
+    true,
+    true,
+    "PUT",
+    token,
+    JSON.stringify({ readed: status })
+  );
 }
 
-export async function deleteContactMessageApi(token, messageId) {
+export function deleteContactMessageApi(token, messageId) {
   const url = `${basePath}/${apiVersion}/delete-contact-message/${messageId}`;
-  const params = {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token
-    }
-  }
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "DELETE", token);
 }
 
-export async function getLastMessageApi(token) {
+export function getLastMessageApi(token) {
   const url = `${basePath}/${apiVersion}/get-last-message-email`;
-  const params = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token
-    }
-  }
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "GET", token);
 }
-

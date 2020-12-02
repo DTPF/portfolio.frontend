@@ -1,57 +1,22 @@
 import { basePath, apiVersion } from "./config";
+import { makeRequest } from "../api/utils/makeRequest";
 
-export async function connectionApi() {
+export function connectionApi() {
   const url = `${basePath}/${apiVersion}/connection`;
-  try {
-    const response = await fetch(url);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url);
 }
 
-export async function reloadMessagesTrueApi() {
+export function reloadMessagesTrueApi() {
   const url = `${basePath}/${apiVersion}/reload-messages-true`;
-  const params = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "POST");
 }
 
-export async function reloadMessagesFalseApi() {
+export function reloadMessagesFalseApi() {
   const url = `${basePath}/${apiVersion}/reload-messages-false`;
-  const params = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "POST");
 }
 
-export async function messagesStatusApi() {
+export function messagesStatusApi() {
   const url = `${basePath}/${apiVersion}/messages-status`;
-  try {
-    const response = await fetch(url);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url);
 }

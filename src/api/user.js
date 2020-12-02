@@ -1,180 +1,61 @@
 import { basePath, apiVersion } from "./config";
+import { makeRequest } from "../api/utils/makeRequest";
 
-export async function signUpApi(data) {
+export function signUpApi(data) {
   const url = `${basePath}/${apiVersion}/sign-up`;
-  const params = {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "POST", null, JSON.stringify(data));
 }
 
-export async function signInApi(data) {
+export function signInApi(data) {
   const url = `${basePath}/${apiVersion}/sign-in`;
-  const params = {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "POST", null, JSON.stringify(data));
 }
 
-export async function getUsersApi(token) {
+export function getUsersApi(token) {
   const url = `${basePath}/${apiVersion}/users`;
-  const params = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token,
-    },
-  };
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "GET", token);
 }
 
-export async function getUsersActiveApi(token, status) {
+export function getUsersActiveApi(token, status) {
   const url = `${basePath}/${apiVersion}/users-active?active=${status}`;
-  const params = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token,
-    },
-  };
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "GET", token);
 }
 
-export async function uploadAvatarApi(token, avatar, userId) {
+export function uploadAvatarApi(token, avatar, userId) {
   const url = `${basePath}/${apiVersion}/upload-avatar/${userId}`;
   const formData = new FormData();
   formData.append("avatar", avatar);
-  const params = {
-    method: "PUT",
-    body: formData,
-    headers: {
-      Authorization: token
-    }
-  };
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "PUT", token, formData);
 }
 
-export async function getAvatarApi(avatarName) {
+export function getAvatarApi(avatarName) {
   const url = `${basePath}/${apiVersion}/get-avatar/${avatarName}`;
-  try {
-    const response = await fetch(url);
-    return response;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, null, false);
 }
 
-export async function updateUserApi(token, user, userId) {
+export function updateUserApi(token, user, userId) {
   const url = `${basePath}/${apiVersion}/update-user/${userId}`;
-  const params = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token
-    },
-    body: JSON.stringify(user)
-  };
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "PUT", token, JSON.stringify(user));
 }
 
-export async function activateUserApi(token, userId, status) {
+export function activateUserApi(token, userId, status) {
   const url = `${basePath}/${apiVersion}/activate-user/${userId}`;
-  const params = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token
-    },
-    body: JSON.stringify({
-      active: status
-    })
-  };
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(
+    url,
+    true,
+    true,
+    "PUT",
+    token,
+    JSON.stringify({ active: status })
+  );
 }
 
-export async function deleteUserApi(token, userId) {
+export function deleteUserApi(token, userId) {
   const url = `${basePath}/${apiVersion}/delete-user/${userId}`;
-  const params = {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token
-    }
-  };
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "DELETE", token);
 }
 
-export async function signUpAdminApi(token, data) {
+export function signUpAdminApi(token, data) {
   const url = `${basePath}/${apiVersion}/sign-up-admin`;
-  const params = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token
-    },
-    body: JSON.stringify(data)
-  };
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "POST", token, JSON.stringify(data));
 }

@@ -1,159 +1,54 @@
 import { basePath, apiVersion } from "./config";
+import { makeRequest } from "../api/utils/makeRequest";
 
-export async function addCourseApi(token, course) {
+export function addCourseApi(token, course) {
   const url = `${basePath}/${apiVersion}/add-course`;
-  const params = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token
-    },
-    body: JSON.stringify(course)
-  };
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "POST", token, JSON.stringify(course));
 }
 
-export async function updateCourseApi(token, id, data) {
+export function updateCourseApi(token, id, data) {
   const url = `${basePath}/${apiVersion}/update-course/${id}`;
-  const params = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token
-    },
-    body: JSON.stringify(data)
-  };
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "PUT", token, JSON.stringify(data));
 }
 
-export async function getCoursesApi(limit, page) {
+export function getCoursesApi(limit, page) {
   const url = `${basePath}/${apiVersion}/get-courses?limit=${limit}&page=${page}`;
-  try {
-    const response = await fetch(url);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url);
 }
 
-export async function getCourseApi(urlCourse) {
+export function getCourseApi(urlCourse) {
   const url = `${basePath}/${apiVersion}/get-course/${urlCourse}`;
-  try {
-    const response = await fetch(url);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url);
 }
 
-export async function getCourseByOrderApi(order) {
+export function getCourseByOrderApi(order) {
   const url = `${basePath}/${apiVersion}/get-course-order/${order}`;
-  try {
-    const response = await fetch(url);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url);
 }
 
-export async function uploadImageApi(token, image, courseId) {
+export function uploadImageApi(token, image, courseId) {
   const url = `${basePath}/${apiVersion}/upload-image/${courseId}`;
   const formData = new FormData();
   formData.append("image", image);
-  const params = {
-    method: "PUT",
-    body: formData,
-    headers: {
-      Authorization: token
-    }
-  };
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "PUT", token, formData, null);
 }
 
-export async function getImageApi(imageName) {
+export function getImageApi(imageName) {
   const url = `${basePath}/${apiVersion}/get-image/${imageName}`;
-
-  try {
-    const response = await fetch(url);
-    return response;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, null, false);
 }
 
-export async function deleteCourseApi(token, id) {
+export function deleteCourseApi(token, id) {
   const url = `${basePath}/${apiVersion}/delete-course/${id}`;
-  const params = {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token
-    }
-  };
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "DELETE", token);
 }
 
-export async function addTagApi(token, id, data) {
+export function addTagApi(token, id, data) {
   const url = `${basePath}/${apiVersion}/add-tag/${id}`;
-  const params = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token
-    },
-    body: JSON.stringify(data)
-  }
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "PUT", token, JSON.stringify(data));
 }
 
-export async function deleteTagApi(token, id, data) {
+export function deleteTagApi(token, id, data) {
   const url = `${basePath}/${apiVersion}/delete-tag/${id}`;
-  const params = {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token
-    },
-    body: JSON.stringify(data)
-  }
-  try {
-    const response = await fetch(url, params);
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    return err;
-  }
+  return makeRequest(url, true, true, "DELETE", token, JSON.stringify(data));
 }
