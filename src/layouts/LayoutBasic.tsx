@@ -1,13 +1,11 @@
 import React, { useState, Suspense, lazy } from "react";
 import useConnection from "../hooks/useConnection";
 import { gaEvent } from "../utils/analytics.js";
-import { Cookies } from "react-cookie";
 import { Layout, BackTop, Tag, Alert } from "antd";
 import { StopOutlined } from "@ant-design/icons";
 import "./LayoutBasic.scss";
 import desktopImage from "../assets/img/jpg/background-squares.jpg";
 import mobileImage from "../assets/img/jpg/background-squares-mobile.jpg";
-import CookiesConsent from "../components/UI/CookiesConsent";
 import MenuTop from "../components/Web/Layout/MenuTop";
 import MenuSider from "../components/Web/Layout/MenuSider";
 import Footer from "../components/Web/Layout/Footer";
@@ -18,8 +16,6 @@ export default function LayoutBasic(props: any) {
   const { routes } = props;
   const { connection, isOnline } = useConnection();
   const [menuCollapsed, setMenuCollapsed] = useState(true);
-  const cookie = new Cookies();
-  const _gaCookies = cookie.get("_gaCookies");
   const clickBackTop = () => {
     gaEvent("click_back_top", "clicks", "UI Clicks", true);
   };
@@ -44,9 +40,6 @@ export default function LayoutBasic(props: any) {
             closeText="Cerrar aviso"
           />
         </>
-      )}
-      {!_gaCookies && (
-        <CookiesConsent />
       )}
     </>
   );
