@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { useHistory } from "react-router-dom";
-const HelmetAnalytics = lazy(() => import("../../components/HelmetAnalytics"));
+const Helmet = lazy(() => import("../../components/Helmet"));
 const Error404 = lazy(() => import("../../components/Error/Error404"));
 const Error500 = lazy(() => import("../../components/Error/Error500"));
 
@@ -13,7 +13,7 @@ export default function Error(props: {
   const urlHistory = useHistory();
   return (
     <Suspense fallback={<></>}>
-      <HelmetAnalytics
+      <Helmet
         titleHelmet={`DTPF | Error ${status ? status : 404}`}
         contentHelmet={title ? title : "Recurso no encontrado."}
       />

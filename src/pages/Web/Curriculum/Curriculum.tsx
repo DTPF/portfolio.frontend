@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import "./Curriculum.scss";
-const HelmetAnalytics = lazy(
-  () => import("../../../components/HelmetAnalytics")
+const Helmet = lazy(
+  () => import("../../../components/Helmet")
 );
 const CurriculumWeb = lazy(() => import("../../../components/Web/Curriculum"));
 const ButtonGoBack = lazy(() => import("../../../components/UI/ButtonGoBack"));
@@ -16,7 +16,7 @@ export default function Curriculum(props: any) {
   const { location, history } = props;
   return (
     <Suspense fallback={<></>}>
-      <HelmetAnalytics
+      <Helmet
         titleHelmet="DTPF | Curriculum"
         contentHelmet="Curriculum de David Thomas Pizarro Frick"
       />

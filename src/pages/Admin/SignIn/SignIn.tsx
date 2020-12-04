@@ -6,7 +6,7 @@ import { getAccessTokenApi } from "../../../api/auth";
 import "./SignIn.scss";
 const LoginForm = lazy(() => import('../../../components/Admin/LoginForm'));
 const RegisterForm = lazy(() => import('../../../components/Admin/RegisterForm'));
-const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
+const Helmet = lazy(() => import("../../../components/Helmet"));
 
 export default function SignIn() {
   const { Content } = Layout;
@@ -16,7 +16,7 @@ export default function SignIn() {
   }
   return (
     <Suspense fallback={<></>}>
-      <HelmetAnalytics
+      <Helmet
         titleHelmet="DTPF | Admin Login"
         contentHelmet="Página de Admin Login"
       />

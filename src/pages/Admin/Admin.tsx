@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Suspense, lazy } from "react";
 import { checkUserLogin } from "../../providers/AuthProvider";
-const HelmetAnalytics = lazy(() => import("../../components/HelmetAnalytics"));
+const Helmet = lazy(() => import("../../components/Helmet"));
 const Home = lazy(() => import("../../components/Admin/Home"));
 
 export default function Admin() {  
@@ -14,7 +14,7 @@ export default function Admin() {
   }, []);
   return (
     <Suspense fallback={<></>}>
-      <HelmetAnalytics
+      <Helmet
         titleHelmet="DTPF | Admin"
         contentHelmet="Página principal de Admin"
       />

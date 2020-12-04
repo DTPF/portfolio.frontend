@@ -12,8 +12,8 @@ const CoursesList = lazy(
 const AddEditCoursesForm = lazy(
   () => import("../../../components/Admin/Courses/AddEditCoursesForm")
 );
-const HelmetAnalytics = lazy(
-  () => import("../../../components/HelmetAnalytics")
+const Helmet = lazy(
+  () => import("../../../components/Helmet")
 );
 
 function Courses(props: any) {
@@ -37,7 +37,7 @@ function Courses(props: any) {
   return (
     <div className="admin-courses">
       <Suspense fallback={<></>}>
-        <HelmetAnalytics
+        <Helmet
           titleHelmet="DTPF | Admin Cursos"
           contentHelmet="Página Admin de Cursos"
         />

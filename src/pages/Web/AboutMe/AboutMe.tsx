@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
-const HelmetAnalytics = lazy(
-  () => import("../../../components/HelmetAnalytics")
+const Helmet = lazy(
+  () => import("../../../components/Helmet")
 );
 const AboutMeWeb = lazy(() => import("../../../components/Web/AboutMeWeb"));
 const ButtonGoBack = lazy(() => import("../../../components/UI/ButtonGoBack"));
@@ -15,7 +15,7 @@ export default function AboutMe(props: any) {
   const { location, history } = props;
   return (
     <Suspense fallback={<></>}>
-      <HelmetAnalytics
+      <Helmet
         titleHelmet="DTPF | Sobre Mi"
         contentHelmet="Página sobre David Thomas Pizarro Frick"
       />

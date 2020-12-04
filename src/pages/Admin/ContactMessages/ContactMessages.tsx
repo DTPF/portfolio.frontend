@@ -4,7 +4,7 @@ import { getAccessTokenApi } from "../../../api/auth";
 import { reloadMessagesFalseApi } from "../../../api/utils";
 import useMessagesStatus from "../../../hooks/useMessagesStatus";
 const ContactMessagesList = lazy(() => import("../../../components/Admin/ContactMessagesList"));
-const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
+const Helmet = lazy(() => import("../../../components/Helmet"));
 
 export default function ContactMessages() {
   const { messagesStatus, setMessagesStatus } = useMessagesStatus();
@@ -36,7 +36,7 @@ export default function ContactMessages() {
   return (
     <div>
       <Suspense fallback={<></>}>
-        <HelmetAnalytics
+        <Helmet
           titleHelmet="DTPF | Admin Mensajes"
           contentHelmet="Página admin de Mensajes"
         />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { getMenuApi } from "../../../api/menu";
 const MenuWebList = lazy(() => import('../../../components/Admin/MenuWeb/MenuWebList'));
-const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
+const Helmet = lazy(() => import("../../../components/Helmet"));
 
 export default function MenuWeb() {
   const [menu, setMenu] = useState(null);
@@ -20,7 +20,7 @@ export default function MenuWeb() {
   return (
     <div className="menu-web">
       <Suspense fallback={<></>}>
-        <HelmetAnalytics
+        <Helmet
           titleHelmet="DTPF | Admin Menú Web"
           contentHelmet="Página Admin de Menú Web"
         />

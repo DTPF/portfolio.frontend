@@ -3,7 +3,7 @@ import { getAccessTokenApi } from "../../../api/auth";
 import { getUsersActiveApi } from "../../../api/user";
 const Spin = lazy(() => import("../../../components/UI/Spin"));
 const ListUsers = lazy(() => import('../../../components/Admin/Users/ListUsers'));
-const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
+const Helmet = lazy(() => import("../../../components/Helmet"));
 
 export default function Users() {
   const [usersActive, setUsersActive] = useState([]);
@@ -34,7 +34,7 @@ export default function Users() {
         </Suspense>
       ) : (
         <Suspense fallback={<></>}>
-          <HelmetAnalytics
+          <Helmet
             titleHelmet="DTPF | Admin Usuarios"
             contentHelmet="Página Admin de Usuarios"
           />

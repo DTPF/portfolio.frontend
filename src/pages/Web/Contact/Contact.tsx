@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-const HelmetAnalytics = lazy(() => import("../../../components/HelmetAnalytics"));
+const Helmet = lazy(() => import("../../../components/Helmet"));
 const ContactPage = lazy(() => import("../../../components/Web/Contact"));
 const ButtonGoBack = lazy(() => import("../../../components/UI/ButtonGoBack"));
 const CategoriesBigButtonsStatic = lazy(() => import("../../../components/Web/CategoriesBigButtonsStatic/CategoriesBigButtonsStatic"));
@@ -8,7 +8,7 @@ export default function Contact(props: any) {
   const { location, history } = props;
   return (
     <Suspense fallback={<></>}>
-      <HelmetAnalytics
+      <Helmet
         titleHelmet="DTPF | Contacto"
         contentHelmet="Página para contactar con David Thomas Pizarro Frick"
       />

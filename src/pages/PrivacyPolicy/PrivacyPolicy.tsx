@@ -1,6 +1,6 @@
 import React, { useEffect, Suspense, lazy } from "react";
 import { useHistory } from "react-router-dom";
-const HelmetAnalytics = lazy(() => import("../../components/HelmetAnalytics"));
+const Helmet = lazy(() => import("../../components/Helmet"));
 const ButtonGoBack = lazy(() => import("../../components/UI/ButtonGoBack"));
 const PrivacyPolicyComponent = lazy(() => import("../../components/PrivacyPolicy"));
 
@@ -17,7 +17,7 @@ export default function PrivacyPolicy() {
   }, []);
   return (
     <Suspense fallback={<></>}>
-      <HelmetAnalytics
+      <Helmet
         titleHelmet="DTPF | Política de privacidad"
         contentHelmet="Página de política de privacidad de David Thomas Pizarro Frick"
       />
