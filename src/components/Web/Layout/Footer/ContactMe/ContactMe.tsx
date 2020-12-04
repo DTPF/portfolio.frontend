@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { subscribeContactApi } from "../../../../../api/contact";
 import { reloadMessagesTrueApi } from "../../../../../api/utils";
 import { gaEvent } from "../../../../../utils/analytics.js";
-import { Cookies } from "react-cookie";
 import { Form, Input, Button, message } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
 import "./ContactMe.scss";
@@ -29,8 +28,6 @@ export default function ContactMe() {
 
 function RenderForm(props: any) {
   const { inputs, setInputs } = props;
-  const cookie = new Cookies();
-  const _gaCookies = cookie.get("_gaCookies");
   const messageAnt: any = message;
   const { TextArea }: any = Input;
   const [formValid, setFormValid] = useState({
@@ -52,7 +49,7 @@ function RenderForm(props: any) {
       });
     }
   };
-  const onFinish = async () => {
+  const onFinish = () => {
     const { email, message } = inputs;
     const emailReplace = email?.replace(/ /g, "");
     const finalData = {
@@ -67,8 +64,6 @@ function RenderForm(props: any) {
     const countWords = message && message.split(" ").length;
     if (!email && message === "1988") {
       window.location.href = "/ad1988";
-    } else if (!_gaCookies) {
-      messageAnt.warn("Acepta las cookies para enviar el mensaje.");
     } else if (!email && !message) {
       messageAnt.warn("El email y el mensaje son obligatorios.");
     } else if (!email) {
@@ -103,7 +98,7 @@ function RenderForm(props: any) {
     } else if (countWords < 3) {
       messageAnt.warn("Especifica un poco más en el mensaje por favor.");
     } else {
-      await subscribeContactApi(finalData).then(async (response) => {
+      subscribeContactApi(finalData).then((response) => {
         if (response.status === 200) {
           emailjs
             .send(
@@ -120,7 +115,7 @@ function RenderForm(props: any) {
                 console.log("FAILED...", err);
               }
             );
-          await reloadMessagesTrueApi();
+          reloadMessagesTrueApi();
           setInputs({ email: "", message: "" });
           messageAnt
             .success("Enviado correctamente!!", 1.5)

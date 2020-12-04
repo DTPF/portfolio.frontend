@@ -16,15 +16,12 @@ import {
 } from "../../../../utils/formValidation";
 import { RedoOutlined } from "@ant-design/icons";
 import emailjs from "emailjs-com";
-import { Cookies } from "react-cookie";
 
 export default function ContactForm() {
   const { TextArea } = Input;
   const Form: any = FormAnt;
   const messageAnt: any = msg;
   const removeclassName: any = document.getElementsByClassName("ant-input");
-  const cookie = new Cookies();
-  const _gaCookies = cookie.get("_gaCookies");
   const [inputs, setInputs] = useState({
     name: "",
     email: "",
@@ -92,9 +89,7 @@ export default function ContactForm() {
       "notRequierd"
     );
     const countWords = message && message.split(" ").length;
-    if (!_gaCookies) {
-      messageAnt.warn("Acepta las cookies para enviar el mensaje.");
-    } else if (nameIsNumberValidat) {
+    if (nameIsNumberValidat) {
       messageAnt.warn(`Seguro que te llamas ${name}??`);
     } else if (!nameMinLengthValidat) {
       messageAnt.warn("El nombre requiere un mínimo de 3 carácteres.");
@@ -132,7 +127,7 @@ export default function ContactForm() {
             )
             .then(
               (response) => {
-                console.log(response.text);
+                console.log(`%c${response.text}`, "color: green");
               },
               (err) => {
                 console.log("FAILED...", err);
