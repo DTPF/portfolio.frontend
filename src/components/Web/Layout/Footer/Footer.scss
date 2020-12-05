@@ -1,4 +1,5 @@
 @import "../../../../scss/variables";
+@import "../../../../scss/mixins";
 
 .footer {
   background-color: $primary-color;
@@ -12,11 +13,11 @@
   &__copyright {
     margin-top: 20px;
     .ant-col {      
-      color: #fff;
       display: flex;
       justify-content: center;
       text-transform: uppercase;
-
+      @include H4();
+      color: #fff;
     }
   }
 }

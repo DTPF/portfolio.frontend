@@ -14,10 +14,10 @@
       min-height: 100px;
     }
     &__title {
-      @include titleH2();
       text-transform: uppercase;
       text-align: center;
       margin-top: 10px;
+      @include titleH2();
       @include fadeIn();
     }
     .container {
@@ -100,8 +100,8 @@
       position: absolute;
       width: 100%;
       top: 15px;
-      h2 {
-        font-size: 1.1em;
+      h3 {
+        @include H3();
         color: $primary-color-dark;
       }
     }
@@ -119,8 +119,9 @@
       padding: 10px 20px;
       background-color: white;
       border-radius: 6px;
-      h3 {
-        color: $primary-color;
+      span {
+        @include H4();
+        color: $font-primary-light;
         margin: 0;
         margin-top: 10px;
         &:first-child {
@@ -129,8 +130,8 @@
       }
       p {
         margin: 3px 0;
-        color: $primary-color-dark;
-        font-weight: 700;
+        color: $font-primary-dark;
+        font-weight: 500;
         font-size: 1em;
       }
     }
@@ -142,20 +143,19 @@
       }
       &__text {
         text-align: justify;
-        font-weight: 500 !important;
+        font-weight: 400 !important;
+        color: $font-primary-dark;
         background-color: rgba(192, 192, 192, 0.123);
         padding: 10px;
         border-radius: 5px;
-        -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
-        -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
-        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+        @include boxShadowMd();
       }
       .ant-collapse-header {
         position: relative;
         color: $font-primary-dark !important;
         margin: 0;
         margin-top: 10px;
-        font-weight: bold;
+        font-weight: 500;
         font-size: 1em;
         padding: 5px 10px;
         border: 0 !important;
@@ -239,9 +239,8 @@
         margin-top: 20px;
         margin-left: 20px;
         text-align: left;
-        h2 {
-          @include titleH2();
-          font-size: 1em !important;
+        h3 {
+          @include H3();
         }
       }
     }

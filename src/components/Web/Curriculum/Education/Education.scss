@@ -46,11 +46,12 @@
         margin-bottom: 5px;
         @include boxShadowMd();
         &-header {
+          @include H5();
           color: $font-primary-dark;
           font-weight: bold;
           span {
             position: absolute !important;
-            top: 10px !important;
+            top: calc(50% - 12px) !important;
             font-size: 1.8em !important;
             margin: 0 -5px;
           }
@@ -59,19 +60,21 @@
           border-bottom-left-radius: 7px;
           border-bottom-right-radius: 7px;
           h3 {
-            color: $font-primary;
+            @include H4();
+            color: $font-primary-light !important;
             font-weight: bold;
-            font-size: 1.1em;
           }
           h4 {
+            @include H5();
             color: $font-primary-dark;
             font-style: oblique;
+            font-weight: 500;
           }
           p {
+            @include H5();
             margin: 3px 0;
             color: $primary-color-dark;
             font-weight: 500;
-            font-size: 1em;
             text-align: justify;
           }
           li {

@@ -19,14 +19,17 @@
       @include titleH1();
       text-transform: uppercase;
       margin: 0;
-      margin-top: 0px;
+      margin-top: 10px;
     }
     h2 {
-      @include titleH2();
+      @include H3();
+      font-weight: 500;
       color: $primary-color;
       padding: 0 10px;
       margin: 15px auto;
-      max-width: 500px;
+      @media (min-width: $media-breakpoint-up-lg) {
+        font-size: 1.4em;
+      }
     }
   }
 

@@ -21,7 +21,7 @@
   p {
     margin-bottom: 20px;
     text-align: center;
-    @include titleH3();
+    @include H4();
     color: #fff;
     @media (max-width: $media-breakpoint-down-sm) {
       padding-left: 10px;
