@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ContactForm from "../../../components/Web/Contact/ContactForm";
 import ContactInfo from "./ContactInfo/ContactInfo";
 import { Image } from "antd";
@@ -8,10 +8,16 @@ import mobileMapImage from "../../../assets/img/jpg/mapa-mobile-contacto.jpg";
 
 export default function Contact() {
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
-  function reportWindowSize() {
+  const reportWindowSize = () => {
     setInnerWidth(window.innerWidth);
   }
-  window.onresize = reportWindowSize;
+  useEffect(() => {
+    let unmounted = false;
+    if (!unmounted) {
+      window.onresize = reportWindowSize;
+    }
+    return () => { unmounted = true };
+  }, []); 
   return (
     <div className="contact">
       <h1 className="contact__title">Contacto</h1>
