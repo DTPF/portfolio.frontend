@@ -14,28 +14,13 @@ export default function Education(props: any) {
   interface URL { url: string }
   const { url } = useParams<URL>();
   const [courses] = useGetCourses(100, location);
-  const [isLoading, setIsLoading] = useState(false);
-  useEffect(() => {
-    let unmounted = false;
-    if (!unmounted) {
-      setIsLoading(true);
-    }
-    window.scrollTo(0, 0);
-    return () => { unmounted = true };
-  }, []);
   return (
-    <>
-      {!isLoading ? (
-        <Spin />
-      ) : (
-        <RenderEducation
-          url={url}
-          location={location}
-          history={history}
-          courses={courses}
-        />
-      )}
-    </>
+    <RenderEducation
+      url={url}
+      location={location}
+      history={history}
+      courses={courses}
+    />
   );
 }
 

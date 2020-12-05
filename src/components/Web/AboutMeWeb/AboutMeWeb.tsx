@@ -6,15 +6,6 @@ import Cube from "./Cube";
 import image from "../../../assets/img/png/yo.png";
 
 export default function AboutMeWeb() {
-  useEffect(() => {
-    let unmounted = false;
-    if (!unmounted) {
-      window.scrollTo(0, 0);
-    }
-    return () => {
-      unmounted = true;
-    };
-  }, []);
   return (
     <div className="about-me">
       <div className="about-me__title">
