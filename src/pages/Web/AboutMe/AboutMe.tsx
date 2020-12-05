@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 const Helmet = lazy(
   () => import("../../../components/Helmet")
 );
@@ -13,6 +13,13 @@ const CategoriesBigButtonsStatic = lazy(
 
 export default function AboutMe(props: any) {
   const { location, history } = props;
+  useEffect(() => {
+    let unmounted = false;
+    if (!unmounted) {
+      window.scrollTo(0, 0);
+    }
+    return () => { unmounted = true };
+  }, []);
   return (
     <Suspense fallback={<></>}>
       <Helmet

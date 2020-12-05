@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import WellcomeParagraph from "../../../components/Web/WellcomeParagraph/WellcomeParagraph";
 import MainTitle from "../../../components/Web/MainTitle";
 import CategoriesBigButtonsStatic from "../../../components/Web/CategoriesBigButtonsStatic/CategoriesBigButtonsStatic";
@@ -6,7 +6,14 @@ import Helmet from "../../../components/Helmet";
 import { Row } from "antd";
 import "./Home.scss";
 
-export default function Home() { 
+export default function Home() {
+  useEffect(() => {
+    let unmounted = false;
+    if (!unmounted) {
+      window.scrollTo(0, 0);
+    }
+    return () => { unmounted = true };
+  }, []);
   return (
     <>
       <Helmet

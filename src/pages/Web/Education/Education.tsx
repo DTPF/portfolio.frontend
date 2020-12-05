@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 import "./Education.scss";
 const Helmet = lazy(() => import("../../../components/Helmet"));
 const EducationWeb = lazy(() => import("../../../components/Web/Education"));
@@ -7,6 +7,13 @@ const CategoriesBigButtonsStatic = lazy(() => import("../../../components/Web/Ca
 
 export default function Education(props: any) {
   const { location, history } = props;
+  useEffect(() => {
+    let unmounted = false;
+    if (!unmounted) {
+      window.scrollTo(0, 0);
+    }
+    return () => { unmounted = true };
+  }, []);
   return (
     <Suspense fallback={<></>}>
       <Helmet
