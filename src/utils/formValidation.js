@@ -64,7 +64,7 @@ export function minLenghtValidationClass(inputData, minLength, notRequired) {
   const { value } = inputData;
   removeClassErrorSuccess(inputData);
   if (value.length >= minLength) {
-    inputData.classList.add("success");
+    inputData.classList.add("form-validation-success");
     if (notRequired) {
       if (value === "") {
         removeClassErrorSuccess(inputData);
@@ -72,7 +72,7 @@ export function minLenghtValidationClass(inputData, minLength, notRequired) {
     }
     return true;
   } else {
-    inputData.classList.add("error");
+    inputData.classList.add("form-validation-error");
     if (notRequired) {
       if (value === "") {
         removeClassErrorSuccess(inputData);
@@ -84,17 +84,18 @@ export function minLenghtValidationClass(inputData, minLength, notRequired) {
 
 export function isNotNumberValidationClass(inputData, noSuccessClass) {
   const isNumber = /^\d+$/;
+  const valueSplit = inputData.value.replace(/ /g, "");
   removeClassErrorSuccess(inputData);
-  const resultValidation = isNumber.test(inputData.value);
+  const resultValidation = isNumber.test(valueSplit);
   if (resultValidation) {
-    inputData.classList.add("error");
+    inputData.classList.add("form-validation-error");
     return true;
   } else {
     if (noSuccessClass) {
       removeClassErrorSuccess(inputData);
       return false;
     } else {
-      inputData.classList.add("success");
+      inputData.classList.add("form-validation-success");
       return false;
     }
   }
@@ -105,36 +106,37 @@ export function minLenghtIsNotNumberValidationClass(
   minLength,
   notRequired
 ) {
-  const isNumber = /^\d+$/;
   const { value } = inputData;
   removeClassErrorSuccess(inputData);
-  const resultValidation = isNumber.test(value);
-  const resultVal = () => {
+  const isNumber = /^\d+$/;
+  const valueSplit = value.replace(/ /g, "");
+  const resultValidation = isNumber.test(valueSplit);
     if (resultValidation) {
-      inputData.classList.add("error");
-      return true;
-    } else {
-      inputData.classList.add("success");
+      inputData.classList.add("form-validation-error");
       return false;
-    }
-  };
-  if (value.length >= minLength) {
-    inputData.classList.add("success");
-    resultVal();
-    if (notRequired) {
-      if (value === "") {
-        removeClassErrorSuccess(inputData);
+    } else {
+      inputData.classList.add("form-validation-success");
+      if (value.length >= minLength) {
+        inputData.classList.add("form-validation-success");
+        if (notRequired) {
+          if (value === "") {
+            removeClassErrorSuccess(inputData);
+            return true;
+          }
+        }
+        return true;
+      } else {
+        inputData.classList.add("form-validation-error");
+        if (notRequired) {
+          if (value === "") {
+            removeClassErrorSuccess(inputData);
+            return false;
+          }
+        }
+        return false;
       }
     }
-  } else {
-    inputData.classList.add("error");
-    resultVal();
-    if (notRequired) {
-      if (value === "") {
-        removeClassErrorSuccess(inputData);
-      }
-    }
-  }
+
 }
 
 export function emailValidationClass(inputData, initialClass) {
@@ -146,19 +148,19 @@ export function emailValidationClass(inputData, initialClass) {
       removeClassErrorSuccess(inputData);
     } else {
       if (resultValidation) {
-        inputData.classList.add("success");
+        inputData.classList.add("form-validation-success");
         return true;
       } else {
-        inputData.classList.add("error");
+        inputData.classList.add("form-validation-error");
         return false;
       }
     }
   } else {
     if (resultValidation) {
-      inputData.classList.add("success");
+      inputData.classList.add("form-validation-success");
       return true;
     } else {
-      inputData.classList.add("error");
+      inputData.classList.add("form-validation-error");
       return false;
     }
   }
@@ -170,7 +172,7 @@ export function isPhoneNumberValidationClass(inputData, notRequired) {
   removeClassErrorSuccess(inputData);
   const resultValidation = isPhoneNumber.test(value);
   if (resultValidation) {
-    inputData.classList.add("success");
+    inputData.classList.add("form-validation-success");
     if (notRequired) {
       if (value === "") {
         removeClassErrorSuccess(inputData);
@@ -178,7 +180,7 @@ export function isPhoneNumberValidationClass(inputData, notRequired) {
     }
     return true;
   } else {
-    inputData.classList.add("error");
+    inputData.classList.add("form-validation-error");
     if (notRequired) {
       if (value === "") {
         removeClassErrorSuccess(inputData);
@@ -189,6 +191,6 @@ export function isPhoneNumberValidationClass(inputData, notRequired) {
 }
 
 function removeClassErrorSuccess(inputData) {
-  inputData.classList.remove("success");
-  inputData.classList.remove("error");
+  inputData.classList.remove("form-validation-success");
+  inputData.classList.remove("form-validation-error");
 }
