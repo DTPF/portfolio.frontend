@@ -2,9 +2,17 @@
 @import "../../scss/variables";
 
 .error-ant {
-  .ant-result-extra {
-    button {
-      @include buttonPrimary();
+  .ant-result {
+    &-title {
+      color: var(--t-primary-color-dark);
+    }
+    &-subtitle {
+      color: var(--t-primary-color);
+    }
+    &-extra {
+      button {
+        @include buttonPrimary();
+      }
     }
   }
 }

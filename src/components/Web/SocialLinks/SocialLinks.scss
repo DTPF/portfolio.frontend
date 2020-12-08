@@ -1,6 +1,12 @@
 @import "../../../scss/variables";
 @import "../../../scss/mixins";
 
+:root[data-theme='light'] {
+  --t-social-links-border: 1px solid transparent;
+}
+:root[data-theme='dark'] {
+  --t-social-links-border: 1px solid var(--color-lightgrey);
+}
 .social-links {
   display: flex;
   align-items: center;
@@ -16,9 +22,11 @@
     @include boxShadowMd();
     &.github {
       background-color: $github;
+      border: var(--t-social-links-border);
     }
     &.linkedin {
       background-color: $linkedin;
+      border: var(--t-social-links-border);
     }
     svg {
       min-width: 27px !important;

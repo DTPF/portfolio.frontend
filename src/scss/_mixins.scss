@@ -1,6 +1,15 @@
+:root[data-theme="light"] {
+  --button-primary-bg: var(--primary-color);
+  --button-primary-light-border: 1px solid var(--primary-color);
+}
+:root[data-theme="dark"] {
+  --button-primary-bg: var(--primary-color-extra-dark);
+  --button-primary-light-border: 1px solid var(--color-lightgrey);
+}
+
 @mixin buttonPrimary() {
   color: #fff;
-  background-color: #5d718d;
+  background-color: var(--button-primary-bg);
   border: 1px solid #556985;
   font-weight: bold;
   font-size: 13px;
@@ -11,7 +20,7 @@
   &:focus,
   &:active {
     color: #fff;
-    background-color: #5d718d;
+    background-color: var(--button-primary-bg);
     border: 1px solid #556985;
   }
   &:hover {
@@ -42,12 +51,12 @@
   &:focus {
     color: #273b56d3;
     background-color: #cdd5df;
-    border: 1px solid #273b56d3;
+    border: var(--button-primary-light-border);
   }
   &:hover {
     color: #fff;
     background-color: #273b56;
-    border: 1px solid #273b56;
+    border: var(--button-primary-light-border);
     @include boxShadowLg();
   }
   @media (min-width: $media-breakpoint-up-xs) {

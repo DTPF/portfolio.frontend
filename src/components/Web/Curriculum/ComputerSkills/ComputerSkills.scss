@@ -17,12 +17,13 @@
       text-transform: uppercase;
       text-align: center;
       margin-top: 23px;
+      color: var(--t-primary-color-dark);
     }
     padding: 0 15px;
     &__skill {
       display: flex;
       justify-content: space-between;
-      color: $font-primary;
+      color: var(--t-primary-color-dark);
       font-size: 1.2em;
       font-weight: 500;
       margin: 0 auto;

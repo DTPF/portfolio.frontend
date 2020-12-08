@@ -6,12 +6,13 @@
     max-width: 1000px;
     margin: 0 auto;
     text-align: justify;
-    color: $font-primary-dark;
+    color: var(--t-primary-color-dark);
     font-size: 1.1em;
     font-weight: 500;
     padding: 10px;
     margin-bottom: 20px;
     span {
+      color: var(--t-primary-color-dark);
       font-size: 1.2em;
       font-weight: 700;
     }

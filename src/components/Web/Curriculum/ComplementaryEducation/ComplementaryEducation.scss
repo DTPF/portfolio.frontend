@@ -18,10 +18,10 @@
     h2 {
       @include titleH2();
       text-transform: uppercase;
-      // font-size: 1.5em;
       text-align: center;
       margin-top: 20px;
       margin-bottom: 22px;
+      color: var(--t-primary-color-dark);
       @include fadeIn();
       @media (min-width: $media-breakpoint-up-lg) {
         margin-top: 0;
@@ -38,32 +38,43 @@
       .ant-collapse {
         width: 100% !important;
         max-width: 650px;
-        border-radius: 7px;
+        background: var(--t-white-lightgrey-bg);
         @include boxShadowMd();
         &-header {
+          border-bottom: 0 !important;
           color: $font-primary-dark;
           font-weight: bold;
           font-size: 1.2em;
         }
         &-content {
+          background: var(--t-white-lightgrey-bg);
           ul {
             padding-left: 28px;
             padding-right: 10px;
             li {
               color: $font-primary;
-              padding: 4px 0;
+              padding: 4px 2px;
               &::marker {
                 padding: 0;
               }
             }
           }
           &-box {
-            padding: 10px 0;
+            padding: 10px 0px;
             padding-top: 12px;
             padding-bottom: 0;
           }
         }
       }
+    }
+  }
+  .ant-collapse {
+    border-radius: 7px !important;
+    &-content {
+      border-radius: 7px !important;
+    }
+    &-item {
+      border: 0 !important;
     }
   }
 }

@@ -2,20 +2,22 @@
 @import "./scss/mixins";
 @import "./scss/animations";
 
-.success {
-  background-color: $background-success;
+:root[data-theme="light"] {
+  --t-ant-message-notice-bg: var(--primary-bg-dark);
+  --t-offline-tag-alert-bg: var(--primary-bg-dark);
+  --t-offline-tag-alert-color: #fff;
 }
-
-.error {
-  background-color: $background-error;
+:root[data-theme="dark"] {
+  --t-ant-message-notice-bg:var(--primary-bg);
+  --t-offline-tag-alert-bg: #cdd5df;
+  --t-offline-tag-alert-color: var(--primary-bg-dark);
 }
-
 .ant-message-notice {
   &:first-child {
     margin-top: 15px;
   }
   &-content {
-    background-color: $primary-color-dark;
+    background-color: var(--t-ant-message-notice-bg) !important;
     border: 2px solid $primary-color-extra-dark;
     color: #fff;
     font-weight: 500;
@@ -23,84 +25,59 @@
     @include boxShadowXl();
   }
 }
-
-.ant-notification {
-  display: flex;
-  justify-content: center;
-  width: 100% !important;
-  margin: 0 auto !important;
-  &-notice {
-    text-align: left;
-    margin-top: 10px;
-    padding: 0;
-    padding-top: 7px;
-    padding-left: 7px;
-    background-color: $primary-color-dark;
-    border: 2px solid $primary-color-extra-dark;
-    border-radius: 5px;
-    @include boxShadowLg();
-    @media (min-width: $media-breakpoint-up-md) {
-      margin-top: 20px;
-    }
-    &-message {
-      color: #fff !important;
-      font-size: 1em !important;
-      padding-top: 2px;
-    }
-  }
-  &-close-x {
-    color: $secondary-color !important;
-    position: absolute !important;
-    top: -7px !important;
-    right: -15px;
-  }
-}
-
 .offline-message {
   position: fixed;
-  left: calc(50% - 42px) !important;
-  top: 45px;
+  right: calc(50% - 50px);
+  top: 18px;
   z-index: 101;
-  color: $font-primary-extra-dark;
-  background-color: $primary-color-light;
+  color: var(--t-offline-tag-alert-color);
+  background-color: var(--t-offline-tag-alert-bg);
   font-weight: bold;
-  border: 2px solid $primary-color-dark;
+  border: 2px solid $primary-color-extra-dark;
   border-radius: 10px;
   @include boxShadowLg();
   @include fadeInfinite(0.9, 1, 1s);
   @media (min-width: $media-breakpoint-up-md) {
-    top: 50px;
+    top: 21px;
   }
   @media (min-width: $media-breakpoint-up-lg) {
-    top: 55px;
+    right: 160px;
+    top: 24px;
   }
   @media (min-width: $media-breakpoint-up-xl) {
-    top: 60px;
+    top: 27px;
   }
   .anticon-stop {
     color: red;
   }
 }
-
 .offline-message-alert {
   position: fixed;
-  bottom: 0px;
+  top: 55px;
   width: 100%;
   padding-right: 85px !important;
   font-size: 0.9em;
   z-index: 100;
   border: 0;
   border-top: 2px solid $primary-color;
-  background-color: $primary-color-light;
+  background-color: var(--t-offline-tag-alert-bg);
   @include boxShadowLg();
+  @media (min-width: $media-breakpoint-up-md) {
+    top: 60px;
+  }
+  @media (min-width: $media-breakpoint-up-lg) {
+    top: 65px;
+  }
+  @media (min-width: $media-breakpoint-up-xl) {
+    top: 70px;
+  }
   .ant-alert-message {
-    color: $font-primary-extra-dark !important;
+    color: var(--t-offline-tag-alert-color) !important;
     font-weight: 500;
   }
   .ant-alert-close-icon {
-    // padding-top: 5px !important;
     span {
-      color: $font-primary-dark;
+      color: var(--t-offline-tag-alert-color);
     }
   }
 }

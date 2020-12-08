@@ -17,18 +17,19 @@
       text-align: center;
       text-transform: uppercase;
       margin-top: 15px;
+      color: var(--t-primary-color-dark);
     }
     &__item {
       @include fadeIn();
       display: flex;
       justify-content: space-between;
       max-width: 240px;
+      color: var(--t-primary-color-dark);
       margin: 0 auto;
-      color: $font-primary;
       font-weight: 500;
       font-size: 1.2em;
       span {
-        color: $font-primary-dark;
+        color: var(--t-primary-color-dark);
       }
     }
   }

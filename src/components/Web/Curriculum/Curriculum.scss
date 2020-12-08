@@ -8,6 +8,7 @@
     @include titleH1();
     text-align: center;
     margin-top: 20px;
+    color: var(--t-primary-color-dark);
   }
   &__languages-projects {
     margin: 0 auto;

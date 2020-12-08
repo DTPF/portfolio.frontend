@@ -2,7 +2,7 @@
 @import "../../../../scss/mixins";
 
 .footer {
-  background-color: $primary-color;
+  background-color: var(--t-header-footer-bg);
   padding: 0;
   padding-bottom: 15px;
   padding-top: 10px;  
@@ -17,7 +17,7 @@
       justify-content: center;
       text-transform: uppercase;
       @include H4();
-      color: #fff;
+      color: var(--t-white-lightgrey-color);
     }
   }
 }

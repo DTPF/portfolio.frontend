@@ -1,6 +1,14 @@
 @import "../../../../scss/variables";
 @import "../../../../scss/mixins";
 
+:root[data-theme="light"] {
+  --t-courses-card-bg: var(--color-lightgrey);
+  --t-courses-card-anticon-eye-color: var(--primary-color-dark);
+}
+:root[data-theme="dark"] {
+  --t-courses-card-bg: var(--primary-bg-dark);
+  --t-courses-card-anticon-eye-color: #fff;
+}
 .courses-list {
   max-width: 1450px;
   margin: 0 auto;
@@ -20,6 +28,7 @@
       text-transform: uppercase;
       margin: 0;
       margin-top: 10px;
+      color: var(--t-primary-color-dark);
     }
     h2 {
       @include H3();
@@ -27,6 +36,7 @@
       color: $primary-color;
       padding: 0 10px;
       margin: 15px auto;
+      color: var(--t-primary-color);
       @media (min-width: $media-breakpoint-up-lg) {
         font-size: 1.4em;
       }
@@ -138,7 +148,6 @@
 
   &__card {
     border: 0;
-    background-color: $primary-color;
     border-radius: 5px;
     overflow: hidden;
     @include boxShadowLg();
@@ -167,7 +176,7 @@
       }
       &-body {
         text-align: center;
-        background-color: $primary-color-light;
+        background-color: var(--t-courses-card-bg);
         min-height: 100%;
         padding: 0;
         padding-bottom: 35px;
@@ -178,7 +187,7 @@
         align-items: center;
         justify-content: center;
         min-height: 80px;
-        background-color: $primary-color-light;
+        background-color: var(--t-courses-card-bg);
         @media (min-width: $media-breakpoint-up-xs) {
           min-height: 85px;
         }
@@ -191,9 +200,8 @@
         @media (min-width: $media-breakpoint-up-lg) {
           min-height: 105px;
         }
-
         &-description {
-          color: $font-primary-dark;
+          color: var(--t-primary-color-dark);
           font-size: 10px;
           font-weight: bold;
           padding: 0 5px;
@@ -212,6 +220,9 @@
           }
         }
       }
+    }
+    .anticon-eye {
+      color: var(--t-courses-card-anticon-eye-color) !important;
     }
   }
 

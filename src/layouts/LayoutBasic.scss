@@ -2,6 +2,20 @@
 @import "../scss/mixins";
 @import "../scss/animations";
 
+:root[data-theme='light'] {
+  --t-layout-basic-bg-primary-G1: var(--bg-lightgrey);
+  --t-layout-basic-bg-primary-G2:  #c6c8ca;
+  --t-layout-basic-border-top: var(--primary-bg-dark);;
+  --t-layout-basic-backTop: var(--secondary-bg-opacity-8);
+}
+
+:root[data-theme='dark'] {
+  --t-layout-basic-bg-primary-G1:   #5d718dc7;
+  --t-layout-basic-bg-primary-G2: var(--primary-bg);
+  --t-layout-basic-border-top: var(--primary-bg);
+  --t-layout-basic-backTop: var(--secondary-bg-opacity-9);
+}
+
 .layout-basic {
   background-repeat: no-repeat;
   background-position: 1% 1%;
@@ -10,14 +24,14 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-attachment: fixed;
-  background-color: rgb(218, 218, 218);
+  background: linear-gradient(90deg, var(--t-layout-basic-bg-primary-G2) 0%, var(--t-layout-basic-bg-primary-G1) 50%, var(--t-layout-basic-bg-primary-G2) 100%);
   &__header {
     position: fixed;
     z-index: 100;
     width: 100%;
     .ant-menu-horizontal {
       border-bottom: 0 !important;
-      border-top: 2px solid $primary-color-dark;
+      border-top: 2px solid var(--t-layout-basic-border-top);
       @include boxShadowXl();
     }
   }
@@ -42,7 +56,6 @@
       min-height: calc(100vh - 333px);
     }
   }
-
   &__footer {
     font-weight: bold;
     @include boxShadowXl();
@@ -61,7 +74,7 @@
 }
 
 .ant-back-top-content {
-  background-color: $secondary-color-transparent !important;
+  background-color: var(--t-layout-basic-backTop) !important;
   @include boxShadowLg();
   &:hover {
     background-color: $secondary-color !important;

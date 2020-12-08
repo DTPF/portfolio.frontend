@@ -1,7 +1,7 @@
 @import "../../../../../scss/variables";
 @import "../../../../../scss/mixins";
 
-.my-info {
+.footer__my-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,23 +17,21 @@
     margin-top: 10px;
     margin-bottom: 15px;
   }
-
   p {
     margin-bottom: 20px;
     text-align: center;
     @include H4();
-    color: #fff;
+    color: var(--t-white-lightgrey-color);
     @media (max-width: $media-breakpoint-down-sm) {
       padding-left: 10px;
       padding-right: 10px;
     }
     @media (min-width: $media-breakpoint-up-lg) {
-        padding-left: 10px;
-        padding-right: 10px;
-        font-size: $font-size-sm;
-      }
+      padding-left: 10px;
+      padding-right: 10px;
+      font-size: $font-size-sm;
+    }
   }
-
   .social-links {
     justify-content: center;
   }

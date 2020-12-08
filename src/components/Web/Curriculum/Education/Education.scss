@@ -20,6 +20,7 @@
       text-align: center;
       h2 {
         @include titleH2();
+        color: var(--t-primary-color-dark);
         text-transform: uppercase;
         margin-top: 0;
         margin-bottom: 22px;
@@ -45,6 +46,7 @@
         max-width: 650px;
         margin-bottom: 5px;
         @include boxShadowMd();
+        background: var(--t-white-lightgrey-bg);
         &-header {
           @include H5();
           color: $font-primary-dark;
@@ -59,6 +61,7 @@
         &-content {
           border-bottom-left-radius: 7px;
           border-bottom-right-radius: 7px;
+          background: var(--t-white-lightgrey-bg);
           h3 {
             @include H4();
             color: $font-primary-light !important;

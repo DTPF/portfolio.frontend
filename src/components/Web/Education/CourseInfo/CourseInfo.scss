@@ -1,5 +1,13 @@
 @import "../../../../scss/index.scss";
 
+html[data-theme="light"] {
+  --t-courses-info-btn-next-prev-bg: #273b56ab;
+  --t-courses-info-btn-next-prev-color: #fff;
+}
+html[data-theme="dark"] {
+  --t-courses-info-btn-next-prev-bg: var(--secondary-bg-opacity-7);
+  --t-courses-info-btn-next-prev-color: var(--primary-bg-dark);
+}
 .course-info {
   width: 100% !important;
   height: 100%;
@@ -17,6 +25,7 @@
       padding-top: 10px;
       padding-left: 30px;
       padding-right: 30px;
+      color: var(--t-primary-color-dark);
       @media (min-width: $media-breakpoint-up-lg) {
         font-size: 2em;
       }
@@ -28,50 +37,49 @@
     position: fixed;
     z-index: 100;
     bottom: 40% !important;
+    border-radius: 20px;
     @include boxShadowLg();
     button {
       width: 35px;
       height: 70px;
       @include buttonPrimary();
-      background-color: #273b56ab;
       padding: 0;
+      color: var(--t-courses-info-btn-next-prev-color);
+      background-color: var(--t-courses-info-btn-next-prev-bg);
+      border-radius: 20px;
       span {
         font-size: 1.3em;
       }
       &:active,
       &:focus,
-      &:hover {
-        background-color: $primary-color !important;
-        border: 1px solid $primary-color-dark;
-        color: #fff;
         &:hover {
-          color: $primary-color;
-          border: 1px solid $primary-color;
-          background-color: $primary-color-light !important;
+          background-color: $primary-color !important;
+          border: 1px solid $primary-color-dark;
+          color: #fff;
+          &:hover {
+            color: $primary-color;
+            border: 1px solid $primary-color;
+            background-color: $primary-color-light !important;
+          }
         }
-      }
     }
   }
   &__linkPrevMobile {
     left: 0px;
-    border-radius: 20px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     button {
       border-left: 0 !important;
-      border-radius: 20px;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
   }
   &__linkNextMobile {
     right: 0px;  
-    border-radius: 20px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     button {
       border-right: 0 !important;
-      border-radius: 20px;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
@@ -95,13 +103,13 @@
     display: flex;
     justify-content: center;
     &-duration {
-      color: $primary-color-dark;
+      color: var(--t-primary-color-dark);
       font-weight: bold;
       padding: 10px 15px;
       max-width: 385px;
     }
     &-date {
-      color: $primary-color-dark;
+      color: var(--t-primary-color-dark);
       font-weight: bold;
       text-align: right;
       padding: 10px 15px;
@@ -127,7 +135,6 @@
         @include boxShadowLg();
         align-items: center;
         display: flex;
-        // border-radius: 50px;
       }
       span {
         padding-right: 4px;
@@ -137,16 +144,17 @@
   }
 
   &__description {
-    max-width: 700px;
+    max-width: 990px;
     margin: 0 auto;
     p {
       padding: 10px 20px;
       text-indent: 15px;
       text-align: justify;
       @include p();
+      color: var(--t-primary-color-dark);
     }
-    @media (min-width: $media-breakpoint-up-md) {
-      font-size: 1.2em;
+    @media (min-width: $media-breakpoint-up-lg) {
+      font-size: 1.1em;
       padding: 10px 20px;
     }
   }
@@ -185,31 +193,4 @@
       @include tagsStyle();
     }
   }
-
-  // &__goBack {
-  //   button {
-  //     background-color:  rgba(255, 200, 62, 0.4) !important;
-  //     border: 0;
-  //     color: $primary-color-dark;
-  //     position: absolute;
-  //     top: -10px;
-  //     left: 0px;
-  //     z-index: 50;
-  //     font-size: 1.2em;
-  //     padding: 0;
-  //     width: 30px;
-  //     height: 30px;
-  //     border-radius: 20px;
-  //     border-top-left-radius: 0;
-  //     border-bottom-left-radius: 0;
-  //     @include boxShadowLg();
-  //     &:hover,
-  //     &:active,
-  //     &:focus {
-  //       color: $primary-color-dark;
-  //       background-color:  rgba(255, 200, 62, 0.6) !important;
-  //       border: 0 !important;
-  //     }
-  //   }
-  // }
 }

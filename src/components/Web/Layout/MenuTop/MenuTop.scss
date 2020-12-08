@@ -1,11 +1,11 @@
 @import "../../../../scss/variables";
+@import "../../../../scss/mixins";
 
 .menu-top-web {
-  background-color: $primary-color;
+  background-color: var(--t-header-footer-bg);
   display: flex;
   align-items: center;
   justify-content: flex-start;
-
   li {
     border: 0 !important;
     a {
@@ -16,7 +16,6 @@
       }
     }
   }
-
   &__logo {
     a {
       &:focus,
@@ -40,7 +39,6 @@
       }
     }
   }
-
   &__item {
     a {
       color: #fff !important;
@@ -52,14 +50,14 @@
     @media (min-width: $media-breakpoint-up-md) {
       font-size: $font-size-md;
     }
-    @media (max-width: 840px) {
+    @media (max-width: $media-breakpoint-up-lg) {
       display: none !important;
     }
     &-social {
       position: absolute !important;
       right: 0 !important;
       top: 17px !important;
-      @media (max-width: 840px) {
+      @media (max-width: $media-breakpoint-up-lg) {
         display: none !important;
       }
       @media (min-width: $media-breakpoint-up-lg) {
@@ -81,7 +79,6 @@
       }
     }
   }
-
   &__menu {
     position: absolute;
     right: 0;
@@ -93,7 +90,7 @@
     &:focus {
       color: #fff;
     }
-    @media (min-width: 840px) {
+    @media (min-width: $media-breakpoint-up-lg) {
       display: none !important;
     }
   }

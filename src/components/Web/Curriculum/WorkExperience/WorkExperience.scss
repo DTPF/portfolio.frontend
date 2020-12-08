@@ -2,6 +2,13 @@
 @import "../../../../scss/mixins";
 @import "../../../../scss/animations";
 
+:root[data-theme="light"] {
+  --t-curriculum-ant-collapse-bg: rgba(192, 192, 192, 0.1);
+}
+
+:root[data-theme="dark"] {
+  --t-curriculum-ant-collapse-bg: var(--primary-bg-light);
+}
 .curriculum {
   .work-experience {
     margin: 0 auto;
@@ -19,6 +26,7 @@
       margin-top: 10px;
       @include titleH2();
       @include fadeIn();
+      color: var(--t-primary-color-dark);
     }
     .container {
       padding: 10px 40px;
@@ -50,7 +58,7 @@
         content: "";
         position: absolute;
         width: 7px;
-        background-color: white;
+        background-color: var(--t-white-lightgrey-bg);
         top: 40px;
         bottom: 10px;
         left: 50%;
@@ -74,7 +82,7 @@
         right: 30px;
         border: medium solid white;
         border-width: 10px 0 10px 10px;
-        border-color: transparent transparent transparent white;
+        border-color: transparent transparent transparent var(--t-white-lightgrey-bg);
       }
     }
     .right {
@@ -89,7 +97,7 @@
         left: 30px;
         border: medium solid white;
         border-width: 10px 10px 10px 0;
-        border-color: transparent white transparent transparent;
+        border-color: transparent var(--t-white-lightgrey-bg) transparent transparent;
       }
       &::after {
         left: -16px;
@@ -102,7 +110,7 @@
       top: 15px;
       h3 {
         @include H3();
-        color: $primary-color-dark;
+        color: var(--t-primary-color-dark);
       }
     }
     .title-left {
@@ -117,8 +125,8 @@
 
     .content {
       padding: 10px 20px;
-      background-color: white;
       border-radius: 6px;
+      background-color: var(--t-white-lightgrey-bg) !important;
       span {
         @include H4();
         color: $font-primary-light;
@@ -136,7 +144,7 @@
       }
     }
     .work-collapse-panel {
-      background-color: #fff;
+      background-color: var(--t-white-lightgrey-bg) !important;
       border: 0;
       .ant-collapse-content-box {
         padding: 5px;
@@ -144,8 +152,9 @@
       &__text {
         text-align: justify;
         font-weight: 400 !important;
+        background-color: var(--t-curriculum-ant-collapse-bg);
+        color: #273b56 !important;
         color: $font-primary-dark;
-        background-color: rgba(192, 192, 192, 0.123);
         padding: 10px;
         border-radius: 5px;
         @include boxShadowMd();
@@ -207,9 +216,9 @@
         &::before {
           left: 50px;
           top: 35px;
-          border: medium solid white;
+          border: medium solid var(--t-white-lightgrey-bg);
           border-width: 10px 10px 10px 0;
-          border-color: transparent white transparent transparent;
+          border-color: transparent var(--t-white-lightgrey-bg) transparent transparent;
           margin: 0;
         }
         &::after {

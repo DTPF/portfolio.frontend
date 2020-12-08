@@ -19,6 +19,7 @@
       @include titleH2();
       text-transform: uppercase;
       margin-top: 15px;
+      color: var(--t-primary-color-dark);
       @media (min-width: $media-breakpoint-up-sm) {
         margin-top: 5px;
       }
@@ -26,7 +27,7 @@
     h3 {
       @include fadeIn();
       animation-duration: 1200ms;
-      color: $font-primary;
+      color: var(--t-primary-color-dark);
     }
     .ant-image {
       @include fadeIn();

@@ -1,5 +1,24 @@
 @import "../../../../scss/variables";
 
+:root[data-theme="light"] {
+  --t-css-cube-side-1-bg: #cdd5df;
+  --t-css-cube-side-2-bg: #445a7b;
+  --t-css-cube-side-3-bg: #5d718d;
+  --t-css-cube-side-4-bg: #345784;
+  --t-css-cube-side-5-bg: #1d3759;
+  --t-css-cube-side-6-bg: #0e1e35;
+  --t-css-cube-sides-color: #fff;
+}
+:root[data-theme="dark"] {
+  --t-css-cube-side-1-bg: rgb(255, 238, 164);
+  --t-css-cube-side-2-bg: rgb(255, 210, 95);
+  --t-css-cube-side-3-bg: rgb(255, 209, 92);
+  --t-css-cube-side-4-bg: rgb(255, 202, 70);
+  --t-css-cube-side-5-bg: rgb(255, 193, 36);
+  --t-css-cube-side-6-bg: rgb(255, 192, 33);
+  --t-css-cube-sides-color: #273b56;
+}
+
 #css-3D-cube {
   width: 100%;
   height: 260px;
@@ -52,7 +71,7 @@
     text-transform: uppercase;
     text-align: center;
     font-weight: bold;
-    color: #fff;
+    color: var(--t-css-cube-sides-color);
     @media (min-width: $media-breakpoint-up-lg) {
       font-size: 1.5em;
     }
@@ -63,7 +82,7 @@
       translateZ(90px);
     -webkit-transform: rotatex(90deg) translateX(0px) translateY(0px)
       translateZ(90px);
-    background-color: #cdd5df;
+    background-color: var(--t-css-cube-side-1-bg);
     color: #273b56;
     @media (min-width: $media-breakpoint-up-lg) {
       transform: rotatex(90deg) translateX(0px) translateY(0px)
@@ -80,7 +99,7 @@
       translateZ(90px);
     -webkit-transform: rotateY(-90deg) translateX(0px) translateY(0px)
       translateZ(90px);
-    background-color: #445a7b;
+    background-color: var(--t-css-cube-side-2-bg);
     @media (min-width: $media-breakpoint-up-lg) {
       transform: rotateY(-90deg) translateX(0px) translateY(0px)
         translateZ(150px);
@@ -94,7 +113,7 @@
     transform: translateX(0px) translateY(0px) translateZ(90px);
     -moz-transform: translateX(0px) translateY(0px) translateZ(90px);
     -webkit-transform: translateX(0px) translateY(0px) translateZ(90px);
-    background-color: #5d718d;
+    background-color: var(--t-css-cube-side-3-bg);
     @media (min-width: $media-breakpoint-up-lg) {
       transform: translateX(0px) translateY(0px) translateZ(150px);
       -moz-transform: translateX(0px) translateY(0px) translateZ(150px);
@@ -107,8 +126,7 @@
       translateZ(90px);
     -webkit-transform: rotateY(90deg) translateX(0px) translateY(0px)
       translateZ(90px);
-    background-color: #345784;
-    color: #fff;
+    background-color: var(--t-css-cube-side-4-bg);
     @media (min-width: $media-breakpoint-up-lg) {
       transform: rotateY(90deg) translateX(0px) translateY(0px)
         translateZ(150px);
@@ -124,8 +142,7 @@
       translateZ(90px);
     -webkit-transform: rotateY(180deg) translateX(0px) translateY(0px)
       translateZ(90px);
-    background-color: #1d3759;
-    color: #fff;
+    background-color: var(--t-css-cube-side-5-bg);
     @media (min-width: $media-breakpoint-up-lg) {
       transform: rotateY(180deg) translateX(0px) translateY(0px)
         translateZ(150px);
@@ -141,8 +158,7 @@
       translateZ(90px);
     -webkit-transform: rotateX(-90deg) translateX(0px) translateY(0px)
       translateZ(90px);
-    background-color: #0e1e35;
-    color: #fff;
+    background-color: var(--t-css-cube-side-6-bg);
     @media (min-width: $media-breakpoint-up-lg) {
       transform: rotateX(-90deg) translateX(0px) translateY(0px)
         translateZ(150px);

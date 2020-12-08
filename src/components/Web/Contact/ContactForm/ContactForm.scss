@@ -39,7 +39,7 @@
         margin-top: 5px !important;
         width: 80px;
         text-align: left !important;
-        color: $font-primary-dark !important;
+        color: var(--t-primary-color-dark) !important;
         font-size: 1.1em;
         font-weight: 500;
         span {
@@ -60,6 +60,7 @@
       margin: 0 !important;
       padding: 5px !important;
       color: $font-primary-extra-dark !important;
+      background: var(--t-white-lightgrey-bg);
       border: 0;
       font-size: 1.1em;
       border-radius: 5px;
@@ -73,6 +74,25 @@
     }
     textarea {
       text-align: justify;
+    }
+
+    .form-validation-error {
+      color: #fff !important;
+      border: 1px solid red !important;
+      background: rgba(255, 0, 0, 0.164);
+      &:hover,
+      &:focus {
+        border: 1px solid red !important;
+      }
+    }
+    .form-validation-success {
+      color: $font-primary !important;
+      background-color: var(--t-white-lightgrey-bg);
+      border: 1px solid #fff !important;
+      &:hover,
+      &:focus {
+        border: 1px solid #fff !important;
+      }
     }
   }
   &-button {

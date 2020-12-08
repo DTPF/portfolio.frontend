@@ -14,7 +14,6 @@
     @media (max-width: 285px) {
       width: 250px;
     }
-
     &-wrapper {
       padding: 0;
       height: 250px !important;
@@ -23,33 +22,31 @@
         height: 230px !important;
       }
     }
-
     &-bar {
+      background: var(--t-primary-color-dark);
       position: absolute;
       width: 100% !important;
       height: 3px;
-      background: $primary-color-dark !important;
       top: 143px;
       @media (max-width: $media-breakpoint-down-sm) {
         top: 141px;
       }
     }
-
     .title {
+      color: var(--t-primary-color-dark);
       display: flex;
       justify-content: center;
       font-size: 40px;
       padding-top: 30px;
       position: absolute;
       width: 150px;
-      color: $primary-color-dark;
       @media (max-width: $media-breakpoint-down-sm) {
         font-size: 30px;
         padding-top: 45px;
       }
     }
-
     .title-2 {
+      color: var(--t-primary-color-dark);
       display: flex;
       justify-content: center;
       font-size: 40px;
@@ -57,18 +54,16 @@
       padding-top: 75px;
       position: absolute;
       width: 130px;
-      color: $primary-color-dark;
       @media (max-width: $media-breakpoint-down-sm) {
         font-size: 30px;
         padding-top: 85px;
       }
     }
-
     .content {
+      color: var(--t-primary-color);
       font-size: 19px;
       text-align: center;
       position: absolute;
-      color: $primary-color-extra-dark;
       top: 160px;
       @media (max-width: $media-breakpoint-down-sm) {
         font-size: 16px;
@@ -76,5 +71,4 @@
       }
     }
   }
-  
 }

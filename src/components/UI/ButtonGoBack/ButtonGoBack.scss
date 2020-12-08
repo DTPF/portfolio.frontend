@@ -1,10 +1,16 @@
 @import "../../../scss/variables";
 @import "../../../scss/mixins";
 
+:root[data-theme="light"] {
+  --t-button-goBack-bg: var(--secondary-bg-opacity-8);
+}
+:root[data-theme="dark"] {
+  --t-button-goBack-bg: var(--secondary-bg-opacity-7);
+}
 .button-go-back {
   &__goBack {
     button {
-      background-color: $secondary-color-transparent-light !important;
+      background-color: var(--t-button-goBack-bg) !important;
       border: 0;
       color: $primary-color-dark;
       position: absolute;

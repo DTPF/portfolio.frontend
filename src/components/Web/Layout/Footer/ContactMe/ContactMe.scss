@@ -2,7 +2,7 @@
 @import "../../../../../scss/mixins";
 @import "../../../../../scss/animations";
 
-.contact-me {
+.footer__contact-me {
   position: relative;
   max-width: 300px;
   top: 50%;
@@ -30,12 +30,17 @@
       color: $font-primary-extra-dark;
       font-size: 1.1em;
       border: 1px solid #fff !important;
+      background: var(--t-white-lightgrey-bg);
       &:hover,
       &:active,
       &:focus {
         @include boxShadowLg();
         border: 1px solid #fff !important;
       }
+    }
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--primary-color-medium);
     }
     input {
       padding: 3px 0;
@@ -47,20 +52,21 @@
       padding: 4px;
       padding-left: 10px;
     }
-    .error {
+    .form-validation-error {
       color: #fff !important;
       border: 1px solid red !important;
+      background: rgba(255, 0, 0, 0.164);
       &:hover,
       &:focus {
-      border: 1px solid red !important;
+        border: 1px solid red !important;
       }
     }
-    .success {
-      background-color: #fff;
+    .form-validation-success {
+      background-color: var(--t-white-lightgrey-bg);
       border: 1px solid #fff !important;
       &:hover,
       &:focus {
-      border: 1px solid #fff !important;
+        border: 1px solid #fff !important;
       }
     }
     .ant-input {
@@ -84,10 +90,11 @@
     text-align: center;
     margin-bottom: 15px;
     @include H3();
-    color: #fff;
+    color: var(--t-white-lightgrey-color);
     span {
       @include rotateInfiniteAlternate30();
       font-size: 1.5em;
+      color: #fff;
     }
   }
   button {
