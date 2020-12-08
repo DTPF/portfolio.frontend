@@ -1,11 +1,11 @@
 import React, { useRef, useEffect } from "react";
 import "./Clock.scss";
 
-const Canvas = (props) => {
+export default function ClockJs() {
   const canvasRef = useRef(null);
   useEffect(() => {
     const canvas = document.getElementById("canvas");
-    let ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d");
     let radius = canvas.height / 2;
     ctx.translate(radius, radius);
     radius = radius * 0.92;
@@ -41,10 +41,10 @@ const Canvas = (props) => {
     ctx.fill();
   };
   const drawTime = (ctx, radius) => {
-    var now = new Date();
-    var hour = now.getHours();
-    var minute = now.getMinutes();
-    var second = now.getSeconds();
+    const now = new Date();
+    let hour = now.getHours();
+    let minute = now.getMinutes();
+    let second = now.getSeconds();
     hour = hour % 12;
     hour =
       (hour * Math.PI) / 6 +
@@ -73,4 +73,3 @@ const Canvas = (props) => {
   );
 };
 
-export default Canvas;
