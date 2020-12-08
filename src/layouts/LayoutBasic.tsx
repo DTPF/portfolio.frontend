@@ -4,8 +4,7 @@ import { gaEvent } from "../utils/analytics.js";
 import { Layout, BackTop, Tag, Alert } from "antd";
 import { StopOutlined } from "@ant-design/icons";
 import "./LayoutBasic.scss";
-import desktopImage from "../assets/img/jpg/background-squares.jpg";
-import mobileImage from "../assets/img/jpg/background-squares-mobile.jpg";
+import Theme from "../components/UI/Theme";
 import MenuTop from "../components/Web/Layout/MenuTop";
 import MenuSider from "../components/Web/Layout/MenuSider";
 import Footer from "../components/Web/Layout/Footer";
@@ -27,6 +26,7 @@ export default function LayoutBasic(props: any) {
         setMenuCollapsed={setMenuCollapsed}
         connection={connection}
       />
+      <Theme />
       <BackTop duration={600} onClick={() => clickBackTop} />
       {!isOnline && (
         <>
@@ -46,13 +46,7 @@ export default function LayoutBasic(props: any) {
 }
 
 function RenderLayoutBasic(props: any) {
-  const {
-    routes,
-    menuCollapsed,
-    setMenuCollapsed,
-    connection,
-  } = props;
-  const backgroundImage = window.innerWidth >= 650 ? desktopImage : mobileImage;
+  const { routes, menuCollapsed, setMenuCollapsed, connection } = props;
   const { Content } = Layout;
   const closeMenu = () => {
     if (menuCollapsed === false) {
@@ -60,31 +54,29 @@ function RenderLayoutBasic(props: any) {
     }
   };
   return (
-    <div
-      className="layout-basic"
-      onClick={closeMenu}
-      style={{ backgroundImage: `url(${backgroundImage})` }}
-    >
-        <div className="layout-basic__header">
-          <MenuTop
-            menuCollapsed={menuCollapsed}
-            setMenuCollapsed={setMenuCollapsed}
-          />
-          <MenuSider
-            menuCollapsed={menuCollapsed}
-            setMenuCollapsed={setMenuCollapsed}
-          />
-        </div>
-        <Content className="layout-basic__content">
-          {!connection || connection === 200 ? (
-            <LoadRoutes routes={routes && routes} />
-          ) : (
-            <Suspense fallback={<></>}>
-              <Error status={500} />
-            </Suspense>
-          )}
-        </Content>
-        <footer className="layout-basic__footer"><Footer /></footer>
+    <div className="layout-basic">
+      <div className="layout-basic__header">
+        <MenuTop
+          menuCollapsed={menuCollapsed}
+          setMenuCollapsed={setMenuCollapsed}
+        />
+        <MenuSider
+          menuCollapsed={menuCollapsed}
+          setMenuCollapsed={setMenuCollapsed}
+        />
+      </div>
+      <Content onClick={closeMenu} className="layout-basic__content">
+        {!connection || connection === 200 ? (
+          <LoadRoutes routes={routes && routes} />
+        ) : (
+          <Suspense fallback={<></>}>
+            <Error status={500} />
+          </Suspense>
+        )}
+      </Content>
+      <footer className="layout-basic__footer">
+        <Footer />
+      </footer>
     </div>
   );
 }
