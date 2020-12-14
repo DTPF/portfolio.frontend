@@ -8,7 +8,7 @@ import AdminSignIn from "../pages/Admin/SignIn";
 import AdminUsers from "../pages/Admin/Users";
 import AdminMenuWeb from "../pages/Admin/MenuWeb";
 import AdminContactMessages from "../pages/Admin/ContactMessages";
-import AdminCourses from "../pages/Admin/Courses";
+import AdminEducation from "../pages/Admin/Education";
 
 // Web Pages
 import Home from "../pages/Web/Home";
@@ -54,9 +54,9 @@ const routes = [
         component: AdminContactMessages
       },
       {
-        path: "/ad1988/courses",
+        path: "/ad1988/education",
         exact: true,
-        component: AdminCourses
+        component: AdminEducation
       },
       {
         component: Errors,
