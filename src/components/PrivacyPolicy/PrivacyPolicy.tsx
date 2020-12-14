@@ -1,7 +1,9 @@
 import React from "react";
+import useScrollToTop from "../../hooks/useScrollToTop";
 import "./PrivacyPolicy.scss";
 
 export default function PrivacyPolicy() {
+  useScrollToTop();
   return (
     <div className="privacy-policy">
       <h1>Política de Privacidad y Cookies</h1>
