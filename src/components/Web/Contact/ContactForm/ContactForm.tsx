@@ -1,18 +1,24 @@
 /* eslint-disable no-template-curly-in-string */
 import React, { useState } from "react";
-import { Row, Col, Form as FormAnt, Input, Button, message as msg } from "antd";
+import { Link } from "react-router-dom";
+import {
+  Row,
+  Col,
+  Form as FormAnt,
+  Input,
+  Checkbox,
+  Button,
+  message as msg,
+} from "antd";
 import "./ContactForm.scss";
 import { subscribeContactApi } from "../../../../api/contact";
 import { reloadMessagesTrueApi } from "../../../../api/utils";
 import {
   emailValidation,
-  emailValidationClass,
   minLenghtValidation,
   isNumberValidation,
-  isNotNumberValidationClass,
   isPhoneNumberValidation,
-  isPhoneNumberValidationClass,
-  minLenghtIsNotNumberValidationClass,
+  inputValidationStyle,
 } from "../../../../utils/formValidation";
 import { RedoOutlined } from "@ant-design/icons";
 import emailjs from "emailjs-com";
@@ -28,93 +34,144 @@ export default function ContactForm() {
     phone_number: "",
     subject: "",
     message: "",
+    privacyPolicy: false,
   });
-  const [formValid, setFormValid] = useState({
-    name: false,
-    email: false,
-    phoneNumber: false,
-    subject: false,
-    message: false,
-  });
-  const inputValidation = (e: any) => {
-    const { type, name } = e.target;
-    if (type === "text") {
-      setFormValid({
-        ...formValid,
-        [name]: minLenghtIsNotNumberValidationClass(e.target, 3, "notRequired"),
+  const handleChangeForm = (e: any) => {
+    if (e.target.name === "privacyPolicy") {
+      setInputs({
+        ...inputs,
+        [e.target.name]: e.target.checked,
       });
-    }
-    if (type === "email") {
-      setFormValid({ ...formValid, [name]: emailValidationClass(e.target) });
-    }
-    if (type === "tel") {
-      setFormValid({
-        ...formValid,
-        [name]: isPhoneNumberValidationClass(e.target, "notRequired"),
-      });
-    }
-    if (type === "textarea") {
-      setFormValid({
-        ...formValid,
-        [name]: isNotNumberValidationClass(e.target, "noSuccessClass"),
+    } else {
+      setInputs({
+        ...inputs,
+        [e.target.name]: e.target.value,
       });
     }
   };
-  const onFinish = async (e: any) => {
-    const { name, email, phone_number, subject, message } = inputs;
-    const emailReplace = email.replace(/ /g, "");
-    let finalData = {
+  const inputValidation = (e: any) => {
+    const { type, name } = e.target;
+    const valueTrim = e.target.value.replace(/ /g, "");
+    ////////// VALIDATIONS
+    // email
+    const emailValid = emailValidation(e.target.value);
+    // name
+    const nameMinLength = minLenghtValidation(e.target.value, 3);
+    const nameIsNumber = isNumberValidation(valueTrim);
+    // phone number
+    const phoneValid = isPhoneNumberValidation(e.target.value);
+    // subject
+    const subjectMinLength = minLenghtValidation(e.target.value, 3);
+    const subjectIsNumber = isNumberValidation(valueTrim);
+    // message
+    const messageMinLength = minLenghtValidation(e.target.value, 15);
+    const messageIsNumber = isNumberValidation(valueTrim);
+    const messageCountWords = e.target.value.split(" ").length;
+    ////////// END VALIDATIONS
+    const addError = () => inputValidationStyle(e, "add", "error");
+    const removeError = () => inputValidationStyle(e, "remove", "error");
+    if (type === "email") {
+      if (!emailValid) {
+        addError();
+      } else {
+        removeError();
+      }
+    }
+    if (name === "name") {
+      if (!nameMinLength || nameIsNumber) {
+        addError();
+      } else {
+        removeError();
+      }
+    }
+    if (type === "tel") {
+      if (!phoneValid) {
+        addError();
+      } else {
+        removeError();
+      }
+    }
+    if (name === "subject") {
+      if (!subjectMinLength || subjectIsNumber) {
+        addError();
+      } else {
+        removeError();
+      }
+    }
+    if (name === "message") {
+      if (!messageMinLength || messageIsNumber || messageCountWords < 3) {
+        addError();
+      } else {
+        removeError();
+      }
+    }
+    if (e.target.value === "") {
+      removeError();
+    }
+  };
+  const onFinish = async () => {
+    const {
+      name,
+      email,
+      phone_number,
+      subject,
+      message,
+      privacyPolicy,
+    } = inputs;
+    
+    const emailTrim = email.replace(/ /g, "");
+    const nameTrim = name.replace(/ /g, "");
+    const subjectTrim = subject.replace(/ /g, "");
+    const messageTrim = message.replace(/ /g, "");
+    const finalData = {
       name: name ? name : "Anónimo",
-      email: emailReplace,
+      email: emailTrim,
       phone_number: phone_number ? phone_number : "Ninguno",
       subject: subject ? subject : "Sin asunto",
       message: message,
     };
-    const nameIsNumberValidat = isNumberValidation(name);
-    const nameMinLengthValidat = minLenghtValidation(name, 3, "notRequierd");
-    const emailValidat = emailValidation(emailReplace);
-    const phoneValidat = isPhoneNumberValidation(phone_number, "notRequierd");
-    const subjectReplace = subject.replace(/ /g, "");
-    const subjectIsNumberValidat = isNumberValidation(subjectReplace);
-    const subjectMinLengthValidat = minLenghtValidation(
-      subject,
-      3,
-      "notRequierd"
-    );
-    const messageReplace = message.replace(/ /g, "");
-    const messageIsNumberValidat = isNumberValidation(messageReplace);
-    const messageMinLengthValidat = minLenghtValidation(
-      message,
-      3,
-      "notRequierd"
-    );
-    const countWords = message && message.split(" ").length;
-    if (nameIsNumberValidat) {
-      messageAnt.warn(`Seguro que te llamas ${name}??`);
-    } else if (!nameMinLengthValidat) {
-      messageAnt.warn("El nombre requiere un mínimo de 3 carácteres.");
-    } else if (!email && !message) {
+    ////////// VALIDATIONS
+    // email
+    const emailValid = emailValidation(emailTrim);
+    // name
+    const nameMinLength = minLenghtValidation(name, 3);
+    const nameIsNumber = isNumberValidation(nameTrim);
+    // phone_number
+    const phoneValid = isPhoneNumberValidation(phone_number);
+    // subject
+    const subjectMinLength = minLenghtValidation(subject, 3);
+    const subjectIsNumber = isNumberValidation(subjectTrim);
+    // message
+    const messageMinLength = minLenghtValidation(message, 10);
+    const messageIsNumber = isNumberValidation(messageTrim);
+    const messageCountWords = message && message.split(" ").length;
+    ////////// END VALIDATIONS
+    if (!email && !message) {
       messageAnt.warn("El email y el mensaje son obligatorios.");
+    } else if (nameIsNumber) {
+      messageAnt.warn(`Seguro que te llamas ${name}??`);
+    } else if (name && !nameMinLength) {
+      messageAnt.warn("El nombre requiere un mínimo de 3 carácteres.");
     } else if (!email) {
       messageAnt.warn("El email es obligatorio.");
-    } else if (!emailValidat) {
+    } else if (!emailValid) {
       messageAnt.warn("El email no es correcto.");
-    } else if (!phoneValidat) {
+    } else if (phone_number && !phoneValid) {
       messageAnt.warn("El número de teléfono no es correcto.");
     } else if (!message) {
       messageAnt.warn("El mensaje es obligatorio.");
-    } else if (!subjectMinLengthValidat) {
+    } else if (subject && !subjectMinLength) {
       messageAnt.warn("El asunto requiere un mínimo de 3 carácteres.");
-    } else if (subjectIsNumberValidat) {
+    } else if (subjectIsNumber) {
       messageAnt.warn("El asunto no pueden ser todo números...");
-    } else if (!messageMinLengthValidat) {
-      messageAnt.warn("El mensaje requiere un mínimo de 3 carácteres.");
-    } else if (messageIsNumberValidat) {
+    } else if (messageIsNumber) {
       messageAnt.warn("El mensaje no pueden ser todo números...");
-    } else if (!email && !message) {
-      messageAnt.warn("El email y el mensaje son obligatorios.");
-    } else if (countWords < 3) {
+    } else if (!messageMinLength) {
+      messageAnt.warn("El mensaje requiere un mínimo de 10 carácteres.");
+    } else if (messageCountWords < 3) {
       messageAnt.warn("Especifica un poco más en el mensaje por favor.");
+    } else if (!privacyPolicy) {
+      messageAnt.warn("Acepta la política de privacidad.");
     } else {
       await subscribeContactApi(finalData).then(async (response) => {
         if (response.status === 200) {
@@ -135,8 +192,8 @@ export default function ContactForm() {
             );
           await reloadMessagesTrueApi();
           for (let i = 0; i < removeclassName.length; i++) {
-            removeclassName[i].classList.remove("success");
-            removeclassName[i].classList.remove("error");
+            removeclassName[i].classList.remove("form-validation-success");
+            removeclassName[i].classList.remove("form-validation-error");
           }
           setInputs({
             name: "",
@@ -144,6 +201,7 @@ export default function ContactForm() {
             phone_number: "",
             subject: "",
             message: "",
+            privacyPolicy: false,
           });
           messageAnt
             .success("Enviado correctamente!!", 1.5)
@@ -152,7 +210,8 @@ export default function ContactForm() {
           messageAnt.error(response.message);
         } else {
           if (response.message === "Failed to fetch") {
-            messageAnt.error("No se ha podido enviar el mensaje.", 2)
+            messageAnt
+              .error("No se ha podido enviar el mensaje.", 2)
               .then(() => messageAnt.warn("Comprueba tu conexión a internet."));
           } else {
             messageAnt.warn(response.message);
@@ -168,107 +227,107 @@ export default function ContactForm() {
       phone_number: "",
       subject: "",
       message: "",
+      privacyPolicy: inputs.privacyPolicy,
     });
     for (let i = 0; i < removeclassName.length; i++) {
-      removeclassName[i].classList.remove("success");
-      removeclassName[i].classList.remove("error");
+      removeclassName[i].classList.remove("form-validation-success");
+      removeclassName[i].classList.remove("form-validation-error");
     }
   };
   return (
-    <Form name="contact-message" onFinish={onFinish}>
+    <Form
+      name="contact-message"
+      onFinish={onFinish}
+      onChange={handleChangeForm}
+    >
       <Row className="contact__form">
         <Col span={24} lg={12} className="contact__form-column-left">
           <div className="contact__form-item">
             <div className="contact__form-item-label">
-              <label title="email">
-                <span>*&nbsp;</span>Email
-              </label>
+              <span>*&nbsp;</span>Email
             </div>
             <Form.Item>
               <Input
                 type="email"
                 name="email"
+                aria-label="Email"
                 value={inputs.email}
                 onInput={inputValidation}
-                onChange={(e) => {
-                  setInputs({ ...inputs, email: e.target.value });
-                }}
               />
             </Form.Item>
           </div>
           <div className="contact__form-item">
-            <div className="contact__form-item-label">
-              <label title="name">Nombre</label>
-            </div>
+            <div className="contact__form-item-label">Nombre</div>
             <Form.Item>
               <Input
                 type="text"
                 name="name"
+                aria-label="Nombre"
                 value={inputs.name}
                 onInput={inputValidation}
-                onChange={(e) => {
-                  setInputs({ ...inputs, name: e.target.value });
-                }}
               />
             </Form.Item>
           </div>
           <div className="contact__form-item">
-          <div className="contact__form-item-label">
-            <label title="phone_number">Teléfono</label>
-            </div>
+            <div className="contact__form-item-label">Teléfono</div>
             <Form.Item>
               <Input
                 type="tel"
                 name="phone_number"
+                aria-label="Teléfono"
                 value={inputs.phone_number}
                 onInput={inputValidation}
-                onChange={(e) =>
-                  setInputs({ ...inputs, phone_number: e.target.value })
-                }
               />
             </Form.Item>
           </div>
           <div className="contact__form-item">
-          <div className="contact__form-item-label">
-            <label title="subject">Asunto</label>
-            </div>
+            <div className="contact__form-item-label">Asunto</div>
             <Form.Item>
               <Input
                 type="text"
                 name="subject"
+                aria-label="Asunto"
                 value={inputs.subject}
                 onInput={inputValidation}
-                onChange={(e) =>
-                  setInputs({ ...inputs, subject: e.target.value })
-                }
               />
             </Form.Item>
           </div>
         </Col>
         <Col span={24} lg={12} className="contact__form-column-right">
           <div className="contact__form-item">
-          <div className="contact__form-item-label">
-            <label title="message">
+            <div className="contact__form-item-label">
               <span>*&nbsp;</span>Mensaje
-            </label>
             </div>
             <Form.Item>
               <TextArea
+                name="message"
+                aria-label="Mensaje"
                 autoSize={{ minRows: 8, maxRows: 16 }}
                 value={inputs.message}
                 onInput={inputValidation}
-                onChange={(e) =>
-                  setInputs({ ...inputs, message: e.target.value })
-                }
               />
             </Form.Item>
           </div>
+        </Col>
+        <Col span={24} className="contact__form-checkbox">
+          <Form.Item>
+            <Checkbox
+              type="checkbox"
+              name="privacyPolicy"
+              className="ant-input__checkbox"
+              checked={inputs.privacyPolicy}
+            >
+              He leído y acepto la
+              <Link to="/privacy-policy">&nbsp;política de privacidad.</Link>
+            </Checkbox>
+          </Form.Item>
         </Col>
         <Col span={24} className="contact__form-button">
           <Form.Item>
             {(inputs.name ||
               inputs.email ||
               inputs.phone_number ||
+              inputs.subject ||
               inputs.message) && (
               <Button
                 type="primary"

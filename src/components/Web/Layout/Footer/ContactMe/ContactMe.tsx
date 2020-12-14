@@ -1,23 +1,27 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Form, Input, Checkbox, Button, message } from "antd";
 import { subscribeContactApi } from "../../../../../api/contact";
 import { reloadMessagesTrueApi } from "../../../../../api/utils";
 import { gaEvent } from "../../../../../utils/analytics.js";
-import { Form, Input, Button, message } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
 import "./ContactMe.scss";
 import {
   emailValidation,
-  emailValidationClass,
   isNumberValidation,
-  isNotNumberValidationClass,
+  inputValidationStyle,
 } from "../../../../../utils/formValidation";
 import emailjs from "emailjs-com";
 
 export default function ContactMe() {
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState({
+    email: "",
+    message: "",
+    privacyPolicy: false,
+  });
   return (
-    <div className="contact-me">
-      <span className="contact-me__title">
+    <div className="footer__contact-me">
+      <span className="footer__contact-me__title">
         Contacta conmigo&nbsp;
         <SmileOutlined />
       </span>
@@ -30,38 +34,66 @@ function RenderForm(props: any) {
   const { inputs, setInputs } = props;
   const messageAnt: any = message;
   const { TextArea }: any = Input;
-  const [formValid, setFormValid] = useState({
-    email: false,
-    message: false,
-  });
-  const inputValidation = (e: any) => {
-    const { type, name } = e.target;
-    if (type === "email") {
-      setFormValid({
-        ...formValid,
-        [name]: emailValidationClass(e.target, "noInitialClass"),
+  const handleChangeForm = (e: any) => {
+    if (e.target.name === "privacyPolicy") {
+      setInputs({
+        ...inputs,
+        [e.target.name]: e.target.checked,
       });
-    }
-    if (type === "textarea") {
-      setFormValid({
-        ...formValid,
-        [name]: isNotNumberValidationClass(e.target, "noSuccessClass"),
+    } else {
+      setInputs({
+        ...inputs,
+        [e.target.name]: e.target.value,
       });
     }
   };
-  const onFinish = () => {
-    const { email, message } = inputs;
-    const emailReplace = email?.replace(/ /g, "");
+  const inputValidation = (e: any) => {
+    const { name } = e.target;
+    const messageTrim = e.target.value.replace(/ /g, "");
+    ////////// VALIDATIONS
+    // email
+    const emailValid = emailValidation(e.target.value);
+    // message
+    const messageIsNumber = isNumberValidation(messageTrim);
+    const messageCountWords = e.target.value.split(" ").length;
+    ////////// END VALIDATIONS
+    const addError = () => inputValidationStyle(e, "add", "error");
+    const removeError = () => inputValidationStyle(e, "remove", "error");
+    if (name === "email") {
+      if (!emailValid) {
+        addError();
+      } else {
+        removeError();
+      }
+    }
+    if (name === "message") {
+      if (messageCountWords < 3 || messageIsNumber) {
+        addError();
+      } else {
+        removeError();
+      }
+    }
+    if (e.target.value === "") {
+      removeError();
+    }
+  };
+  const onFinish = async () => {
+    const { email, message, privacyPolicy } = inputs;
+    const emailTrim = email?.replace(/ /g, "");
+    const messageTrim = message?.replace(/ /g, "");
     const finalData = {
       name: "Anónimo",
-      email: emailReplace,
+      email: emailTrim,
       subject: "Sin asunto",
       message: message,
     };
-    const mailIsMail = emailValidation(emailReplace);
-    const messageReplace = message?.replace(/ /g, "");
-    const messageIsNum = isNumberValidation(messageReplace);
-    const countWords = message && message.split(" ").length;
+    ////////// VALIDATIONS
+    // email
+    const emailValid = emailValidation(emailTrim);
+    // message
+    const messageIsNumber = isNumberValidation(messageTrim);
+    const messageCountWords = message && message.split(" ").length;
+    ////////// END VALIDATIONS
     if (!email && message === "1988") {
       window.location.href = "/ad1988";
     } else if (!email && !message) {
@@ -70,9 +102,9 @@ function RenderForm(props: any) {
       messageAnt.warn("El email es obligatorio.");
     } else if (!message) {
       messageAnt.warn("El mensaje es obligatorio.");
-    } else if (!mailIsMail) {
+    } else if (!emailValid) {
       messageAnt.warn("El email no es válido.");
-    } else if (messageIsNum) {
+    } else if (messageIsNumber) {
       setInputs({
         email: "Autodestrucción...",
         message: "Cuenta atrás iniciada...",
@@ -95,10 +127,12 @@ function RenderForm(props: any) {
             setInputs({ email: email, message: message });
           }, 10000)
         );
-    } else if (countWords < 3) {
+    } else if (messageCountWords < 3) {
       messageAnt.warn("Especifica un poco más en el mensaje por favor.");
+    } else if (!privacyPolicy) {
+      messageAnt.warn("Acepta la política de privacidad.");
     } else {
-      subscribeContactApi(finalData).then((response) => {
+      await subscribeContactApi(finalData).then(async (response) => {
         if (response.status === 200) {
           emailjs
             .send(
@@ -109,14 +143,14 @@ function RenderForm(props: any) {
             )
             .then(
               (response) => {
-                console.log(response.text);
+                console.log(`%c${response.text}`, "color: green");
               },
               (err) => {
                 console.log("FAILED...", err);
               }
             );
-          reloadMessagesTrueApi();
-          setInputs({ email: "", message: "" });
+          await reloadMessagesTrueApi();
+          setInputs({ email: "", message: "", privacyPolicy: false });
           messageAnt
             .success("Enviado correctamente!!", 1.5)
             .then(() => messageAnt.info("Contestaré lo antes posible!!", 2.5));
@@ -124,7 +158,8 @@ function RenderForm(props: any) {
           messageAnt.error(response.message);
         } else {
           if (response.message === "Failed to fetch") {
-            messageAnt.error("No se ha podido enviar el mensaje.", 2)
+            messageAnt
+              .error("No se ha podido enviar el mensaje.", 2)
               .then(() => messageAnt.warn("Comprueba tu conexión a internet."));
           } else {
             messageAnt.warn(response.message);
@@ -133,34 +168,44 @@ function RenderForm(props: any) {
       });
     }
   };
-  const clickEmailFormFooter = () => {
+  const gaClickEmailFormFooter = () => {
     gaEvent("click_email_contact_me_footer", "clicks", "UI Clicks", true);
   };
   return (
-    <Form onFinish={onFinish}>
+    <Form onFinish={onFinish} onChange={handleChangeForm}>
       <Form.Item>
         <Input
           type="email"
           name="email"
+          aria-label="Email"
           placeholder="Correo electrónico"
           value={inputs.email}
           onInput={inputValidation}
-          onClick={() => clickEmailFormFooter()}
-          onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
+          onClick={gaClickEmailFormFooter}
         />
       </Form.Item>
-      <Form.Item>
+      <Form.Item className="contactme__textarea-form-item">
         <TextArea
+          name="message"
+          aria-label="Mensaje"
           placeholder="Escribe aquí tu mensaje"
           autoSize={{ minRows: 1, maxRows: 6 }}
           maxLength={500}
           value={inputs.message}
           onPressEnter={onFinish}
           onInput={inputValidation}
-          onChange={(e: any) =>
-            setInputs({ ...inputs, message: e.target.value })
-          }
         />
+      </Form.Item>
+      <Form.Item className="contactme__checkbox-form-item">
+        <Checkbox
+          type="checkbox"
+          name="privacyPolicy"
+          className="ant-input__checkbox"
+          checked={inputs.privacyPolicy}
+        >
+          He leído y acepto la
+          <Link to="/privacy-policy">&nbsp;política de privacidad.</Link>
+        </Checkbox>
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button">
