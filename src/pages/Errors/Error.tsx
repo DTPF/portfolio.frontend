@@ -10,18 +10,17 @@ export default function Error(props: {
   status: number;
 }) {
   const { title, subtitle, status } = props;
-  const urlHistory = useHistory();
+  const history = useHistory();
   return (
     <Suspense fallback={<></>}>
       <Helmet
         titleHelmet={`DTPF | Error ${status ? status : 404}`}
         contentHelmet={title ? title : "Recurso no encontrado."}
       />
-      {(!status || status === 404) && (
-        <Error404 title={title} subtitle={subtitle} urlHistory={urlHistory} />
-      )}
-      {status === 500 && (
-        <Error500 title={title} subtitle={subtitle} urlHistory={urlHistory} />
+      {(!status || status === 404) ? (
+        <Error404 title={title} subtitle={subtitle} history={history} />
+      ) : (
+        <Error500 title={title} subtitle={subtitle} />
       )}
     </Suspense>
   );

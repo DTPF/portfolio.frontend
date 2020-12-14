@@ -1,13 +1,12 @@
 import React from "react";
-import { Result, Button } from "antd";
+import { Result } from "antd";
 import "../Error.scss";
 
 export default function Error500(props: {
   title?: string;
   subtitle?: string;
-  urlHistory: any;
 }) {
-  const { title, subtitle, urlHistory } = props;
+  const { title, subtitle } = props;
   return (
     <div className="error-ant">
       <Result
@@ -19,9 +18,7 @@ export default function Error500(props: {
             : "Lo siento, ha ocurrido un error en el servidor, vuelve más tarde."
         }
         extra={
-          <Button type="primary" onClick={urlHistory.goBack}>
-            Volver
-          </Button>
+          <div>La página se reiniciará automáticamente cuando se solucione el problema.</div>
         }
       />
     </div>
