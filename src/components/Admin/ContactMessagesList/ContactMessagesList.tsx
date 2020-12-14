@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Switch,
   List,
@@ -7,9 +7,17 @@ import {
   message as messageAnt,
 } from "antd";
 import Modal from "../../UI/Modal";
-import { checkMessageApi, deleteContactMessageApi } from "../../../api/contact";
+import useMessagesStatus from "../../../hooks/useMessagesStatus";
+import {
+  getMessagesUnreadApi,
+  checkMessageApi,
+  deleteContactMessageApi,
+} from "../../../api/contact";
 import { getAccessTokenApi } from "../../../api/auth";
-import { reloadMessagesTrueApi } from "../../../api/utils";
+import {
+  reloadMessagesTrueApi,
+  reloadMessagesFalseApi,
+} from "../../../api/utils";
 import { CheckOutlined, DeleteOutlined } from "@ant-design/icons";
 import "./ContactMessagesList.scss";
 import moment from "moment";
@@ -17,11 +25,33 @@ import "moment/locale/es";
 const { confirm } = ModalDelete;
 
 export default function ContactMessagesList(props: any) {
-  const { messagesUnread, messagesRead, setReloadMessages } = props;
+  const { reloadMessages, setReloadMessages } = props;
   const [viewMessagesUnread, setViewMessagesUnread] = useState(true);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [modalTitle] = useState("");
   const [modalContent] = useState(null);
+  const { messagesStatus, setMessagesStatus } = useMessagesStatus();
+  const [messagesUnread, setMessagesUnread] = useState([]);
+  const [messagesRead, setMessagesRead] = useState([]);
+  const token = getAccessTokenApi();
+  useEffect(() => {
+    let isMounted = true;
+    reloadMessagesFalseApi().then(() => {
+      if (isMounted) {
+        setReloadMessages(false);
+        setMessagesStatus(false);
+      }
+    });
+    getMessagesUnreadApi(token, false).then((response) => {
+      isMounted && setMessagesUnread(response.messages);
+    });
+    getMessagesUnreadApi(token, true).then((response) => {
+      isMounted && setMessagesRead(response.messages);
+    });
+    return () => { isMounted = false };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [messagesStatus, reloadMessages]);
+
   return (
     <div className="messages-contact">
       <div className="messages-contact__header">
@@ -100,11 +130,9 @@ function MessageUnread(props: any) {
       ]}
     >
       <List.Item.Meta
-        title={
-          `${message.name ? message.name : "Anónimo"} - Hace ${
-            message && moment(message.date).fromNow(true)
-          }`
-        }
+        title={`${message.name ? message.name : "Anónimo"} - Hace ${
+          message && moment(message.date).fromNow(true)
+        }`}
         description={
           <div>
             <em>{message.email}</em>
@@ -183,11 +211,9 @@ function MessageRead(props: any) {
       ]}
     >
       <List.Item.Meta
-        title={
-          `${message.name ? message.name : "Anónimo"} - Hace ${
-            message && moment(message.date).fromNow(true)
-          }`
-        }
+        title={`${message.name ? message.name : "Anónimo"} - Hace ${
+          message && moment(message.date).fromNow(true)
+        }`}
         description={
           <div>
             <em>{message.email}</em>
