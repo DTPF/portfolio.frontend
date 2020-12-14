@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { checkUserLogin } from "../../../providers/AuthProvider";
 import { useHistory } from "react-router";
 import { useCookies } from "react-cookie";
 import { Button } from "antd";
 
-export default function Home({ userData }: any) {
+export default function Home(props: any) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookies, setCookie, removeCookie] = useCookies();
   const history = useHistory();
@@ -16,8 +17,14 @@ export default function Home({ userData }: any) {
     }
     history.go(0);
   };
+  const [user, setUser] = useState(null);  
+  useEffect(() => {
+    let isMounted = true;
+    isMounted && checkUserLogin(setUser);
+    return () => { isMounted = false }
+  }, []);
   return (
-    <RenderHome userData={userData} deleteCookies={deleteCookies} />
+    <RenderHome userData={user} deleteCookies={deleteCookies} />
   );
 }
 
