@@ -8,6 +8,7 @@ import {
   getAvatarApi,
   activateUserApi,
   deleteUserApi,
+  getUsersActiveApi
 } from "../../../../api/user";
 import { getAccessTokenApi } from "../../../../api/auth";
 import { notifDelay, notifDelayErr } from "../../../../utils/notifications";
@@ -21,9 +22,23 @@ import "./ListUsers.scss";
 const { confirm } = ModalDelete;
 
 export default function ListUsers(props: any) {
-  const { usersActive, usersInactive, setReloadUsers } = props;
+  const { reloadUsers, setReloadUsers } = props;
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState(null);
+  const [usersActive, setUsersActive] = useState([]);
+  const [usersInactive, setUsersInactive] = useState([]);
+  const token = getAccessTokenApi();
+  useEffect(() => {
+    let isMounted = true;
+    getUsersActiveApi(token, true).then((response) => {
+      isMounted && setUsersActive(response.users);
+    });
+    getUsersActiveApi(token, false).then((response) => {
+      isMounted && setUsersInactive(response.users);
+    });
+    return () => { isMounted = false };
+    // eslint-disable-next-line 
+  }, [reloadUsers]);
   return (
     <div className="list-users">
       <RenderListUsers
