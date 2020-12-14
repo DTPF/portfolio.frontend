@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Switch, List, Button, Modal as ModalAntd, notification } from "antd";
 import Modal from "../../../UI/Modal";
 import {
+  getMenuApi,
   updateMenuApi,
   activateMenuApi,
   deleteMenuApi,
@@ -16,13 +17,21 @@ import DragSortableList from "react-drag-sortable";
 const { confirm } = ModalAntd;
 
 export default function MenuWebList(props) {
-  const { menu, setReloadMenuWeb } = props;
+  const { reloadMenuWeb, setReloadMenuWeb } = props;
   const [listItems, setListItems] = useState([]);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState(null);
+  const [menu, setMenu] = useState(null);
   useEffect(() => {
-    let unmounted = false;
+    let isMounted = true;
+    getMenuApi().then((response) => {
+      isMounted && setMenu(response.menu)
+    });
+    return () => { isMounted = false };
+  }, [reloadMenuWeb]);
+  useEffect(() => {
+    let isMounted = true;
     const listItemsArray = [];
     menu && menu.forEach((item) => {
       listItemsArray.push({
@@ -39,10 +48,8 @@ export default function MenuWebList(props) {
         ),
       });
     });
-    if (!unmounted) {
-      setListItems(listItemsArray);
-    }
-    return () => { unmounted = true };
+    isMounted && setListItems(listItemsArray)
+    return () => { isMounted = false };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [menu]);
   const activateMenu = (menu, status) => {
