@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import routes from "./config/routes";
 import AuthProvider from "./providers/AuthProvider";
 import "./App.scss";
-import { notification } from "antd";
+import { message } from "antd";
 import * as serviceWorker from "./serviceWorker";
 
 export default function App() {
@@ -16,13 +16,7 @@ export default function App() {
           }
           window.location.reload();
         };
-        const args = {
-          message: "Nueva actualización de la web",
-          duration: 0,
-          closeIcon: "Recargar",
-          onClose: () => {reload()}
-        };
-        notification.open(args);
+        message.info("Nueva versión. Actualizando la web", 3, reload);
       },
     });
   }, []);
@@ -49,7 +43,7 @@ function RouteWithSubRoutes(route: {
     <Route
       path={route.path}
       exact={route.exact}
-      render={(props) => <route.component routes={route.routes} {...props} />}
+      render={(props) => <route.component {...props} routes={route.routes} />}
     />
   );
 }
