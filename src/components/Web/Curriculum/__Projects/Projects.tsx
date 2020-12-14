@@ -8,7 +8,7 @@ import "./Projects.scss";
 
 export default function Projects() {
   const [show, el] = useNearScreen();
-  let ref: any = el;
+  const ref: any = el;
   return (
     <div className="projects">
       <div className="use-near-screen" ref={ref}>
@@ -18,18 +18,18 @@ export default function Projects() {
             <Row>
               <Col span={12}>
                 <h3>Portfolio personal</h3>
-                <Image src={dtpfImage}></Image>
-                <Link to="/">https://dtps.es</Link>
+                <Link to="/">
+                  <Image src={dtpfImage}></Image>
+                </Link>
               </Col>
               <Col span={12}>
                 <h3>Blog de recetas</h3>
-                <Image src={recetasImage}></Image>
                 <a
                   href="https://recetasmsr.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  https://recetasmsr.com
+                  <Image src={recetasImage} preview={false}></Image>
                 </a>
               </Col>
             </Row>

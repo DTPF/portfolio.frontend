@@ -10,7 +10,7 @@ import {
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
-const Spin = lazy(() => import("../../../../components/UI/Spin"));
+const Spin = lazy(() => import("../../../UI/Spin"));
 const { confirm } = Modal;
 
 export default function CoursesList(props: any) {

@@ -5,7 +5,7 @@ import { Button, Row, Col, Form, Divider, Input, Tag, Modal, notification} from 
 import { notifDelay, notifDelayErr } from "../../../../utils/notifications";
 import { TagOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import "./AdminTags.scss";
-const Spin = lazy(() => import("../../../../components/UI/Spin"));
+const Spin = lazy(() => import("../../../UI/Spin"));
 const { confirm } = Modal;
 
 export default function AdminTags(props: {
