@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Form, Input, Button, notification } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { signInApi } from "../../../api/user";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../../utils/constants";
-import { notifDelayErr } from "../../../utils/notifications";
 import {
-  emailValidationClass,
-  minLenghtValidationClass,
+  emailValidation,
+  inputValidationStyle,
 } from "../../../utils/formValidation";
 import "./LoginForm.scss";
 
@@ -18,55 +17,54 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
-  const [formValid, setFormValid] = useState({
-    email: false,
-    password: false,
-  });
-  const changeForm = (e: any) => {
+  const handleChangeForm = (e: any) => {
     setInputs({
       ...inputs,
       [e.target.name]: e.target.value,
     });
   };
   const inputValidation = (e: any) => {
-    const { type, name } = e.target;
+    const { type } = e.target;
+    const emailValid = emailValidation(e.target.value);
     if (type === "email") {
-      setFormValid({ ...formValid, [name]: emailValidationClass(e.target) });
+      if (!emailValid) {
+        inputValidationStyle(e, "add", "error");
+      } else {
+        inputValidationStyle(e, "remove", "error");
+      }
     }
-    if (type === "password") {
-      setFormValid({ ...formValid, [name]: minLenghtValidationClass(e.target, 6) });
+    if (e.target.value === "") {
+      inputValidationStyle(e, "remove", "error");
     }
   };
   const login = () => {
     if (countLogin > 10) {
       setTimeToLogin(30000);
-    } 
+    }
     setIsLoading(true);
-    setTimeout( async function () {
+    setTimeout(async function () {
       let count = countLogin;
       setCountLogin(count + 1);
       const result = await signInApi(inputs);
-      if(result.message) {
-        notification["error"]({
-          message: result.message,
-          duration: notifDelayErr
-        });
+      if (result.message) {
+        message.error(result.message);
       } else {
-        const {accessToken, refreshToken} = result;
+        const { accessToken, refreshToken } = result;
         localStorage.setItem(ACCESS_TOKEN, accessToken);
         localStorage.setItem(REFRESH_TOKEN, refreshToken);
         window.location.href = "/ad1988";
       }
       setIsLoading(false);
-    }, timeToLogin);    
+    }, timeToLogin);
   };
   return (
-    <Form className="login-form" onFinish={login} onChange={changeForm}>
+    <Form className="login-form" onFinish={login} onChange={handleChangeForm}>
       <Form.Item>
         <Input
           prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
           type="email"
           name="email"
+          aria-label="Email"
           placeholder="Correo electrónico"
           className="login-form__input"
           onChange={inputValidation}
@@ -77,6 +75,7 @@ export default function LoginForm() {
           prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
           type="password"
           name="password"
+          aria-label="Contraseña"
           placeholder="Contraseña"
           className="login-form__input"
           onChange={inputValidation}
