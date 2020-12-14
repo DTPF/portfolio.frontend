@@ -42,8 +42,8 @@ export default function Theme() {
         name="theme-switcher"
         defaultChecked={isDarkTheme()}
       />
-      <label htmlFor="theme-switcher" onClick={() => gaClickThemeSwitcher()}>
-        Toggle
+      <label htmlFor="theme-switcher" aria-hidden="true" onClick={gaClickThemeSwitcher}>
+        Theme Toggle
       </label>
     </div>
   );
