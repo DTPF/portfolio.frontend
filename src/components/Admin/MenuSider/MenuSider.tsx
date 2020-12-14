@@ -33,13 +33,11 @@ function RenderMenuSider(props: any) {
   const { messagesUnreadLength, menuCollapsed, location } = props;
   const [newMessage, setNewMessage] = useState(messagesUnreadLength);
   useEffect(() => {
-    let unmounted = false;
+    let isMounted = true;
     if (messagesUnreadLength !== undefined) {
-      if (!unmounted) {
-        setNewMessage(messagesUnreadLength);
-      }
+      isMounted && setNewMessage(messagesUnreadLength);
     }
-    return () => { unmounted = true };
+    return () => { isMounted = false };
   }, [newMessage, messagesUnreadLength]);
   return (
     <NextRender
@@ -55,7 +53,7 @@ function NextRender(props: any) {
   const { menuCollapsed, location, messagesUnreadLength, newMessage } = props;
   const { Sider } = Layout;
   const token = getAccessTokenApi();
-  const playSound = (): any => {
+  const playSound = () => {
     const a : any = document.getElementById('sound');
     a.play();
   }
@@ -63,15 +61,15 @@ function NextRender(props: any) {
     getLastMessageApi(token).then((response) => {
       if (response.email) {
         if (newMessage < messagesUnreadLength) {
-          message.success(`Mensaje de ${response.email}`, 5);
-          addNotification({
-            title: `Mensaje de ${response.email}`,
-            native: true,
-            duration: 5000
-          });
-          playSound();
-        }
-      }
+            message.success(`Mensaje de ${response.email}`, 5);
+            addNotification({
+              title: `Mensaje de ${response.email}`,
+              native: true,
+              duration: 5000
+            });
+            playSound();
+          }
+        }  
     });
   }, [messagesUnreadLength, newMessage, token]);
   return (
@@ -117,8 +115,8 @@ function NextRender(props: any) {
               )}
             </Link>
           </Menu.Item>
-          <Menu.Item key="ad1988/courses">
-            <Link to="/ad1988/courses">
+          <Menu.Item key="ad1988/education">
+            <Link to="/ad1988/education">
               <ReadOutlined />
               <span className="nav-text">Formación</span>
             </Link>
