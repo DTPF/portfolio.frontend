@@ -3,6 +3,7 @@ import { Row, Col, Button, Image as ImageAnt, Tag } from "antd";
 import QueueAnim from "rc-queue-anim";
 import Modal from "../../../UI/Modal";
 import { gaEvent } from "../../../../utils/analytics.js";
+import useScrollToTop from "../../../../hooks/useScrollToTop";
 import "./ProjectLayout.scss";
 
 export default function ProyectLayout(props: {
@@ -14,14 +15,14 @@ export default function ProyectLayout(props: {
   image: string;
   imageAlt: string;
   modalTitle: string;
-  modalTags: [string];
+  modalTags: string[];
   modalImage1: string;
   modalImage2: string;
   modalImage3: string;
   modalImageAlt: string;
   modalDate: string;
   modalIntroduction: string;
-  modalText: [string];
+  modalText: string[];
 }) {
   const {
     innerWidth,
@@ -42,6 +43,7 @@ export default function ProyectLayout(props: {
     modalText,
   } = props;
   const [isVisibleModal, setIsVisibleModal] = useState(false);
+  useScrollToTop();
   return (
     <>
       <Modal

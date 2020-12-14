@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ContactForm from "../../../components/Web/Contact/ContactForm";
 import ContactInfo from "./ContactInfo/ContactInfo";
+import useScrollToTop from "../../../hooks/useScrollToTop";
 import "./Contact.scss";
 
 export default function Contact() {
@@ -8,6 +9,7 @@ export default function Contact() {
   const reportWindowSize = () => {
     setInnerWidth(window.innerWidth);
   };
+  useScrollToTop();
   useEffect(() => {
     let unmounted = false;
     if (!unmounted) {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import useScrollToTop from "../../../hooks/useScrollToTop";
 import { Image } from "antd";
 import "./AboutMeWeb.scss";
 import Clock from "./Clock";
@@ -6,6 +7,7 @@ import Cube from "./Cube";
 import image from "../../../assets/img/png/yo.png";
 
 export default function AboutMeWeb() {
+  useScrollToTop();
   return (
     <div className="about-me">
       <div className="about-me__title">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { useGetCourses } from "../../../hooks/useGetCourses";
+import useScrollToTop from "../../../hooks/useScrollToTop";
 import { useParams } from "react-router-dom";
 import { Row, Col } from "antd";
 import "./Education.scss";
@@ -14,6 +15,7 @@ export default function Education(props: any) {
   interface URL { url: string }
   const { url } = useParams<URL>();
   const [courses] = useGetCourses(100, location);
+  useScrollToTop();
   return (
     <RenderEducation
       url={url}
