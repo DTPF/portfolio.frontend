@@ -1,27 +1,17 @@
-import React, { useEffect, Suspense, lazy } from "react";
-import { useHistory } from "react-router-dom";
+import React, { Suspense, lazy } from "react";
 const Helmet = lazy(() => import("../../components/Helmet"));
 const ButtonGoBack = lazy(() => import("../../components/UI/ButtonGoBack"));
 const PrivacyPolicyComponent = lazy(() => import("../../components/PrivacyPolicy"));
 
-export default function PrivacyPolicy() {
-  const goBack = useHistory().goBack;
-  useEffect(() => {
-    let unmounted = false;
-    if (!unmounted) {
-      window.scrollTo(0, 0);
-    }
-    return () => {
-      unmounted = true;
-    };
-  }, []);
+export default function PrivacyPolicy(props: any) {
+  const { history } = props;
   return (
     <Suspense fallback={<></>}>
       <Helmet
         titleHelmet="DTPF | Política de privacidad"
         contentHelmet="Página de política de privacidad de David Thomas Pizarro Frick"
       />
-      <ButtonGoBack goBack={goBack} eventGoBack="politica-privacidad" />
+      <ButtonGoBack goBack={history.goBack} eventGoBack="politica-privacidad" />
       <PrivacyPolicyComponent />
     </Suspense>
   );

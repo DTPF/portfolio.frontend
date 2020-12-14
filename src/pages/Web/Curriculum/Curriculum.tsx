@@ -1,26 +1,12 @@
-import React, { useEffect, Suspense, lazy } from "react";
+import React, { Suspense, lazy } from "react";
 import "./Curriculum.scss";
-const Helmet = lazy(
-  () => import("../../../components/Helmet")
-);
+const Helmet = lazy(() => import("../../../components/Helmet"));
 const CurriculumWeb = lazy(() => import("../../../components/Web/Curriculum"));
 const ButtonGoBack = lazy(() => import("../../../components/UI/ButtonGoBack"));
-const CategoriesBigButtonsStatic = lazy(
-  () =>
-    import(
-      "../../../components/Web/CategoriesBigButtonsStatic/CategoriesBigButtonsStatic"
-    )
-);
+const CategoriesBigButtonsStatic = lazy(() => import("../../../components/Web/CategoriesBigButtonsStatic/CategoriesBigButtonsStatic"));
 
 export default function Curriculum(props: any) {
   const { location, history } = props;
-  useEffect(() => {
-    let unmounted = false;
-    if (!unmounted) {
-      window.scrollTo(0, 0);
-    }
-    return () => { unmounted = true };
-  }, []);
   return (
     <Suspense fallback={<></>}>
       <Helmet
