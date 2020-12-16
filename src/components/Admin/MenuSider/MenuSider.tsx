@@ -13,13 +13,11 @@ import {
 import "./MenuSider.scss";
 import { getAccessTokenApi } from "../../../api/auth";
 import addNotification from "react-push-notification";
-import useMessagesUnreadLength from "../../../webSockets/hooks/useMessagesUnreadLength";
 const sound = require("../../../assets/audio/sound.mp3");
 const soundOGG = require("../../../assets/audio/sound.ogg");
 
 function MenuSider(props: any) {
-  const { menuCollapsed, location } = props;
-  const messagesUnreadLength = useMessagesUnreadLength();
+  const { menuCollapsed, location, messagesUnreadLength } = props;
   return (
     <RenderMenuSider
       messagesUnreadLength={messagesUnreadLength}
