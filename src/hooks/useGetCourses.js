@@ -6,13 +6,11 @@ export function useGetCourses(num, location) {
   const { page = 1 } = queryString.parse(location.search);
   const [courses, setCourses] = useState([]);
   useEffect(() => {
-    let unmounted = false;
+    let isMounted = true;
     getCoursesApi(num, page).then((response) => {
-      if (!unmounted) {
-        setCourses(response.courses);
-      }
+      isMounted && setCourses(response.courses);
     });
-    return () => { unmounted = true };
+    return () => { isMounted = false };
   }, [num, page]);
   return [courses];
 }
