@@ -1,25 +1,27 @@
 import { useState, useEffect } from "react";
 import { getMenuApi } from "../api/menu";
+import { useDBConnectionStatus, useNavigatorIsOnline } from "../hooks/useConnection";
 
 export default function useGetMenu(ignoreMenu) {
   const [menuData, setMenuData] = useState([]);
+  const isNavigatorOnline = useNavigatorIsOnline();
+  const connectionStatus = useDBConnectionStatus();
   useEffect(() => {
-    let unmounted = false;
+    let isMounted = true;
     getMenuApi().then((response) => {
-      if (response.status !== 200) {
-        console.log("Error del servidor.");
-      } else {
+      if (response.status === 200) {
         const arrayMenu = [];
-        if (!unmounted) {
-          response.menu &&
-            response.menu.forEach((item) => {
-              item.active && arrayMenu.push(item);
-            });
+        response.menu &&
+          response.menu.forEach((item) => {
+            item.active && arrayMenu.push(item);
+          });
+        isMounted &&
           setMenuData(arrayMenu.filter((item) => item.url !== ignoreMenu));
-        }
+      } else {
+        console.log("Error del servidor.");
       }
-      return () => { unmounted = true };
+      return () => { isMounted = false };
     });
-  }, [ignoreMenu]);
+  }, [connectionStatus, isNavigatorOnline]);
   return menuData;
 }
