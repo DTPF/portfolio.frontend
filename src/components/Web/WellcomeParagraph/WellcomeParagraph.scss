@@ -1,5 +1,6 @@
 @import "../../../scss/variables";
 @import "../../../scss/mixins";
+@import "../../../scss/animations";
 
 .wellcome-paragraph {
   &__text {
@@ -11,19 +12,16 @@
     font-weight: 500;
     padding: 10px;
     margin-bottom: 20px;
-    span {
-      color: var(--t-primary-color-dark);
-      font-size: 1.2em;
-      font-weight: 700;
-    }
     @media (min-width: $media-breakpoint-down-sm) {
       text-align: center;
     }
     @media (min-width: $media-breakpoint-down-md) {
       font-size: 1.3em;
-      span {
-        font-size: 1.3em;
-      }
+    }
+    &-firstword {
+      color: var(--t-primary-color-dark);
+      font-size: 1.5em;
+      font-weight: 700;
     }
   }
 }

@@ -8,19 +8,19 @@
   h1 {
     text-align: center;
     @include titleH1();
-    color: $font-primary-dark;
+    color: var(--t-primary-color-dark);
   }
   h2 {
-    color: $font-primary-dark;
+    color: var(--t-primary-color-dark);
   }
   p {
-    color: $font-primary;
+    color: var(--t-primary-color);
     text-align: justify;
   }
   li {
-    color: $font-primary;
+    color: var(--t-primary-color);
     &::marker {
-      color: $primary-color-dark;
+      color: var(--t-primary-color-dark);
       font-size: 1.2em;
     }
   }

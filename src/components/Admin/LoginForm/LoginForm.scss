@@ -1,19 +1,18 @@
 @import "../../../scss/variables";
+@import "../../../scss/mixins";
 
 .login-form {
   .ant-form-item:last-of-type {
     margin: 0;
   }
-
   &__input {
-      padding: 0;
+    padding: 0;
     .ant-input-prefix {
       padding-left: 5px;
       i {
         font-size: 0em + 22px / $font-size-sm;
       }
     }
-
     input {
       font-size: 0em + 20px / $font-size-sm;
       padding: 7px 7px 7px 14px !important;
@@ -29,21 +28,14 @@
 
   &__button {
     width: 100%;
-    font-size: 0em + 22px / $font-size-sm;
-    background-color: $primary-color;
-    color: $font-light;
     height: 42px;
-    margin-top: 20px;
-
-    &:hover {
-      background-color: $primary-color-hover;
-      color: $font-light;
-    }
-    &:focus,
-    &:active {
-      background-color: $primary-color;
-      color: $font-light;
-      border: 0;
-    }
+    margin-top: 10px;
+  }
+  button {
+    @include buttonPrimary();
+  }
+  .form-validation-error {
+    color: $primary-color-dark !important;
+    background: rgba(255, 0, 0, 0.164);
   }
 }

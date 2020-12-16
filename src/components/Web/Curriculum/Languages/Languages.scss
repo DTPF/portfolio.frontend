@@ -5,6 +5,7 @@
 .curriculum {
   .languages {
     margin: 0 auto;
+    margin-bottom: 25px;
     @media (min-width: $media-breakpoint-up-xl) {
       max-width: 250px;
     }

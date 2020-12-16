@@ -23,11 +23,25 @@
     &__skill {
       display: flex;
       justify-content: space-between;
+      width: 100%;
       color: var(--t-primary-color-dark);
       font-size: 1.2em;
       font-weight: 500;
       margin: 0 auto;
-      max-width: 290px;
+      max-width: 320px;
+      &-name {
+        justify-content: flex-start;
+      }
+      &-progress {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        max-width: 130px;
+      }
+      .ant-progress-bg {
+        border-top-left-radius: 0px !important;
+        border-bottom-left-radius: 0px !important;
+      }
     }
     &__col {
       @include fadeIn();

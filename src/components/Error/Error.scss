@@ -10,6 +10,7 @@
       color: var(--t-primary-color);
     }
     &-extra {
+      color: var(--t-primary-color-dark);
       button {
         @include buttonPrimary();
       }

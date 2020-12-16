@@ -250,6 +250,7 @@
         text-align: left;
         h3 {
           @include H3();
+          color: var(--t-primary-color-dark);
         }
       }
     }
