@@ -1,7 +1,7 @@
 import React, { useState, Suspense, lazy } from "react";
-import useConnection from "../hooks/useConnection";
+import { useDBConnectionStatus, useNavigatorIsOnline } from "../hooks/useConnection";
 import { gaEvent } from "../utils/analytics.js";
-import { Layout, BackTop, Tag, Alert } from "antd";
+import { BackTop, Tag, Alert } from "antd";
 import { StopOutlined } from "@ant-design/icons";
 import "./LayoutBasic.scss";
 import Theme from "../components/UI/Theme";
@@ -13,22 +13,23 @@ const Error = lazy(() => import("../pages/Errors"));
 
 export default function LayoutBasic(props: any) {
   const { routes } = props;
-  const { connection, isOnline } = useConnection();
+  const isNavigatorOnline = useNavigatorIsOnline();
+  const connectionStatus = useDBConnectionStatus();
   const [menuCollapsed, setMenuCollapsed] = useState(true);
   const clickBackTop = () => {
     gaEvent("click_back_top", "clicks", "UI Clicks", true);
-  };
+  };  
   return (
     <>
       <RenderLayoutBasic
         routes={routes}
         menuCollapsed={menuCollapsed}
         setMenuCollapsed={setMenuCollapsed}
-        connection={connection}
+        connection={connectionStatus}
       />
       <Theme />
       <BackTop duration={600} onClick={() => clickBackTop} />
-      {!isOnline && (
+      {!isNavigatorOnline && (
         <>
           <Tag className="offline-message" icon={<StopOutlined />}>
             Offline
@@ -46,15 +47,14 @@ export default function LayoutBasic(props: any) {
 }
 
 function RenderLayoutBasic(props: any) {
-  const { routes, menuCollapsed, setMenuCollapsed, connection } = props;
-  const { Content } = Layout;
+  const { routes, menuCollapsed, setMenuCollapsed, connectionStatus } = props;
   const closeMenu = () => {
     if (menuCollapsed === false) {
       setMenuCollapsed(true);
     }
   };
   return (
-    <div className="layout-basic">
+    <div className="layout-basic unselectable">
       <div className="layout-basic__header">
         <MenuTop
           menuCollapsed={menuCollapsed}
@@ -65,18 +65,18 @@ function RenderLayoutBasic(props: any) {
           setMenuCollapsed={setMenuCollapsed}
         />
       </div>
-      <Content onClick={closeMenu} className="layout-basic__content">
-        {!connection || connection === 200 ? (
+      <div onClick={closeMenu} className="layout-basic__content">
+        {!connectionStatus || connectionStatus === 200 ? (
           <LoadRoutes routes={routes && routes} />
         ) : (
           <Suspense fallback={<></>}>
             <Error status={500} />
           </Suspense>
         )}
-      </Content>
-      <footer className="layout-basic__footer">
+      </div>
+      <div className="layout-basic__footer">
         <Footer />
-      </footer>
+      </div>
     </div>
   );
 }

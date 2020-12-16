@@ -2,7 +2,8 @@ import React, { useState, Suspense, lazy } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { Layout, Tag } from "antd";
 import useAuth from "../hooks/useAuth";
-import useConnection from "../hooks/useConnection";
+import { useDBConnectionStatus, useNavigatorIsOnline } from "../hooks/useConnection";
+import useMessagesUnreadLength from "../webSockets/hooks/useMessagesUnreadLength";
 import AdminSignIn from "../pages/Admin/SignIn";
 import { Notifications } from "react-push-notification";
 import { StopOutlined } from "@ant-design/icons";
@@ -14,7 +15,8 @@ const Error = lazy(() => import("../pages/Errors"));
 
 export default function LayoutAdmin(props: any) {
   const { routes } = props;
-  const { connection, isOnline } = useConnection();
+  const isNavigatorOnline = useNavigatorIsOnline();
+  const connectionStatus = useDBConnectionStatus();
   const { user, isLoading } = useAuth();
   if (!user && !isLoading) {
     return (
@@ -27,12 +29,12 @@ export default function LayoutAdmin(props: any) {
   if (user && !isLoading) {
     return (
       <>
-        {!isOnline && (
+        {!isNavigatorOnline && (
           <Tag className="offline-message" icon={<StopOutlined />}>
             Offline
           </Tag>
         )}
-        <RenderLayoutAdmin routes={routes} connection={connection} />
+        <RenderLayoutAdmin routes={routes} connectionStatus={connectionStatus} />
       </>
     );
   }
@@ -40,8 +42,9 @@ export default function LayoutAdmin(props: any) {
 }
 
 function RenderLayoutAdmin(props: any) {
-  const { routes, connection } = props;
+  const { routes, connectionStatus } = props;
   const [menuCollapsed, setMenuCollapsed] = useState(false);
+  const messagesUnreadLength = useMessagesUnreadLength();
   const { Header, Content, Footer } = Layout;
   const closeMenu = () => {
     if (menuCollapsed === false) {
@@ -52,7 +55,7 @@ function RenderLayoutAdmin(props: any) {
     <Layout onClick={closeMenu}>
       <Notifications />
       <Suspense fallback={<></>}>
-        <MenuSider menuCollapsed={menuCollapsed} />
+        <MenuSider menuCollapsed={menuCollapsed} messagesUnreadLength={messagesUnreadLength} />
         <Layout className="layout-admin">
           <Header className="layout-admin__header">
             <MenuTop
@@ -61,7 +64,7 @@ function RenderLayoutAdmin(props: any) {
             />
           </Header>
           <Content className="layout-admin__content">
-            {!connection || connection === 200 ? (
+            {!connectionStatus || connectionStatus === 200 ? (
               <LoadRoutes routes={routes && routes} />
             ) : (
               <Error status={500} />
