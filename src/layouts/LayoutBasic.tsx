@@ -1,5 +1,5 @@
 import React, { useState, Suspense, lazy } from "react";
-import { useDBConnectionStatus, useNavigatorIsOnline } from "../hooks/useConnection";
+import { useDBConnectionStatus, useIsNavigatorOnline } from "../hooks/useConnection";
 import { gaEvent } from "../utils/analytics.js";
 import { BackTop, Tag, Alert } from "antd";
 import { StopOutlined } from "@ant-design/icons";
@@ -13,8 +13,8 @@ const Error = lazy(() => import("../pages/Errors"));
 
 export default function LayoutBasic(props: any) {
   const { routes } = props;
-  const isNavigatorOnline = useNavigatorIsOnline();
-  const connectionStatus = useDBConnectionStatus();
+  const isNavigatorOnline = useIsNavigatorOnline();
+  const connectionStatus = useDBConnectionStatus();  
   const [menuCollapsed, setMenuCollapsed] = useState(true);
   const clickBackTop = () => {
     gaEvent("click_back_top", "clicks", "UI Clicks", true);
@@ -25,7 +25,7 @@ export default function LayoutBasic(props: any) {
         routes={routes}
         menuCollapsed={menuCollapsed}
         setMenuCollapsed={setMenuCollapsed}
-        connection={connectionStatus}
+        connectionStatus={connectionStatus}
       />
       <Theme />
       <BackTop duration={600} onClick={() => clickBackTop} />

@@ -2,7 +2,7 @@ import React, { useState, Suspense, lazy } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { Layout, Tag } from "antd";
 import useAuth from "../hooks/useAuth";
-import { useDBConnectionStatus, useNavigatorIsOnline } from "../hooks/useConnection";
+import { useDBConnectionStatus, useIsNavigatorOnline } from "../hooks/useConnection";
 import useMessagesUnreadLength from "../webSockets/hooks/useMessagesUnreadLength";
 import AdminSignIn from "../pages/Admin/SignIn";
 import { Notifications } from "react-push-notification";
@@ -15,7 +15,7 @@ const Error = lazy(() => import("../pages/Errors"));
 
 export default function LayoutAdmin(props: any) {
   const { routes } = props;
-  const isNavigatorOnline = useNavigatorIsOnline();
+  const isNavigatorOnline = useIsNavigatorOnline();
   const connectionStatus = useDBConnectionStatus();
   const { user, isLoading } = useAuth();
   if (!user && !isLoading) {
