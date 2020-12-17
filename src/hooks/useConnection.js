@@ -1,69 +1,47 @@
 import { useState, useEffect } from "react";
 import { connectionApi } from "../api/utils";
 
-export default function useConnection() {
-  const [connection, setConnection] = useState(null);
-  const [isOnline, setIsOnline] = useState(true);
-  const [timeToReload, setTimeToReload] = useState(1000);
+export function useDBConnectionStatus() {
+  const [connectionStatus, setConnectionStatus] = useState(null);
+  const [timeToReload, setTimeToReload] = useState(2000);
   useEffect(() => {
-    let unmounted = false;
-    const onLine = window.navigator.onLine;
-    if (onLine) {
-      if (!unmounted) {
-        setIsOnline(onLine);
-      }
+    let isMounted = true;
+    const interval = setInterval(() => {
+      const onLine = window.navigator.onLine;
       connectionApi().then((response) => {
-        if (response.status) {
-          if (!unmounted) {
-            setConnection(response.status);
-          }
-        } else {
-          if (!unmounted) {
-            setConnection(500);
+        if (isMounted) {
+          if (!onLine) {
+            setConnectionStatus(200);
+          } else {
+            setConnectionStatus(response.status ? response.status : 500);
+            setTimeToReload(response.status ? 3000 : 2000);
           }
         }
       });
-    } else {
-      if (!unmounted) {
-        setConnection(200);
-        setIsOnline(onLine);
-      }
-    }
-    return () => { unmounted = true };
-  }, []);
-  useEffect(() => {
-    let unmounted = false;
-    const interval = setInterval(() => {
-      const onLine = window.navigator.onLine;
-      if (onLine) {
-        if (!unmounted) {
-          setIsOnline(onLine);
-        }
-        connectionApi().then((response) => {
-          if (response.status) {
-            if (!unmounted) {
-              setConnection(response.status);
-              setTimeToReload(30000);
-            }
-          } else {
-            if (!unmounted) {
-              setConnection(500);
-              setTimeToReload(1000);
-            }
-          }
-        });
-      } else {
-        if (!unmounted) {
-          setConnection(200);
-          setIsOnline(onLine);
-          setTimeToReload(1000);
-        }
-      }
     }, timeToReload);
     return () => {
       clearInterval(interval);
-      unmounted = true;
+      isMounted = false;
     };
-  }, [timeToReload, isOnline]);
-  return { connection, isOnline };
+  }, [timeToReload]);
+  return connectionStatus;
+}
+
+export function useIsNavigatorOnline() {
+  const [isNavigatorOnline, setIsNavigatorOnline] = useState(true);
+  const [timeToReload, setTimeToReload] = useState(2000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const onLine = window.navigator.onLine;
+      if (onLine) {
+        setIsNavigatorOnline(true);
+        setTimeToReload(3000);
+      } else {
+        setIsNavigatorOnline(false);
+        setTimeToReload(2000);
+      }
+    }, timeToReload);
+    return () => { clearInterval(interval) };
+  }, [timeToReload]);
+  return isNavigatorOnline;
 }
