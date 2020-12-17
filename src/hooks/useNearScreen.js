@@ -4,6 +4,7 @@ export function useNearScreen() {
   const el = useRef(null);
   const [show, setShow] = useState(false);
   useEffect(() => {
+    let isMounted = true;
     Promise.resolve(
       typeof window.IntersectionObserver !== "undefined"
         ? window.IntersectionObserver
@@ -12,12 +13,13 @@ export function useNearScreen() {
       const observer = new window.IntersectionObserver(function (entries) {
         const { isIntersecting } = entries[0];
         if (isIntersecting) {
-          setShow(true);
+          isMounted && setShow(true);
           observer.disconnect();
         }
       });
-      observer.observe(el.current);
+      isMounted && observer.observe(el.current);
     });
+    return () => { isMounted = false }
   }, [el]);
 
   return [show, el];
