@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { getMenuApi } from "../api/menu";
-import { useDBConnectionStatus, useNavigatorIsOnline } from "../hooks/useConnection";
+import { useDBConnectionStatus, useIsNavigatorOnline } from "../hooks/useConnection";
 
 export default function useGetMenu(ignoreMenu) {
   const [menuData, setMenuData] = useState([]);
-  const isNavigatorOnline = useNavigatorIsOnline();
+  const isNavigatorOnline = useIsNavigatorOnline();
   const connectionStatus = useDBConnectionStatus();
   useEffect(() => {
     let isMounted = true;
