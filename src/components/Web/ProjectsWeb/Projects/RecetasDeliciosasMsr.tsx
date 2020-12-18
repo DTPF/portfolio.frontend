@@ -5,13 +5,16 @@ import ModalImage1 from "../../../../assets/img/jpg/recetasmsrModalImage1.jpg";
 import ModalImage2 from "../../../../assets/img/jpg/recetasmsrModalImage2.jpg";
 import ModalImage3 from "../../../../assets/img/jpg/recetasmsrModalImage3.jpg";
 
-export default function RecetasDeliciosasMsr(props: any) {
+export default function RecetasDeliciosasMsr(props: {
+  align: string;
+  innerWidth: number;
+}) {
   const { align, innerWidth } = props;
   return (
     <ProjectLayout
       innerWidth={innerWidth}
       align={align}
-      link="https://www.recetasmsr.com"
+      linkToWeb="https://www.recetasmsr.com"
       imageAlt="Link a www.recetasmsr.com"
       image={recetasDeliciosasImage}
       contentTitle="Recetas Deliciosas MSR's"
@@ -45,7 +48,7 @@ export default function RecetasDeliciosasMsr(props: any) {
         utilidades la capacidad de compartir recetas via email con estilos acorde 
         a la web, filtros y búsqueda avanzada de recetas, gestión autónoma del 
         administrador para la gestión de contenido y de usuarios. Además, esta 
-        adaptada para todos los dispositivos.`
+        adaptada para todos los dispositivos.`,
       ]}
       modalTags={[
         "PHP",
