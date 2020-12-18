@@ -55,7 +55,7 @@ function ModalPDF(props: any) {
 function DesarrolloAppFPN3(props: any) {
   const { setIsVisibleModal } = props;
   const [show, el] = useNearScreen();
-  let ref: any = el;
+  const ref: any = el;
   return (
     <div className="use-near-screen" ref={ref}>
       {show && (
@@ -66,7 +66,6 @@ function DesarrolloAppFPN3(props: any) {
             expandIcon={({ isActive }) => (
               <LeftCircleTwoTone
                 twoToneColor="#5d718d"
-                // style={{ fontSize: "26px" }}
                 rotate={isActive ? -90 : 0}
               />
             )}
@@ -119,7 +118,7 @@ function DesarrolloAppFPN3(props: any) {
 
 function CompetenciasClaveN3() {
   const [show, el] = useNearScreen();
-  let ref: any = el;
+  const ref: any = el;
   return (
     <div className="use-near-screen" ref={ref}>
       {show && (
@@ -153,7 +152,7 @@ function CompetenciasClaveN3() {
 
 function HerramientasWebN3() {
   const [show, el] = useNearScreen();
-  let ref: any = el;
+  const ref: any = el;
   return (
     <div className="use-near-screen" ref={ref}>
       {show && (
@@ -197,7 +196,7 @@ function HerramientasWebN3() {
 
 function AdministrativoN1() {
   const [show, el] = useNearScreen();
-  let ref: any = el;
+  const ref: any = el;
   return (
     <div className="use-near-screen" ref={ref}>
       {show && (
@@ -233,7 +232,7 @@ function AdministrativoN1() {
 
 function GraduadoEscolar() {
   const [show, el] = useNearScreen();
-  let ref: any = el;
+  const ref: any = el;
   return (
     <div className="use-near-screen" ref={ref}>
       {show && (
