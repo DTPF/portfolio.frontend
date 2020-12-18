@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import routes from "./config/routes";
 import AuthProvider from "./providers/AuthProvider";
-import "./App.scss";
-import { message } from "antd";
+import ConnectionProvider from "./providers/ConnectionProvider";
+import MainMenuProvider from "./providers/MainMenuProvider";
 import * as serviceWorker from "./serviceWorker";
+import { message } from "antd";
+import "./App.scss";
 
 export default function App() {
   useEffect(() => {
@@ -22,13 +24,17 @@ export default function App() {
   }, []);
   return (
     <AuthProvider>
-      <Router>
-        <Switch>
-          {routes.map((route, index) => (
-            <RouteWithSubRoutes key={index} {...route} />
-          ))}
-        </Switch>
-      </Router>
+      <ConnectionProvider>
+        <MainMenuProvider>
+          <Router>
+            <Switch>
+              {routes.map((route, index) => (
+                <RouteWithSubRoutes key={index} {...route} />
+              ))}
+            </Switch>
+          </Router>
+        </MainMenuProvider>
+      </ConnectionProvider>
     </AuthProvider>
   );
 }
