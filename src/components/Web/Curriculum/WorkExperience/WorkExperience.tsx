@@ -24,23 +24,16 @@ export default function WorkExperience() {
 
 function ProximaExperiencia() {
   const [show, el] = useNearScreen();
-  const textA = `En búsqueda activa de empleo.`;
-  const textB = `
-    Desde septiembre de 2018 formándome en diferentes lenguajes 
-    y tecnologías en un centro formativo (FP), complementándolo con 
-    cursos online con y sin certificado, y de manera autodidacta para 
-    ser desarrollador de software.
-  `;
-  let ref: any = el;
+  const ref: any = el;
   return (
     <div className="use-near-screen" ref={ref}>
       {show && (
         <div className="container workx-7 right">
           <div className="title-right workx-7">
-            <h2>PRÓXIMA EXPERIENCIA</h2>
+            <h3>PRÓXIMA EXPERIENCIA</h3>
           </div>
           <div className="content">
-            <h3>Agosto 2020</h3>
+            <span>Agosto 2020</span>
             <Collapse
               bordered={false}
               defaultActiveKey={["1"]}
@@ -55,9 +48,12 @@ function ProximaExperiencia() {
                 className="work-collapse-panel"
               >
                 <p className="work-collapse-panel__text">
-                  {textA}
+                  En búsqueda activa de empleo.
                   <br />
-                  {textB}
+                  Desde septiembre de 2018 formándome en diferentes lenguajes y
+                  tecnologías en un centro formativo (FP), complementándolo con
+                  cursos online con y sin certificado, y de manera autodidacta
+                  para ser desarrollador de software.
                 </p>
               </Panel>
             </Collapse>
@@ -70,16 +66,16 @@ function ProximaExperiencia() {
 
 function SupermercadoChipYChop() {
   const [show, el] = useNearScreen();
-  let ref: any = el;
+  const ref: any = el;
   return (
     <div className="use-near-screen" ref={ref}>
       {show && (
         <div className="container workx-6 left">
           <div className="title-left workx-6">
-            <h2>SUPERMERCADO CHIP Y CHOP</h2>
+            <h3>SUPERMERCADO CHIP Y CHOP</h3>
           </div>
           <div className="content">
-            <h3>Temporada 2018</h3>
+            <span>Temporada 2018</span>
             <p>Dependiente de supermercado</p>
           </div>
         </div>
@@ -90,16 +86,16 @@ function SupermercadoChipYChop() {
 
 function TizonaSL() {
   const [show, el] = useNearScreen();
-  let ref: any = el;
+  const ref: any = el;
   return (
     <div className="use-near-screen" ref={ref}>
       {show && (
         <div className="container workx-5 right">
           <div className="title-right workx-5">
-            <h2>TIZONA S.L (GRUPO IFA)</h2>
+            <h3>TIZONA S.L (GRUPO IFA)</h3>
           </div>
           <div className="content">
-            <h3>2016</h3>
+            <span>2016</span>
             <p>Encargado de supermercado</p>
           </div>
         </div>
@@ -110,20 +106,20 @@ function TizonaSL() {
 
 function MoyaSaus() {
   const [show, el] = useNearScreen();
-  let ref: any = el;
+  const ref: any = el;
   return (
     <div className="use-near-screen" ref={ref}>
       {show && (
         <div className="container workx-4 left">
           <div className="title-left workx-4">
-            <h2>MOYA SAUS (Grupo IFA)</h2>
+            <h3>MOYA SAUS (Grupo IFA)</h3>
           </div>
           <div className="content">
-            <h3>2016 - Enero 2017</h3>
+            <span>2016 - Enero 2017</span>
             <p>Encargado de supermercado</p>
-            <h3>2011 - 2015</h3>
+            <span>2011 - 2015</span>
             <p>Segundo encargado de supermercado</p>
-            <h3>2010</h3>
+            <span>2010</span>
             <p>Dependiente de supermercado</p>
           </div>
         </div>
@@ -134,16 +130,16 @@ function MoyaSaus() {
 
 function IntegraTap() {
   const [show, el] = useNearScreen();
-  let ref: any = el;
+  const ref: any = el;
   return (
     <div className="use-near-screen" ref={ref}>
       {show && (
         <div className="container workx-3 right">
           <div className="title-right workx-3">
-            <h2>INTEGRA TAP</h2>
+            <h3>INTEGRA TAP</h3>
           </div>
           <div className="content">
-            <h3>2008 - 2010</h3>
+            <span>2008 - 2010</span>
             <p>Oficial 2ª en aplicaciones técnicas de albañilería</p>
           </div>
         </div>
@@ -154,16 +150,16 @@ function IntegraTap() {
 
 function LlabresFeliu() {
   const [show, el] = useNearScreen();
-  let ref: any = el;
+  const ref: any = el;
   return (
     <div className="use-near-screen" ref={ref}>
       {show && (
         <div className="container workx-2 left">
           <div className="title-left workx-2">
-            <h2>LLABRÉS FELIU MEDI-AMBENT</h2>
+            <h3>LLABRÉS FELIU MEDI-AMBENT</h3>
           </div>
           <div className="content">
-            <h3>2006 - 2008</h3>
+            <span>2006 - 2008</span>
             <p>Peón, Oficial y Capataz de albañilería</p>
           </div>
         </div>
@@ -174,16 +170,16 @@ function LlabresFeliu() {
 
 function TallerLaCabina() {
   const [show, el] = useNearScreen();
-  let ref: any = el;
+  const ref: any = el;
   return (
     <div className="use-near-screen" ref={ref}>
       {show && (
         <div className="container workx-1 right">
           <div className="title-right workx-1">
-            <h2>TALLER LA CABINA</h2>
+            <h3>TALLER LA CABINA</h3>
           </div>
           <div className="content">
-            <h3>Mayo - Octubre 2006</h3>
+            <span>Mayo - Octubre 2006</span>
             <p>Auxiliar de administrativo en taller de automóviles</p>
           </div>
         </div>
