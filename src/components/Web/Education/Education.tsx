@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import { useGetCourses } from "../../../hooks/useGetCourses";
 import useScrollToTop from "../../../hooks/useScrollToTop";
 import { useParams } from "react-router-dom";
@@ -15,7 +15,8 @@ export default function Education(props: any) {
   const { location, history } = props;
   interface URL { url: string }
   const { url } = useParams<URL>();
-  const [courses] = useGetCourses(100, location);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const courses = useGetCourses(itemsPerPage, location);
   useScrollToTop();
   return (
     <RenderEducation
@@ -23,12 +24,14 @@ export default function Education(props: any) {
       location={location}
       history={history}
       courses={courses}
+      itemsPerPage={itemsPerPage}
+      setItemsPerPage={setItemsPerPage}
     />
   );
 }
 
 function RenderEducation(props: any) {
-  const { url, location, history, courses } = props;
+  const { url, location, history, courses, itemsPerPage, setItemsPerPage } = props;
   const title = "Todos los cursos";
   const subtitle =
     "Cursos realizados online y " +
@@ -43,7 +46,7 @@ function RenderEducation(props: any) {
             <Col className="education__info-courses" key="courses">
               <InfoBanner />
               <Courses
-                numItems={10000}
+                itemsPerPage={itemsPerPage}
                 title={title}
                 subtitle={subtitle}
                 courses={courses && courses.docs}
@@ -52,7 +55,7 @@ function RenderEducation(props: any) {
               />
             </Col>
             <div className="div"></div>
-            {courses?.totalPages > 1 && (
+            {(courses?.totalPages > 1 || itemsPerPage === courses?.totalDocs) && (
               <>
                 <Col key="pagination">
                   <Suspense fallback={<></>}>
@@ -60,12 +63,13 @@ function RenderEducation(props: any) {
                       courses={courses}
                       location={location}
                       history={history}
+                      itemsPerPage={itemsPerPage}
+                      setItemsPerPage={setItemsPerPage}
                     />
                   </Suspense>
                 </Col>
               </>
             )}
-            <div className="div"></div>
           </Col>
           <Col lg={1} />
         </Row>
