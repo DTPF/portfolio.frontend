@@ -94,10 +94,10 @@ function AddEditForm(props: any) {
       }
     }
   };
-  const updateCourse = () => {
+  const updateCourse = async () => {
     let userUpdate = courseData;
     if (typeof userUpdate.image === "object") {
-      uploadImageApi(token, userUpdate.image, course._id).then((response) => {
+      await uploadImageApi(token, userUpdate.image, course._id).then((response) => {
         if (response.status === 200) {
           userUpdate.image = response.image;
           updateCourseApi(token, course._id, userUpdate).then((result) => {
@@ -126,7 +126,7 @@ function AddEditForm(props: any) {
         }
       });
     } else {
-      updateCourseApi(token, course._id, courseData)
+      await updateCourseApi(token, course._id, courseData)
         .then((response) => {
           if (response.status === 200) {
             notification["success"]({
@@ -150,8 +150,8 @@ function AddEditForm(props: any) {
         });
     }
   };
-  const addCourse = () => {
-    addCourseApi(token, courseData)
+  const addCourse = async () => {
+    await addCourseApi(token, courseData)
       .then((response) => {
         if (response.status !== 200) {
           notification["warning"]({
