@@ -5,7 +5,7 @@ import "./MainTitle.scss";
 
 export default function MainTitle() {
   return (
-    <div className="main-title">
+    <div className="main-title" aria-hidden="true">
       <div className="combined-wrapper">
         <div className="combined">
           <Texty
