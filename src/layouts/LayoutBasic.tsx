@@ -1,5 +1,5 @@
 import React, { useState, Suspense, lazy } from "react";
-import { useDBConnectionStatus, useIsNavigatorOnline } from "../hooks/useConnection";
+import useConnection from "../hooks/useConnection";
 import { gaEvent } from "../utils/analytics.js";
 import { BackTop, Tag, Alert } from "antd";
 import { StopOutlined } from "@ant-design/icons";
@@ -13,12 +13,11 @@ const Error = lazy(() => import("../pages/Errors"));
 
 export default function LayoutBasic(props: any) {
   const { routes } = props;
-  const isNavigatorOnline = useIsNavigatorOnline();
-  const connectionStatus = useDBConnectionStatus();  
+  const { connectionStatus, isNavigatorOnline } = useConnection();
   const [menuCollapsed, setMenuCollapsed] = useState(true);
   const clickBackTop = () => {
     gaEvent("click_back_top", "clicks", "UI Clicks", true);
-  };  
+  };
   return (
     <>
       <RenderLayoutBasic
@@ -49,9 +48,7 @@ export default function LayoutBasic(props: any) {
 function RenderLayoutBasic(props: any) {
   const { routes, menuCollapsed, setMenuCollapsed, connectionStatus } = props;
   const closeMenu = () => {
-    if (menuCollapsed === false) {
-      setMenuCollapsed(true);
-    }
+    !menuCollapsed && setMenuCollapsed(true);
   };
   return (
     <div className="layout-basic unselectable">
@@ -66,7 +63,7 @@ function RenderLayoutBasic(props: any) {
         />
       </div>
       <div onClick={closeMenu} className="layout-basic__content">
-        {!connectionStatus || connectionStatus === 200 ? (
+        {!connectionStatus || connectionStatus === 200 ? (  
           <LoadRoutes routes={routes && routes} />
         ) : (
           <Suspense fallback={<></>}>

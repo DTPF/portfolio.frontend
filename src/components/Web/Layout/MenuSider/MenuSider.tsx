@@ -1,13 +1,13 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import useGetMainMenu from "../../../../hooks/useGetMainMenu";
 import { Layout, Menu } from "antd";
-import useGetMenu from "../../../../hooks/useGetMenu";
-import SocialLinks from "../../SocialLinks";
 import "./MenuSider.scss";
+import SocialLinks from "../../SocialLinks";
 
 function MenuSider(props: any) {
   const { menuCollapsed, setMenuCollapsed, location } = props;
-  const menuData: any = useGetMenu();
+  const { mainMenu } = useGetMainMenu();
   const { Sider } = Layout;
   return (
     <Sider
@@ -19,7 +19,7 @@ function MenuSider(props: any) {
       onClick={() => setMenuCollapsed(!menuCollapsed)}
     >
       <Menu selectedKeys={[location.pathname]}  mode="vertical">
-        {menuData.map((item: any) => {
+        {mainMenu.map((item: any) => {
           const external = item.url.indexOf("http") > -1 ? true : false;
           if (external) {
             return (

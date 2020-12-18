@@ -1,22 +1,22 @@
 import React from "react";
-import useGetMenu from "../../../../hooks/useGetMenu";
-import { Menu, Button } from "antd";
 import { NavLink, withRouter } from "react-router-dom";
+import useGetMainMenu from "../../../../hooks/useGetMainMenu";
+import { gaEvent } from "../../../../utils/analytics.js";
+import { Menu, Button } from "antd";
 import Logo from "../../../../assets/img/png/logo128.png";
-import { 
+import {
   MenuOutlined,
   CloseCircleOutlined
 } from "@ant-design/icons";
 import "./MenuTop.scss";
 import SocialLinks from "../../SocialLinks";
-import { gaEvent } from "../../../../utils/analytics.js";
 
 function MenuTop(props: any) {
-  const menuData: any = useGetMenu();
+  const { mainMenu } = useGetMainMenu();
   const { menuCollapsed, setMenuCollapsed, location } = props;
   const clickMenuIcon = () => {
     gaEvent("click_menu_mobile_icon", "clicks", "UI Clicks", true);
-  };
+  };  
   return (
     <Menu
       selectedKeys={[location.pathname]}
@@ -28,7 +28,7 @@ function MenuTop(props: any) {
           <img src={Logo} alt="Logo de David Thomas Pizarro Frick" />
         </NavLink>
       </Menu.Item>
-      {menuData.map((item: any) => {
+      {mainMenu.map((item: any) => {
         const external = item.url.indexOf("http") > -1 ? true : false;
         if (external) {
           return (
