@@ -10,8 +10,7 @@ import Spin from "../../../../components/UI/Spin";
 import "./Courses.scss";
 
 export default function Courses(props: any) {
-  const { courses, numItems, title, subtitle } = props;
-  const [isLoading, setIsLoading] = useState(false);
+  const { courses, itemsPerPage, title, subtitle } = props;
   return (
     <>
       <Row>
@@ -23,7 +22,7 @@ export default function Courses(props: any) {
       <div className="courses-list">
         <Row>
           {courses &&
-            courses.slice(0, numItems).map((course: any) => (
+            courses.slice(0, itemsPerPage).map((course: any) => (
               <Col
               key={course._id}
               span={12}
@@ -32,7 +31,7 @@ export default function Courses(props: any) {
               xl={6}
               className="courses-list__courses"
               >
-                <Course course={course} isLoading={isLoading} setIsLoading={setIsLoading} />
+                <Course course={course} />
               </Col>
             ))
           }
@@ -43,9 +42,10 @@ export default function Courses(props: any) {
 }
 
 function Course(props: any) {
-  const { course, setIsLoading, isLoading } = props;
+  const { course } = props;
+  const [isLoading, setIsLoading] = useState(false);
   const [show, el] : any = useNearScreen();
-  const [image, setImage] : any = useState(null);
+  const [image, setImage] = useState("");
   const { Meta } = Card;
   useEffect(() => {
     let unmounted = false;
@@ -56,7 +56,7 @@ function Course(props: any) {
         const thumbnailName = `thumb_${fileName}`;
         const replaceName = filePath.replace(fileName, thumbnailName);
         if (!unmounted) {
-          setImage(replaceName);
+        setImage(replaceName);
           setIsLoading(true);
         }
       });
