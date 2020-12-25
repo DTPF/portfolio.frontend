@@ -13,8 +13,8 @@ import {
 import "./MenuSider.scss";
 import { getAccessTokenApi } from "../../../api/auth";
 import addNotification from "react-push-notification";
-const sound = require("../../../assets/audio/sound.mp3");
-const soundOGG = require("../../../assets/audio/sound.ogg");
+import sound from "../../../assets/audio/sound.mp3";
+import soundOGG from "../../../assets/audio/sound.ogg";
 
 function MenuSider(props: any) {
   const { menuCollapsed, location, messagesUnreadLength } = props;
@@ -50,26 +50,30 @@ function RenderMenuSider(props: any) {
 function NextRender(props: any) {
   const { menuCollapsed, location, messagesUnreadLength, newMessage } = props;
   const { Sider } = Layout;
-  const token = getAccessTokenApi();
   const playSound = () => {
-    const a : any = document.getElementById('sound');
+    const a: any = document.getElementById("sound");
     a.play();
-  }
+  };
   useEffect(() => {
+    const token = getAccessTokenApi();
     getLastMessageApi(token).then((response) => {
       if (response.email) {
-        if (newMessage < messagesUnreadLength) {
-            message.success(`Mensaje de ${response.email}`, 5);
-            addNotification({
-              title: `Mensaje de ${response.email}`,
-              native: true,
-              duration: 5000
-            });
-            playSound();
-          }
-        }  
+        if (
+          newMessage &&
+          messagesUnreadLength &&
+          newMessage < messagesUnreadLength
+        ) {
+          message.success(`Mensaje de ${response.email}`, 5);
+          addNotification({
+            title: `Mensaje de ${response.email}`,
+            native: true,
+            duration: 5000
+          });
+          playSound();
+        }
+      }
     });
-  }, [messagesUnreadLength, newMessage, token]);
+  }, [messagesUnreadLength, newMessage]);
   return (
     <>
       <Sider
@@ -128,8 +132,8 @@ function NextRender(props: any) {
         </Menu>
       </Sider>
       <audio id="sound" preload="auto">
-        <source src={sound} type="audio/mpeg" />
-        <source src={soundOGG} type='audio/ogg' />
+        <source src={sound} type="audio/mp3" />
+        <source src={soundOGG} type="audio/ogg" />
         <embed hidden={true} src={sound} />
       </audio>
     </>
