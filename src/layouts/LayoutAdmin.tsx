@@ -11,11 +11,10 @@ import "./LayoutAdmin.scss";
 const MenuTop = lazy(() => import("../components/Admin/MenuTop"));
 const MenuSider = lazy(() => import("../components/Admin/MenuSider"));
 const LoadRoutes = lazy(() => import("../providers/LoadRoutes"));
-const Error = lazy(() => import("../pages/Errors"));
 
 export default function LayoutAdmin(props: any) {
   const { routes } = props;
-  const { connectionStatus, isNavigatorOnline } = useConnection();  
+  const { connectionStatus, isNavigatorOnline } = useConnection();
   const { user, isLoading } = useAuth();
   if (!user && !isLoading) {
     return (
@@ -28,12 +27,15 @@ export default function LayoutAdmin(props: any) {
   if (user && !isLoading) {
     return (
       <>
-        {!isNavigatorOnline && (
+        <RenderLayoutAdmin
+          routes={routes}
+          connectionStatus={connectionStatus}
+        />
+        {(!isNavigatorOnline || connectionStatus === 500) && (
           <Tag className="offline-message" icon={<StopOutlined />}>
             Offline
           </Tag>
         )}
-        <RenderLayoutAdmin routes={routes} connectionStatus={connectionStatus} />
       </>
     );
   }
@@ -41,7 +43,7 @@ export default function LayoutAdmin(props: any) {
 }
 
 function RenderLayoutAdmin(props: any) {
-  const { routes, connectionStatus } = props;
+  const { routes } = props;
   const [menuCollapsed, setMenuCollapsed] = useState(false);
   const messagesUnreadLength = useMessagesUnreadLength();
   const { Header, Content, Footer } = Layout;
@@ -52,7 +54,10 @@ function RenderLayoutAdmin(props: any) {
     <Layout onClick={closeMenu}>
       <Notifications />
       <Suspense fallback={<></>}>
-        <MenuSider menuCollapsed={menuCollapsed} messagesUnreadLength={messagesUnreadLength} />
+        <MenuSider
+          menuCollapsed={menuCollapsed}
+          messagesUnreadLength={messagesUnreadLength}
+        />
         <Layout className="layout-admin">
           <Header className="layout-admin__header">
             <MenuTop
@@ -61,11 +66,7 @@ function RenderLayoutAdmin(props: any) {
             />
           </Header>
           <Content className="layout-admin__content">
-            {!connectionStatus || connectionStatus === 200 ? (
-              <LoadRoutes routes={routes && routes} />
-            ) : (
-              <Error status={500} />
-            )}
+            <LoadRoutes routes={routes && routes} />
           </Content>
           <Footer className="layout-admin__footer">
             David Thomas Pizarro Frick
