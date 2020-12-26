@@ -4,13 +4,13 @@ import routes from "./config/routes";
 import AuthProvider from "./providers/AuthProvider";
 import ConnectionProvider from "./providers/ConnectionProvider";
 import MainMenuProvider from "./providers/MainMenuProvider";
-import * as serviceWorker from "./serviceWorker";
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { message } from "antd";
 import "./App.scss";
 
 export default function App() {
   useEffect(() => {
-    serviceWorker.register({
+    serviceWorkerRegistration.register({
       onUpdate: (registration: any) => {
         const reload = () => {
           if (registration && registration.waiting) {
