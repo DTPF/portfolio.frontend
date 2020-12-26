@@ -14,21 +14,23 @@ const AddEditCoursesForm = lazy(
 function Courses(props: any) {
   const { location, history } = props;
   const [courses, setCourses] = useState(null);
+  const { page = 1 } = queryString.parse(location.search);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [reloadCourses, setReloadCourses] = useState(false);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState(null);
-  const { page = 1 } = queryString.parse(location.search);
+  
   useEffect(() => {
     let isMounted = true;
-    getCoursesApi(10, page).then((response) => {
+    getCoursesApi(itemsPerPage, page).then((response) => {
       isMounted && setCourses(response.courses);
     });
     setReloadCourses(false);
     return () => {
       isMounted = false;
     };
-  }, [page, reloadCourses]);
+  }, [page, reloadCourses, itemsPerPage]);
   return (
     <div className="admin-courses">
       <AddCourse
@@ -45,7 +47,13 @@ function Courses(props: any) {
         setReloadCourses={setReloadCourses}
       />
       {courses && (
-        <Pagination courses={courses} location={location} history={history} />
+        <Pagination
+          courses={courses}
+          location={location}
+          history={history}
+          itemsPerPage={itemsPerPage}
+          setItemsPerPage={setItemsPerPage}
+        />
       )}
       <Suspense fallback={<></>}>
         <Modal
@@ -123,15 +131,17 @@ function RenderListCourses(props: any) {
 }
 
 function Pagination(props: any) {
-  const { courses, location, history } = props;
+  const { courses, location, history, itemsPerPage, setItemsPerPage } = props;
   return (
     <>
-      {courses.totalPages > 1 && (
+      {(courses?.totalPages > 1 || itemsPerPage === courses?.totalDocs) && (
         <Suspense fallback={<></>}>
           <PaginationAnt
             courses={courses}
             location={location}
             history={history}
+            itemsPerPage={itemsPerPage}
+            setItemsPerPage={setItemsPerPage}
           />
         </Suspense>
       )}
