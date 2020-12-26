@@ -16,7 +16,7 @@ export default function LayoutBasic(props: any) {
   const [menuCollapsed, setMenuCollapsed] = useState(true);
   const clickBackTop = () => {
     gaEvent("click_back_top", "clicks", "UI Clicks", true);
-  }; 
+  };
   return (
     <>
       <RenderLayoutBasic
@@ -54,6 +54,7 @@ function RenderLayoutBasic(props: any) {
   };
   return (
     <div className="layout-basic unselectable">
+      <div className="layout-basic__header-box"></div>
       <div className="layout-basic__header">
         <MenuTop
           menuCollapsed={menuCollapsed}

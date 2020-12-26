@@ -18,6 +18,9 @@
   --t-menu-sder-web-item-selected-bg: var(--primary-bg-light);
   --t-menu-sider-web-item-selected-color: var(--primary-color-dark);
 }
+.ant-layout-sider {
+  @include boxShadowLg();
+}
 .menu-sider-web {
   position: fixed;
   right: -1px;
@@ -27,7 +30,6 @@
   background-color: var(--t-menu-sider-web-bg);
   border-bottom-right-radius: $border-radius;
   margin-top: 0 !important;
-  @include boxShadowMd();
   @media (min-width: $media-breakpoint-up-lg) {
     display: none !important;
   }

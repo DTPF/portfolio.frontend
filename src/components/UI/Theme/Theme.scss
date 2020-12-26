@@ -6,7 +6,7 @@
   position: fixed;
   top: -5px;
   right: 60px;
-  z-index: 101;
+  z-index: 99999;
   @media (min-width: $media-breakpoint-up-md) {
     top: -2px;
   }

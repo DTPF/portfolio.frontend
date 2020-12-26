@@ -4,22 +4,38 @@
 
 :root[data-theme="light"] {
   --t-ant-message-notice-bg: var(--primary-bg-dark);
+  --t-ant-message-notice-color: #fff;
   --t-offline-tag-alert-bg: var(--primary-bg-dark);
   --t-offline-tag-alert-color: #fff;
 }
 :root[data-theme="dark"] {
-  --t-ant-message-notice-bg:var(--primary-bg);
+  --t-ant-message-notice-bg: var(--primary-bg-light);
+  --t-ant-message-notice-color: var(--primary-color-dark);
   --t-offline-tag-alert-bg: #cdd5df;
   --t-offline-tag-alert-color: var(--primary-bg-dark);
 }
 .ant-message-notice {
   &:first-child {
-    margin-top: 15px;
+    margin-top: 40px;
+    @media (min-width: $media-breakpoint-up-md) {
+      margin-top: 45px;
+    }
+    @media (min-width: $media-breakpoint-up-lg) {
+      margin-top: 50px;
+    }
+    @media (min-width: $media-breakpoint-up-xl) {
+      margin-top: 55px;
+    }
+    .ant-message-notice-content {
+      border-top: 0;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
   }
   &-content {
     background-color: var(--t-ant-message-notice-bg) !important;
     border: 2px solid $primary-color-extra-dark;
-    color: #fff;
+    color: var(--t-ant-message-notice-color);
     font-weight: 500;
     border-radius: 5px;
     @include boxShadowXl();
@@ -91,4 +107,4 @@
 }
 .add-fade {
   @include fadeIn();
-} 
+}
