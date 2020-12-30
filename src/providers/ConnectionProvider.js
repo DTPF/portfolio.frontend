@@ -30,18 +30,18 @@ export default function ConnectionProvider(props) {
 
 function checkConnection(setConnection, setTimeToReload) {
   const isNavigatorOnline = window.navigator.onLine;
-  connectionApi().then(async (res) => {
+  connectionApi().then((res) => {
     if (!isNavigatorOnline) {
-      await setConnection({
+      setConnection({
         connectionStatus: 200,
         isNavigatorOnline: isNavigatorOnline,
       });
     } else {
-      await setConnection({
+      setConnection({
         connectionStatus: res.status ? res.status : 500,
         isNavigatorOnline: isNavigatorOnline,
       });
     }
-    await setTimeToReload(res.status && isNavigatorOnline ? 30000 : 2000);
+    setTimeToReload(res.status && isNavigatorOnline ? 30000 : 2000);
   });
 }
