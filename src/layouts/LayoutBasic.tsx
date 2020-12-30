@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useConnection from "../hooks/useConnection";
+import useShowContentOffline from "../dbIndexed/utils/useShowContentOffline";
 import { gaEvent } from "../utils/analytics.js";
 import { BackTop, Tag, Alert } from "antd";
 import { StopOutlined } from "@ant-design/icons";
@@ -13,8 +14,9 @@ import LoadRoutes from "../providers/LoadRoutes";
 export default function LayoutBasic(props: any) {
   const { routes } = props;
   const { connectionStatus, isNavigatorOnline } = useConnection();
+  const showContentOffline = useShowContentOffline();
   const [menuCollapsed, setMenuCollapsed] = useState(true);
-  const clickBackTop = () => {
+  const gaClickBackTop = () => {
     gaEvent("click_back_top", "clicks", "UI Clicks", true);
   };
   return (
@@ -25,23 +27,25 @@ export default function LayoutBasic(props: any) {
         setMenuCollapsed={setMenuCollapsed}
       />
       <Theme />
-      <BackTop duration={600} onClick={() => clickBackTop} />
+      <BackTop duration={500} onClick={() => gaClickBackTop} />
       {(!isNavigatorOnline || connectionStatus === 500) && (
-        <>
-          <Tag className="offline-message" icon={<StopOutlined />}>
-            Offline
-          </Tag>
-          <Alert
-            className="offline-message-alert"
-            message={
-              !isNavigatorOnline
-                ? "Comprueba tu conexión a internet para visualizar ver todo el contenido."
-                : "Hay problemas con el servidor. La página se reiniciará cuando se solucione el problema."
-            }
-            type="info"
-            closeText="Cerrar aviso"
-          />
-        </>
+        <Tag className="offline-message" icon={<StopOutlined />}>
+          Offline
+        </Tag>
+      )}
+      {showContentOffline && (
+        <Alert
+          className="offline-message-alert"
+          message={`No se visualiza todo el contenido de la web.
+                 ${
+                   !isNavigatorOnline
+                     ? "Comprueba la conexión a internet."
+                     : "Hay problemas con el servidor."
+                 }
+                 La página se reiniciará cuando se solucione el problema.`}
+          type="info"
+          closeText="Cerrar aviso"
+        />
       )}
     </>
   );
