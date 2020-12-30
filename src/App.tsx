@@ -1,27 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import routes from "./config/routes";
 import AuthProvider from "./providers/AuthProvider";
 import ConnectionProvider from "./providers/ConnectionProvider";
 import MainMenuProvider from "./providers/MainMenuProvider";
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import { message } from "antd";
+import dbIndexed from "./dbIndexed";
 import "./App.scss";
 
 export default function App() {
-  useEffect(() => {
-    serviceWorkerRegistration.register({
-      onUpdate: (registration: any) => {
-        const reload = () => {
-          if (registration && registration.waiting) {
-            registration.waiting.postMessage({ type: "SKIP_WAITING" });
-          }
-          window.location.reload();
-        };
-        message.info("Nueva versión. Actualizando la web", 3, reload);
-      },
-    });
-  }, []);
+  dbIndexed();
   return (
     <AuthProvider>
       <ConnectionProvider>
