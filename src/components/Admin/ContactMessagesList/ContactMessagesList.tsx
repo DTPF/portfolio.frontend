@@ -14,10 +14,7 @@ import {
   deleteContactMessageApi,
 } from "../../../api/contact";
 import { getAccessTokenApi } from "../../../api/auth";
-import {
-  reloadMessagesTrueApi,
-  reloadMessagesFalseApi,
-} from "../../../api/utils";
+import { reloadMessagesApi } from "../../../api/utils";
 import { CheckOutlined, DeleteOutlined } from "@ant-design/icons";
 import "./ContactMessagesList.scss";
 import moment from "moment";
@@ -36,7 +33,7 @@ export default function ContactMessagesList(props: any) {
   const token = getAccessTokenApi();
   useEffect(() => {
     let isMounted = true;
-    reloadMessagesFalseApi().then(() => {
+    reloadMessagesApi(false).then(() => {
       if (isMounted) {
         setReloadMessages(false);
         setMessagesStatus(false);
@@ -48,7 +45,9 @@ export default function ContactMessagesList(props: any) {
     getMessagesUnreadApi(token, true).then((response) => {
       isMounted && setMessagesRead(response.messages);
     });
-    return () => { isMounted = false };
+    return () => {
+      isMounted = false;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messagesStatus, reloadMessages]);
 
@@ -109,7 +108,7 @@ function MessageUnread(props: any) {
   const { message, setReloadMessages } = props;
   const checkMessage = () => {
     const accessToken = getAccessTokenApi();
-    reloadMessagesTrueApi().then(() => {
+    reloadMessagesApi(true).then(() => {
       checkMessageApi(accessToken, message._id, true)
         .then((response) => {
           messageAnt.success(response.message);

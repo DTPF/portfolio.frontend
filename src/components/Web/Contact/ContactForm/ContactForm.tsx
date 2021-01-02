@@ -12,7 +12,7 @@ import {
 } from "antd";
 import "./ContactForm.scss";
 import { subscribeContactApi } from "../../../../api/contact";
-import { reloadMessagesTrueApi } from "../../../../api/utils";
+import { reloadMessagesApi } from "../../../../api/utils";
 import {
   emailValidation,
   minLenghtValidation,
@@ -190,7 +190,7 @@ export default function ContactForm() {
                 console.log("FAILED...", err);
               }
             );
-          await reloadMessagesTrueApi();
+          await reloadMessagesApi(true);
           for (let i = 0; i < removeclassName.length; i++) {
             removeclassName[i].classList.remove("form-validation-success");
             removeclassName[i].classList.remove("form-validation-error");

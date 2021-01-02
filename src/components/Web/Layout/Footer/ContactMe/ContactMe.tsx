@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Input, Checkbox, Button, message } from "antd";
 import { subscribeContactApi } from "../../../../../api/contact";
-import { reloadMessagesTrueApi } from "../../../../../api/utils";
+import { reloadMessagesApi } from "../../../../../api/utils";
 import { gaEvent } from "../../../../../utils/analytics.js";
 import { SmileOutlined } from "@ant-design/icons";
 import "./ContactMe.scss";
@@ -149,7 +149,7 @@ function RenderForm(props: any) {
                 console.log("FAILED...", err);
               }
             );
-          await reloadMessagesTrueApi();
+          await reloadMessagesApi(true);
           setInputs({ email: "", message: "", privacyPolicy: false });
           messageAnt
             .success("Enviado correctamente!!", 1.5)
