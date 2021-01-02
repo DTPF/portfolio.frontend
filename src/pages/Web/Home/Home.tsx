@@ -1,9 +1,9 @@
 import React from "react";
+import useScrollToTop from "../../../hooks/useScrollToTop";
 import WellcomeParagraph from "../../../components/Web/WellcomeParagraph/WellcomeParagraph";
 import MainTitle from "../../../components/Web/MainTitle";
-import CategoriesBigButtonsStatic from "../../../components/Web/CategoriesBigButtonsStatic/CategoriesBigButtonsStatic";
+import MainMenuBigButtons from "../../../components/Web/MainMenuBigButtons";
 import Helmet from "../../../components/Helmet";
-import useScrollToTop from "../../../hooks/useScrollToTop";
 import "./Home.scss";
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
       <div className="home">
         <MainTitle />
         <WellcomeParagraph />
-        <CategoriesBigButtonsStatic />
+        <MainMenuBigButtons />
       </div>
     </>
   );

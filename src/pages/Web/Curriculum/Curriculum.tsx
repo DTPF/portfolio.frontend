@@ -3,7 +3,7 @@ import "./Curriculum.scss";
 const Helmet = lazy(() => import("../../../components/Helmet"));
 const CurriculumWeb = lazy(() => import("../../../components/Web/Curriculum"));
 const ButtonGoBack = lazy(() => import("../../../components/UI/ButtonGoBack"));
-const CategoriesBigButtonsStatic = lazy(() => import("../../../components/Web/CategoriesBigButtonsStatic/CategoriesBigButtonsStatic"));
+const MainMenuBigButtons = lazy(() => import("../../../components/Web/MainMenuBigButtons"));
 
 export default function Curriculum(props: any) {
   const { location, history } = props;
@@ -15,10 +15,7 @@ export default function Curriculum(props: any) {
       />
       <ButtonGoBack goBack={history.goBack} eventGoBack="curriculum" />
       <CurriculumWeb />
-      <CategoriesBigButtonsStatic
-        location={location.pathname}
-        classnameToHideComponent="categories-big-buttons-static__extra"
-      />
+      <MainMenuBigButtons location={location.pathname} />
     </Suspense>
   );
 }
