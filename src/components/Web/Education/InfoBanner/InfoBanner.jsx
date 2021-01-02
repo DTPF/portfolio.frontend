@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useGetCourses } from "../../../../hooks/useGetCourses";
+import GetCoursesInfo from "../../../../dbIndexed/courses/GetCoursesInfo";
+import useConnection from "../../../../hooks/useConnection";
+import { COURSES_TECH, COURSES_HOURS } from "../../../../utils/constants";
+import { StorageValid } from "../../../../utils/validations";
 import TweenOne from "rc-tween-one";
 import Children from "rc-tween-one/lib/plugin/ChildrenPlugin.js";
 import BannerAnim, { Element } from "rc-banner-anim";
@@ -9,36 +12,45 @@ import Spin from "../../../../components/UI/Spin";
 
 export default function InfoBanner() {
   TweenOne.plugins.push(Children);
-  const [courses] = useGetCourses(10000, 1);
   const [totalDuration, setTotalDuration] = useState(0);
   const [duration, setDuration] = useState(0);
+  const courses = GetCoursesInfo(10000);
+  const { connectionStatus, isNavigatorOnline } = useConnection();
   useEffect(() => {
-    let timer = setTimeout(() => {
+    const timeout = setTimeout(() => {
       setDuration(totalDuration);
     }, 1);
-    return () => { clearTimeout(timer) };
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [totalDuration]);
   useEffect(() => {
-    let unmounted = false;
-    const duration = [];
-    let totalDuration = 0;
-    if (courses) {
-      courses.docs &&
+    let isMounted = true;
+    const coursesHours = StorageValid() && localStorage.getItem(COURSES_HOURS);
+    if (coursesHours) {
+      isMounted && setTotalDuration(coursesHours);
+    } else {
+      const duration = [];
+      let totalDuration = 0;
+      if (courses && courses.docs) {
         courses.docs.forEach((course) => {
-          if (!unmounted) {
-            duration.push(course.duration);
-          }
+          isMounted && duration.push(course.duration);
         });
-      duration.forEach((num) => {
-        totalDuration += num;
-        if (!unmounted) {
-          setTotalDuration(totalDuration);
-        }
-      });
+        duration.forEach((num) => {
+          totalDuration += num;
+          isMounted && setTotalDuration(totalDuration);
+        });
+        StorageValid() &&
+          totalDuration > 0 &&
+          localStorage.setItem(COURSES_HOURS, totalDuration);
+      }
     }
-    return () => { unmounted = true };
+    return () => {
+      isMounted = false;
+    };
   }, [courses]);
-
+  const techLS = StorageValid() && localStorage.getItem(COURSES_TECH);
+  const tech = techLS ? techLS : tecnologiesUsed(courses);
   return (
     <>
       {totalDuration === 0 ? (
@@ -76,7 +88,9 @@ export default function InfoBanner() {
                 className="info-banner-title"
                 animation={{ y: 300, opacity: 0, type: "from" }}
               >
-                <Tecnologies courses={courses} />
+                {connectionStatus === 500 || !isNavigatorOnline
+                  ? courses.technologies
+                  : tech}
               </TweenOne>
               <TweenOne
                 className="info-banner-text"
@@ -95,8 +109,8 @@ export default function InfoBanner() {
 function AnimationCountHours({ totalDuration, duration }) {
   const [state, setState] = useState(null);
   useEffect(() => {
-    let unmounted = false;
-    if (!unmounted) {
+    let isMounted = true;
+    isMounted &&
       setState({
         animation: {
           Children: {
@@ -106,8 +120,9 @@ function AnimationCountHours({ totalDuration, duration }) {
           duration: 2000,
         },
       });
-    }
-    return () => { unmounted = true };
+    return () => {
+      isMounted = false;
+    };
   }, [totalDuration]);
   return (
     <TweenOne animation={state && state.animation}>
@@ -116,33 +131,24 @@ function AnimationCountHours({ totalDuration, duration }) {
   );
 }
 
-function Tecnologies({ courses }) {
-  const [tecnologies, setTecnologies] = useState(0);
-  useEffect(() => {
-    let unmounted = false;
-    const arrayTags = [];
-    const tec = [];
-    courses &&
-      courses.docs.forEach((course) => {
-        if (!unmounted) {
-          arrayTags.push(course.tags);
-        }
-      });
-    for (let i = 0; i < arrayTags.length; i++) {
-      let tecnologies = arrayTags[i];
-      for (let j = 0; j < tecnologies.length; j++) {
-        let tecnology = tecnologies[j];
-        if (!unmounted) {
-          if (!tec.includes(tecnology)) {
-            tec.push(tecnology);
-          }
-        }
+function tecnologiesUsed(courses) {
+  const arrayTags = [];
+  const tec = [];
+  courses.docs &&
+    courses.docs.forEach((course) => {
+      arrayTags.push(course.tags);
+    });
+  for (let i = 0; i < arrayTags.length; i++) {
+    const tecnologies = arrayTags[i];
+    for (let j = 0; j < tecnologies.length; j++) {
+      const tecnology = tecnologies[j];
+      if (!tec.includes(tecnology)) {
+        tec.push(tecnology);
       }
     }
-    if (!unmounted) {
-      setTecnologies(tec.length);
-    }
-    return () => { unmounted = true };
-  }, [courses]);
-  return tecnologies;
+  }
+  StorageValid() &&
+    tec.length > 0 &&
+    localStorage.setItem(COURSES_TECH, tec.length);
+  return tec.length;
 }

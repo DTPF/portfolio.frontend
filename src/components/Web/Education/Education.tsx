@@ -1,6 +1,7 @@
 import React, { useState, Suspense, lazy } from "react";
-import { useGetCourses } from "../../../hooks/useGetCourses";
+import GetCoursesInfo from "../../../dbIndexed/courses/GetCoursesInfo";
 import useScrollToTop from "../../../hooks/useScrollToTop";
+import useConnection from "../../../hooks/useConnection";
 import { useParams } from "react-router-dom";
 import { Row, Col } from "antd";
 import "./Education.scss";
@@ -13,10 +14,15 @@ const CourseInfo = lazy(
 
 export default function Education(props: any) {
   const { location, history } = props;
-  interface URL { url: string }
+  interface URL {
+    url: string;
+  }
   const { url } = useParams<URL>();
+  const { connectionStatus, isNavigatorOnline } = useConnection();
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const courses = useGetCourses(itemsPerPage, location);
+  const courses = GetCoursesInfo(
+    connectionStatus === 500 || !isNavigatorOnline ? 1000 : itemsPerPage
+  );
   useScrollToTop();
   return (
     <RenderEducation
@@ -24,14 +30,23 @@ export default function Education(props: any) {
       location={location}
       history={history}
       courses={courses}
-      itemsPerPage={itemsPerPage}
+      itemsPerPage={
+        connectionStatus === 500 || !isNavigatorOnline ? 1000 : itemsPerPage
+      }
       setItemsPerPage={setItemsPerPage}
     />
   );
 }
 
 function RenderEducation(props: any) {
-  const { url, location, history, courses, itemsPerPage, setItemsPerPage } = props;
+  const {
+    url,
+    location,
+    history,
+    courses,
+    itemsPerPage,
+    setItemsPerPage,
+  } = props;
   const title = "Todos los cursos";
   const subtitle =
     "Cursos realizados online y " +
@@ -55,7 +70,8 @@ function RenderEducation(props: any) {
               />
             </Col>
             <div className="div"></div>
-            {(courses?.totalPages > 1 || itemsPerPage === courses?.totalDocs) && (
+            {(courses?.totalPages > 1 ||
+              itemsPerPage === courses?.totalDocs) && (
               <>
                 <Col key="pagination">
                   <Suspense fallback={<></>}>

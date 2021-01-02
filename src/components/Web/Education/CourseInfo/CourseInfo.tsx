@@ -1,66 +1,70 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { Link } from "react-router-dom";
-import moment from "moment";
-import "moment/locale/es";
-import { Row, Col, Image, Tag, Button } from "antd";
-import { Helmet } from "react-helmet";
 import {
   getCourseApi,
   getImageApi,
-  getCourseByOrderApi,
+  getPrevCourseApi,
+  getNextCourseApi,
 } from "../../../../api/education";
+import useScrollToTop from "../../../../hooks/useScrollToTop";
+import moment from "moment";
+import "moment/locale/es";
+import { Row, Col, Image, Tag, Button } from "antd";
 import {
   ArrowLeftOutlined,
   ArrowRightOutlined,
-  LinkOutlined
+  LinkOutlined,
 } from "@ant-design/icons";
-import NoImage from "../../../../assets/img/png/no-image.png";
 import "./CourseInfo.scss";
-import Spin from "../../../../components/UI/Spin";
+import noImage from "../../../../assets/img/png/no-image.png";
+const Spin = lazy(() => import("../../../../components/UI/Spin"))
+const Helmet = lazy(() => import("../../../../components/Helmet"));
 const Error = lazy(() => import("../../../../pages/Errors"));
 
 export default function CourseInfo(props: any) {
   const { url, courses } = props;
   const [course, setCourse] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  useScrollToTop();
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  useEffect(() => {
-    let unmounted = false;
+    let isMounted = true;
+    const offlineCourse =
+      courses &&
+      courses.docs &&
+      courses.docs.find((course: any) => course.url === url);
     getCourseApi(url).then((response) => {
       if (response.status === 200) {
-        if (!unmounted) {
+        if (isMounted) {
           setCourse(response.course);
-          setIsLoading(true);
-        }        
+          setIsLoading(false);
+        }
       } else {
-        if (!unmounted) {
-          setCourse(null);
-          setIsLoading(true);
+        if (offlineCourse) {
+          setCourse(offlineCourse);
+          setIsLoading(false);
         }
       }
     });
-    return () => { unmounted = true;  };
-  }, [url]);   
+    return () => {
+      isMounted = false;
+    };
+  }, [url, courses]);
   return (
     <div className="course-info">
-      {!isLoading ? (
-        <Spin />
-        ) : (
-          <>
-            {course ? (
-              <Course course={course && course} courses={courses} />
-            ) : (
-              <Suspense fallback={<></>}>
-                <Error
-                  status={404}
-                  title="Ups!! Curso no encontrado..."
-                  subtitle="Lo siento, el curso que buscas no existe."
-                />    
-              </Suspense>   
-            )}
-          </>
+      {isLoading ? (
+        <Suspense fallback={<></>}>
+          <Spin />
+        </Suspense>
+      ) : course ? (
+        <Course course={course && course} courses={courses} />
+      ) : (
+        <Suspense fallback={<></>}>
+          <Error
+            status={404}
+            title="Ups!! Curso no encontrado..."
+            subtitle="Lo siento, el curso que buscas no existe."
+          />
+        </Suspense>
       )}
     </div>
   );
@@ -71,112 +75,137 @@ function Course(props: any) {
   const [image, setImage] = useState("");
   const [prevCourse, setPrevCourse] = useState(null);
   const [nextCourse, setNextCourse] = useState(null);
-  const prev = course && course.order + 1;
-  const next = course && course.order - 1;
-  const coursesLength = courses.docs && courses.docs.length;
-  const link = course && course.link;
+  const [isLoading, setIsLoading] = useState(true);
+  function cycle(array: any, str: any) {
+    const i = array.indexOf(str);
+    if (i === -1) return undefined;
+    return array[(i + 1) % array.length];
+  }
   useEffect(() => {
-    let unmounted = false;
+    let isMounted = true;
     if (course) {
-      if (prev === coursesLength + 1 || !coursesLength) {
-        getCourseByOrderApi(1).then((response) => {
-          if (!unmounted) {
-            setPrevCourse(response.course);
+      getPrevCourseApi(course.url).then((res) => {
+        if (res.status === 200) {
+          isMounted && setPrevCourse(res.prevCourse);
+        } else {
+          const coursesUrl = [];
+          if (courses.docs) {
+            for (let i = 0; i < courses.docs.length; i++) {
+              coursesUrl.push(courses.docs[i].url);
+            }
+            const coursesUrlReversed = coursesUrl.reverse();
+            const prevUrl = cycle(coursesUrlReversed, course.url);
+            setPrevCourse(prevUrl);
           }
-        });
-      } else {
-        getCourseByOrderApi(prev).then((response) => {
-          if (!unmounted) {
-              setPrevCourse(response.course);
+        }
+      });
+      getNextCourseApi(course.url).then((res) => {
+        if (res.status === 200) {
+          isMounted && setNextCourse(res.nextCourse);
+        } else {
+          const coursesUrl = [];
+          if (courses.docs) {
+            for (let i = 0; i < courses.docs.length; i++) {
+              coursesUrl.push(courses.docs[i].url);
+            }
+            const nextUrl = cycle(coursesUrl, course.url);
+            setNextCourse(nextUrl);
           }
-        });
-      }
-      if (next === 0) {
-        getCourseByOrderApi(coursesLength).then((response) => {
-          if (!unmounted) {
-            setNextCourse(response.course);
-          }
-        });
-      } else {
-        getCourseByOrderApi(next).then((response) => {
-          if (!unmounted) {
-            setNextCourse(response.course);
-          }
-        });
-      }
-    }
-    return () => { unmounted = true };
-  }, [course, prev, next, coursesLength]);
-  useEffect(() => {
-    let unmounted = false;
-    if (course && course.image) {
-      getImageApi(course.image).then((response) => {
-        if (!unmounted) {
-          setImage(response.url);
         }
       });
     }
-    return () => { unmounted = true };
-  }, [course]);  
+    return () => {
+      isMounted = false;
+    };
+  }, [course, courses]);
+  useEffect(() => {
+    let isMounted = true;
+    if (course && course.image) {
+      getImageApi(course.image).then((response) => {
+        if (response.status === 200) {
+          if (isMounted) {
+            setImage(response.url);
+          }
+        } else {
+          setImage("");
+        }
+        setIsLoading(false);
+      });
+    } else {
+      setImage("");
+      setIsLoading(false);
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [course]);
   return (
     <>
-      <Helmet>
-        <title>Formación | {course.title}</title>
-        <meta
-          name="description"
-          content={course.title}
-          data-react-helmet="true"
-        />
-      </Helmet>
-        <Links prevCourse={prevCourse} nextCourse={nextCourse} />
-      <Col span={24} className="course-info__title">
-          <h1>{course.title}</h1>
-      </Col>
-        <div className="course-info__image">
-          <Image
-            src={image ? image : NoImage}
-            alt={course && "Imágen de " + course.title}
+      {isLoading ? (
+        <Suspense fallback={<></>}>
+          <Spin />
+        </Suspense>
+      ) : (
+        <>
+        <Suspense fallback={<></>}>
+          <Helmet
+            titleHelmet={`Formación | ${course.title}`}
+            contentHelmet={course.title}
+          />
+        </Suspense>
+          <Links prevCourse={prevCourse} nextCourse={nextCourse} />
+          <Col span={24} className="course-info__title">
+            <h1>{course.title}</h1>
+          </Col>
+          <div className="course-info__image">
+            <Image
+              src={image ? image : noImage}
+              alt={course && "Imágen de " + course.title}
             ></Image>
-        </div>
-        <Row className="course-info__info">
-          <Col span={12} className="course-info__info-duration">
-            {course && course.duration}&nbsp;horas
+          </div>
+          <Row className="course-info__info">
+            <Col span={12} className="course-info__info-duration">
+              {course && course.duration}&nbsp;horas
+            </Col>
+            <Col span={12} className="course-info__info-date">
+              Hace&nbsp;{course && moment(course.date).fromNow(true)}
+            </Col>
+          </Row>
+          <Col className="course-info__description">
+            <p>{course && course.description}</p>
           </Col>
-          <Col span={12} className="course-info__info-date">
-            Hace&nbsp;{course && moment(course.date).fromNow(true)}
-          </Col>
-        </Row>
-        <Col className="course-info__description">
-          <p>{course && course.description}</p>
-        </Col>
-        <Row className="course-info__tags">
-          <Tags course={course && course} />
-        </Row>
-        <Row className="course-info__button">
-          <Col span={24} className="course-info__button-link">
-            {link && (
-              <Button>
-                <a href={link} target="_blank" rel="noopener noreferrer">
-                  <LinkOutlined />
-                  Enlace a Certificación
-                </a>
-              </Button>
-            )}
-          </Col>
-        </Row>
+          <Row className="course-info__tags">
+            <Tags course={course && course} />
+          </Row>
+          <Row className="course-info__button">
+            <Col span={24} className="course-info__button-link">
+              {course && course.link && (
+                <Button>
+                  <a
+                    href={course.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <LinkOutlined />
+                    Enlace a Certificación
+                  </a>
+                </Button>
+              )}
+            </Col>
+          </Row>
+        </>
+      )}
     </>
   );
 }
 
 function Links(props: any) {
   const { prevCourse, nextCourse } = props;
-  const prevLink = `/education/${prevCourse && prevCourse.url}`;
-  const nextLink = `/education/${nextCourse && nextCourse.url}`;
   return (
     <>
       <div className="course-info__linkPrevMobile" key="prevMob">
-        {prevCourse && prevCourse.url && (
-          <Link to={prevLink}>
+        {prevCourse && (
+          <Link to={`/education/${prevCourse}`}>
             <Button type="primary">
               <ArrowLeftOutlined />
             </Button>
@@ -184,8 +213,8 @@ function Links(props: any) {
         )}
       </div>
       <div className="course-info__linkNextMobile" key="nextMob">
-        {nextCourse && nextCourse.url && (
-          <Link to={nextLink}>
+        {nextCourse && (
+          <Link to={`/education/${nextCourse}`}>
             <Button type="primary">
               <ArrowRightOutlined />
             </Button>
@@ -200,16 +229,16 @@ function Tags(props: any) {
   const { course } = props;
   const [tags, setTags] = useState([]);
   useEffect(() => {
-    let unmounted = false;
+    let isMounted = true;
     const url = course && course.url;
     if (url) {
       getCourseApi(url).then((response) => {
-        if (!unmounted) {
-          setTags(response.course && response.course.tags);
-        }
+        isMounted && setTags(response.course && response.course.tags);
       });
     }
-    return () => { unmounted = true };
+    return () => {
+      isMounted = false;
+    };
   }, [course]);
   return (
     <div className="course-info__tags-div">
@@ -220,8 +249,8 @@ function Tags(props: any) {
             <span key={tag} className={tagToClassname}>
               <Tag>{tag}</Tag>
             </span>
-          )
-      })}
+          );
+        })}
     </div>
   );
 }
