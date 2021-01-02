@@ -45,7 +45,7 @@
   position: fixed;
   right: calc(50% - 50px);
   top: 18px;
-  z-index: 101;
+  z-index: 99999;
   color: var(--t-offline-tag-alert-color);
   background-color: var(--t-offline-tag-alert-bg);
   font-weight: bold;
