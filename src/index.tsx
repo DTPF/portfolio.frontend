@@ -18,4 +18,7 @@ serviceWorkerRegistration.register({
       message.info("Nueva versión. Actualizando la web", reload);
     }
   },
+  onSuccess: () => {
+    message.info("Web disponible para su uso sin conexión");
+  },
 });
