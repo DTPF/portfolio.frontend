@@ -11,18 +11,20 @@ export default function dbIndexed() {
   if (!isDBValid()) return;
   const openRequest = indexedDB.open(DB_DTPF, VERSION);
   openRequest.onupgradeneeded = function (e: any) {
-    const db = e.target.result;
-    createObjects(db);
-    updateCoursesDBIndexed(db);
-    updateMainMenuDBIndexed(db);
-    if (StorageValid()) {
-      localStorage.removeItem(COURSES_TECH);
-      localStorage.removeItem(COURSES_HOURS);
+    if (window.navigator.onLine) {
+      const db = e.target.result;
+      createObjects(db);
+      updateCoursesDBIndexed(db);
+      updateMainMenuDBIndexed(db);
+      if (StorageValid()) {
+        localStorage.removeItem(COURSES_TECH);
+        localStorage.removeItem(COURSES_HOURS);
+      }
     }
   };
   openRequest.onsuccess = function (e: any) {
     const db = e.target.result;
-    setIndexedDBVersion(db);
+    window.navigator.onLine && setIndexedDBVersion(db);
     removeEmptyDB(db);
   };
 }
