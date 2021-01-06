@@ -57,7 +57,7 @@ function RenderLayoutBasic(props: any) {
     !menuCollapsed && setMenuCollapsed(true);
   };
   return (
-    <div className="layout-basic unselectable">
+    <div className="layout-basic">
       <div className="layout-basic__header-box"></div>
       <div className="layout-basic__header">
         <MenuTop
