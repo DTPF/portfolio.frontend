@@ -3,7 +3,7 @@ import { useGetCourses } from "../../hooks/useGetCourses";
 import useGetCoursesDBIndexed from "./useGetCoursesDBIndexed";
 import useConnection from "../../hooks/useConnection";
 
-export default function GetCoursesInfo(itemsPerPage: any) {
+export default function GetCoursesInfo(itemsPerPage: number) {
   const { connectionStatus, isNavigatorOnline } = useConnection();
   const courses = useGetCourses(itemsPerPage, window.location);
   const coursesDataIndexed = useGetCoursesDBIndexed();
